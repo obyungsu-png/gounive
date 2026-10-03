@@ -1,0 +1,189 @@
+.job-overlay {
+  display: none;
+  background: #f4f7f9;
+  padding-bottom: 40px;
+}
+.job-overlay.open { display: block; }
+
+.job-modal {
+  background: #f4f7f9;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.job-modal-topbar {
+  background: #e8f5f4;
+  padding: 14px 40px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #888;
+  border-bottom: 1px solid #d0ecea;
+}
+.job-modal-topbar .breadcrumb-sep { color: #ccc; margin: 0 4px; }
+.job-modal-topbar a { color: #888; }
+.job-modal-topbar a:hover { color: #2db4a8; }
+.job-modal-close-btn {
+  margin-left: auto;
+  background: #fff;
+  border: 1px solid #2db4a8;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2db4a8;
+  cursor: pointer;
+  padding: 5px 14px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.job-modal-close-btn:hover { background: #2db4a8; color: #fff; }
+
+.job-modal-hero {
+  background: #fff;
+  text-align: center;
+  padding: 30px 20px 26px;
+  border-bottom: 1px solid #eee;
+}
+.job-modal-hero h1 {
+  font-size: 26px;
+  font-weight: 800;
+  color: #222;
+}
+
+.job-modal-body {
+  display: flex;
+  gap: 24px;
+  padding: 28px 80px 28px 40px;
+}
+
+/* Left filter */
+.job-filter-panel {
+  width: 220px;
+  flex-shrink: 0;
+}
+.job-filter-panel .filter-search {
+  display: flex;
+  gap: 0;
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+}
+.job-filter-panel .filter-search input {
+  flex: 1;
+  padding: 10px 12px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.job-filter-panel .filter-search button {
+  padding: 0 14px;
+  background: #333;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 15px;
+}
+.filter-box {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.filter-box label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 10px;
+}
+.filter-box select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #555;
+  appearance: auto;
+  background: #fafafa;
+}
+.filter-search-btn {
+  width: 100%;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid #2db4a8;
+  border-radius: 8px;
+  color: #2db4a8;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-top: 4px;
+}
+.filter-search-btn:hover { background: #2db4a8; color: #fff; }
+
+/* Source note */
+.source-note {
+  text-align: right;
+  font-size: 12px;
+  color: #aaa;
+  margin-bottom: 14px;
+}
+
+/* Accordion */
+.job-acc-list { flex: 1; }
+.job-acc-item {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+.job-acc-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 22px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  color: #333;
+  user-select: none;
+}
+.job-acc-header:hover { background: #f5fffe; }
+.acc-icon {
+  font-size: 18px;
+  color: #aaa;
+  transition: transform 0.25s;
+}
+.job-acc-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  border-top: 0px solid #eee;
+}
+.job-acc-item.open .job-acc-body {
+  border-top: 1px solid #f0f0f0;
+}
+.job-tags {
+  padding: 16px 22px 18px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.job-tag {
+  padding: 6px 14px;
+  background: #f0faf9;
+  border: 1px solid #c8ebe8;
+  border-radius: 20px;
+  font-size: 13px;
+  color: #2db4a8;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+.job-tag:hover { background: #2db4a8; color: #fff; border-color: #2db4a8; }

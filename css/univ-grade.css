@@ -1,0 +1,22 @@
+.univ-grade-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
+.univ-grade-tag { padding: 8px 16px; background: #fff; border: 1px solid #ddd; border-radius: 20px; font-size: 13px; color: #555; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
+.univ-grade-tag:hover { border-color: #2db4a8; color: #2db4a8; }
+.univ-grade-tag strong { color: #2db4a8; font-weight: 700; margin-left: 4px; }
+
+.grade-tabs-univ { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 24px; }
+.grade-tab-univ { padding: 12px 24px; font-size: 14px; font-weight: 700; color: #aaa; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.grade-tab-univ.active { color: #2db4a8; border-bottom-color: #2db4a8; }
+
+.know-box { background: #e8f5f4; border: 1px solid #b8e6e2; border-radius: 10px; padding: 18px; margin-bottom: 20px; }
+.know-title { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: #1a5c3a; margin-bottom: 12px; }
+.know-title i { font-size: 18px; }
+.know-text { font-size: 13px; color: #555; line-height: 1.7; }
+.know-text ul { margin: 10px 0 0 20px; list-style: disc; }
+.know-text li { margin-bottom: 8px; }
+.know-text strong { font-weight: 700; }
+.know-text .red { color: #e53935; }
+.know-text .section-title { font-weight: 700; margin-top: 12px; margin-bottom: 6px; }
+
+.score-criteria { margin-top: 12px; font-size: 12px; color: #666; line-height: 1.6; }
+.score-criteria strong { color: #333; font-weight: 600; }
+.ug-select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 8px; }

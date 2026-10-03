@@ -1,0 +1,43 @@
+/* ===== 특례 준비 가이드 페이지 ===== */
+.ok-tabs-scroll { overflow-x: auto; scrollbar-width: none; }
+.ok-tabs-scroll .ok-tab { white-space: nowrap; }
+
+.pg-timeline { position: relative; margin-left: 8px; border-left: 2px solid #b8e6e2; }
+.pg-tl-item { display: flex; gap: 20px; padding: 0 0 22px 22px; position: relative; }
+.pg-tl-item::before { content: ''; position: absolute; left: -8px; top: 4px; width: 14px; height: 14px; border-radius: 50%; background: #2db4a8; border: 3px solid #e8f5f4; }
+.pg-tl-when { flex: 0 0 120px; font-size: 15px; font-weight: 800; color: #2db4a8; }
+.pg-tl-when span { display: block; font-size: 12px; font-weight: 500; color: #999; margin-top: 2px; }
+.pg-tl-body { flex: 1; background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 16px 20px; }
+.pg-tl-title { font-size: 15px; font-weight: 700; color: #222; margin-bottom: 8px; }
+.pg-tl-body ul { padding-left: 18px; font-size: 13px; color: #555; line-height: 1.8; }
+.pg-tl-body li { list-style: disc; }
+
+.pg-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.pg-compare-col { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; overflow: hidden; }
+.pg-compare-head { background: #2db4a8; color: #fff; font-size: 16px; font-weight: 800; padding: 14px 20px; }
+.pg-compare-head.blue { background: #1e88e5; }
+.pg-factor { padding: 16px 20px; border-bottom: 1px solid #f0f0f0; }
+.pg-factor:last-child { border-bottom: none; }
+.pg-factor-title { font-size: 14px; font-weight: 700; color: #222; margin-bottom: 6px; }
+.pg-factor-title i { color: #2db4a8; margin-right: 6px; }
+.pg-factor-desc { font-size: 13px; color: #555; line-height: 1.75; }
+.pg-factor-desc strong { color: #1a5c3a; }
+
+.pg-months { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 10px; }
+.pg-month { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 16px; }
+.pg-month.hl { border-color: #2db4a8; background: #f0faf9; }
+.pg-month-label { font-size: 12px; font-weight: 700; color: #2db4a8; margin-bottom: 6px; }
+.pg-month-title { font-size: 14px; font-weight: 700; color: #222; margin-bottom: 4px; }
+.pg-month-desc { font-size: 12px; color: #777; line-height: 1.6; }
+
+.pg-progress { height: 10px; background: #e6eeee; border-radius: 5px; overflow: hidden; }
+.pg-progress-bar { height: 100%; width: 0; background: #2db4a8; transition: width 0.3s; }
+.pg-progress-text { font-size: 13px; color: #555; margin: 8px 0 14px; font-weight: 600; }
+.pg-checklist { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 8px; }
+.pg-checklist label { display: flex; align-items: center; gap: 10px; background: #fff; border: 1px solid #e6eeee; border-radius: 10px; padding: 13px 16px; font-size: 14px; color: #333; cursor: pointer; }
+.pg-checklist input { width: 18px; height: 18px; accent-color: #2db4a8; flex-shrink: 0; }
+.pg-checklist label.done { color: #999; text-decoration: line-through; background: #f8fbfb; }
+
+.pg-glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 10px; }
+.pg-term { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 16px 18px; font-size: 13px; color: #555; line-height: 1.7; }
+.pg-term b { display: block; font-size: 15px; color: #1a5c3a; margin-bottom: 4px; }

@@ -1,0 +1,124 @@
+/* ===== 반응형 (태블릿 ≤1200px · 모바일 ≤900px · 소형 ≤600px) ===== */
+
+@media (max-width: 1200px) {
+  .main-wrap { padding: 20px 80px 40px 24px; }
+  .info-body, .job-modal-body { padding: 24px 80px 24px 24px; }
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .banner-illustration { right: 16px; width: 180px; }
+  .banner-illustration i.main-icon { font-size: 100px; }
+  .novice-top-tabs { grid-template-columns: repeat(3, 1fr); }
+  .docs-top-tabs { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 900px) {
+  /* 헤더 */
+  .top-header { flex-wrap: wrap; gap: 10px; padding: 12px 16px; }
+  .logo { font-size: 20px; }
+  .top-links { gap: 8px; font-size: 12px; }
+  .search-box { order: 3; flex: 1 1 100%; }
+  .search-box input { padding: 10px 44px 10px 16px; font-size: 14px; }
+
+  /* 아이콘 내비 */
+  .icon-nav { padding: 8px 12px; }
+  .nav-hamburger, .icon-circle { width: 44px; height: 44px; font-size: 18px; }
+  .icon-nav-item { min-width: 68px; padding: 4px 4px; gap: 6px; }
+  .icon-nav-item .nav-label { font-size: 11px; }
+  .nav-util { display: none; }
+
+  /* 메인 레이아웃: 사이드 컬럼을 아래로 */
+  .main-wrap { padding: 16px 16px 40px; }
+  .banner-row, .section-row, .eval-row, .search-section-row { flex-direction: column; }
+  .login-sidebar, .section-side, .eval-side, .notices-side { width: auto; }
+  .login-sidebar { padding-bottom: 16px; }
+  .banner-slider { min-height: 280px; }
+  .banner-slide { padding: 28px 24px 44px; }
+  .section-main { padding: 22px 18px; }
+  .eval-banner { padding: 30px 24px; }
+  .eval-illustration { display: none; }
+
+  /* 내부 페이지 */
+  .info-topbar, .job-modal-topbar { padding: 10px 16px; flex-wrap: wrap; font-size: 12px; }
+  .info-hero { padding: 22px 16px 18px; }
+  .info-hero h1 { font-size: 21px; }
+  .info-body, .job-modal-body { flex-direction: column; padding: 16px; gap: 16px; }
+  .info-filter, .job-filter-panel { width: auto; }
+  .info-table-area { min-width: 0; overflow-x: auto; }
+  .info-table { min-width: 640px; }
+  .ok-wrap { padding: 20px 16px 10px; }
+  .pg-compare, .data-grid { grid-template-columns: 1fr; }
+  .consult-stats { flex-wrap: wrap; }
+  .consult-stat { flex: 1 1 50%; border-bottom: 1px solid #eee; }
+  .consult-banner { flex-direction: column; align-items: flex-start; gap: 10px; }
+
+  /* 전체메뉴: 전체 화면 */
+  .menu-modal { top: 0; width: 100%; max-height: 100vh; overflow-y: auto; border-radius: 0; padding: 20px 16px 24px; }
+  .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .menu-ok-strip { flex-direction: column; align-items: flex-start; gap: 8px; padding: 14px 16px; }
+  .menu-bottom { flex-wrap: wrap; gap: 12px; }
+
+  /* 가이드 모달: 전체 화면 */
+  .guide-modal-overlay, .novice-modal-overlay, .docs-modal-overlay { padding: 0; }
+  .guide-modal-box, .novice-modal-box, .docs-modal-box { border-radius: 0; min-height: 100vh; }
+  .guide-tabs-row { grid-template-columns: 1fr; padding: 16px 16px 0; }
+  .guide-section, .docs-section { padding-left: 16px; padding-right: 16px; }
+  .novice-steps, .docs-tips, .docs-checklist { grid-template-columns: 1fr; }
+
+  /* 우측 플로팅 → 하단 고정 바 */
+  .side-floating { top: auto; bottom: 0; left: 0; right: 0; transform: none; flex-direction: row; gap: 0; }
+  .side-float-btn { flex: 1; width: auto; padding: 8px 2px; font-size: 11px; border-radius: 0 !important; border-left: 1px solid rgba(255,255,255,0.25); }
+  .side-float-btn br:nth-of-type(2) { display: none; }
+  body { padding-bottom: 50px; }
+  .scroll-top { bottom: 66px; right: 14px; width: 40px; height: 40px; }
+  .toast { bottom: 70px; }
+
+  /* 푸터 */
+  .footer-links { flex-wrap: wrap; gap: 10px 18px; padding: 14px 16px; }
+  .footer-selects { margin-left: 0; width: 100%; }
+  .footer-selects select { flex: 1; min-width: 0; }
+  .footer-body { flex-direction: column; padding: 20px 16px 24px; gap: 16px; }
+  .footer-org, .footer-org + .footer-org { padding: 0; border-left: none; }
+  .footer-org + .footer-org { border-top: 1px solid #eee; padding-top: 16px; }
+}
+
+@media (max-width: 600px) {
+  .logo { font-size: 18px; }
+  .banner-slider { min-height: 300px; }
+  .banner-slide { align-items: flex-start; padding: 26px 20px 48px; }
+  .banner-content { max-width: 100%; }
+  .banner-title, .banner-title em, .slide-7 .banner-title { font-size: 21px; }
+  .banner-title span { font-size: 13px !important; }
+  .banner-desc { font-size: 13px; }
+  .banner-arrow { display: none; }
+  .eval-tag { font-size: 12px; }
+  .eval-title { font-size: 20px; }
+  .eval-desc br { display: none; }
+  .og-scale-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+  .og-scale-btns .grade-input-btn { margin: 0; font-size: 12px; }
+  .og-box:nth-of-type(2) { display: grid; grid-template-columns: 1fr 1fr; gap: 0 10px; }
+  .og-box:nth-of-type(2) .og-box-title { grid-column: 1 / -1; }
+  .banner-desc br { display: none; }
+  .banner-illustration { display: none; }
+  .slide-3 .feature-row { gap: 8px; }
+  .slide-3 .feature-card { padding: 10px 6px; }
+  .color-cards { grid-template-columns: 1fr; }
+  .color-card { min-height: 130px; padding: 22px 20px; }
+  .search-section-title { font-size: 19px; }
+  .ok-stats { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .ok-stat { padding: 14px; }
+  .ok-stat-num { font-size: 22px; }
+  .ok-table { font-size: 13px; }
+  .ok-table th, .ok-table td { padding: 10px; }
+  .ok-table tbody th { width: 84px; white-space: normal; }
+  .ok-section-title { font-size: 16px; margin-top: 26px; }
+  .ok-tab { padding: 10px 14px; font-size: 14px; }
+  .pg-tl-item { flex-direction: column; gap: 8px; padding-left: 18px; }
+  .pg-tl-when { flex: none; }
+  .pg-checklist, .pg-glossary { grid-template-columns: 1fr; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .ui-form-row { grid-template-columns: 1fr; gap: 0; }
+  .login-page { padding: 28px 16px; }
+  .data-card { padding: 14px; }
+  .data-thumb { width: 76px; height: 100px; font-size: 11px; }
+  .univ-grade-tag { font-size: 12px; padding: 6px 12px; }
+  .search-result small { display: none; }
+}

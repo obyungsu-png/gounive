@@ -4,1216 +4,93 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>재외국민 One Stop 서비스</title>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap');
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body { font-family: 'Noto Sans KR', sans-serif; background: #f5f5f5; color: #333; display: flex; flex-direction: column; min-height: 100vh; }
-.page-content { flex: 1; }
-a { text-decoration: none; color: inherit; cursor: pointer; }
-
-/* ===== TOP HEADER ===== */
-.top-header {
-  background: #fff;
-  padding: 16px 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 1px solid #eee;
-}
-.logo {
-  font-size: 24px;
-  font-weight: 800;
-  color: #2db4a8;
-  letter-spacing: -1px;
-  white-space: nowrap;
-}
-.logo span { color: #7ec8c0; }
-.search-box {
-  flex: 0 1 500px;
-  position: relative;
-}
-.search-box input {
-  width: 100%;
-  padding: 12px 50px 12px 20px;
-  border: 2px solid #2db4a8;
-  border-radius: 30px;
-  font-size: 15px;
-  outline: none;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.search-box input::placeholder { color: #aaa; }
-.search-box .search-icon {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #2db4a8;
-  font-size: 20px;
-}
-.top-links {
-  display: flex;
-  gap: 16px;
-  font-size: 13px;
-  color: #888;
-}
-.top-links a:hover { color: #2db4a8; }
-.top-links span { color: #ddd; }
-
-/* ===== ICON NAVIGATION ===== */
-.icon-nav {
-  background: #fff;
-  padding: 15px 40px;
-  display: flex;
-  align-items: center;
-  gap: 0;
-  border-bottom: 1px solid #eee;
-  overflow-x: auto;
-}
-.nav-hamburger {
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #e0e0e0;
-  border-radius: 50%;
-  font-size: 20px;
-  color: #666;
-  cursor: pointer;
-  flex-shrink: 0;
-  margin-right: 8px;
-}
-.icon-nav-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-  min-width: 90px;
-  padding: 5px 10px;
-  cursor: pointer;
-  flex-shrink: 0;
-}
-.icon-nav-item:hover .icon-circle { background: #e8f7f5; border-color: #2db4a8; }
-.icon-circle {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  border: 1px solid #e0e0e0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  color: #666;
-  background: #fff;
-  transition: all 0.2s;
-}
-.icon-nav-item .nav-label {
-  font-size: 12px;
-  color: #555;
-  white-space: nowrap;
-  font-weight: 500;
-}
-.nav-util {
-  display: flex;
-  gap: 8px;
-  margin-left: auto;
-  flex-shrink: 0;
-}
-.nav-util .icon-circle { border: none; color: #999; }
-
-/* ===== MAIN CONTENT AREA ===== */
-.main-wrap {
-  max-width: 1400px;
-  margin: 0 auto;
-  padding: 25px 80px 40px 40px;
-}
-
-/* Banner + Login Row */
-.banner-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 25px;
-}
-.banner-slider {
-  flex: 1;
-  border-radius: 16px;
-  overflow: hidden;
-  position: relative;
-  min-height: 300px;
-}
-.banner-slide {
-  position: absolute;
-  inset: 0;
-  display: none;
-  align-items: center;
-  padding: 40px 60px;
-  opacity: 0;
-  transition: opacity 0.5s ease;
-}
-.banner-slide.active {
-  display: flex;
-  opacity: 1;
-}
-
-/* Slide 1 - 대학입학정보박람회 (파란색) */
-.slide-1 { background: linear-gradient(135deg, #64b5f6 0%, #90caf9 100%); }
-/* Slide 2 - 서비스 가이드 (밝은 파란) */
-.slide-2 { background: linear-gradient(135deg, #bbdefb 0%, #e3f2fd 100%); }
-/* Slide 3 - 차세대 포털 (노란) */
-.slide-3 { background: linear-gradient(135deg, #fff59d 0%, #fff9c4 100%); }
-/* Slide 4 - 유튜브 채널 (연한 노란) */
-.slide-4 { background: linear-gradient(135deg, #fff9c4 0%, #fffde7 100%); }
-/* Slide 5 - 용어사전 (밤하늘) */
-.slide-5 { background: linear-gradient(135deg, #1a237e 0%, #311b92 100%); }
-/* Slide 6 - 알리미 (밝은 회색) */
-.slide-6 { background: linear-gradient(135deg, #f5f5f5 0%, #fafafa 100%); }
-/* Slide 7 - 기숙사 (보라) */
-.slide-7 { background: linear-gradient(135deg, #e1bee7 0%, #f3e5f5 100%); }
-
-.banner-content {
-  position: relative;
-  z-index: 2;
-  max-width: 60%;
-}
-.banner-tag {
-  display: inline-block;
-  background: #2db4a8;
-  color: #fff;
-  padding: 5px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  margin-bottom: 14px;
-}
-.banner-title {
-  font-size: 28px;
-  font-weight: 800;
-  line-height: 1.3;
-  margin-bottom: 10px;
-}
-.banner-title em {
-  font-style: normal;
-  font-size: 34px;
-  display: block;
-}
-.banner-desc {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-top: 8px;
-}
-.banner-btns {
-  display: flex;
-  gap: 10px;
-  margin-top: 18px;
-}
-.banner-btn {
-  padding: 8px 20px;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
-/* Slide-specific text colors */
-.slide-1 .banner-title { color: #fff9c4; text-shadow: 2px 2px 0 #1976d2; }
-.slide-1 .banner-title em { color: #fff; text-shadow: 2px 2px 0 #1976d2; }
-.slide-1 .banner-desc { color: #fff; font-weight: 600; }
-.slide-1 .banner-desc strong { color: #ffeb3b; }
-
-.slide-2 .banner-title { color: #1565c0; }
-.slide-2 .banner-title em { color: #2196f3; }
-.slide-2 .banner-desc { color: #555; }
-
-.slide-3 .banner-title { color: #424242; -webkit-text-stroke: 1px #fff; text-shadow: 3px 3px 0 rgba(0,0,0,0.1); }
-.slide-3 .banner-desc { color: #5d4037; font-weight: 600; }
-.slide-3 .feature-row { display: flex; gap: 14px; margin-top: 16px; }
-.slide-3 .feature-card { background: #fff; border-radius: 10px; padding: 14px 16px; flex: 1; text-align: center; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
-.slide-3 .feature-icon { font-size: 24px; margin-bottom: 6px; }
-.slide-3 .feature-title { font-size: 12px; font-weight: 700; color: #2db4a8; }
-.slide-3 .feature-desc { font-size: 11px; color: #666; margin-top: 2px; }
-
-.slide-4 .banner-title { color: #9e9e9e; }
-.slide-4 .banner-title em { color: #43a047; font-size: 38px; }
-.slide-4 .banner-desc { color: #555; }
-.slide-4 .pill-row { display: flex; gap: 8px; margin: 12px 0; }
-.slide-4 .pill { background: #43a047; color: #fff; padding: 4px 14px; border-radius: 20px; font-size: 13px; font-weight: 700; }
-
-.slide-5 .banner-title { color: #66ff66; text-shadow: 0 0 20px rgba(102,255,102,0.4); }
-.slide-5 .banner-title em { color: #ffeb3b; font-size: 32px; text-shadow: 0 0 20px rgba(255,235,59,0.4); }
-.slide-5 .banner-desc { color: #b3e5fc; }
-
-.slide-6 .banner-title { color: #333; }
-.slide-6 .banner-title em { color: #e91e63; font-size: 36px; -webkit-text-stroke: 1px #fff; }
-.slide-6 .banner-desc { color: #666; font-style: italic; font-size: 13px; }
-
-.slide-7 .banner-title { color: #222; font-size: 30px; }
-.slide-7 .banner-desc { color: #555; }
-.slide-7 .app-badges { display: flex; gap: 8px; margin-top: 14px; align-items: center; }
-.slide-7 .app-badge { background: #000; color: #fff; padding: 6px 12px; border-radius: 6px; font-size: 11px; display: inline-flex; align-items: center; gap: 6px; }
-.slide-7 .app-badge i { font-size: 16px; }
-
-.banner-illustration {
-  position: absolute;
-  right: 40px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 240px;
-  height: 220px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-}
-.banner-illustration i.main-icon {
-  font-size: 130px;
-  opacity: 0.35;
-}
-.slide-1 .banner-illustration i.main-icon { color: #fff; }
-.slide-2 .banner-illustration i.main-icon { color: #1976d2; }
-.slide-3 .banner-illustration i.main-icon { color: #ff9800; opacity: 0.3; }
-.slide-4 .banner-illustration i.main-icon { color: #f44336; opacity: 0.6; }
-.slide-5 .banner-illustration i.main-icon { color: #ffeb3b; opacity: 0.6; }
-.slide-6 .banner-illustration i.main-icon { color: #e91e63; opacity: 0.4; }
-.slide-7 .banner-illustration i.main-icon { color: #ab47bc; opacity: 0.5; }
-
-.banner-dots {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  gap: 6px;
-  align-items: center;
-  z-index: 10;
-}
-.banner-dots .dot {
-  width: 8px; height: 8px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.6);
-  cursor: pointer;
-  border: 1px solid rgba(0,0,0,0.1);
-}
-.banner-dots .dot.active { background: #2db4a8; width: 20px; border-radius: 4px; }
-.banner-dots .counter {
-  font-size: 12px;
-  color: #555;
-  margin-left: 8px;
-  background: rgba(255,255,255,0.7);
-  padding: 2px 8px;
-  border-radius: 10px;
-}
-.banner-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.85);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #666;
-  cursor: pointer;
-  z-index: 11;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-}
-.banner-arrow.prev { left: 16px; }
-.banner-arrow.next { right: 16px; }
-.banner-arrow:hover { background: #fff; color: #2db4a8; }
-
-/* Login Sidebar */
-.login-sidebar {
-  width: 300px;
-  flex-shrink: 0;
-  background: #fff;
-  border-radius: 16px;
-  border: 1px solid #e0e0e0;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.login-greeting {
-  padding: 30px 20px 15px;
-  text-align: center;
-  font-size: 20px;
-  font-weight: 700;
-  color: #333;
-}
-.login-avatar {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  background: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 36px;
-  color: #ccc;
-  margin-bottom: 15px;
-}
-.login-btn {
-  width: 85%;
-  padding: 14px;
-  background: #2db4a8;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.login-btn:hover { background: #26a69a; }
-.login-links {
-  display: flex;
-  gap: 0;
-  padding: 15px 0 20px;
-  font-size: 13px;
-  color: #888;
-}
-.login-links a { padding: 0 12px; border-right: 1px solid #ddd; }
-.login-links a:last-child { border-right: none; }
-.login-links a:hover { color: #2db4a8; }
-
-/* 로그인 후 상태 UI */
-.profile-row {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  padding: 22px 20px;
-  border-bottom: 1px solid #eee;
-  cursor: pointer;
-  transition: background 0.15s;
-}
-.profile-row:hover { background: #fafafa; }
-.profile-badge {
-  background: #2db4a8;
-  color: #fff;
-  padding: 6px 10px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 700;
-  flex-shrink: 0;
-}
-.profile-name {
-  font-size: 17px;
-  font-weight: 700;
-  color: #222;
-  flex: 1;
-}
-.profile-arrow {
-  color: #bbb;
-  font-size: 14px;
-}
-.quick-menu {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  padding: 8px 4px 12px;
-}
-.quick-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-  padding: 14px 4px;
-  cursor: pointer;
-  border-right: 1px solid #f0f0f0;
-  transition: background 0.15s;
-  position: relative;
-}
-.quick-item:nth-child(3n) { border-right: none; }
-.quick-item:nth-child(-n+3) { border-bottom: 1px solid #f0f0f0; }
-.quick-item i {
-  font-size: 22px;
-  color: #555;
-}
-.quick-item span {
-  font-size: 12px;
-  color: #555;
-  font-weight: 500;
-}
-.quick-item:hover { background: #f5fffe; }
-.quick-item:hover i,
-.quick-item:hover span { color: #2db4a8; }
-.quick-item.active i,
-.quick-item.active span { color: #2db4a8; font-weight: 700; }
-.logout-btn {
-  width: calc(100% - 30px);
-  margin: 6px 15px 18px;
-  padding: 10px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  font-size: 13px;
-  color: #666;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.logout-btn:hover { border-color: #2db4a8; color: #2db4a8; }
-
-/* ===== STEP SECTION ===== */
-.section-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 25px;
-}
-.section-main {
-  flex: 1;
-  background: #fff;
-  border-radius: 16px;
-  padding: 30px;
-  border: 1px solid #e8e8e8;
-}
-.section-side {
-  width: 300px;
-  flex-shrink: 0;
-  background: #fff;
-  border-radius: 16px;
-  padding: 25px;
-  border: 1px solid #e8e8e8;
-}
-.section-header {
-  display: flex;
-  align-items: baseline;
-  gap: 15px;
-  margin-bottom: 6px;
-}
-.section-title {
-  font-size: 22px;
-  font-weight: 800;
-  color: #333;
-}
-.section-tab {
-  font-size: 16px;
-  color: #aaa;
-  cursor: pointer;
-  font-weight: 500;
-}
-.section-tab:hover { color: #2db4a8; }
-.section-desc {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 25px;
-}
-.steps-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-.step-card {
-  background: #fafafa;
-  border-radius: 12px;
-  padding: 24px 18px;
-  border: 1px solid #eee;
-  transition: all 0.2s;
-}
-.step-card:hover { border-color: #2db4a8; box-shadow: 0 2px 12px rgba(45,180,168,0.1); }
-.step-badge {
-  display: inline-block;
-  padding: 4px 14px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 700;
-  color: #fff;
-  margin-bottom: 14px;
-}
-.step-badge.s1 { background: #2db4a8; }
-.step-badge.s2 { background: #42a5f5; }
-.step-badge.s3 { background: #ab47bc; }
-.step-badge.s4 { background: #ef5350; }
-.step-sub {
-  font-size: 12px;
-  color: #999;
-  margin-bottom: 4px;
-}
-.step-name {
-  font-size: 16px;
-  font-weight: 700;
-  color: #333;
-  margin-bottom: 14px;
-}
-.step-links a {
-  display: inline-block;
-  font-size: 13px;
-  color: #666;
-  margin-right: 14px;
-  padding: 4px 0;
-}
-.step-links a:hover { color: #2db4a8; }
-.step-links a::after {
-  content: ' ›';
-  color: #aaa;
-}
-
-/* Side Panel - 대입정보 */
-.side-title {
-  font-size: 18px;
-  font-weight: 700;
-  margin-bottom: 18px;
-  color: #333;
-}
-.side-subtitle {
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 12px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.side-subtitle .more {
-  font-size: 12px;
-  color: #aaa;
-  font-weight: 400;
-  cursor: pointer;
-}
-.side-subtitle .more:hover { color: #2db4a8; }
-.magazine-card {
-  background: linear-gradient(135deg, #fce4ec, #f8bbd0);
-  border-radius: 12px;
-  padding: 20px;
-  text-align: center;
-  position: relative;
-  overflow: hidden;
-}
-.magazine-label {
-  display: inline-block;
-  background: #fff;
-  padding: 3px 12px;
-  border-radius: 12px;
-  font-size: 11px;
-  font-weight: 600;
-  color: #e91e63;
-  margin-bottom: 8px;
-}
-.magazine-title {
-  font-size: 18px;
-  font-weight: 800;
-  color: #c2185b;
-  line-height: 1.3;
-}
-.magazine-vol {
-  font-size: 12px;
-  color: #e91e63;
-  margin-top: 4px;
-  font-weight: 600;
-}
-
-/* ===== EVALUATION SECTION (전형 평가기준) ===== */
-.eval-banner {
-  background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-  border-radius: 16px;
-  padding: 45px 50px;
-  margin-bottom: 25px;
-  position: relative;
-  overflow: hidden;
-}
-.eval-tag {
-  display: inline-block;
-  background: #1976d2;
-  color: #fff;
-  padding: 8px 18px;
-  border-radius: 6px;
-  font-size: 14px;
-  font-weight: 700;
-  margin-bottom: 18px;
-}
-.eval-title {
-  font-size: 26px;
-  font-weight: 800;
-  color: #1a237e;
-  line-height: 1.4;
-  margin-bottom: 12px;
-}
-.eval-desc {
-  font-size: 14px;
-  color: #555;
-  line-height: 1.7;
-  margin-bottom: 8px;
-}
-.eval-note {
-  font-size: 12px;
-  color: #888;
-  margin-bottom: 18px;
-}
-.eval-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px 24px;
-  background: #fff;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.eval-btn:hover { border-color: #1976d2; color: #1976d2; }
-.eval-illustration {
-  position: absolute;
-  right: 60px;
-  top: 50%;
-  transform: translateY(-50%);
-  font-size: 140px;
-  opacity: 0.12;
-  color: #1976d2;
-}
-
-/* ===== EVAL ROW (banner + side) ===== */
-.eval-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 25px;
-}
-.eval-row .eval-banner { flex: 1; margin-bottom: 0; }
-.eval-side {
-  width: 300px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.news-panel {
-  background: #fff;
-  border-radius: 16px;
-  padding: 22px;
-  border: 1px solid #e8e8e8;
-  flex: 1;
-}
-.news-tabs {
-  display: flex;
-  gap: 16px;
-  margin-bottom: 14px;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 10px;
-}
-.news-tab {
-  font-size: 14px;
-  font-weight: 600;
-  color: #aaa;
-  cursor: pointer;
-  padding-bottom: 2px;
-}
-.news-tab.active { color: #333; border-bottom: 2px solid #2db4a8; }
-.news-item {
-  display: flex;
-  gap: 12px;
-  margin-bottom: 14px;
-  align-items: flex-start;
-}
-.news-thumb {
-  width: 60px;
-  height: 60px;
-  border-radius: 8px;
-  background: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  color: #ccc;
-  flex-shrink: 0;
-}
-.news-text {
-  flex: 1;
-}
-.news-text .title {
-  font-size: 13px;
-  font-weight: 500;
-  color: #333;
-  line-height: 1.4;
-  margin-bottom: 4px;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-.news-text .meta {
-  font-size: 11px;
-  color: #aaa;
-}
-
-/* ===== SEARCH SECTION (대학/학과/전형) ===== */
-.search-section-row {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 25px;
-}
-.search-section-main {
-  flex: 1;
-}
-.search-section-title {
-  font-size: 22px;
-  font-weight: 800;
-  color: #333;
-  margin-bottom: 6px;
-}
-.search-section-desc {
-  font-size: 14px;
-  color: #888;
-  margin-bottom: 20px;
-}
-.color-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
-}
-.color-card {
-  border-radius: 16px;
-  padding: 28px 22px;
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  cursor: pointer;
-  transition: transform 0.2s;
-}
-.color-card:hover { transform: translateY(-3px); }
-.color-card.yellow { background: #fdd835; }
-.color-card.green { background: #66bb6a; }
-.color-card.orange { background: #ffa726; }
-.color-card .card-title {
-  font-size: 18px;
-  font-weight: 800;
-  color: #fff;
-  margin-bottom: 12px;
-}
-.color-card .card-desc {
-  font-size: 13px;
-  color: rgba(255,255,255,0.85);
-  line-height: 1.5;
-}
-.color-card .card-icon {
-  position: absolute;
-  right: 20px;
-  bottom: 20px;
-  font-size: 60px;
-  opacity: 0.25;
-  color: #fff;
-}
-
-/* Notices Panel */
-.notices-side {
-  width: 300px;
-  flex-shrink: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-.notice-panel {
-  background: #fff;
-  border-radius: 16px;
-  padding: 22px;
-  border: 1px solid #e8e8e8;
-}
-.notice-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 14px;
-}
-.notice-title {
-  font-size: 16px;
-  font-weight: 700;
-  color: #333;
-}
-.notice-more {
-  font-size: 12px;
-  color: #aaa;
-  cursor: pointer;
-}
-.notice-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid #f5f5f5;
-}
-.notice-item:last-child { border-bottom: none; }
-.notice-badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 11px;
-  font-weight: 600;
-  background: #e3f2fd;
-  color: #1976d2;
-  flex-shrink: 0;
-}
-.notice-badge.general { background: #e8f5e9; color: #388e3c; }
-.notice-text {
-  font-size: 13px;
-  color: #555;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.phone-box {
-  background: #fff;
-  border-radius: 16px;
-  padding: 22px;
-  border: 1px solid #e8e8e8;
-  text-align: left;
-}
-.phone-label {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 6px;
-}
-.phone-number {
-  font-size: 26px;
-  font-weight: 800;
-  color: #333;
-  margin-bottom: 8px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.phone-number .ph-icon {
-  font-size: 32px;
-  color: #2db4a8;
-}
-.phone-hours {
-  font-size: 12px;
-  color: #999;
-  line-height: 1.6;
-}
-
-/* ===== RIGHT SIDE BUTTONS ===== */
-.side-floating {
-  position: fixed;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  z-index: 200;
-}
-.side-float-btn {
-  background: #2db4a8;
-  color: #fff;
-  padding: 10px 6px;
-  font-size: 10px;
-  font-weight: 600;
-  text-align: center;
-  cursor: pointer;
-  writing-mode: horizontal-tb;
-  width: 62px;
-  line-height: 1.4;
-  border-left: 2px solid rgba(255,255,255,0.2);
-}
-.side-float-btn:first-child { border-radius: 8px 0 0 0; }
-.side-float-btn:last-child { border-radius: 0 0 0 8px; }
-.side-float-btn:nth-child(2) { background: #26a69a; }
-.side-float-btn:nth-child(3) { background: #00897b; }
-.side-float-btn:nth-child(4) { background: #00796b; }
-.side-float-btn:hover { filter: brightness(1.1); }
-
-/* ===== FOOTER ===== */
-.footer {
-  background: #fff;
-  border-top: 1px solid #e0e0e0;
-  margin-top: 0;
-}
-.footer-links {
-  padding: 16px 40px;
-  display: flex;
-  gap: 32px;
-  border-bottom: 1px solid #eee;
-  font-size: 13px;
-  color: #555;
-  align-items: center;
-}
-.footer-links a { color: #555; white-space: nowrap; }
-.footer-links a:first-child { font-weight: 700; color: #333; }
-.footer-links a:hover { color: #2db4a8; }
-.footer-selects {
-  margin-left: auto;
-  display: flex;
-  gap: 10px;
-}
-.footer-selects select {
-  padding: 6px 24px 6px 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  font-size: 13px;
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #555;
-  background: #fff;
-  appearance: auto;
-  min-width: 110px;
-}
-.footer-body {
-  padding: 28px 40px 32px;
-  display: flex;
-  gap: 0;
-}
-.footer-org {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  flex: 1;
-  padding-right: 40px;
-}
-.footer-org + .footer-org {
-  padding-right: 0;
-  padding-left: 40px;
-  border-left: 1px solid #eee;
-}
-.footer-org-logo {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: #f0f0f0;
-  border: 1px solid #e0e0e0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-}
-.footer-org-logo i { font-size: 22px; color: #bbb; }
-.footer-org-info {
-  font-size: 12px;
-  color: #aaa;
-  line-height: 1.8;
-}
-.footer-org-info .org-name {
-  font-size: 15px;
-  font-weight: 700;
-  color: #444;
-  margin-bottom: 4px;
-}
-
-/* ===== SCROLL TOP ===== */
-.scroll-top {
-  position: fixed;
-  right: 20px;
-  bottom: 30px;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: #fff;
-  border: 1px solid #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 18px;
-  color: #999;
-  cursor: pointer;
-  z-index: 100;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-/* ===== FULL MENU MODAL ===== */
-.menu-overlay {
-  display: none;
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  background: rgba(0,0,0,0.35);
-  z-index: 500;
-}
-.menu-overlay.open { display: block; }
-
-.menu-modal {
-  position: absolute;
-  top: 130px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 92%;
-  max-width: 1340px;
-  background: #fff;
-  border-radius: 0 0 16px 16px;
-  box-shadow: 0 8px 40px rgba(0,0,0,0.18);
-  padding: 30px 36px 36px;
-  animation: modalDown 0.18s ease;
-}
-@keyframes modalDown {
-  from { opacity:0; transform: translateX(-50%) translateY(-10px); }
-  to   { opacity:1; transform: translateX(-50%) translateY(0); }
-}
-
-.menu-modal-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-  padding-bottom: 16px;
-  border-bottom: 1px solid #eee;
-}
-.menu-modal-header .menu-title {
-  font-size: 20px;
-  font-weight: 800;
-  color: #333;
-}
-.menu-modal-header .menu-login-link {
-  font-size: 14px;
-  color: #2db4a8;
-  font-weight: 600;
-  cursor: pointer;
-}
-.menu-modal-header .menu-login-link:hover { text-decoration: underline; }
-
-.menu-ok-strip { display: flex; align-items: center; gap: 24px; background: #e8f5f4; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; }
-.menu-ok-title { font-size: 14px; font-weight: 700; color: #1a5c3a; white-space: nowrap; }
-.menu-ok-title i { color: #2db4a8; margin-right: 4px; }
-.menu-ok-links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
-.menu-ok-links a { font-size: 13px; color: #444; }
-.menu-ok-links a:hover { color: #2db4a8; }
-.menu-ok-links a i { font-size: 10px; color: #aaa; margin-left: 2px; }
-.menu-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-bottom: 28px;
-}
-.menu-category {
-  background: #f8f8f8;
-  border-radius: 10px;
-  padding: 18px 18px 20px;
-}
-.menu-cat-header {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 14px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #e8e8e8;
-}
-.menu-cat-header i {
-  font-size: 18px;
-  color: #2db4a8;
-}
-.menu-cat-title {
-  font-size: 15px;
-  font-weight: 700;
-  color: #222;
-}
-.menu-links {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 6px 10px;
-}
-.menu-links a {
-  font-size: 13px;
-  color: #555;
-  padding: 3px 0;
-  display: block;
-}
-.menu-links a:hover { color: #2db4a8; }
-.menu-links a.full-width {
-  grid-column: 1 / -1;
-}
-
-.menu-bottom {
-  background: #f0faf9;
-  border-radius: 10px;
-  padding: 16px 24px;
-  display: flex;
-  align-items: center;
-  gap: 60px;
-}
-.menu-contact {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-.menu-contact i { font-size: 20px; color: #2db4a8; }
-.menu-contact .contact-label { font-size: 13px; color: #888; }
-.menu-contact .contact-number {
-  font-size: 18px;
-  font-weight: 800;
-  color: #2db4a8;
-}
-
-/* Active hamburger styling */
-.nav-hamburger.active {
-  background: #e8f7f5;
-  border-color: #2db4a8;
-}
-.nav-hamburger.active i { color: #2db4a8; }
-</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/job.css">
+<link rel="stylesheet" href="css/info-pages.css">
+<link rel="stylesheet" href="css/admission-pages.css">
+<link rel="stylesheet" href="css/univ-grade.css">
+<link rel="stylesheet" href="css/ok-pages.css">
+<link rel="stylesheet" href="css/program.css">
+<link rel="stylesheet" href="css/overseas-grade.css">
+<link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/guide-modal.css">
+<link rel="stylesheet" href="css/novice-modal.css">
+<link rel="stylesheet" href="css/docs-modal.css">
+<link rel="stylesheet" href="css/ui.css">
+<link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
 
 <!-- TOP HEADER -->
 <div class="page-content">
 <header class="top-header">
-  <div class="logo">재외국민 <span>One Stop</span> 서비스</div>
+  <div class="logo" onclick="showHome()" style="cursor:pointer;">재외국민 <span>One Stop</span> 서비스</div>
   <div class="search-box">
-    <input type="text" placeholder="검색어를 입력해주세요">
-    <i class="fas fa-search search-icon"></i>
+    <input type="text" id="siteSearch" placeholder="대학명, 특례, 아포스티유 등 검색" autocomplete="off" aria-label="사이트 검색">
+    <i class="fas fa-search search-icon" id="searchBtn" role="button" aria-label="검색"></i>
+    <div class="search-dropdown" id="searchDropdown"></div>
   </div>
-  <div class="top-links">
-    <a href="#" onclick="openPage('loginOverlay')">로그인</a>
-    <span>|</span>
-    <a href="#">회원가입</a>
-    <span>|</span>
-    <a href="#">사이트맵</a>
-  </div>
+  <div class="top-links" id="topLinks"></div>
 </header>
 
 <!-- ICON NAVIGATION -->
 <nav class="icon-nav">
-  <div class="nav-hamburger" id="menuBtn" onclick="toggleMenu()">
+  <div class="nav-hamburger" id="menuBtn" onclick="toggleMenu()" aria-label="전체메뉴">
     <i class="fas fa-bars"></i>
   </div>
-  <div class="icon-nav-item" onclick="openJobModal()" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-briefcase"></i></div>
-    <span class="nav-label">직업정보</span>
-  </div>
-  <div class="icon-nav-item" onclick="openUnivModal()" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-university"></i></div>
-    <span class="nav-label">대학정보</span>
-  </div>
-  <div class="icon-nav-item" onclick="openDeptModal()" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-book-open"></i></div>
-    <span class="nav-label">학과정보</span>
-  </div>
-  <div class="icon-nav-item" onclick="openPage('admOverlay')" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-file-alt"></i></div>
-    <span class="nav-label">전형정보</span>
-  </div>
-  <div class="icon-nav-item" onclick="openPage('univGradeOverlay')" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-chart-pie"></i></div>
-    <span class="nav-label">대학성적분석</span>
-  </div>
-  <div class="icon-nav-item" onclick="openPage('gradeOverlay')" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-chart-bar"></i></div>
-    <span class="nav-label">학생부입력</span>
-  </div>
-  <div class="icon-nav-item" onclick="openPage('dataOverlay')" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-database"></i></div>
-    <span class="nav-label">대입정보자료</span>
-  </div>
-  <div class="icon-nav-item" onclick="openPage('compOverlay')" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-comments"></i></div>
-    <span class="nav-label">종합전형상담</span>
-  </div>
-  <div class="icon-nav-item" onclick="openPage('consultOverlay')" style="cursor:pointer;">
-    <div class="icon-circle"><i class="fas fa-clipboard-list"></i></div>
-    <span class="nav-label">대입상담</span>
-  </div>
-  <div class="icon-nav-item">
-    <div class="icon-circle"><i class="fas fa-calendar-alt"></i></div>
-    <span class="nav-label">전형일정</span>
-  </div>
-  <div class="icon-nav-item">
-    <div class="icon-circle"><i class="fas fa-cogs"></i></div>
-    <span class="nav-label">메뉴편집</span>
+  <div class="icon-nav-scroll">
+    <div class="icon-nav-item" onclick="openPage('systemOverlay')">
+      <div class="icon-circle"><i class="fas fa-passport"></i></div>
+      <span class="nav-label">특례자격</span>
+    </div>
+    <div class="icon-nav-item" onclick="openPage('univOverlay')">
+      <div class="icon-circle"><i class="fas fa-university"></i></div>
+      <span class="nav-label">대학정보</span>
+    </div>
+    <div class="icon-nav-item" onclick="openPage('deptOverlay')">
+      <div class="icon-circle"><i class="fas fa-book-open"></i></div>
+      <span class="nav-label">학과정보</span>
+    </div>
+    <div class="icon-nav-item" onclick="openPage('admOverlay')">
+      <div class="icon-circle"><i class="fas fa-file-alt"></i></div>
+      <span class="nav-label">특례전형</span>
+    </div>
+    <div class="icon-nav-item" onclick="openPage('univGradeOverlay')">
+      <div class="icon-circle"><i class="fas fa-chart-pie"></i></div>
+      <span class="nav-label">대학성적분석</span>
+    </div>
+    <div class="icon-nav-item" onclick="openPage('gradeOverlay')">
+      <div class="icon-circle"><i class="fas fa-chart-bar"></i></div>
+      <span class="nav-label">해외성적입력</span>
+    </div>
+    <div class="icon-nav-item" onclick="openProgram(0)">
+      <div class="icon-circle"><i class="fas fa-route"></i></div>
+      <span class="nav-label">특례준비</span>
+    </div>
+    <div class="icon-nav-item" onclick="openPage('dataOverlay')">
+      <div class="icon-circle"><i class="fas fa-database"></i></div>
+      <span class="nav-label">자료실</span>
+    </div>
+    <div class="icon-nav-item" onclick="openPage('consultOverlay')">
+      <div class="icon-circle"><i class="fas fa-comments"></i></div>
+      <span class="nav-label">입시상담</span>
+    </div>
+    <div class="icon-nav-item" onclick="openProgram(2)">
+      <div class="icon-circle"><i class="fas fa-calendar-alt"></i></div>
+      <span class="nav-label">특례일정</span>
+    </div>
+    <div class="icon-nav-item" onclick="openPage('instOverlay')">
+      <div class="icon-circle"><i class="fas fa-school"></i></div>
+      <span class="nav-label">재외교육기관</span>
+    </div>
   </div>
   <div class="nav-util">
-    <div class="icon-circle"><i class="fas fa-bell"></i></div>
-    <div class="icon-circle"><i class="fas fa-user"></i></div>
+    <div class="icon-circle" onclick="openNotices()" title="공지사항"><i class="fas fa-bell"></i></div>
+    <div class="icon-circle" onclick="openMyArea()" title="로그인/마이페이지"><i class="fas fa-user"></i></div>
   </div>
 </nav>
 
@@ -1224,39 +101,41 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   <div class="banner-row">
     <div class="banner-slider" id="bannerSlider">
 
-      <!-- Slide 1: 대학입학정보박람회 -->
+      <!-- Slide 1: 자격진단 -->
       <div class="banner-slide slide-1 active">
         <div class="banner-content">
           <div class="banner-title">
-            2027학년도 재외국민
-            <em>입학정보박람회</em>
+            2028학년도 특례 입시,
+            <em>자격진단부터 시작하세요</em>
           </div>
           <div class="banner-desc">
-            <strong>2026. 8. 20.(목) ~ 22.(토)</strong> 매일 10:00 ~ 17:00 코엑스 3층 D홀<br>
-            신청기간 : 2026. 7. 15.(수) 09:00 ~ 8. 14.(금) 18:00<br>
-            신청방법 : 재외국민 One Stop 서비스 홈페이지 선착순 접수<br>
-            대입정보센터 ▶ 박람회/설명회 ▶ 1:1 상담관
+            고교 1개 학년 포함 해외 3년 이상 이수, 학생 3/4 · 부모 2/3 체류 요건<br>
+            나의 해외 체류기간이 3년 특례·12년 특례 중 어디에 해당하는지 먼저 확인하세요.
+          </div>
+          <div class="banner-btns">
+            <button class="banner-btn" style="background:#2db4a8;color:#fff;" onclick="openPage('systemOverlay')">특례자격 확인 ›</button>
+            <button class="banner-btn" style="background:#fff;color:#2db4a8;border:1px solid #2db4a8;" onclick="openProgram(0)">준비 로드맵 ›</button>
           </div>
         </div>
-        <div class="banner-illustration"><i class="fas fa-bullhorn main-icon"></i></div>
+        <div class="banner-illustration"><i class="fas fa-passport main-icon"></i></div>
       </div>
 
-      <!-- Slide 2: 서비스 가이드 -->
+      <!-- Slide 2: 3년 vs 12년 특례 -->
       <div class="banner-slide slide-2">
         <div class="banner-content">
           <div class="banner-title">
-            재외국민 표준 공통원서접수
-            <em>서비스 가이드!</em>
+            3년 특례 vs 12년 특례
+            <em>한눈에 비교!</em>
           </div>
           <div class="banner-desc">
-            한 번의 가입으로 여러 대학에 원서접수가 가능합니다.<br>
-            지원 절차와 필요서류를 쉽게 안내해 드립니다.
+            모집인원, 학력·체류 요건, 부모 요건, 핵심 증빙서류까지<br>
+            두 특례 전형의 차이를 표 하나로 정리했습니다.
           </div>
           <div class="banner-btns">
-            <button class="banner-btn" style="background:#2196f3;color:#fff;">가이드 보기 ›</button>
+            <button class="banner-btn" style="background:#2196f3;color:#fff;" onclick="openPage('systemOverlay')">비교표 보기 ›</button>
           </div>
         </div>
-        <div class="banner-illustration"><i class="fas fa-book-open main-icon"></i></div>
+        <div class="banner-illustration"><i class="fas fa-balance-scale main-icon"></i></div>
       </div>
 
       <!-- Slide 3: 차세대 포털 -->
@@ -1298,6 +177,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
             <span class="pill" style="background:#fbc02d;">좋아요!</span>
           </div>
           <div class="banner-desc">설정하고 새로운 영상들을 먼저 만나보세요~!</div>
+          <div class="banner-btns"><button class="banner-btn" style="background:#ff0000;color:#fff;" onclick="window.open('https://www.youtube.com/results?search_query=재외국민+특례+입시','_blank')">영상 보기 ›</button></div>
         </div>
         <div class="banner-illustration"><i class="fab fa-youtube main-icon"></i></div>
       </div>
@@ -1313,6 +193,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
             아는만큼 보인다!<br>
             복잡하고 헷갈렸던 재외국민 입시 용어를 한번에 확인하세요
           </div>
+          <div class="banner-btns"><button class="banner-btn" style="background:#7e57c2;color:#fff;" onclick="openProgram(4)">용어사전 보기 ›</button></div>
         </div>
         <div class="banner-illustration"><i class="fas fa-star main-icon"></i></div>
       </div>
@@ -1325,26 +206,26 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
             대학정보가 필요할때 <em>재외국민 알리미</em>
           </div>
           <div class="banner-desc">전국 대학의 재외국민 전형 정보를 한눈에 확인하세요.</div>
+          <div class="banner-btns"><button class="banner-btn" style="background:#2db4a8;color:#fff;" onclick="openPage('admOverlay')">특례전형 검색 ›</button></div>
         </div>
         <div class="banner-illustration"><i class="fas fa-university main-icon"></i></div>
       </div>
 
-      <!-- Slide 7: 기숙사 -->
+      <!-- Slide 7: 전형요소별 준비 -->
       <div class="banner-slide slide-7">
         <div class="banner-content">
           <div class="banner-title">
-            기숙사 선택,<br>이제 쉽고 빠르게
+            필답고사 · 면접 · 서류<br>전형요소별 준비 가이드
           </div>
           <div class="banner-desc">
-            검색부터 비교, 선택까지 한 번에<br>
-            재외국민 학생들을 위한 기숙사 정보 플랫폼
+            3년 특례 필답고사부터 12년 특례 서류평가까지<br>
+            학년별 로드맵과 체크리스트로 차근차근 준비하세요.
           </div>
-          <div class="app-badges">
-            <span class="app-badge"><i class="fab fa-google-play"></i> Google Play</span>
-            <span class="app-badge"><i class="fab fa-apple"></i> App Store</span>
+          <div class="banner-btns">
+            <button class="banner-btn" style="background:#ff7043;color:#fff;" onclick="openProgram(1)">준비 가이드 ›</button>
           </div>
         </div>
-        <div class="banner-illustration"><i class="fas fa-building main-icon"></i></div>
+        <div class="banner-illustration"><i class="fas fa-pen-nib main-icon"></i></div>
       </div>
 
       <div class="banner-arrow prev" onclick="bannerPrev()"><i class="fas fa-chevron-left"></i></div>
@@ -1376,9 +257,9 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 
       <!-- 로그인 후 상태 -->
       <div id="loginAfterBox" style="display:none;width:100%;">
-        <div class="profile-row" onclick="openPage('loginOverlay')">
-          <span class="profile-badge">학부모</span>
-          <span class="profile-name">오병수</span>
+        <div class="profile-row" onclick="openPage('gradeOverlay')">
+          <span class="profile-badge" id="profileRole">학부모</span>
+          <span class="profile-name" id="profileName"></span>
           <i class="fas fa-chevron-right profile-arrow"></i>
         </div>
         <div class="quick-menu">
@@ -1390,21 +271,21 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
             <i class="fas fa-graduation-cap"></i>
             <span>관심대학</span>
           </div>
-          <div class="quick-item" onclick="openPage('jobOverlay')">
-            <i class="fas fa-search"></i>
-            <span>관심진로</span>
+          <div class="quick-item" onclick="openProgram(3)">
+            <i class="fas fa-tasks"></i>
+            <span>체크리스트</span>
           </div>
           <div class="quick-item active" onclick="openPage('consultOverlay')">
             <i class="fas fa-headset"></i>
             <span>상담내역</span>
           </div>
           <div class="quick-item" onclick="openPage('gradeOverlay')">
-            <i class="fas fa-clipboard-check"></i>
-            <span>신청/접수</span>
+            <i class="fas fa-calculator"></i>
+            <span>해외성적</span>
           </div>
-          <div class="quick-item">
+          <div class="quick-item" onclick="openProgram(2)">
             <i class="fas fa-calendar-check"></i>
-            <span>나의일정</span>
+            <span>특례일정</span>
           </div>
         </div>
         <button class="logout-btn" onclick="logoutUser()">로그아웃</button>
@@ -1416,15 +297,15 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   <div class="section-row">
     <div class="section-main">
       <div class="section-header">
-        <span class="section-title">자격분석</span>
-        <span class="section-tab">전형정보</span>
+        <span class="section-title">특례 입시 4단계</span>
+        <span class="section-tab">3년 · 12년 특례</span>
       </div>
-      <div class="section-desc">재외국민 특별전형 지원 자격 및 대학별 전형을 분석해 드립니다.</div>
+      <div class="section-desc">해외 체류기간 진단부터 원서접수까지, 재외국민 특례 입시를 단계별로 안내합니다.</div>
       <div class="steps-grid">
         <div class="step-card">
           <span class="step-badge s1">STEP1</span>
-          <div class="step-sub">해외거주기간/학력</div>
-          <div class="step-name">자격확인</div>
+          <div class="step-sub">해외 체류기간·학력</div>
+          <div class="step-name">자격진단</div>
           <div class="step-links">
             <a href="#" onclick="openGuideModal();return false;">자격요건 입력</a>
             <a href="#" onclick="openPage('systemOverlay');return false;">특례자격 안내</a>
@@ -1433,40 +314,42 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
         <div class="step-card">
           <span class="step-badge s2">STEP2</span>
           <div class="step-sub">지원 가능한</div>
-          <div class="step-name">대학/전형선택</div>
+          <div class="step-name">대학·전형선택</div>
           <div class="step-links">
-            <a href="#" onclick="openPage('univOverlay');return false;">대학검색</a>
-            <a href="#" onclick="openPage('deptOverlay');return false;">학과검색</a>
+            <a href="#" onclick="openPage('admOverlay');return false;">특례전형 검색</a>
+            <a href="#" onclick="openPage('univGradeOverlay');return false;">대학성적분석</a>
           </div>
         </div>
         <div class="step-card">
           <span class="step-badge s3">STEP3</span>
-          <div class="step-sub">자격분석</div>
-          <div class="step-name">결과분석</div>
+          <div class="step-sub">서류·필답·면접</div>
+          <div class="step-name">전형 준비</div>
           <div class="step-links">
-            <a href="#" onclick="openPage('univGradeOverlay');return false;">분석 결과확인</a>
+            <a href="#" onclick="openProgram(1);return false;">전형요소별 준비</a>
+            <a href="#" onclick="openDocsGuide();return false;">서류준비 가이드</a>
           </div>
         </div>
         <div class="step-card">
           <span class="step-badge s4">STEP4</span>
-          <div class="step-sub">전문상담</div>
-          <div class="step-name">입시상담</div>
+          <div class="step-sub">일정 확인·전문상담</div>
+          <div class="step-name">접수·상담</div>
           <div class="step-links">
+            <a href="#" onclick="openProgram(2);return false;">특례 일정</a>
             <a href="#" onclick="openPage('consultOverlay');return false;">온라인 상담</a>
           </div>
         </div>
       </div>
     </div>
     <div class="section-side">
-      <div class="side-title">입시 정보</div>
+      <div class="side-title">특례 준비</div>
       <div class="side-subtitle">
-        재외국민전형 매거진
-        <span class="more">더보기 ‹ ›</span>
+        나의 준비 체크리스트
+        <span class="more" onclick="openProgram(3)" style="cursor:pointer;">바로가기 ›</span>
       </div>
-      <div class="magazine-card">
-        <div class="magazine-label">2026 Spring</div>
-        <div class="magazine-title">재외국민전형<br>입시매거진</div>
-        <div class="magazine-vol">vol. 136</div>
+      <div class="magazine-card" onclick="openProgram(3)" style="cursor:pointer;">
+        <div class="magazine-label">3년 · 12년 특례 공통</div>
+        <div class="magazine-title">특례 입시<br>준비 체크리스트</div>
+        <div class="magazine-vol" id="checklistSummary">10개 항목 점검하기</div>
       </div>
     </div>
   </div>
@@ -1486,33 +369,13 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
     </div>
     <div class="eval-side">
       <div class="news-panel">
-        <div class="side-subtitle" style="margin-bottom:0;">대입 주요자료 <span class="more">더보기</span></div>
+        <div class="side-subtitle" style="margin-bottom:0;">특례 주요자료 <span class="more" onclick="NEWS_TABS[newsTab].more()" style="cursor:pointer;">더보기</span></div>
         <div class="news-tabs">
-          <span class="news-tab active">재외국민뉴스</span>
-          <span class="news-tab">입시자료실</span>
-          <span class="news-tab">주요일정</span>
+          <span class="news-tab active" onclick="switchNewsTab(0)">특례소식</span>
+          <span class="news-tab" onclick="switchNewsTab(1)">입시자료실</span>
+          <span class="news-tab" onclick="switchNewsTab(2)">주요일정</span>
         </div>
-        <div class="news-item">
-          <div class="news-thumb"><i class="fas fa-newspaper"></i></div>
-          <div class="news-text">
-            <div class="title">2027학년도 재외국민 전형 주요 변경사항 총정리</div>
-            <div class="meta">2027 재외국민</div>
-          </div>
-        </div>
-        <div class="news-item">
-          <div class="news-thumb"><i class="fas fa-file-signature"></i></div>
-          <div class="news-text">
-            <div class="title">[단독] 서울 주요대 재외국민 전형 모집인원 변동 안내</div>
-            <div class="meta">2027 재외국민</div>
-          </div>
-        </div>
-        <div class="news-item" onclick="openPage('systemOverlay')" style="cursor:pointer;">
-          <div class="news-thumb"><i class="fas fa-question-circle"></i></div>
-          <div class="news-text">
-            <div class="title">해외체류기간 산정 기준, 꼭 알아야 할 핵심 포인트</div>
-            <div class="meta">2027 공통</div>
-          </div>
-        </div>
+        <div id="newsList"></div>
       </div>
     </div>
   </div>
@@ -1520,7 +383,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   <!-- UNIVERSITY/DEPARTMENT/ADMISSION SEARCH + NOTICES SIDE -->
   <div class="search-section-row">
     <div class="search-section-main">
-      <div class="search-section-title">대학/학과/전형 검색</div>
+      <div class="search-section-title">대학/학과/특례전형 검색</div>
       <div class="search-section-desc">나에게 적합한 입시전략을 세우기 위하여 대학, 학과, 전형 검색을 통하여 다양한 입시정보를 찾을 수 있도록 도와드립니다.</div>
       <div class="color-cards">
         <div class="color-card yellow" onclick="openPage('univOverlay')">
@@ -1534,8 +397,8 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
         </div>
         <div class="color-card orange" onclick="openPage('admOverlay')">
-          <div class="card-title">전형정보</div>
-          <div class="card-desc">전형일정이나 방법, 그리고 어떤 기준으로 학생을 선발하는지, 자격요건 등 전형에 대한 정보</div>
+          <div class="card-title">특례전형정보</div>
+          <div class="card-desc">3년·12년 특례 전형방법(서류·필답고사·면접)과 지원자격, 대학별 전형 비교 정보</div>
           <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
         </div>
       </div>
@@ -1598,203 +461,12 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 <div class="side-floating">
   <div class="side-float-btn" onclick="openGuideModal()">자격요건<br>가이드</div>
   <div class="side-float-btn" onclick="openNoviceGuide()">초보자<br>가이드</div>
-  <div class="side-float-btn" onclick="window.open('https://www.youtube.com/results?search_query=재외국민+전형+TV','_blank')">표준공통<br>원점수<br>가이드</div>
+  <div class="side-float-btn" onclick="openProgram(0)">특례준비<br>가이드</div>
   <div class="side-float-btn" onclick="openDocsGuide()">서류준비<br>가이드</div>
 </div>
 
 
 <!-- 직업정보 모달 -->
-<style>
-.job-overlay {
-  display: none;
-  background: #f4f7f9;
-  padding-bottom: 40px;
-}
-.job-overlay.open { display: block; }
-
-.job-modal {
-  background: #f4f7f9;
-  max-width: 100%;
-  margin: 0;
-  padding: 0;
-}
-
-.job-modal-topbar {
-  background: #e8f5f4;
-  padding: 14px 40px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 13px;
-  color: #888;
-  border-bottom: 1px solid #d0ecea;
-}
-.job-modal-topbar .breadcrumb-sep { color: #ccc; margin: 0 4px; }
-.job-modal-topbar a { color: #888; }
-.job-modal-topbar a:hover { color: #2db4a8; }
-.job-modal-close-btn {
-  margin-left: auto;
-  background: #fff;
-  border: 1px solid #2db4a8;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #2db4a8;
-  cursor: pointer;
-  padding: 5px 14px;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.job-modal-close-btn:hover { background: #2db4a8; color: #fff; }
-
-.job-modal-hero {
-  background: #fff;
-  text-align: center;
-  padding: 30px 20px 26px;
-  border-bottom: 1px solid #eee;
-}
-.job-modal-hero h1 {
-  font-size: 26px;
-  font-weight: 800;
-  color: #222;
-}
-
-.job-modal-body {
-  display: flex;
-  gap: 24px;
-  padding: 28px 80px 28px 40px;
-}
-
-/* Left filter */
-.job-filter-panel {
-  width: 220px;
-  flex-shrink: 0;
-}
-.job-filter-panel .filter-search {
-  display: flex;
-  gap: 0;
-  margin-bottom: 20px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  overflow: hidden;
-  background: #fff;
-}
-.job-filter-panel .filter-search input {
-  flex: 1;
-  padding: 10px 12px;
-  border: none;
-  outline: none;
-  font-size: 13px;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.job-filter-panel .filter-search button {
-  padding: 0 14px;
-  background: #333;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 15px;
-}
-.filter-box {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 16px;
-  margin-bottom: 14px;
-}
-.filter-box label {
-  display: block;
-  font-size: 13px;
-  font-weight: 600;
-  color: #444;
-  margin-bottom: 10px;
-}
-.filter-box select {
-  width: 100%;
-  padding: 9px 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 13px;
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #555;
-  appearance: auto;
-  background: #fafafa;
-}
-.filter-search-btn {
-  width: 100%;
-  padding: 12px;
-  background: #fff;
-  border: 1px solid #2db4a8;
-  border-radius: 8px;
-  color: #2db4a8;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-  margin-top: 4px;
-}
-.filter-search-btn:hover { background: #2db4a8; color: #fff; }
-
-/* Source note */
-.source-note {
-  text-align: right;
-  font-size: 12px;
-  color: #aaa;
-  margin-bottom: 14px;
-}
-
-/* Accordion */
-.job-acc-list { flex: 1; }
-.job-acc-item {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  margin-bottom: 10px;
-  overflow: hidden;
-}
-.job-acc-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 18px 22px;
-  cursor: pointer;
-  font-size: 15px;
-  font-weight: 600;
-  color: #333;
-  user-select: none;
-}
-.job-acc-header:hover { background: #f5fffe; }
-.acc-icon {
-  font-size: 18px;
-  color: #aaa;
-  transition: transform 0.25s;
-}
-.job-acc-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  border-top: 0px solid #eee;
-}
-.job-acc-item.open .job-acc-body {
-  border-top: 1px solid #f0f0f0;
-}
-.job-tags {
-  padding: 16px 22px 18px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-.job-tag {
-  padding: 6px 14px;
-  background: #f0faf9;
-  border: 1px solid #c8ebe8;
-  border-radius: 20px;
-  font-size: 13px;
-  color: #2db4a8;
-  cursor: pointer;
-  transition: all 0.15s;
-}
-.job-tag:hover { background: #2db4a8; color: #fff; border-color: #2db4a8; }
-</style>
 
 <div class="job-overlay" id="jobOverlay">
   <div class="job-modal">
@@ -1988,348 +660,6 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 </div>
 
 <!-- ===== 대학정보 / 학과정보 공통 스타일 ===== -->
-<style>
-/* 공통 full-page 오버레이 */
-.info-overlay {
-  display: none;
-  background: #f4f7f9;
-  padding-bottom: 40px;
-}
-.info-overlay.open { display: block; }
-
-/* 상단 topbar */
-.info-topbar {
-  background: #e8f5f4;
-  padding: 12px 40px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 13px;
-  color: #888;
-  border-bottom: 1px solid #d0ecea;
-}
-.info-topbar a { color: #888; }
-.info-topbar a:hover { color: #2db4a8; }
-.info-topbar .bc-sep { color: #ccc; margin: 0 4px; }
-.info-topbar .bc-cur { font-weight: 700; color: #333; }
-.info-close-btn {
-  margin-left: auto;
-  background: #fff;
-  border: 1px solid #2db4a8;
-  border-radius: 20px;
-  font-size: 13px;
-  font-weight: 600;
-  color: #2db4a8;
-  cursor: pointer;
-  padding: 5px 14px;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.info-close-btn:hover { background: #2db4a8; color: #fff; }
-
-/* hero */
-.info-hero {
-  background: #fff;
-  text-align: center;
-  padding: 28px 20px 22px;
-  border-bottom: 1px solid #eee;
-}
-.info-hero h1 { font-size: 24px; font-weight: 800; color: #222; }
-
-/* body layout */
-.info-body {
-  display: flex;
-  gap: 24px;
-  padding: 26px 80px 26px 40px;
-  max-width: 1300px;
-  margin: 0 auto;
-}
-
-/* ---- Left filter panel ---- */
-.info-filter {
-  width: 220px;
-  flex-shrink: 0;
-}
-.tab-row {
-  display: flex;
-  border: 1px solid #2db4a8;
-  border-radius: 8px;
-  overflow: hidden;
-  margin-bottom: 16px;
-}
-.tab-btn {
-  flex: 1;
-  padding: 10px 0;
-  background: #fff;
-  border: none;
-  font-size: 14px;
-  font-weight: 600;
-  color: #2db4a8;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-  transition: background 0.15s;
-}
-.tab-btn.active { background: #2db4a8; color: #fff; }
-.tab-btn:not(:last-child) { border-right: 1px solid #2db4a8; }
-
-.filter-select-box {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #fff;
-  padding: 12px 14px;
-  margin-bottom: 12px;
-}
-.filter-select-box select {
-  width: 100%;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  padding: 8px 10px;
-  font-size: 13px;
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #555;
-  background: #fafafa;
-  appearance: auto;
-}
-.filter-input-row {
-  display: flex;
-  gap: 0;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  overflow: hidden;
-  background: #fff;
-  margin-bottom: 12px;
-}
-.filter-input-row input {
-  flex: 1;
-  padding: 9px 12px;
-  border: none;
-  outline: none;
-  font-size: 13px;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.filter-input-row button {
-  padding: 0 13px;
-  background: #333;
-  border: none;
-  color: #fff;
-  cursor: pointer;
-  font-size: 14px;
-}
-.filter-apply-row {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #fff;
-  padding: 12px 14px;
-  margin-bottom: 12px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  cursor: pointer;
-  font-size: 14px;
-  color: #333;
-  font-weight: 600;
-}
-.filter-apply-row:hover { border-color: #2db4a8; }
-
-.bookmark-btn {
-  width: 100%;
-  padding: 11px;
-  background: #2db4a8;
-  color: #fff;
-  border: none;
-  border-radius: 8px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  margin-bottom: 10px;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.filter-action-row {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 10px;
-}
-.filter-action-row button {
-  flex: 1;
-  padding: 9px 0;
-  border-radius: 6px;
-  font-size: 12px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.btn-reset { background: #fff; border: 1px solid #2db4a8; color: #2db4a8; }
-.btn-save  { background: #2db4a8; border: 1px solid #2db4a8; color: #fff; }
-.filter-link-btn {
-  width: 100%;
-  padding: 9px;
-  background: #fff;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 12px;
-  color: #666;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
-/* ---- Right table area ---- */
-.info-table-area { flex: 1; }
-.table-summary {
-  font-size: 16px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 14px;
-}
-.table-summary strong { color: #2db4a8; font-size: 18px; }
-
-.info-table {
-  width: 100%;
-  border-collapse: collapse;
-  background: #fff;
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid #e0e0e0;
-}
-.info-table thead tr {
-  background: #f5f5f5;
-  border-bottom: 2px solid #e0e0e0;
-}
-.info-table th {
-  padding: 12px 10px;
-  font-size: 13px;
-  font-weight: 700;
-  color: #444;
-  text-align: center;
-  white-space: nowrap;
-}
-.info-table th .sort-icon { color: #bbb; font-size: 11px; margin-left: 4px; }
-.info-table tbody tr {
-  border-bottom: 1px solid #f0f0f0;
-  transition: background 0.1s;
-}
-.info-table tbody tr:hover { background: #f9fffe; }
-.info-table td {
-  padding: 14px 10px;
-  font-size: 13px;
-  color: #444;
-  text-align: center;
-  vertical-align: middle;
-}
-.univ-name-cell {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  text-align: left;
-}
-.univ-logo {
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: #e8f5f4;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; color: #2db4a8;
-  flex-shrink: 0;
-  font-weight: 700;
-}
-.univ-name-text { font-weight: 600; color: #222; font-size: 13px; }
-.region-cell { display: flex; align-items: center; gap: 4px; justify-content: center; }
-.region-cell i { color: #2db4a8; font-size: 12px; }
-.competition-cell { font-size: 12px; line-height: 1.6; }
-.competition-cell .comp-su { color: #2db4a8; }
-.competition-cell .comp-jeong { color: #ff7043; }
-.num-link { color: #2db4a8; font-weight: 700; font-size: 13px; text-decoration: none; }
-.num-link:hover { text-decoration: underline; }
-.compare-btn {
-  padding: 5px 12px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background: #fff;
-  font-size: 12px;
-  color: #555;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.compare-btn:hover { border-color: #2db4a8; color: #2db4a8; }
-.star-btn { background: none; border: none; color: #ddd; font-size: 16px; cursor: pointer; }
-.star-btn:hover { color: #ffc107; }
-
-/* table header dropdown row */
-.table-top-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 10px;
-}
-.table-view-select {
-  padding: 7px 28px 7px 12px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 13px;
-  font-family: 'Noto Sans KR', sans-serif;
-  color: #555;
-  appearance: auto;
-}
-
-/* pagination */
-.pagination {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 4px;
-  padding: 24px 0 8px;
-}
-.page-btn {
-  width: 34px; height: 34px;
-  border: 1px solid #ddd;
-  background: #fff;
-  border-radius: 6px;
-  font-size: 13px;
-  color: #555;
-  cursor: pointer;
-  display: flex; align-items: center; justify-content: center;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.page-btn.active { background: #2db4a8; color: #fff; border-color: #2db4a8; font-weight: 700; }
-.page-btn:hover:not(.active) { border-color: #2db4a8; color: #2db4a8; }
-
-/* 학과 table - dept result btn */
-.result-btn {
-  padding: 5px 10px;
-  border: 1px solid #ccc;
-  border-radius: 16px;
-  background: #fff;
-  font-size: 11px;
-  color: #555;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-  margin-right: 4px;
-}
-.result-btn:hover { border-color: #2db4a8; color: #2db4a8; }
-
-/* dept filter extra */
-.dept-keyword-row {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #fff;
-  padding: 12px 14px;
-  margin-bottom: 12px;
-}
-.dept-keyword-row label {
-  font-size: 13px; font-weight: 600; color: #444;
-  display: block; margin-bottom: 8px;
-}
-.dept-keyword-input {
-  display: flex;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  overflow: hidden;
-}
-.dept-keyword-input input {
-  flex:1; padding: 8px 10px; border: none; outline: none;
-  font-size: 13px; font-family: 'Noto Sans KR', sans-serif;
-}
-.dept-keyword-input button {
-  padding: 0 11px; background: #333; border: none; color: #fff; cursor: pointer;
-}
-</style>
 
 <!-- ===== 대학정보 모달 ===== -->
 <div class="info-overlay" id="univOverlay">
@@ -2356,8 +686,8 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
         </select>
       </div>
       <div class="filter-input-row">
-        <input type="text" placeholder="대학명을 입력해주세요.">
-        <button><i class="fas fa-search"></i></button>
+        <input type="text" id="univSearchInput" placeholder="대학명을 입력해주세요." oninput="filterUnivTable(this.value)">
+        <button onclick="filterUnivTable(document.getElementById('univSearchInput').value)" aria-label="검색"><i class="fas fa-search"></i></button>
       </div>
       <div class="filter-apply-row">
         적용필터 <i class="fas fa-sync-alt" style="color:#2db4a8;font-size:13px;"></i>
@@ -2374,7 +704,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
     <!-- 테이블 -->
     <div class="info-table-area">
       <div class="table-top-row">
-        <div class="table-summary">총 <strong>220건</strong></div>
+        <div class="table-summary">총 <strong id="univTotal">220건</strong></div>
         <select class="table-view-select"><option>대학목록 ∨</option></select>
       </div>
       <table class="info-table">
@@ -2469,239 +799,120 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 </div>
 
 
-<!-- ===== 전형정보 페이지 ===== -->
-<style>
-.adm-result-btn {
-  padding: 5px 14px;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  background: #fff;
-  font-size: 12px;
-  color: #555;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-  white-space: nowrap;
-}
-.adm-result-btn:hover { border-color: #2db4a8; color: #2db4a8; }
-.expand-btn { background: none; border: none; font-size: 16px; color: #aaa; cursor: pointer; }
-
-/* 학생부 성적 */
-.grade-table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; }
-.grade-table th { background: #f5f5f5; padding: 10px 12px; font-size: 13px; font-weight: 600; color: #444; text-align: center; border-bottom: 1px solid #e0e0e0; }
-.grade-table td { padding: 10px 12px; font-size: 13px; color: #555; text-align: center; border-bottom: 1px solid #f0f0f0; }
-.grade-table .row-label { font-weight: 600; background: #fafafa; text-align: center; }
-
-.grade-input-btn {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  background: #fff;
-  font-size: 13px;
-  color: #555;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: center;
-  margin-bottom: 8px;
-}
-.grade-input-btn:hover { border-color: #2db4a8; color: #2db4a8; }
-.grade-input-btn.primary { background: #2db4a8; color: #fff; border-color: #2db4a8; }
-.grade-input-btn.primary:hover { background: #26a69a; }
-
-.grade-tabs { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 20px; }
-.grade-tab { padding: 10px 20px; font-size: 14px; font-weight: 600; color: #888; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; }
-.grade-tab.active { color: #333; border-bottom-color: #2db4a8; }
-
-.radio-group { display: flex; gap: 14px; align-items: center; font-size: 13px; }
-.radio-group label { display: flex; align-items: center; gap: 4px; cursor: pointer; }
-.radio-group input[type="radio"] { accent-color: #2db4a8; }
-
-.chart-placeholder { border: 1px solid #e0e0e0; border-radius: 10px; padding: 30px; background: #fff; margin-bottom: 24px; text-align: center; min-height: 200px; display: flex; align-items: center; justify-content: center; color: #bbb; font-size: 14px; }
-
-/* 대입정보자료 */
-.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-.data-card { display: flex; gap: 16px; padding: 20px; background: #fff; border-radius: 10px; border: 1px solid #eee; transition: box-shadow 0.2s; }
-.data-card:hover { box-shadow: 0 2px 12px rgba(0,0,0,0.06); }
-.data-thumb { width: 100px; height: 130px; border-radius: 8px; background: linear-gradient(135deg, #e3f2fd, #bbdefb); display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 12px; color: #1976d2; font-weight: 700; text-align: center; line-height: 1.3; padding: 8px; }
-.data-thumb.green { background: linear-gradient(135deg, #e8f5e9, #c8e6c9); color: #388e3c; }
-.data-thumb.orange { background: linear-gradient(135deg, #fff3e0, #ffe0b2); color: #e65100; }
-.data-info { flex: 1; }
-.data-info .data-tags { font-size: 11px; color: #888; margin-bottom: 6px; }
-.data-info .data-tags span { margin-right: 8px; }
-.data-info .data-title { font-size: 15px; font-weight: 700; color: #222; margin-bottom: 6px; line-height: 1.4; }
-.data-info .data-file { font-size: 12px; color: #2db4a8; margin-bottom: 8px; cursor: pointer; }
-.data-info .data-file i { margin-left: 4px; }
-.data-info .data-meta { font-size: 11px; color: #aaa; }
-
-/* 상담 공통 */
-.consult-stats { display: flex; background: #fff; border: 1px solid #e0e0e0; border-radius: 12px; overflow: hidden; margin-bottom: 16px; }
-.consult-stat { flex: 1; text-align: center; padding: 18px 10px; border-right: 1px solid #eee; }
-.consult-stat:last-child { border-right: none; }
-.consult-stat .stat-label { font-size: 12px; color: #888; margin-bottom: 6px; }
-.consult-stat .stat-value { font-size: 20px; font-weight: 800; color: #2db4a8; }
-.consult-stat .stat-value.black { color: #333; }
-
-.consult-banner { background: linear-gradient(90deg, #2db4a8, #00897b); color: #fff; border-radius: 10px; padding: 16px 24px; display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 14px; font-weight: 600; }
-.consult-banner a { color: #fff; background: rgba(255,255,255,0.2); padding: 8px 18px; border-radius: 6px; font-size: 13px; }
-
-.consult-filter-select { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; color: #555; background: #fff; appearance: auto; margin-bottom: 10px; }
-.consult-filter-chevron { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; color: #555; background: #fff; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
-.consult-filter-chevron:hover { border-color: #2db4a8; }
-
-.empty-state { text-align: center; padding: 60px 20px; color: #aaa; }
-.empty-state i { font-size: 40px; margin-bottom: 12px; display: block; color: #ddd; }
-
-.usage-accordion { border: 1px solid #e0e0e0; border-radius: 10px; overflow: hidden; margin-top: 20px; }
-.usage-acc-header { padding: 16px 22px; font-size: 15px; font-weight: 600; color: #333; cursor: pointer; display: flex; justify-content: space-between; align-items: center; background: #fff; }
-.usage-acc-header:hover { background: #fafafa; }
-
-.warning-text { color: #e53935; font-size: 13px; line-height: 1.6; margin-bottom: 16px; }
-</style>
+<!-- ===== 특례전형정보 페이지 ===== -->
 
 <div class="info-overlay" id="admOverlay">
   <div class="info-topbar">
     <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
-    <span class="bc-sep">›</span><a href="#" onclick="showHome()">대학/학과/전형</a>
-    <span class="bc-sep">›</span><a href="#">전형정보</a>
-    <span class="bc-sep">›</span><span class="bc-cur">일반대학</span>
+    <span class="bc-sep">›</span><a href="#" onclick="showHome();return false;">대학/학과/전형</a>
+    <span class="bc-sep">›</span><a href="#">특례전형정보</a>
+    <span class="bc-sep">›</span><span class="bc-cur" id="admBcCur">3년 특례</span>
     <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
   </div>
-  <div class="info-hero"><h1>전형정보</h1></div>
+  <div class="info-hero"><h1>특례전형정보</h1></div>
   <div class="info-body">
     <div class="info-filter">
-      <div class="tab-row">
-        <button class="tab-btn active">일반대학</button>
-        <button class="tab-btn">전문대학</button>
+      <div class="tab-row" id="admTypeTabs">
+        <button class="tab-btn active" onclick="setAdmType('3년')">3년 특례</button>
+        <button class="tab-btn" onclick="setAdmType('12년')">12년 특례</button>
       </div>
-      <div class="filter-select-box"><select><option>2027학년도(현재 고3)</option></select></div>
-      <div class="filter-input-row"><input type="text" placeholder="대학명을 입력해주세요."><button><i class="fas fa-search"></i></button></div>
-      <div class="dept-keyword-row"><label>학과 <i class="fas fa-sync-alt" style="color:#2db4a8;font-size:11px;"></i></label><div class="dept-keyword-input"><input type="text" placeholder="학과관련 키워드"><button><i class="fas fa-search"></i></button></div></div>
-      <div class="dept-keyword-row"><label>전형 <i class="fas fa-sync-alt" style="color:#2db4a8;font-size:11px;"></i></label><div class="dept-keyword-input"><input type="text" placeholder="전형관련 키워드"><button><i class="fas fa-search"></i></button></div></div>
-      <div class="filter-apply-row">적용필터 <i class="fas fa-sync-alt" style="color:#2db4a8;font-size:13px;"></i><i class="fas fa-chevron-right" style="color:#aaa;font-size:12px;"></i></div>
-      <button class="bookmark-btn">관심전형보기</button>
-      <div class="filter-action-row"><button class="btn-reset">검색조건 초기화</button><button class="btn-save">검색조건 저장</button></div>
-      <button class="filter-link-btn">검색조건설정 바로가기</button>
+      <div class="filter-select-box"><select><option>2027학년도(현재 고3·G12)</option><option>2028학년도(현재 고2·G11)</option></select></div>
+      <div class="filter-input-row"><input type="text" id="admKeyword" placeholder="대학명 또는 모집단위" oninput="renderAdmTable()"><button onclick="renderAdmTable()" aria-label="검색"><i class="fas fa-search"></i></button></div>
+      <div class="filter-box" style="margin-top:4px;"><label>전형방법</label>
+        <select class="ug-select" id="admMethod" onchange="renderAdmTable()">
+          <option value="">전체</option><option value="서류">서류 중심</option><option value="필답">필답고사 포함</option><option value="면접">면접 포함</option>
+        </select>
+      </div>
+      <div class="filter-box"><label>지역</label>
+        <select class="ug-select" id="admRegion" onchange="renderAdmTable()">
+          <option value="">전체</option><option>서울</option><option>경기</option><option>인천</option><option>그 외 지역</option>
+        </select>
+      </div>
+      <div class="filter-action-row"><button class="btn-reset" onclick="resetAdmFilters()">검색조건 초기화</button><button class="btn-save" onclick="openPage('univGradeOverlay')">성적분석</button></div>
+      <button class="filter-link-btn" onclick="openProgram(1)">전형요소별 준비 가이드 ›</button>
     </div>
     <div class="info-table-area">
-      <div class="table-top-row">
-        <div class="table-summary">총 <strong>70,827건</strong></div>
-        <select class="table-view-select"><option>대학목록 ∨</option></select>
+      <div class="og-notice" style="background:#fff8e1;">
+        <i class="fas fa-exclamation-circle" style="color:#e65100;"></i>
+        아래 목록은 <strong>화면 구성용 예시 데이터</strong>입니다. 실제 모집단위·전형방법·경쟁률은 각 대학 재외국민 특별전형 모집요강과 입시결과로 확인하세요.
       </div>
-      <table class="info-table">
-        <thead><tr>
-          <th>대학명 <span class="sort-icon">▾</span></th>
-          <th>학과명 <span class="sort-icon">▾</span></th>
-          <th>지역 <span class="sort-icon">▾</span></th>
-          <th>2026<br>경쟁률</th>
-          <th>모집인원 <span class="sort-icon">▾</span></th>
-          <th>전년도 입시결과(등급)</th>
-          <th>분석 · 비교</th>
-          <th>★</th>
-        </tr></thead>
-        <tbody>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가야대학교[본교]</span></div></td><td>간호학과(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경남</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">6.78</span></div><div>정시 <span class="comp-jeong">6.77</span></div></div></td><td><a class="num-link">185</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가야대학교[본교]</span></div></td><td>물리치료학과(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경남</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">7.35</span></div><div>정시 <span class="comp-jeong">6.25</span></div></div></td><td><a class="num-link">56</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가야대학교[본교]</span></div></td><td>방사선학과(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경남</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">7.61</span></div><div>정시 <span class="comp-jeong">11.33</span></div></div></td><td><a class="num-link">45</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가야대학교[본교]</span></div></td><td>사회복지상담학과(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경남</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">1.03</span></div><div>정시 <span class="comp-jeong">1</span></div></div></td><td><a class="num-link">40</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가야대학교[본교]</span></div></td><td>스포츠재활복지학과(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경남</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">4.95</span></div><div>정시 <span class="comp-jeong">3</span></div></div></td><td><a class="num-link">40</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가야대학교[본교]</span></div></td><td>자유전공학부(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경남</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">0.64</span></div><div>정시 <span class="comp-jeong">1</span></div></div></td><td><a class="num-link">14</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가야대학교[본교]</span></div></td><td>치유웰니스학과(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경남</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">1.21</span></div><div>정시 <span class="comp-jeong">0.25</span></div></div></td><td><a class="num-link">19</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가야대학교[본교]</span></div></td><td>특수교육과(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경남</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">2.04</span></div><div>정시 <span class="comp-jeong">2</span></div></div></td><td><a class="num-link">26</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가천대학교[본교]</span></div></td><td>AI인문대학(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경기</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">36.7</span></div><div>정시 <span class="comp-jeong">12.48</span></div></div></td><td><a class="num-link">290</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-          <tr><td><div class="univ-name-cell"><div class="univ-logo">가</div><span class="univ-name-text">가천대학교[본교]</span></div></td><td>간호학과(주간)</td><td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>경기</div></td><td><div class="competition-cell"><div>수시 <span class="comp-su">35.11</span></div><div>정시 <span class="comp-jeong">4.45</span></div></div></td><td><a class="num-link">337</a></td><td><button class="adm-result-btn">전형평가기준 및 결과공개</button></td><td><button class="expand-btn">∨</button></td><td><button class="star-btn">★</button></td></tr>
-        </tbody>
-      </table>
-      <div class="pagination"><button class="page-btn">«</button><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">5</button><button class="page-btn">6</button><button class="page-btn">7</button><button class="page-btn">8</button><button class="page-btn">9</button><button class="page-btn">10</button><button class="page-btn">›</button><button class="page-btn">»</button></div>
+      <div class="table-top-row">
+        <div class="table-summary">총 <strong id="admTotal">0건</strong></div>
+      </div>
+      <div class="og-table-wrap">
+        <table class="info-table adm-table">
+          <thead><tr>
+            <th>대학명</th><th>모집단위</th><th>지역</th><th>전형유형</th><th>전형방법</th><th>전년도<br>경쟁률</th><th>전형결과</th>
+          </tr></thead>
+          <tbody id="admTableBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state" id="admEmpty" style="display:none;"><i class="fas fa-exclamation-circle"></i>조건에 맞는 전형이 없어요.</div>
     </div>
   </div>
 </div>
 
-<!-- ===== 학생부 성적 페이지 ===== -->
+<!-- ===== 해외학교 성적 입력 페이지 ===== -->
 <div class="info-overlay" id="gradeOverlay">
   <div class="info-topbar">
     <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
     <span class="bc-sep">›</span><a href="#">마이페이지</a>
     <span class="bc-sep">›</span><a href="#">성적관리</a>
-    <span class="bc-sep">›</span><span class="bc-cur">학생부 성적</span>
+    <span class="bc-sep">›</span><span class="bc-cur">해외학교 성적</span>
     <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
   </div>
-  <div class="info-hero"><h1>학생부 성적</h1></div>
+  <div class="info-hero"><h1>해외학교 성적 입력</h1></div>
   <div class="info-body">
     <div class="info-filter">
-      <div style="border:1px solid #e0e0e0;border-radius:8px;padding:16px;margin-bottom:14px;background:#fff;">
-        <div style="font-size:14px;font-weight:600;margin-bottom:12px;">성적유형</div>
-        <button class="grade-input-btn primary">학생부</button>
-        <button class="grade-input-btn">수능/모의고사</button>
-        <button class="grade-input-btn">분석 내역</button>
-      </div>
-      <div style="border:1px solid #e0e0e0;border-radius:8px;padding:16px;margin-bottom:14px;background:#fff;">
-        <div style="font-size:14px;font-weight:600;margin-bottom:12px;">성적입력</div>
-        <div style="font-size:13px;font-weight:600;margin-bottom:8px;">1학년</div>
-        <button class="grade-input-btn">1학년 1학기 입력</button>
-        <button class="grade-input-btn">1학년 2학기 입력</button>
-        <div style="font-size:13px;font-weight:600;margin:12px 0 8px;">2학년</div>
-        <button class="grade-input-btn">2학년 1학기 입력</button>
-        <button class="grade-input-btn">2학년 2학기 입력</button>
-        <div style="font-size:13px;font-weight:600;margin:12px 0 8px;">3학년</div>
-        <button class="grade-input-btn">3학년 1학기 입력</button>
-        <button class="grade-input-btn">3학년 2학기 입력</button>
-        <div style="font-size:13px;font-weight:600;margin:12px 0 8px;">비교과</div>
-        <button class="grade-input-btn">입력</button>
-        <div style="font-size:13px;font-weight:600;margin:12px 0 8px;">학생부 성적 업로드</div>
-        <button class="grade-input-btn">입력</button>
-      </div>
-      <button class="bookmark-btn">성적분석</button>
-    </div>
-    <div class="info-table-area">
-      <div style="background:#e8f5f4;padding:14px 18px;border-radius:8px;margin-bottom:18px;font-size:13px;color:#333;">
-        <strong>오병수</strong>님 반갑습니다. 학생부 성적분석을 위해서는 <a href="#" style="color:#2db4a8;font-weight:600;">학생부 성적입력</a>이 필요합니다. (입력 가이드를 참고해주세요.) →
-        <button style="float:right;padding:6px 14px;border:1px solid #ccc;border-radius:20px;background:#fff;font-size:12px;cursor:pointer;font-family:'Noto Sans KR',sans-serif;">학생부 성적 입력 가이드</button>
-      </div>
-      <div class="grade-tabs">
-        <span class="grade-tab active">주요교과 분석</span>
-        <span class="grade-tab">교과조합 분석</span>
-        <div style="margin-left:auto;" class="radio-group">
-          이수단위 <span style="color:#ccc">?</span>
-          <label><input type="radio" name="isu" checked> 반영</label>
-          <label><input type="radio" name="isu"> 미반영</label>
+      <div class="og-box">
+        <div class="og-box-title">성적 체계</div>
+        <div class="og-scale-btns" id="ogScaleBtns">
+          <button class="grade-input-btn primary" data-js data-scale="gpa4">4.0 GPA (비가중)</button>
+          <button class="grade-input-btn" data-js data-scale="gpa5">5.0 GPA (가중)</button>
+          <button class="grade-input-btn" data-js data-scale="pct">100점 백분율</button>
+          <button class="grade-input-btn" data-js data-scale="ib">IB 7점</button>
         </div>
       </div>
-      <div style="background:#fff8e1;padding:10px 14px;border-radius:6px;margin-bottom:18px;font-size:12px;color:#e65100;">
-        <i class="fas fa-exclamation-circle"></i> 입력이 안되거나 과목수가 충분하지 않은 경우 다른 성적을 참조하게 되므로 정확도가 떨어집니다.
+      <div class="og-box">
+        <div class="og-box-title">공인시험 기록</div>
+        <label class="og-field">SAT <span>400~1600</span><input type="number" min="400" max="1600" step="10" data-test="sat"></label>
+        <label class="og-field">ACT <span>1~36</span><input type="number" min="1" max="36" data-test="act"></label>
+        <label class="og-field">AP 4·5점 과목 수<input type="number" min="0" max="30" data-test="ap"></label>
+        <label class="og-field">IB 예상 총점 <span>/45</span><input type="number" min="0" max="45" data-test="ibTotal"></label>
+        <label class="og-field">TOEFL iBT <span>/120</span><input type="number" min="0" max="120" data-test="toefl"></label>
+        <label class="og-field">TOPIK 급수 <span>1~6</span><input type="number" min="1" max="6" data-test="topik"></label>
       </div>
-      <div style="text-align:right;margin-bottom:12px;" class="radio-group">
-        <label><input type="radio" name="view" checked> 석차 등급 및 성취도</label>
-        <label><input type="radio" name="view"> 표준점수</label>
+      <button class="bookmark-btn" onclick="resetOverseasGrades()">입력 초기화</button>
+    </div>
+    <div class="info-table-area">
+      <div class="og-notice">
+        <i class="fas fa-info-circle"></i>
+        해외학교 성적은 국가·학교마다 체계가 달라 <strong>대학별 환산 방식이 다릅니다.</strong>
+        이 계산기는 입력한 성적의 평균과 <strong>단순 비율(100점) 환산</strong>을 보여주는 참고용입니다. 입력값은 이 브라우저에 자동 저장됩니다.
       </div>
-      <table class="grade-table">
-        <thead><tr><th>구분</th><th>국어</th><th>수학</th><th>영어</th><th>사회</th><th>과학</th><th>평균</th></tr></thead>
-        <tbody>
-          <tr><td class="row-label" rowspan="3">1학년</td><td>1학기</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2학기</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>평균</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td></tr>
-          <tr><td class="row-label" rowspan="3">2학년</td><td>1학기</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2학기</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>평균</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td></tr>
-          <tr><td class="row-label" rowspan="3">3학년</td><td>1학기</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>2학기</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td>평균</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td><td style="color:#2db4a8;">0</td></tr>
-        </tbody>
-      </table>
-      <br>
-      <table class="grade-table">
-        <thead><tr><th>구분</th><th>성취도-A</th><th>성취도-B</th><th>성취도-C</th><th>합계</th></tr></thead>
-        <tbody>
-          <tr><td class="row-label">1학년</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td class="row-label">2학년</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td class="row-label">3학년</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-          <tr><td class="row-label">전학년</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
-        </tbody>
-      </table>
-      <div style="font-size:12px;color:#888;margin-top:10px;">※ 재학생은 3학년 1학기까지, 졸업생은 3학년 2학기까지의 성적을 기준으로 제공됩니다.</div>
-      <h3 style="margin-top:30px;font-size:18px;font-weight:800;">학년별 교과추이</h3>
-      <div class="chart-placeholder"><i class="fas fa-chart-line" style="font-size:40px;margin-right:10px;"></i> 성적 입력 후 그래프가 표시됩니다</div>
-      <h3 style="font-size:18px;font-weight:800;">전학년 교과비교</h3>
-      <div class="chart-placeholder"><i class="fas fa-chart-bar" style="font-size:40px;margin-right:10px;"></i> 성적 입력 후 그래프가 표시됩니다</div>
+
+      <div class="og-summary">
+        <div class="og-sum-card"><div class="og-sum-label">전체 평균</div><div class="og-sum-value" id="ogAvg">-</div><div class="og-sum-desc" id="ogScaleLabel">4.0 GPA 기준</div></div>
+        <div class="og-sum-card"><div class="og-sum-label">100점 환산 (단순 비율)</div><div class="og-sum-value" id="ogPct">-</div><div class="og-sum-desc">평균 ÷ 만점 × 100</div></div>
+        <div class="og-sum-card"><div class="og-sum-label">입력한 학기</div><div class="og-sum-value" id="ogTerms">0</div><div class="og-sum-desc">최대 8개 학기</div></div>
+        <div class="og-sum-card"><div class="og-sum-label">최근 학기 추이</div><div class="og-sum-value" id="ogTrend">-</div><div class="og-sum-desc">직전 학기 대비</div></div>
+      </div>
+
+      <div class="og-table-wrap">
+        <table class="grade-table og-table">
+          <thead><tr><th>학년 · 학기</th><th>영어<br><small>Language Arts</small></th><th>수학</th><th>과학</th><th>사회</th><th>기타<br><small>제2외국어 등</small></th><th>학기 평균</th></tr></thead>
+          <tbody id="ogTableBody"></tbody>
+          <tfoot><tr><td class="row-label">과목 평균</td><td id="ogColAvg0">-</td><td id="ogColAvg1">-</td><td id="ogColAvg2">-</td><td id="ogColAvg3">-</td><td id="ogColAvg4">-</td><td id="ogColAvgAll">-</td></tr></tfoot>
+        </table>
+      </div>
+      <div style="font-size:12px;color:#888;margin-top:10px;line-height:1.7;">
+        ※ 재학생은 최종 학년 1학기까지, 졸업(예정)자는 최종 학년 2학기까지 입력하세요. 학기제가 아닌 학교(쿼터·트라이메스터 등)는 대학이 인정하는 학기 단위로 묶어 입력합니다.<br>
+        ※ 대학은 GPA를 자체 기준으로 재환산하거나 교과별 가중치를 두는 경우가 많으므로, 실제 평가는 대학별 모집요강을 확인하세요.
+      </div>
+      <div class="ok-links" style="margin-top:20px;">
+        <div class="ok-link" onclick="openPage('univGradeOverlay')"><i class="fas fa-chart-pie"></i><div>대학별 성적분석<span>전년도 입시결과와 비교</span></div></div>
+        <div class="ok-link" onclick="openProgram(1)"><i class="fas fa-route"></i><div>전형요소별 준비<span>3년·12년 특례 평가요소</span></div></div>
+      </div>
     </div>
   </div>
 </div>
@@ -2788,15 +999,15 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   </div>
 </div>
 
-<!-- ===== 온라인대입상담 페이지 ===== -->
+<!-- ===== 특례 입시상담 페이지 ===== -->
 <div class="info-overlay" id="consultOverlay">
   <div class="info-topbar">
     <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
     <span class="bc-sep">›</span><a href="#">대입상담</a>
-    <span class="bc-sep">›</span><span class="bc-cur">온라인대입상담</span>
+    <span class="bc-sep">›</span><span class="bc-cur">특례 입시상담</span>
     <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
   </div>
-  <div class="info-hero"><h1>온라인대입상담</h1></div>
+  <div class="info-hero"><h1>특례 입시 온라인상담</h1></div>
   <div class="info-body">
     <div class="info-filter">
       <select class="consult-filter-select"><option>제목</option></select>
@@ -2805,26 +1016,34 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
         <button style="flex:1;padding:10px;border:none;background:#fff;font-size:13px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">전체</button>
         <button style="flex:1;padding:10px;border:none;background:#2db4a8;color:#fff;font-size:13px;font-weight:600;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">내가 쓴 글</button>
       </div>
-      <select class="consult-filter-select"><option>계열</option></select>
-      <div class="consult-filter-chevron">구분 <i class="fas fa-chevron-right"></i></div>
+      <select class="consult-filter-select"><option>상담분야</option><option>자격요건·체류기간</option><option>서류·인증·번역</option><option>필답고사</option><option>면접</option><option>대학·학과 선택</option><option>귀국·편입학</option></select>
+      <select class="consult-filter-select"><option>특례유형</option><option>3년 특례</option><option>12년 특례</option><option>미정</option></select>
       <select class="consult-filter-select"><option>처리상태</option></select>
       <select class="consult-filter-select"><option>공개여부</option></select>
-      <button class="bookmark-btn">상담신청</button>
+      <button class="bookmark-btn" onclick="openConsultForm()">상담신청</button>
     </div>
     <div class="info-table-area">
       <div class="consult-stats">
-        <div class="consult-stat"><div class="stat-label">시·도교육청 추천</div><div class="stat-value">17개</div></div>
-        <div class="consult-stat"><div class="stat-label">경력 10년 이상</div><div class="stat-value black">10년</div></div>
-        <div class="consult-stat"><div class="stat-label">현직 진로진학 교사</div><div class="stat-value">500명</div></div>
+        <div class="consult-stat"><div class="stat-label">상담 분야</div><div class="stat-value">6개</div></div>
+        <div class="consult-stat"><div class="stat-label">상담 대상</div><div class="stat-value black">3특·12특</div></div>
+        <div class="consult-stat"><div class="stat-label">전화상담(대교협)</div><div class="stat-value">1600-1615</div></div>
         <div class="consult-stat"><div class="stat-label">상담비용</div><div class="stat-value black">무료</div></div>
       </div>
-      <div class="consult-banner"><span>대입상담교사단의 상담을 받아보세요!</span><a href="#">온라인대입상담 신청하기 ›</a></div>
-      <div class="warning-text">
-        ※ 수시모집 기간 상담량 증가로 인하여, 온라인대입상담 답변이 늦어지고 있습니다.<br>
-        상담 신청 시 많은 질문을 포함하기 보다는 나눠 질문 할 경우 빠른 답변을 받을 수 있으니 참고하여 작성 부탁 드립니다.
+      <div class="consult-banner"><span>특례 자격·서류·필답·면접, 궁금한 점을 남겨주세요!</span><a href="#" onclick="openConsultForm();return false;">특례 상담 신청하기 ›</a></div>
+      <div class="ok-section-title" style="font-size:15px;margin-top:4px;"><i class="fas fa-lightbulb"></i> 상담 전에 먼저 확인해 보세요</div>
+      <div class="ok-chips" style="margin-bottom:18px;">
+        <span class="ok-chip" style="cursor:pointer;" onclick="openPage('systemOverlay')"><b>FAQ</b>부모 한 명만 동반했어요</span>
+        <span class="ok-chip" style="cursor:pointer;" onclick="openPage('systemOverlay')"><b>FAQ</b>12년 특례 부모 요건</span>
+        <span class="ok-chip" style="cursor:pointer;" onclick="openDocsGuide()"><b>가이드</b>아포스티유·번역공증</span>
+        <span class="ok-chip" style="cursor:pointer;" onclick="openProgram(1)"><b>가이드</b>필답고사·면접 준비</span>
+        <span class="ok-chip" style="cursor:pointer;" onclick="openPage('returnOverlay')"><b>안내</b>귀국 후 편입학</span>
       </div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:20px;">검색결과 0건</div>
-      <div class="empty-state"><i class="fas fa-exclamation-circle"></i>작성하신 게시글이 없어요.</div>
+      <div class="warning-text">
+        ※ 원서접수 시기에는 상담이 많아 답변이 늦어질 수 있습니다. 답변은 <strong>한국시간</strong> 기준으로 등록됩니다.<br>
+        상담 신청 시 해외 재학 국가·학년별 재학 기간·부모 체류 기간을 함께 적어주시면 더 정확한 답변을 받을 수 있습니다.
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:20px;">내 상담 <span id="consultCount">0</span>건</div>
+      <div id="consultList"></div>
       <hr style="border:none;border-top:1px solid #eee;margin:30px 0;">
       <div class="usage-accordion">
         <div class="usage-acc-header">이용안내 <i class="fas fa-chevron-down"></i></div>
@@ -2834,32 +1053,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 </div>
 
 
-
 <!-- ===== 대학성적분석 페이지 ===== -->
-<style>
-.univ-grade-tags { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; }
-.univ-grade-tag { padding: 8px 16px; background: #fff; border: 1px solid #ddd; border-radius: 20px; font-size: 13px; color: #555; cursor: pointer; transition: all 0.2s; white-space: nowrap; }
-.univ-grade-tag:hover { border-color: #2db4a8; color: #2db4a8; }
-.univ-grade-tag strong { color: #2db4a8; font-weight: 700; margin-left: 4px; }
-
-.grade-tabs-univ { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 24px; }
-.grade-tab-univ { padding: 12px 24px; font-size: 14px; font-weight: 700; color: #aaa; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; }
-.grade-tab-univ.active { color: #2db4a8; border-bottom-color: #2db4a8; }
-
-.know-box { background: #e8f5f4; border: 1px solid #b8e6e2; border-radius: 10px; padding: 18px; margin-bottom: 20px; }
-.know-title { display: flex; align-items: center; gap: 8px; font-size: 15px; font-weight: 700; color: #1a5c3a; margin-bottom: 12px; }
-.know-title i { font-size: 18px; }
-.know-text { font-size: 13px; color: #555; line-height: 1.7; }
-.know-text ul { margin: 10px 0 0 20px; list-style: disc; }
-.know-text li { margin-bottom: 8px; }
-.know-text strong { font-weight: 700; }
-.know-text .red { color: #e53935; }
-.know-text .section-title { font-weight: 700; margin-top: 12px; margin-bottom: 6px; }
-
-.score-criteria { margin-top: 12px; font-size: 12px; color: #666; line-height: 1.6; }
-.score-criteria strong { color: #333; font-weight: 600; }
-.ug-select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 8px; }
-</style>
 
 <div class="info-overlay" id="univGradeOverlay">
   <div class="info-topbar">
@@ -2957,104 +1151,8 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   </div>
 </div>
 
-<script>
-const UNIV_GRADE_TABS = [
-  { label:'3년 특례', univs:[
-    ['연세대학교[본교]',58], ['고려대학교[본교]',52], ['성균관대학교[본교]',41], ['한양대학교[본교]',38], ['서강대학교[본교]',24],
-    ['중앙대학교[본교]',33], ['경희대학교[본교]',45], ['이화여자대학교[본교]',36], ['한국외국어대학교[본교]',29], ['건국대학교[본교]',27]
-  ]},
-  { label:'12년 특례', univs:[
-    ['서울대학교[본교]',72], ['연세대학교[본교]',64], ['고려대학교[본교]',60], ['성균관대학교[본교]',47],
-    ['한양대학교[본교]',44], ['서강대학교[본교]',28], ['경희대학교[본교]',51], ['이화여자대학교[본교]',40]
-  ]}
-];
-
-function switchUnivGradeTab(idx) {
-  const tab = UNIV_GRADE_TABS[idx];
-  document.querySelectorAll('#univGradeOverlay .grade-tab-univ').forEach((t,i) => t.classList.toggle('active', i === idx));
-  document.getElementById('ugBcCur').textContent = tab.label;
-  document.getElementById('ugTotal').textContent = tab.univs.reduce((sum,u) => sum + u[1], 0) + '건';
-  document.getElementById('ugTags').innerHTML = tab.univs.map(u => `<span class="univ-grade-tag">${u[0]} <strong>${u[1]}건</strong></span>`).join('');
-}
-switchUnivGradeTab(0);
-</script>
-
-
 
 <!-- ===== 재외교육 정보 공통 스타일 (제도안내 / 재외교육기관 / 귀국학생) ===== -->
-<style>
-.ok-wrap { max-width: 1140px; margin: 0 auto; padding: 26px 40px 10px; }
-.ok-hero-sub { font-size: 14px; color: #777; margin-top: 8px; }
-.ok-intro { background: #e8f5f4; border: 1px solid #b8e6e2; border-radius: 10px; padding: 18px 22px; font-size: 14px; color: #444; line-height: 1.8; margin-bottom: 26px; }
-.ok-intro strong { color: #1a5c3a; }
-.ok-section-title { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #222; margin: 34px 0 14px; }
-.ok-section-title i { color: #2db4a8; }
-.ok-section-title:first-child { margin-top: 0; }
-
-.ok-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 8px; }
-.ok-stat { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 18px 20px; }
-.ok-stat-label { font-size: 13px; color: #777; margin-bottom: 6px; }
-.ok-stat-num { font-size: 28px; font-weight: 800; color: #2db4a8; line-height: 1.2; }
-.ok-stat-num small { font-size: 14px; color: #555; font-weight: 600; margin-left: 4px; }
-.ok-stat-desc { font-size: 12px; color: #999; margin-top: 6px; }
-
-.ok-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; font-size: 14px; }
-.ok-table th, .ok-table td { padding: 14px 16px; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; line-height: 1.6; }
-.ok-table thead th { background: #2db4a8; color: #fff; font-weight: 700; }
-.ok-table tbody th { background: #f6fbfb; color: #1a5c3a; font-weight: 700; width: 150px; white-space: nowrap; }
-.ok-table td strong { color: #e65100; }
-
-.ok-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
-.ok-card { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 18px 20px; }
-.ok-card-icon { width: 40px; height: 40px; border-radius: 10px; background: #e8f5f4; color: #2db4a8; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px; }
-.ok-card-title { font-size: 15px; font-weight: 700; color: #222; margin-bottom: 6px; }
-.ok-card-desc { font-size: 13px; color: #666; line-height: 1.7; }
-.ok-card.good { border-left: 4px solid #2db4a8; }
-.ok-card.bad { border-left: 4px solid #e57373; }
-.ok-card.bad .ok-card-icon { background: #fdecea; color: #e53935; }
-
-.ok-steps { display: flex; flex-wrap: wrap; gap: 10px; }
-.ok-step { flex: 1; min-width: 150px; background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 16px; position: relative; }
-.ok-step-num { display: inline-block; font-size: 11px; font-weight: 800; color: #fff; background: #2db4a8; border-radius: 12px; padding: 2px 10px; margin-bottom: 8px; }
-.ok-step-title { font-size: 14px; font-weight: 700; color: #222; margin-bottom: 4px; }
-.ok-step-desc { font-size: 12px; color: #777; line-height: 1.6; }
-
-.ok-list { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 18px 22px 18px 40px; font-size: 14px; color: #444; line-height: 1.8; }
-.ok-list li { list-style: disc; margin-bottom: 4px; }
-.ok-list strong { color: #1a5c3a; }
-
-.ok-faq-item { background: #fff; border: 1px solid #e6eeee; border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
-.ok-faq-q { display: flex; align-items: center; gap: 10px; padding: 15px 18px; font-size: 14px; font-weight: 700; color: #333; cursor: pointer; }
-.ok-faq-q::before { content: 'Q'; color: #2db4a8; font-weight: 800; }
-.ok-faq-q i { margin-left: auto; color: #aaa; transition: transform 0.2s; }
-.ok-faq-a { display: none; padding: 0 18px 16px 42px; font-size: 13px; color: #555; line-height: 1.8; }
-.ok-faq-item.open .ok-faq-a { display: block; }
-.ok-faq-item.open .ok-faq-q i { transform: rotate(180deg); }
-
-.ok-tabs { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 20px; }
-.ok-tab { padding: 12px 24px; font-size: 15px; font-weight: 700; color: #aaa; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; }
-.ok-tab.active { color: #2db4a8; border-bottom-color: #2db4a8; }
-.ok-tab-panel { display: none; }
-.ok-tab-panel.active { display: block; }
-
-.ok-chips { display: flex; flex-wrap: wrap; gap: 8px; }
-.ok-chip { padding: 7px 14px; background: #fff; border: 1px solid #ddd; border-radius: 20px; font-size: 13px; color: #555; }
-.ok-chip b { color: #2db4a8; font-weight: 700; margin-right: 4px; }
-
-.ok-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
-.ok-link { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 14px 16px; font-size: 14px; font-weight: 600; color: #333; cursor: pointer; transition: border-color 0.2s; }
-.ok-link:hover { border-color: #2db4a8; color: #2db4a8; }
-.ok-link i { color: #2db4a8; font-size: 18px; width: 22px; text-align: center; }
-.ok-link span { display: block; font-size: 12px; font-weight: 400; color: #999; margin-top: 2px; }
-.ok-link .fa-external-link-alt { margin-left: auto; font-size: 12px; color: #bbb; width: auto; }
-
-.ok-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 18px; background: #2db4a8; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; }
-.ok-btn:hover { background: #26a69a; }
-.ok-btn.line { background: #fff; color: #2db4a8; border: 1px solid #2db4a8; }
-.ok-note { font-size: 12px; color: #888; line-height: 1.7; margin-top: 10px; }
-.ok-source { font-size: 12px; color: #999; margin-top: 30px; padding-top: 14px; border-top: 1px solid #e6e6e6; line-height: 1.7; }
-.ok-source a { color: #2db4a8; }
-</style>
 
 
 <!-- ===== 재외국민 제도안내 페이지 ===== -->
@@ -3306,41 +1404,206 @@ switchUnivGradeTab(0);
   </div>
 </div>
 
-<script>
-function toggleOkFaq(el) {
-  el.parentElement.classList.toggle('open');
-}
-function switchInstTab(idx) {
-  document.querySelectorAll('#instOverlay .ok-tab').forEach((t,i) => t.classList.toggle('active', i === idx));
-  document.querySelectorAll('#instOverlay .ok-tab-panel').forEach((p,i) => p.classList.toggle('active', i === idx));
-}
-</script>
 
+<!-- ===== 특례 준비 가이드 페이지 ===== -->
+<div class="info-overlay" id="programOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#" onclick="openProgram(0);return false;">특례 준비</a>
+    <span class="bc-sep">›</span><span class="bc-cur" id="programBcCur">준비 로드맵</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero">
+    <h1>특례 입시 준비 가이드</h1>
+    <div class="ok-hero-sub">학년별 로드맵, 전형요소별 준비, 연간 일정, 체크리스트를 한곳에서 확인하세요.</div>
+  </div>
+  <div class="ok-wrap">
+    <div class="ok-tabs ok-tabs-scroll">
+      <span class="ok-tab active" onclick="switchProgramTab(0)">준비 로드맵</span>
+      <span class="ok-tab" onclick="switchProgramTab(1)">전형요소별 준비</span>
+      <span class="ok-tab" onclick="switchProgramTab(2)">특례 일정</span>
+      <span class="ok-tab" onclick="switchProgramTab(3)">체크리스트</span>
+      <span class="ok-tab" onclick="switchProgramTab(4)">용어사전</span>
+    </div>
+
+    <!-- 0. 준비 로드맵 -->
+    <div class="ok-tab-panel active">
+      <div class="ok-intro">
+        특례 입시는 <strong>자격 요건이 먼저</strong>입니다. 아무리 성적이 좋아도 해외 이수 기간이나 체류 일수가 부족하면 지원할 수 없으므로,
+        학년이 낮을 때부터 체류 계획과 서류를 관리하는 것이 가장 중요합니다.
+      </div>
+      <div class="pg-timeline">
+        <div class="pg-tl-item">
+          <div class="pg-tl-when">G9 ~ G10<span>중3 ~ 고1</span></div>
+          <div class="pg-tl-body">
+            <div class="pg-tl-title">자격 요건 점검 · 체류 계획</div>
+            <ul>
+              <li>3년 특례: 고교 1개 학년 포함 중·고교 3년 이상 해외 이수 가능 여부 확인</li>
+              <li>학생 매 1년 3/4 이상, 부모 모두 2/3 이상 체류 요건을 기준으로 귀국·방학 일정 계획</li>
+              <li>학년별 재학·성적증명서를 그때그때 발급·보관하는 습관 만들기</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pg-tl-item">
+          <div class="pg-tl-when">G11<span>고2</span></div>
+          <div class="pg-tl-body">
+            <div class="pg-tl-title">목표 대학 · 전형 결정</div>
+            <ul>
+              <li>3년 특례·12년 특례 중 지원 유형 확정, 목표 대학 5~10곳 리스트 작성</li>
+              <li>3년 특례: 필답고사 실시 대학이면 영어 + 국어(인문)/수학(자연) 기초 다지기</li>
+              <li>12년 특례: SAT·AP·IB·A-Level 등 공인시험 일정 확정, 교내외 활동 정리</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pg-tl-item">
+          <div class="pg-tl-when">G12 1학기<span>고3 1학기</span></div>
+          <div class="pg-tl-body">
+            <div class="pg-tl-title">서류 완성 · 실전 대비</div>
+            <ul>
+              <li>해외 학교 서류 발급 → 아포스티유·영사확인 → 번역공증 (가장 오래 걸리는 단계)</li>
+              <li>자기소개서 초안 작성과 첨삭, 지원 동기·해외 경험 정리</li>
+              <li>필답고사 기출 유형 연습, 면접 예상 질문 준비</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pg-tl-item">
+          <div class="pg-tl-when">원서접수기<span>대학별 상이</span></div>
+          <div class="pg-tl-body">
+            <div class="pg-tl-title">접수 · 응시</div>
+            <ul>
+              <li>대학별 원서접수 일정 확인 후 온라인 접수, 서류 제출(등기우편·방문)</li>
+              <li>필답고사·면접 응시, 해외 거주자는 입국 일정과 체류 일수 영향까지 고려</li>
+            </ul>
+          </div>
+        </div>
+        <div class="pg-tl-item">
+          <div class="pg-tl-when">합격 후<span>입학 전</span></div>
+          <div class="pg-tl-body">
+            <div class="pg-tl-title">등록 · 입학 준비</div>
+            <ul>
+              <li>등록 후 원본 서류 확인 절차 대응 (허위 서류는 합격 취소)</li>
+              <li>한국어 학술 글쓰기·전공 기초 등 입학 전 학업 적응 준비</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="ok-section-title"><i class="fas fa-plane"></i> 귀국 시점별 전략</div>
+      <div class="ok-cards">
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-globe-americas"></i></div><div class="ok-card-title">해외 체류 중 준비</div><div class="ok-card-desc">현지 학교 성적이 서류평가의 핵심입니다. 성적 관리에 집중하면서 온라인으로 필답·면접 기초를 병행하고, 서류는 현지에서 미리 발급·인증합니다.</div></div>
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-plane-arrival"></i></div><div class="ok-card-title">졸업 후 귀국해 준비</div><div class="ok-card-desc">졸업 후 원서접수까지 남은 기간에 필답고사·면접을 집중 준비합니다. 귀국 전 모든 해외 서류를 발급·인증해 두어야 일정이 꼬이지 않습니다.</div></div>
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-exclamation-circle"></i></div><div class="ok-card-title">조기 귀국 시 주의</div><div class="ok-card-desc">학년 중간에 귀국하면 해외 이수 기간이나 체류 일수가 부족해질 수 있습니다. 귀국 전에 자격 요건을 반드시 다시 계산해 보세요.</div></div>
+      </div>
+    </div>
+
+    <!-- 1. 전형요소별 준비 -->
+    <div class="ok-tab-panel">
+      <div class="pg-compare">
+        <div class="pg-compare-col">
+          <div class="pg-compare-head">3년 특례</div>
+          <div class="pg-factor">
+            <div class="pg-factor-title"><i class="fas fa-pen-nib"></i> 필답고사</div>
+            <div class="pg-factor-desc">일부 대학이 실시하며, <strong>영어 + 국어(인문계열) 또는 수학(자연계열)</strong> 조합이 많습니다. 대학마다 출제 범위와 난이도가 다르므로 지원 대학의 기출 유형을 먼저 확인하세요.</div>
+          </div>
+          <div class="pg-factor">
+            <div class="pg-factor-title"><i class="fas fa-user-tie"></i> 면접</div>
+            <div class="pg-factor-desc">지원 동기, 전공 적합성, 해외 생활 경험, 한국어 의사소통 능력을 확인합니다. 제출 서류와 답변 내용이 일관되도록 준비합니다.</div>
+          </div>
+          <div class="pg-factor">
+            <div class="pg-factor-title"><i class="fas fa-folder-open"></i> 서류</div>
+            <div class="pg-factor-desc">해외 학교 성적과 자기소개서, 자격 증빙서류(본인·부모 출입국사실증명서, 부모 재직·해외근무 증명)를 제출합니다.</div>
+          </div>
+        </div>
+        <div class="pg-compare-col">
+          <div class="pg-compare-head blue">12년 특례</div>
+          <div class="pg-factor">
+            <div class="pg-factor-title"><i class="fas fa-folder-open"></i> 서류평가 (핵심)</div>
+            <div class="pg-factor-desc">대부분 <strong>서류평가 중심</strong>으로 선발합니다. 고교 성적(GPA·IB·A-Level), 공인시험(SAT·ACT·AP·IB), 자기소개서와 활동을 종합 평가합니다. 서울대는 12년 특례만 운영하며 서류평가 위주로 선발합니다(일부 모집단위 면접).</div>
+          </div>
+          <div class="pg-factor">
+            <div class="pg-factor-title"><i class="fas fa-user-tie"></i> 면접</div>
+            <div class="pg-factor-desc">일부 대학·모집단위에서 실시하며 학업 역량, 전공 적합성, 의사소통 능력을 봅니다.</div>
+          </div>
+          <div class="pg-factor">
+            <div class="pg-factor-title"><i class="fas fa-file-signature"></i> 전 학년 증빙</div>
+            <div class="pg-factor-desc">초·중·고 12년 전 학년의 재학·성적증명서를 빠짐없이 갖춰야 합니다. 학교를 옮긴 이력이 많다면 일찍 발급을 시작하세요.</div>
+          </div>
+        </div>
+      </div>
+      <div class="ok-section-title"><i class="fas fa-language"></i> 공통: 한국어 능력</div>
+      <ul class="ok-list">
+        <li>면접·필답고사는 물론 입학 후 수업도 한국어로 진행되므로, <strong>한국어 읽기·쓰기 능력</strong>이 합격과 대학 적응 모두에 영향을 줍니다.</li>
+        <li>일부 대학은 <strong>TOPIK</strong>이나 공인영어 성적을 지원자격 또는 가점으로 활용합니다. 지원 대학 기준을 확인하세요.</li>
+        <li>수능최저학력기준은 대부분 적용하지 않지만, 예외가 있는지 모집요강에서 확인하세요.</li>
+      </ul>
+      <div class="ok-links" style="margin-top:20px;">
+        <div class="ok-link" onclick="openPage('gradeOverlay')"><i class="fas fa-calculator"></i><div>해외학교 성적 입력<span>학기별 성적 평균 계산</span></div></div>
+        <div class="ok-link" onclick="openDocsGuide()"><i class="fas fa-folder-open"></i><div>서류준비 가이드<span>필수서류·아포스티유·번역</span></div></div>
+        <div class="ok-link" onclick="openPage('admOverlay')"><i class="fas fa-file-alt"></i><div>특례전형 검색<span>대학별 전형방법 비교</span></div></div>
+      </div>
+    </div>
+
+    <!-- 2. 특례 일정 -->
+    <div class="ok-tab-panel">
+      <div class="ok-intro">
+        아래는 특례 입시의 <strong>일반적인 연간 흐름</strong>입니다. 재외국민 특별전형은 대학마다 원서접수·고사 일정이 크게 다르므로, 정확한 날짜는 반드시 <strong>지원 대학의 해당 학년도 모집요강</strong>으로 확인하세요.
+      </div>
+      <div class="pg-months">
+        <div class="pg-month"><div class="pg-month-label">전년도</div><div class="pg-month-title">입학전형 시행계획 발표</div><div class="pg-month-desc">대학별 모집단위·전형방법의 큰 틀 확인</div></div>
+        <div class="pg-month"><div class="pg-month-label">5월 전후</div><div class="pg-month-title">모집요강 발표</div><div class="pg-month-desc">지원자격, 제출서류, 일정 확정. 자격 요건 최종 점검</div></div>
+        <div class="pg-month"><div class="pg-month-label">6월</div><div class="pg-month-title">서류 마무리</div><div class="pg-month-desc">아포스티유·번역공증 완료, 지원 대학 확정</div></div>
+        <div class="pg-month hl"><div class="pg-month-label">7월 ~ 9월</div><div class="pg-month-title">원서접수</div><div class="pg-month-desc">대학별 접수 기간 상이 (대학별 모집요강 확인)</div></div>
+        <div class="pg-month"><div class="pg-month-label">접수 후</div><div class="pg-month-title">자격심사 · 평가</div><div class="pg-month-desc">서류평가, 필답고사, 면접 (대학별 일정)</div></div>
+        <div class="pg-month"><div class="pg-month-label">발표 후</div><div class="pg-month-title">합격자 발표 · 등록</div><div class="pg-month-desc">등록 기간 엄수, 원본 서류 확인</div></div>
+        <div class="pg-month"><div class="pg-month-label">3월</div><div class="pg-month-title">입학</div><div class="pg-month-desc">학기 시작 전 학업·생활 적응 준비</div></div>
+      </div>
+      <button class="ok-btn" onclick="window.open('https://okep.moe.go.kr/board/list.do?board_manager_seq=16&menu_seq=22','_blank')"><i class="fas fa-file-alt"></i> 대학별 모집요강 확인 (재외교육기관포털)</button>
+    </div>
+
+    <!-- 3. 체크리스트 -->
+    <div class="ok-tab-panel">
+      <div class="ok-intro">체크한 항목은 이 브라우저에 저장되어 다음에 방문해도 그대로 남아 있습니다.</div>
+      <div class="pg-progress"><div class="pg-progress-bar" id="checklistBar"></div></div>
+      <div class="pg-progress-text" id="checklistText">0 / 10 완료</div>
+      <div class="pg-checklist" id="checklist">
+        <label><input type="checkbox"> 지원 유형(3년 특례 / 12년 특례) 확정</label>
+        <label><input type="checkbox"> 학년별 해외 이수 기간 계산 완료</label>
+        <label><input type="checkbox"> 학생·부모 체류 일수(3/4, 2/3) 계산 완료</label>
+        <label><input type="checkbox"> 목표 대학 리스트와 대학별 전형방법 정리</label>
+        <label><input type="checkbox"> 해외 학교 재학·성적·졸업(예정)증명서 발급</label>
+        <label><input type="checkbox"> 아포스티유 또는 영사확인 완료</label>
+        <label><input type="checkbox"> 한국어 번역공증 완료</label>
+        <label><input type="checkbox"> 본인·부모 출입국사실증명서, 가족관계증명서 발급</label>
+        <label><input type="checkbox"> 자기소개서 완성 및 검토</label>
+        <label><input type="checkbox"> 필답고사·면접 대비 (해당 대학)</label>
+      </div>
+      <button class="ok-btn line" onclick="resetChecklist()"><i class="fas fa-undo"></i> 체크 초기화</button>
+    </div>
+
+    <!-- 4. 용어사전 -->
+    <div class="ok-tab-panel">
+      <div class="pg-glossary">
+        <div class="pg-term"><b>3년 특례 (3특)</b>고교 1개 학년 이상을 포함해 중·고교 과정 3년 이상을 해외에서 이수하고, 부모 모두 해외 체류 요건을 갖춘 학생의 전형. 정원 외 2% 이내.</div>
+        <div class="pg-term"><b>12년 특례 (12특)</b>초·중·고 전 교육과정을 해외에서 이수한 학생의 전형. 부모 요건이 없고 정원 외 인원 제한이 없음.</div>
+        <div class="pg-term"><b>정원 외</b>대학 입학정원과 별도로 선발하는 인원. 일반전형 정원에 영향을 주지 않음.</div>
+        <div class="pg-term"><b>체류 요건 (3/4 · 2/3)</b>3년 특례에서 해외 재학기간 중 매 1년마다 학생은 3/4 이상, 부모는 2/3 이상 해외에 체류해야 한다는 기준.</div>
+        <div class="pg-term"><b>아포스티유</b>협약국 간 공문서의 효력을 인정받기 위한 인증. 해당 국가 정부기관에서 발급.</div>
+        <div class="pg-term"><b>영사확인</b>아포스티유 비협약국 서류를 현지 한국 공관(대사관·영사관)에서 확인받는 절차.</div>
+        <div class="pg-term"><b>번역공증</b>외국어 서류를 한국어로 번역하고 공증인에게 번역 내용을 인증받는 것.</div>
+        <div class="pg-term"><b>필답고사</b>일부 대학이 3년 특례 등에서 실시하는 필기시험. 영어·국어·수학 등 대학별 과목 구성.</div>
+        <div class="pg-term"><b>자격심사</b>제출 서류로 지원자격(이수 기간, 체류 일수, 부모 요건 등)을 확인하는 절차. 미충족 시 불합격.</div>
+        <div class="pg-term"><b>외국인 전형</b>학생과 부모 모두 외국 국적인 경우 지원하는 전형. 재외국민 전형과 구분됨.</div>
+        <div class="pg-term"><b>재외국민 등록</b>외국에서 90일을 넘겨 거주·체류하려는 국민이 관할 재외공관에 하는 등록. 재외동포청에서 안내.</div>
+        <div class="pg-term"><b>학력인정학교</b>교육부가 공시한 외국 소재 초·중·고 학력인정학교. 귀국 편입학 시 서류가 간소화될 수 있음.</div>
+      </div>
+    </div>
+
+    <div class="ok-source">
+      출처: 한국대학교육협의회 「대학입학전형기본사항」, 각 대학 재외국민 특별전형 모집요강, <a href="https://okep.moe.go.kr/root/index.do" target="_blank">재외교육기관포털(OKEP)</a>. 일정과 전형방법은 학년도·대학별로 다르므로 반드시 모집요강을 확인하세요.
+    </div>
+  </div>
+</div>
 
 <!-- ===== 로그인 페이지 ===== -->
-<style>
-.login-page { display: flex; justify-content: center; padding: 60px 20px; }
-.login-box { width: 100%; max-width: 440px; }
-.login-box h1 { text-align: center; font-size: 32px; font-weight: 800; color: #222; margin-bottom: 36px; }
-.login-field { width: 100%; padding: 16px 18px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 12px; outline: none; background: #fff; box-sizing: border-box; }
-.login-field:focus { border-color: #2db4a8; }
-.login-field-wrap { position: relative; }
-.login-field-wrap .field-icon { position: absolute; right: 16px; top: 50%; transform: translateY(-50%); color: #2db4a8; font-size: 18px; cursor: pointer; }
-.login-submit { width: 100%; padding: 16px; background: #2db4a8; color: #fff; border: none; border-radius: 8px; font-size: 18px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; margin-top: 4px; margin-bottom: 14px; }
-.login-submit:hover { background: #26a69a; }
-.login-options { display: flex; align-items: center; gap: 16px; font-size: 13px; color: #666; margin-bottom: 36px; }
-.login-options label { display: flex; align-items: center; gap: 5px; cursor: pointer; }
-.login-options input[type="checkbox"] { accent-color: #2db4a8; width: 16px; height: 16px; }
-.login-options a { color: #666; }
-.login-options a:hover { color: #2db4a8; }
-.login-options .sep { color: #ddd; }
-.sns-section { text-align: center; margin-top: 10px; }
-.sns-title { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 18px; }
-.sns-btn { width: 100%; padding: 14px 18px; border: 1px solid #ddd; border-radius: 8px; background: #fff; font-size: 15px; font-weight: 600; color: #333; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; display: flex; align-items: center; justify-content: center; gap: 10px; margin-bottom: 10px; }
-.sns-btn:hover { border-color: #aaa; }
-.sns-btn .naver-icon { width: 28px; height: 28px; border-radius: 50%; background: #03C75A; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 800; }
-.sns-btn .kakao-icon { width: 28px; height: 28px; border-radius: 50%; background: #FEE500; color: #3C1E1E; display: flex; align-items: center; justify-content: center; font-size: 16px; }
-</style>
 
 <div class="info-overlay" id="loginOverlay">
   <div class="info-topbar">
@@ -3351,15 +1614,20 @@ function switchInstTab(idx) {
   <div class="login-page">
     <div class="login-box">
       <h1>로그인</h1>
-      <input type="text" class="login-field" placeholder="아이디 입력">
+      <div class="login-demo-note"><i class="fas fa-info-circle"></i> 현재는 <strong>데모 로그인</strong>입니다. 서버 연동 전까지 로그인 정보는 이 브라우저에만 저장됩니다.</div>
+      <div class="login-role">
+        <label><input type="radio" name="loginRole" value="학생" checked> 학생</label>
+        <label><input type="radio" name="loginRole" value="학부모"> 학부모</label>
+      </div>
+      <input type="text" id="loginId" class="login-field" placeholder="아이디 입력 (4자 이상)" autocomplete="username">
       <div class="login-field-wrap">
-        <input type="password" class="login-field" placeholder="비밀번호" style="margin-bottom:0;">
+        <input type="password" id="loginPw" class="login-field" placeholder="비밀번호 (4자 이상)" style="margin-bottom:0;" autocomplete="current-password">
         <span class="field-icon"><i class="fas fa-shield-alt"></i></span>
       </div>
-      <br>
+      <div class="login-error" id="loginError" role="alert"></div>
       <button class="login-submit" onclick="loginUser()">로그인하기</button>
       <div class="login-options">
-        <label><input type="checkbox" checked> 아이디 저장</label>
+        <label><input type="checkbox" id="loginSaveId" checked> 아이디 저장</label>
         <a href="#">아이디 찾기</a>
         <span class="sep">|</span>
         <a href="#">비밀번호 찾기</a>
@@ -3377,251 +1645,6 @@ function switchInstTab(idx) {
 
 
 <!-- ===== 자격요건 가이드 모달 ===== -->
-<style>
-.guide-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 900;
-  overflow-y: auto;
-  padding: 30px 20px;
-}
-.guide-modal-overlay.open { display: block; }
-.guide-modal-box {
-  max-width: 1100px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-.guide-modal-header {
-  background: #2db4a8;
-  color: #fff;
-  padding: 22px 30px;
-  font-size: 22px;
-  font-weight: 800;
-  text-align: center;
-  position: relative;
-}
-.guide-modal-close {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 22px;
-  cursor: pointer;
-}
-.guide-tabs-row {
-  padding: 24px 30px 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-}
-.guide-tab-btn {
-  padding: 14px 16px;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  background: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  color: #444;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: center;
-  transition: all 0.15s;
-}
-.guide-tab-btn:hover { border-color: #2db4a8; color: #2db4a8; }
-.guide-tab-btn.active { border: 2px solid #2db4a8; color: #2db4a8; font-weight: 700; background: #f0faf9; }
-.guide-tab-full { grid-column: 1 / -1; }
-
-.guide-section {
-  padding: 30px;
-}
-.guide-section h2 {
-  font-size: 20px;
-  font-weight: 800;
-  color: #222;
-  margin-bottom: 20px;
-  padding-bottom: 14px;
-  border-bottom: 2px solid #2db4a8;
-}
-.guide-method-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 16px;
-  font-weight: 700;
-  color: #2db4a8;
-  margin-bottom: 16px;
-  margin-top: 24px;
-}
-.guide-method-title i { font-size: 18px; }
-
-.guide-illustration {
-  border: 1px solid #e0e0e0;
-  border-radius: 12px;
-  padding: 24px;
-  background: #fafafa;
-  display: flex;
-  gap: 24px;
-  align-items: center;
-  margin-bottom: 20px;
-}
-.guide-illust-left, .guide-illust-right {
-  flex: 1;
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  padding: 16px;
-  font-size: 12px;
-  color: #666;
-  min-height: 240px;
-  position: relative;
-}
-.guide-illust-arrow {
-  font-size: 32px;
-  color: #2db4a8;
-}
-.guide-illust-header {
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 12px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid #eee;
-  font-size: 13px;
-}
-.guide-illust-row {
-  padding: 6px 0;
-  border-bottom: 1px dashed #f0f0f0;
-  display: flex;
-  justify-content: space-between;
-}
-.guide-illust-marker {
-  position: absolute;
-  background: #ff5252;
-  color: #fff;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
-}
-
-.guide-step {
-  background: #f0faf9;
-  border-left: 4px solid #2db4a8;
-  padding: 14px 20px;
-  margin-bottom: 14px;
-  border-radius: 0 8px 8px 0;
-}
-.guide-step-num {
-  display: inline-block;
-  background: #2db4a8;
-  color: #fff;
-  padding: 3px 10px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 700;
-  margin-right: 10px;
-}
-.guide-step-text {
-  font-size: 14px;
-  font-weight: 600;
-  color: #333;
-}
-.guide-step-desc {
-  font-size: 13px;
-  color: #666;
-  margin-top: 8px;
-  margin-left: 56px;
-  line-height: 1.6;
-}
-
-.guide-form-demo {
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 20px;
-  background: #fafafa;
-  margin: 16px 0;
-}
-.guide-form-demo h3 {
-  font-size: 15px;
-  font-weight: 700;
-  margin-bottom: 14px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.guide-form-demo h3 span.close-x {
-  cursor: pointer;
-  font-size: 16px;
-  color: #999;
-}
-.guide-form-row {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 14px;
-  flex-wrap: wrap;
-}
-.guide-form-row select, .guide-form-row button {
-  padding: 8px 14px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
-  font-size: 12px;
-  background: #fff;
-  font-family: 'Noto Sans KR', sans-serif;
-  cursor: pointer;
-}
-.guide-form-row button.add-btn { background: #2db4a8; color: #fff; border-color: #2db4a8; }
-.guide-form-row .right-btn { margin-left: auto; display: flex; gap: 6px; align-items: center; }
-.guide-form-row .right-btn button { padding: 6px 10px; }
-.guide-form-row .right-btn .plus-btn { background: #fff; border: 1px solid #ff5252; color: #ff5252; font-weight: 700; font-size: 14px; width: 28px; height: 28px; border-radius: 4px; padding: 0; }
-
-.guide-mini-table { width: 100%; border-collapse: collapse; font-size: 12px; background: #fff; }
-.guide-mini-table th { background: #f5f5f5; padding: 8px; border: 1px solid #e0e0e0; font-weight: 600; color: #555; }
-.guide-mini-table td { padding: 8px; border: 1px solid #e0e0e0; text-align: center; color: #666; }
-.guide-mini-table input, .guide-mini-table select { width: 100%; padding: 4px; border: 1px solid #ddd; border-radius: 4px; font-size: 11px; font-family: 'Noto Sans KR', sans-serif; }
-
-.guide-action-row {
-  text-align: center;
-  margin-top: 14px;
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-}
-.guide-action-row button {
-  padding: 9px 26px;
-  border: none;
-  border-radius: 6px;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.guide-cancel { background: #eee; color: #555; }
-.guide-save { background: #2db4a8; color: #fff; }
-
-.guide-tip {
-  background: #fff8e1;
-  border-radius: 8px;
-  padding: 14px 18px;
-  font-size: 13px;
-  color: #6d4c00;
-  margin: 14px 0;
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-}
-.guide-tip i { color: #f9a825; margin-top: 2px; }
-</style>
 
 <div class="guide-modal-overlay" id="guideModalOverlay" onclick="if(event.target===this)closeGuideModal()">
   <div class="guide-modal-box">
@@ -3766,220 +1789,8 @@ function switchInstTab(idx) {
   </div>
 </div>
 
-<script>
-function openGuideModal() {
-  document.getElementById('guideModalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeGuideModal() {
-  document.getElementById('guideModalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-function switchGuideTab(btn, idx) {
-  document.querySelectorAll('.guide-tab-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  const titles = [
-    '재외국민 자격요건 입력 가이드',
-    '해외체류기간 입력 가이드',
-    '학력증빙서류 OCR 입력 가이드',
-    '해외학교 성적 입력 가이드',
-    '서류 HTML 입력 가이드'
-  ];
-  document.querySelector('#guideContent h2').textContent = titles[idx];
-}
-</script>
-
 
 <!-- ===== 초보자 가이드 모달 ===== -->
-<style>
-.novice-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 900;
-  overflow-y: auto;
-  padding: 30px 20px;
-}
-.novice-modal-overlay.open { display: block; }
-.novice-modal-box {
-  max-width: 1000px;
-  margin: 0 auto;
-  background: #f0faf9;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-.novice-modal-header {
-  background: #2db4a8;
-  color: #fff;
-  padding: 20px 30px;
-  font-size: 22px;
-  font-weight: 800;
-  text-align: center;
-  position: relative;
-}
-.novice-modal-close {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 22px;
-  cursor: pointer;
-}
-.novice-top-tabs {
-  padding: 22px 30px 0;
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 8px;
-}
-.novice-tab {
-  padding: 12px 6px;
-  border: 1px solid #d8e8e6;
-  border-radius: 8px;
-  background: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  color: #444;
-  cursor: pointer;
-  text-align: center;
-  font-family: 'Noto Sans KR', sans-serif;
-  transition: all 0.15s;
-}
-.novice-tab:hover { border-color: #2db4a8; color: #2db4a8; }
-.novice-tab.active { border-color: #2db4a8; background: #2db4a8; color: #fff; }
-
-.novice-intro {
-  margin: 22px 30px;
-  background: #fff;
-  border-radius: 10px;
-  padding: 20px 24px;
-  display: flex;
-  align-items: center;
-  gap: 18px;
-}
-.novice-intro-icon {
-  width: 50px; height: 50px;
-  border-radius: 10px;
-  background: #e8f5f4;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 24px;
-  color: #2db4a8;
-  flex-shrink: 0;
-}
-.novice-intro-text {
-  font-size: 16px;
-  font-weight: 800;
-  color: #222;
-}
-.novice-intro-text strong { color: #2db4a8; }
-.novice-intro-text .sub {
-  font-size: 13px;
-  font-weight: 400;
-  color: #666;
-  margin-top: 4px;
-}
-
-.novice-steps {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  padding: 0 30px;
-}
-.novice-step-card {
-  border-radius: 12px;
-  padding: 24px 20px;
-  background: #fff;
-  border: 2px solid transparent;
-  cursor: pointer;
-  text-align: center;
-  transition: all 0.2s;
-}
-.novice-step-card.active {
-  border-color: #2db4a8;
-  background: #fff;
-  box-shadow: 0 4px 16px rgba(45,180,168,0.15);
-}
-.novice-step-card:not(.active) {
-  background: #6e6e6e;
-  color: #fff;
-}
-.novice-step-icon {
-  font-size: 32px;
-  margin-bottom: 14px;
-  color: #2db4a8;
-}
-.novice-step-card:not(.active) .novice-step-icon { color: #fff; }
-.novice-step-title {
-  font-size: 16px;
-  font-weight: 800;
-  margin-bottom: 12px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e0e0e0;
-}
-.novice-step-card:not(.active) .novice-step-title {
-  border-bottom-color: rgba(255,255,255,0.3);
-}
-.novice-step-title strong { color: #2db4a8; }
-.novice-step-card:not(.active) .novice-step-title strong { color: #fff; }
-.novice-step-desc {
-  font-size: 13px;
-  line-height: 1.7;
-  color: #555;
-}
-.novice-step-card:not(.active) .novice-step-desc { color: #fff; }
-
-.novice-detail {
-  margin: 24px 30px 30px;
-  background: #fff;
-  border-radius: 12px;
-  padding: 26px 30px;
-}
-.novice-detail-title {
-  font-size: 18px;
-  font-weight: 800;
-  margin-bottom: 22px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: #222;
-}
-.novice-detail-title .magnifier {
-  width: 32px; height: 32px;
-  border-radius: 50%;
-  background: #e8f5f4;
-  display: flex; align-items: center; justify-content: center;
-  color: #2db4a8;
-  font-size: 14px;
-}
-.novice-detail-title strong { color: #2db4a8; }
-
-.novice-detail-list { display: flex; flex-direction: column; gap: 16px; }
-.novice-detail-item {
-  display: flex;
-  gap: 16px;
-  align-items: flex-start;
-}
-.novice-detail-tag {
-  background: #2db4a8;
-  color: #fff;
-  padding: 5px 14px;
-  border-radius: 4px;
-  font-size: 12px;
-  font-weight: 700;
-  flex-shrink: 0;
-  margin-top: 2px;
-}
-.novice-detail-desc {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.7;
-}
-.novice-detail-desc strong { font-weight: 700; color: #333; }
-</style>
 
 <div class="novice-modal-overlay" id="noviceModalOverlay" onclick="if(event.target===this)closeNoviceGuide()">
   <div class="novice-modal-box">
@@ -4065,233 +1876,8 @@ function switchGuideTab(btn, idx) {
   </div>
 </div>
 
-<script>
-function openNoviceGuide() {
-  document.getElementById('noviceModalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeNoviceGuide() {
-  document.getElementById('noviceModalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-</script>
-
 
 <!-- ===== 서류준비 가이드 모달 ===== -->
-<style>
-.docs-modal-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 900;
-  overflow-y: auto;
-  padding: 30px 20px;
-}
-.docs-modal-overlay.open { display: block; }
-.docs-modal-box {
-  max-width: 1050px;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-}
-.docs-modal-header {
-  background: linear-gradient(90deg, #2db4a8, #00897b);
-  color: #fff;
-  padding: 22px 30px;
-  font-size: 22px;
-  font-weight: 800;
-  text-align: center;
-  position: relative;
-}
-.docs-modal-close {
-  position: absolute;
-  right: 20px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 22px;
-  cursor: pointer;
-}
-
-.docs-top-tabs {
-  padding: 22px 30px 0;
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-}
-.docs-tab {
-  padding: 12px 6px;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #fff;
-  font-size: 13px;
-  font-weight: 600;
-  color: #444;
-  cursor: pointer;
-  font-family: 'Noto Sans KR', sans-serif;
-  text-align: center;
-}
-.docs-tab:hover { border-color: #2db4a8; color: #2db4a8; }
-.docs-tab.active { background: #2db4a8; color: #fff; border-color: #2db4a8; }
-
-.docs-intro {
-  margin: 22px 30px;
-  background: #f0faf9;
-  border-left: 4px solid #2db4a8;
-  border-radius: 8px;
-  padding: 18px 22px;
-  font-size: 14px;
-  color: #444;
-  line-height: 1.7;
-}
-.docs-intro strong { color: #2db4a8; font-weight: 700; }
-
-.docs-section { padding: 0 30px 30px; }
-.docs-section-title {
-  font-size: 17px;
-  font-weight: 800;
-  color: #222;
-  margin: 24px 0 16px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #2db4a8;
-}
-.docs-section-title i { color: #2db4a8; }
-
-.docs-checklist {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-.docs-check-item {
-  display: flex;
-  gap: 12px;
-  background: #fafafa;
-  border: 1px solid #e8e8e8;
-  border-radius: 10px;
-  padding: 14px 16px;
-  align-items: flex-start;
-}
-.docs-check-icon {
-  width: 36px; height: 36px;
-  background: #e8f5f4;
-  color: #2db4a8;
-  border-radius: 8px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 16px;
-  flex-shrink: 0;
-}
-.docs-check-content { flex: 1; }
-.docs-check-name { font-size: 14px; font-weight: 700; color: #222; margin-bottom: 4px; }
-.docs-check-desc { font-size: 12px; color: #777; line-height: 1.5; }
-.docs-check-badge {
-  display: inline-block;
-  padding: 2px 8px;
-  border-radius: 4px;
-  font-size: 10px;
-  font-weight: 700;
-  margin-left: 6px;
-}
-.docs-check-badge.required { background: #ffebee; color: #c62828; }
-.docs-check-badge.optional { background: #e3f2fd; color: #1565c0; }
-
-.docs-timeline {
-  position: relative;
-  padding-left: 30px;
-  margin-top: 10px;
-}
-.docs-timeline::before {
-  content: "";
-  position: absolute;
-  left: 8px; top: 8px; bottom: 8px;
-  width: 2px;
-  background: #d0ecea;
-}
-.docs-timeline-item {
-  position: relative;
-  padding: 8px 0 16px;
-}
-.docs-timeline-item::before {
-  content: "";
-  position: absolute;
-  left: -27px;
-  top: 14px;
-  width: 12px; height: 12px;
-  border-radius: 50%;
-  background: #2db4a8;
-  border: 3px solid #fff;
-  box-shadow: 0 0 0 2px #2db4a8;
-}
-.docs-timeline-period {
-  font-size: 12px;
-  color: #2db4a8;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-.docs-timeline-title {
-  font-size: 14px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 4px;
-}
-.docs-timeline-desc {
-  font-size: 13px;
-  color: #666;
-  line-height: 1.6;
-}
-
-.docs-warning {
-  background: #fff3e0;
-  border: 1px solid #ffcc80;
-  border-radius: 8px;
-  padding: 16px 18px;
-  margin-top: 18px;
-  display: flex;
-  gap: 12px;
-  align-items: flex-start;
-}
-.docs-warning i { color: #e65100; font-size: 18px; margin-top: 2px; }
-.docs-warning-content { flex: 1; }
-.docs-warning-title { font-size: 13px; font-weight: 700; color: #bf360c; margin-bottom: 6px; }
-.docs-warning-text { font-size: 12px; color: #6d4c00; line-height: 1.6; }
-
-.docs-tips {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-top: 12px;
-}
-.docs-tip-card {
-  background: #fff;
-  border: 1px solid #e0e0e0;
-  border-radius: 10px;
-  padding: 16px;
-  text-align: center;
-}
-.docs-tip-icon {
-  font-size: 28px;
-  color: #2db4a8;
-  margin-bottom: 10px;
-}
-.docs-tip-title {
-  font-size: 13px;
-  font-weight: 700;
-  color: #222;
-  margin-bottom: 6px;
-}
-.docs-tip-desc {
-  font-size: 12px;
-  color: #777;
-  line-height: 1.5;
-}
-</style>
 
 <div class="docs-modal-overlay" id="docsModalOverlay" onclick="if(event.target===this)closeDocsGuide()">
   <div class="docs-modal-box">
@@ -4442,16 +2028,27 @@ function closeNoviceGuide() {
   </div>
 </div>
 
-<script>
-function openDocsGuide() {
-  document.getElementById('docsModalOverlay').classList.add('open');
-  document.body.style.overflow = 'hidden';
-}
-function closeDocsGuide() {
-  document.getElementById('docsModalOverlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-</script>
+
+<!-- ===== 특례 상담 신청 모달 ===== -->
+<div class="ui-modal-overlay" id="consultModal" onclick="if(event.target===this)closeConsultForm()">
+  <div class="ui-modal" role="dialog" aria-labelledby="consultModalTitle">
+    <div class="ui-modal-header"><span id="consultModalTitle">특례 상담 신청</span><button class="ui-modal-close" onclick="closeConsultForm()" aria-label="닫기"><i class="fas fa-times"></i></button></div>
+    <div class="ui-modal-body">
+      <div class="ui-form-row">
+        <label>상담분야<select id="consultField"><option>자격요건·체류기간</option><option>서류·인증·번역</option><option>필답고사</option><option>면접</option><option>대학·학과 선택</option><option>귀국·편입학</option></select></label>
+        <label>특례유형<select id="consultType"><option>3년 특례</option><option>12년 특례</option><option>미정</option></select></label>
+      </div>
+      <label class="ui-form-full">제목<input type="text" id="consultTitle" maxlength="80" placeholder="예) 부모님 체류기간이 2/3에 조금 못 미쳐요"></label>
+      <label class="ui-form-full">상담 내용<textarea id="consultBody" rows="6" placeholder="해외 재학 국가, 학년별 재학 기간, 부모 체류 기간을 함께 적어주시면 더 정확한 답변을 받을 수 있어요."></textarea></label>
+      <label class="ui-check"><input type="checkbox" id="consultOpen"> 다른 이용자에게 공개 (개인정보는 적지 마세요)</label>
+      <div class="login-error" id="consultError" role="alert"></div>
+    </div>
+    <div class="ui-modal-footer">
+      <button class="ok-btn line" onclick="closeConsultForm()">취소</button>
+      <button class="ok-btn" onclick="submitConsult()">상담 등록</button>
+    </div>
+  </div>
+</div>
 
 <!-- FOOTER -->
 </div><!-- /page-content -->
@@ -4499,7 +2096,8 @@ function closeDocsGuide() {
   <div class="menu-modal" onclick="event.stopPropagation()">
     <div class="menu-modal-header">
       <span class="menu-title">전체메뉴보기</span>
-      <span class="menu-login-link" onclick="closeMenu();openPage('loginOverlay')">로그인해주세요 &rsaquo;</span>
+      <span class="menu-login-link" id="menuLoginLink" onclick="closeMenu();openMyArea()">로그인해주세요 &rsaquo;</span>
+      <button class="menu-close" onclick="closeMenu()" aria-label="메뉴 닫기"><i class="fas fa-times"></i></button>
     </div>
 
     <div class="menu-grid">
@@ -4545,7 +2143,7 @@ function closeDocsGuide() {
           <a href="#" onclick="menuGo('consultOverlay');return false;">온라인입시상담</a>
           <a href="#">상담FAQ</a>
           <a href="#">전화상담 안내</a>
-          <a href="#" onclick="menuGo('compOverlay');return false;">1:1 맞춤상담</a>
+          <a href="#" onclick="menuGo('consultOverlay');return false;">1:1 맞춤상담</a>
           <a href="#" class="full-width">재외국민 종합상담</a>
         </div>
       </div>
@@ -4572,7 +2170,7 @@ function closeDocsGuide() {
         </div>
         <div class="menu-links">
           <a href="#" onclick="menuGo('systemOverlay');return false;">재외국민제도안내</a>
-          <a href="#">전형일정</a>
+          <a href="#" onclick="closeMenu();openProgram(2);return false;">전형일정</a>
           <a href="#">입시소식</a>
           <a href="#">설명회/박람회</a>
           <a href="#" onclick="menuGo('dataOverlay');return false;">입시자료실</a>
@@ -4601,7 +2199,7 @@ function closeDocsGuide() {
           <span class="menu-cat-title">회원서비스</span>
         </div>
         <div class="menu-links">
-          <a href="#" onclick="menuGo('loginOverlay');return false;">로그인</a>
+          <a href="#" onclick="closeMenu();openMyArea();return false;">로그인</a>
           <a href="#">회원가입</a>
           <a href="#">아이디찾기</a>
           <a href="#">비밀번호찾기</a>
@@ -4628,7 +2226,19 @@ function closeDocsGuide() {
 
     </div>
 
-    <!-- 재외교육 정보 -->
+    <!-- 특례 입시 바로가기 -->
+    <div class="menu-ok-strip">
+      <div class="menu-ok-title"><i class="fas fa-route"></i> 특례 입시</div>
+      <div class="menu-ok-links">
+        <a href="#" onclick="closeMenu();openProgram(0);return false;">준비 로드맵</a>
+        <a href="#" onclick="closeMenu();openProgram(1);return false;">전형요소별 준비</a>
+        <a href="#" onclick="closeMenu();openProgram(2);return false;">특례 일정</a>
+        <a href="#" onclick="closeMenu();openProgram(3);return false;">체크리스트</a>
+        <a href="#" onclick="closeMenu();openProgram(4);return false;">용어사전</a>
+        <a href="#" onclick="menuGo('admOverlay');return false;">특례전형정보</a>
+        <a href="#" onclick="menuGo('gradeOverlay');return false;">해외성적 입력</a>
+      </div>
+    </div>
     <div class="menu-ok-strip">
       <div class="menu-ok-title"><i class="fas fa-globe-asia"></i> 재외교육 정보</div>
       <div class="menu-ok-links">
@@ -4660,266 +2270,20 @@ function closeDocsGuide() {
   </div>
 </div>
 
-<script>
-function toggleMenu() {
-  const overlay = document.getElementById('menuOverlay');
-  const btn = document.getElementById('menuBtn');
-  const isOpen = overlay.classList.contains('open');
-  if (isOpen) {
-    overlay.classList.remove('open');
-    btn.classList.remove('active');
-  } else {
-    overlay.classList.add('open');
-    btn.classList.add('active');
-  }
-}
-function closeMenu() {
-  document.getElementById('menuOverlay').classList.remove('open');
-  document.getElementById('menuBtn').classList.remove('active');
-}
-function menuGo(id) {
-  closeMenu();
-  openPage(id);
-}
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') { closeMenu(); }
-});
 
-/* 아코디언 토글 */
-function toggleAccordion(el) {
-  const item = el.closest('.job-acc-item');
-  const body = item.querySelector('.job-acc-body');
-  const icon = item.querySelector('.acc-icon');
-  const isOpen = item.classList.contains('open');
-  // 모두 닫기
-  document.querySelectorAll('.job-acc-item.open').forEach(i => {
-    i.classList.remove('open');
-    i.querySelector('.job-acc-body').style.maxHeight = '0';
-    i.querySelector('.acc-icon').style.transform = '';
-  });
-  if (!isOpen) {
-    item.classList.add('open');
-    body.style.maxHeight = body.scrollHeight + 'px';
-    icon.style.transform = 'rotate(180deg)';
-  }
-}
-
-/* 검색 필터 */
-function searchJobs() {
-  const keyword = document.getElementById('jobSearchInput').value.trim().toLowerCase();
-  const salary = document.getElementById('salaryFilter').value;
-  const outlook = document.getElementById('outlookFilter').value;
-
-  document.querySelectorAll('.job-acc-item').forEach(item => {
-    const jobs = item.querySelectorAll('.job-tag');
-    let catVisible = false;
-    jobs.forEach(tag => {
-      const name = tag.textContent.toLowerCase();
-      const matchKw = !keyword || name.includes(keyword);
-      const matchSal = !salary; // 간단 구현: 선택값 있으면 모두 표시
-      const matchOut = !outlook;
-      if (matchKw && matchSal && matchOut) {
-        tag.style.display = '';
-        catVisible = true;
-      } else if (keyword) {
-        tag.style.display = 'none';
-      } else {
-        tag.style.display = '';
-        catVisible = true;
-      }
-    });
-    item.style.display = catVisible ? '' : 'none';
-  });
-}
-</script>
-
-
-<script>
-/* ====== 대학 데이터 ====== */
-const univData = [
-  { name:'가야대학교[본교]', region:'경남', su:'5.34', jeong:'3.56', capacity:405, dept:8, adm:18 },
-  { name:'가천대학교[본교]', region:'경기', su:'29.85', jeong:'9.39', capacity:3938, dept:71, adm:31 },
-  { name:'가톨릭관동대학교[본교]', region:'강원', su:'3.79', jeong:'3.59', capacity:1725, dept:36, adm:45 },
-  { name:'가톨릭꽃동네대학교[본교]', region:'충북', su:'4.59', jeong:'2.79', capacity:108, dept:2, adm:19 },
-  { name:'가톨릭대학교[본교]', region:'경기', su:'16.92', jeong:'5.73', capacity:1620, dept:49, adm:25 },
-  { name:'가톨릭대학교[제2캠퍼스]', region:'서울', su:'35.01', jeong:'3.51', capacity:173, dept:2, adm:9 },
-  { name:'가톨릭대학교[제3캠퍼스]', region:'서울', su:'1.3', jeong:'3.44', capacity:50, dept:1, adm:9 },
-  { name:'감리교신학대학교[본교]', region:'서울', su:'1.46', jeong:'2.73', capacity:192, dept:1, adm:15 },
-  { name:'강남대학교[본교]', region:'경기', su:'11.54', jeong:'6.72', capacity:1491, dept:27, adm:23 },
-  { name:'강서대학교[본교]', region:'서울', su:'12.25', jeong:'9.07', capacity:277, dept:10, adm:17 },
-  { name:'건국대학교[본교]', region:'서울', su:'22.14', jeong:'8.31', capacity:3201, dept:62, adm:38 },
-  { name:'경희대학교[본교]', region:'서울', su:'31.50', jeong:'11.22', capacity:4102, dept:84, adm:52 },
-  { name:'고려대학교[본교]', region:'서울', su:'41.20', jeong:'14.80', capacity:3580, dept:77, adm:46 },
-  { name:'서울대학교[본교]', region:'서울', su:'38.60', jeong:'12.40', capacity:3200, dept:80, adm:55 },
-  { name:'연세대학교[본교]', region:'서울', su:'36.90', jeong:'13.10', capacity:3400, dept:75, adm:48 },
-];
-
-/* ====== 학과 데이터 ====== */
-const deptData = [
-  { dept:'(국제)관광경영학과', univ:'서울신학대학교 [본교]', region:'경기', su:'0', jeong:'0', capacity:0 },
-  { dept:'(국제)글로벌경영학과', univ:'서울신학대학교 [본교]', region:'경기', su:'0', jeong:'0', capacity:0 },
-  { dept:'(국제)글로벌한국어학과', univ:'서울신학대학교 [본교]', region:'경기', su:'0', jeong:'0', capacity:0 },
-  { dept:'(국제)컴퓨터공학과', univ:'서울신학대학교 [본교]', region:'경기', su:'0', jeong:'0', capacity:0 },
-  { dept:'AI 모빌리티학과', univ:'남서울대학교 [본교]', region:'충남', su:'0', jeong:'0', capacity:30 },
-  { dept:'AI 융합미디어학과', univ:'남서울대학교 [본교]', region:'충남', su:'4.51', jeong:'6.4', capacity:75 },
-  { dept:'AI·SW계열', univ:'한신대학교 [본교]', region:'경기', su:'4.39', jeong:'6.54', capacity:215 },
-  { dept:'AI·빅데이터학과', univ:'우송대학교 [본교]', region:'대전', su:'4.37', jeong:'0', capacity:16 },
-  { dept:'국제학부', univ:'서울대학교 [본교]', region:'서울', su:'0', jeong:'3.5', capacity:36 },
-  { dept:'글로벌인재학부', univ:'서울대학교 [본교]', region:'서울', su:'0', jeong:'0', capacity:0 },
-  { dept:'재외국민특별전형학과', univ:'연세대학교 [본교]', region:'서울', su:'12.5', jeong:'8.3', capacity:45 },
-  { dept:'국제통상학과', univ:'고려대학교 [본교]', region:'서울', su:'15.2', jeong:'9.1', capacity:60 },
-  { dept:'글로벌비즈니스학과', univ:'성균관대학교 [본교]', region:'서울', su:'11.4', jeong:'7.6', capacity:40 },
-  { dept:'한국어문학부', univ:'이화여자대학교 [본교]', region:'서울', su:'8.9', jeong:'5.2', capacity:55 },
-  { dept:'경영학과', univ:'한양대학교 [본교]', region:'서울', su:'18.7', jeong:'10.3', capacity:120 },
-];
-
-const ROWS_PER_PAGE = 10;
-
-/* ====== 대학 테이블 렌더 ====== */
-function renderUnivTable(page) {
-  const start = (page-1)*ROWS_PER_PAGE;
-  const rows = univData.slice(start, start+ROWS_PER_PAGE);
-  const body = document.getElementById('univTableBody');
-  body.innerHTML = rows.map(d => `
-    <tr>
-      <td><div class="univ-name-cell">
-        <div class="univ-logo">${d.name.charAt(0)}</div>
-        <span class="univ-name-text">${d.name}</span>
-      </div></td>
-      <td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>${d.region}</div></td>
-      <td><div class="competition-cell">
-        <div>수시 <span class="comp-su">${d.su}</span></div>
-        <div>정시 <span class="comp-jeong">${d.jeong}</span></div>
-      </div></td>
-      <td><a class="num-link" href="#">${d.capacity.toLocaleString()}</a></td>
-      <td><a class="num-link" href="#">${d.dept}</a></td>
-      <td><a class="num-link" href="#">${d.adm}</a></td>
-      <td><button class="compare-btn">✓ 비교</button></td>
-      <td><button class="star-btn">★</button></td>
-    </tr>`).join('');
-  renderPagination('univPagination', page, Math.ceil(univData.length/ROWS_PER_PAGE), renderUnivTable);
-}
-
-/* ====== 학과 테이블 렌더 ====== */
-function renderDeptTable(page) {
-  const start = (page-1)*ROWS_PER_PAGE;
-  const rows = deptData.slice(start, start+ROWS_PER_PAGE);
-  const body = document.getElementById('deptTableBody');
-  body.innerHTML = rows.map(d => `
-    <tr>
-      <td style="text-align:left;font-weight:600;">${d.dept}</td>
-      <td><div class="univ-name-cell" style="justify-content:center;">
-        <div class="univ-logo" style="width:28px;height:28px;font-size:11px;">${d.univ.charAt(0)}</div>
-        <span style="font-size:12px;">${d.univ}</span>
-      </div></td>
-      <td><div class="region-cell"><i class="fas fa-map-marker-alt"></i>${d.region}</div></td>
-      <td><div class="competition-cell">
-        <div>수시 <span class="comp-su">${d.su}</span></div>
-        <div>정시 <span class="comp-jeong">${d.jeong}</span></div>
-      </div></td>
-      <td><a class="num-link" href="#">${d.capacity}</a></td>
-      <td><button class="result-btn">입시결과</button></td>
-      <td><button class="compare-btn">✓ 비교</button></td>
-    </tr>`).join('');
-  renderPagination('deptPagination', page, Math.ceil(deptData.length/ROWS_PER_PAGE), renderDeptTable);
-}
-
-/* ====== 페이지네이션 ====== */
-function renderPagination(containerId, current, total, callback) {
-  const c = document.getElementById(containerId);
-  let html = `<button class="page-btn" onclick="${callback.name}(1)">«</button>
-              <button class="page-btn" onclick="${callback.name}(Math.max(1,${current}-1))">‹</button>`;
-  for(let i=1;i<=Math.min(total,10);i++){
-    html += `<button class="page-btn${i===current?' active':''}" onclick="${callback.name}(${i})">${i}</button>`;
-  }
-  html += `<button class="page-btn" onclick="${callback.name}(Math.min(${total},${current}+1))">›</button>
-           <button class="page-btn" onclick="${callback.name}(${total})">»</button>`;
-  c.innerHTML = html;
-}
-
-/* ====== 페이지 전환 헬퍼 ====== */
-const ALL_PAGES = ['univOverlay','deptOverlay','jobOverlay','admOverlay','gradeOverlay','dataOverlay','compOverlay','consultOverlay','univGradeOverlay','loginOverlay','systemOverlay','instOverlay','returnOverlay'];
-
-function showPage(id) {
-  document.getElementById('mainWrap').style.display = 'none';
-  ALL_PAGES.forEach(p => document.getElementById(p).classList.remove('open'));
-  document.getElementById(id).classList.add('open');
-  // 푸터는 항상 표시
-  document.querySelector('footer.footer').style.display = '';
-  window.scrollTo({top: 0, behavior: 'smooth'});
-}
-
-function showHome() {
-  ALL_PAGES.forEach(p => document.getElementById(p).classList.remove('open'));
-  document.getElementById('mainWrap').style.display = '';
-  document.querySelector('footer.footer').style.display = '';
-  window.scrollTo({top: 0, behavior: 'smooth'});
-}
-
-/* ====== 대학정보 / 학과정보 / 직업정보 ====== */
-function openPage(id) {
-  showPage(id);
-  if(id==='univOverlay') renderUnivTable(1);
-  if(id==='deptOverlay') renderDeptTable(1);
-}
-
-function openUnivModal() { openPage('univOverlay'); }
-function closeUnivModal() { showHome(); }
-
-function openDeptModal() { openPage('deptOverlay'); }
-function closeDeptModal() { showHome(); }
-
-function openJobModal() { showPage('jobOverlay'); }
-function closeJobModal() { showHome(); }
-
-/* ESC → 홈으로 */
-document.addEventListener('keydown', function(e){
-  if(e.key==='Escape'){ showHome(); closeMenu(); }
-});
-
-/* ====== 로그인/로그아웃 ====== */
-function loginUser() {
-  document.getElementById('loginBeforeBox').style.display = 'none';
-  document.getElementById('loginAfterBox').style.display = 'block';
-  showHome();
-}
-function logoutUser() {
-  document.getElementById('loginAfterBox').style.display = 'none';
-  document.getElementById('loginBeforeBox').style.display = 'flex';
-}
-
-/* ====== 배너 슬라이더 ====== */
-let currentSlide = 0;
-const totalSlides = 7;
-let slideInterval;
-
-function bannerGo(idx) {
-  currentSlide = idx;
-  document.querySelectorAll('.banner-slide').forEach((s,i) => {
-    s.classList.toggle('active', i === idx);
-  });
-  document.querySelectorAll('.banner-dots .dot').forEach((d,i) => {
-    d.classList.toggle('active', i === idx);
-  });
-  document.getElementById('bannerCounter').textContent = `‖ ${idx+1}/${totalSlides}`;
-  resetSlideTimer();
-}
-
-function bannerNext() {
-  bannerGo((currentSlide + 1) % totalSlides);
-}
-
-function bannerPrev() {
-  bannerGo((currentSlide - 1 + totalSlides) % totalSlides);
-}
-
-function resetSlideTimer() {
-  clearInterval(slideInterval);
-  slideInterval = setInterval(bannerNext, 5000);
-}
-
-resetSlideTimer();
-</script>
-
+<script src="js/data.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/app.js"></script>
+<script src="js/menu.js"></script>
+<script src="js/modals.js"></script>
+<script src="js/ok-pages.js"></script>
+<script src="js/univ-grade.js"></script>
+<script src="js/program.js"></script>
+<script src="js/overseas-grade.js"></script>
+<script src="js/teukrye-adm.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/consult.js"></script>
+<script src="js/search.js"></script>
+<script src="js/home.js"></script>
 </body>
 </html>

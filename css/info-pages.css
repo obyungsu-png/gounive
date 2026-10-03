@@ -1,0 +1,342 @@
+/* 공통 full-page 오버레이 */
+.info-overlay {
+  display: none;
+  background: #f4f7f9;
+  padding-bottom: 40px;
+}
+.info-overlay.open { display: block; }
+
+/* 상단 topbar */
+.info-topbar {
+  background: #e8f5f4;
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: #888;
+  border-bottom: 1px solid #d0ecea;
+}
+.info-topbar a { color: #888; }
+.info-topbar a:hover { color: #2db4a8; }
+.info-topbar .bc-sep { color: #ccc; margin: 0 4px; }
+.info-topbar .bc-cur { font-weight: 700; color: #333; }
+.info-close-btn {
+  margin-left: auto;
+  background: #fff;
+  border: 1px solid #2db4a8;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2db4a8;
+  cursor: pointer;
+  padding: 5px 14px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.info-close-btn:hover { background: #2db4a8; color: #fff; }
+
+/* hero */
+.info-hero {
+  background: #fff;
+  text-align: center;
+  padding: 28px 20px 22px;
+  border-bottom: 1px solid #eee;
+}
+.info-hero h1 { font-size: 24px; font-weight: 800; color: #222; }
+
+/* body layout */
+.info-body {
+  display: flex;
+  gap: 24px;
+  padding: 26px 80px 26px 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ---- Left filter panel ---- */
+.info-filter {
+  width: 220px;
+  flex-shrink: 0;
+}
+.tab-row {
+  display: flex;
+  border: 1px solid #2db4a8;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 0;
+  background: #fff;
+  border: none;
+  font-size: 14px;
+  font-weight: 600;
+  color: #2db4a8;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  transition: background 0.15s;
+}
+.tab-btn.active { background: #2db4a8; color: #fff; }
+.tab-btn:not(:last-child) { border-right: 1px solid #2db4a8; }
+
+.filter-select-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+.filter-select-box select {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #555;
+  background: #fafafa;
+  appearance: auto;
+}
+.filter-input-row {
+  display: flex;
+  gap: 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  margin-bottom: 12px;
+}
+.filter-input-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 9px 12px;
+  border: none;
+  outline: none;
+  font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.filter-input-row button {
+  flex-shrink: 0;
+  padding: 0 13px;
+  background: #333;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 14px;
+}
+.filter-apply-row {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+.filter-apply-row:hover { border-color: #2db4a8; }
+
+.bookmark-btn {
+  width: 100%;
+  padding: 11px;
+  background: #2db4a8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 10px;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.filter-action-row {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.filter-action-row button {
+  flex: 1;
+  padding: 9px 0;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.btn-reset { background: #fff; border: 1px solid #2db4a8; color: #2db4a8; }
+.btn-save  { background: #2db4a8; border: 1px solid #2db4a8; color: #fff; }
+.filter-link-btn {
+  width: 100%;
+  padding: 9px;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #666;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+/* ---- Right table area ---- */
+.info-table-area { flex: 1; }
+.table-summary {
+  font-size: 16px;
+  font-weight: 700;
+  color: #222;
+  margin-bottom: 14px;
+}
+.table-summary strong { color: #2db4a8; font-size: 18px; }
+
+.info-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid #e0e0e0;
+}
+.info-table thead tr {
+  background: #f5f5f5;
+  border-bottom: 2px solid #e0e0e0;
+}
+.info-table th {
+  padding: 12px 10px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #444;
+  text-align: center;
+  white-space: nowrap;
+}
+.info-table th .sort-icon { color: #bbb; font-size: 11px; margin-left: 4px; }
+.info-table tbody tr {
+  border-bottom: 1px solid #f0f0f0;
+  transition: background 0.1s;
+}
+.info-table tbody tr:hover { background: #f9fffe; }
+.info-table td {
+  padding: 14px 10px;
+  font-size: 13px;
+  color: #444;
+  text-align: center;
+  vertical-align: middle;
+}
+.univ-name-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: left;
+}
+.univ-logo {
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: #e8f5f4;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; color: #2db4a8;
+  flex-shrink: 0;
+  font-weight: 700;
+}
+.univ-name-text { font-weight: 600; color: #222; font-size: 13px; }
+.region-cell { display: flex; align-items: center; gap: 4px; justify-content: center; }
+.region-cell i { color: #2db4a8; font-size: 12px; }
+.competition-cell { font-size: 12px; line-height: 1.6; }
+.competition-cell .comp-su { color: #2db4a8; }
+.competition-cell .comp-jeong { color: #ff7043; }
+.num-link { color: #2db4a8; font-weight: 700; font-size: 13px; text-decoration: none; }
+.num-link:hover { text-decoration: underline; }
+.compare-btn {
+  padding: 5px 12px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background: #fff;
+  font-size: 12px;
+  color: #555;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.compare-btn:hover { border-color: #2db4a8; color: #2db4a8; }
+.star-btn { background: none; border: none; color: #ddd; font-size: 16px; cursor: pointer; }
+.star-btn:hover { color: #ffc107; }
+
+/* table header dropdown row */
+.table-top-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.table-view-select {
+  padding: 7px 28px 7px 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #555;
+  appearance: auto;
+}
+
+/* pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding: 24px 0 8px;
+}
+.page-btn {
+  width: 34px; height: 34px;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 13px;
+  color: #555;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Noto Sans KR', sans-serif;
+}
+.page-btn.active { background: #2db4a8; color: #fff; border-color: #2db4a8; font-weight: 700; }
+.page-btn:hover:not(.active) { border-color: #2db4a8; color: #2db4a8; }
+
+/* 학과 table - dept result btn */
+.result-btn {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 16px;
+  background: #fff;
+  font-size: 11px;
+  color: #555;
+  cursor: pointer;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin-right: 4px;
+}
+.result-btn:hover { border-color: #2db4a8; color: #2db4a8; }
+
+/* dept filter extra */
+.dept-keyword-row {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #fff;
+  padding: 12px 14px;
+  margin-bottom: 12px;
+}
+.dept-keyword-row label {
+  font-size: 13px; font-weight: 600; color: #444;
+  display: block; margin-bottom: 8px;
+}
+.dept-keyword-input {
+  display: flex;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.dept-keyword-input input {
+  flex:1; padding: 8px 10px; border: none; outline: none;
+  font-size: 13px; font-family: 'Noto Sans KR', sans-serif;
+}
+.dept-keyword-input button {
+  padding: 0 11px; background: #333; border: none; color: #fff; cursor: pointer;
+}

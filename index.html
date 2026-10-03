@@ -1063,6 +1063,13 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
 }
 .menu-modal-header .menu-login-link:hover { text-decoration: underline; }
 
+.menu-ok-strip { display: flex; align-items: center; gap: 24px; background: #e8f5f4; border-radius: 10px; padding: 14px 20px; margin-bottom: 24px; }
+.menu-ok-title { font-size: 14px; font-weight: 700; color: #1a5c3a; white-space: nowrap; }
+.menu-ok-title i { color: #2db4a8; margin-right: 4px; }
+.menu-ok-links { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+.menu-ok-links a { font-size: 13px; color: #444; }
+.menu-ok-links a:hover { color: #2db4a8; }
+.menu-ok-links a i { font-size: 10px; color: #aaa; margin-left: 2px; }
 .menu-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1419,7 +1426,8 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           <div class="step-sub">해외거주기간/학력</div>
           <div class="step-name">자격확인</div>
           <div class="step-links">
-            <a href="#">자격요건 입력</a>
+            <a href="#" onclick="openGuideModal();return false;">자격요건 입력</a>
+            <a href="#" onclick="openPage('systemOverlay');return false;">특례자격 안내</a>
           </div>
         </div>
         <div class="step-card">
@@ -1427,8 +1435,8 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           <div class="step-sub">지원 가능한</div>
           <div class="step-name">대학/전형선택</div>
           <div class="step-links">
-            <a href="#">대학검색</a>
-            <a href="#">학과검색</a>
+            <a href="#" onclick="openPage('univOverlay');return false;">대학검색</a>
+            <a href="#" onclick="openPage('deptOverlay');return false;">학과검색</a>
           </div>
         </div>
         <div class="step-card">
@@ -1436,7 +1444,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           <div class="step-sub">자격분석</div>
           <div class="step-name">결과분석</div>
           <div class="step-links">
-            <a href="#">분석 결과확인</a>
+            <a href="#" onclick="openPage('univGradeOverlay');return false;">분석 결과확인</a>
           </div>
         </div>
         <div class="step-card">
@@ -1444,7 +1452,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           <div class="step-sub">전문상담</div>
           <div class="step-name">입시상담</div>
           <div class="step-links">
-            <a href="#">온라인 상담</a>
+            <a href="#" onclick="openPage('consultOverlay');return false;">온라인 상담</a>
           </div>
         </div>
       </div>
@@ -1473,7 +1481,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
         전형별 특성 및 전형요소 등의 입시정보를 각 대학별로 확인 및 비교할 수 있습니다.
       </div>
       <div class="eval-note">* 각 대학별 양식이 상이할 수 있습니다.</div>
-      <button class="eval-btn">전형 평가기준 확인 <i class="fas fa-arrow-right"></i></button>
+      <button class="eval-btn" onclick="openPage('admOverlay')">전형 평가기준 확인 <i class="fas fa-arrow-right"></i></button>
       <div class="eval-illustration"><i class="fas fa-search"></i></div>
     </div>
     <div class="eval-side">
@@ -1498,7 +1506,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
             <div class="meta">2027 재외국민</div>
           </div>
         </div>
-        <div class="news-item">
+        <div class="news-item" onclick="openPage('systemOverlay')" style="cursor:pointer;">
           <div class="news-thumb"><i class="fas fa-question-circle"></i></div>
           <div class="news-text">
             <div class="title">해외체류기간 산정 기준, 꼭 알아야 할 핵심 포인트</div>
@@ -1515,17 +1523,17 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
       <div class="search-section-title">대학/학과/전형 검색</div>
       <div class="search-section-desc">나에게 적합한 입시전략을 세우기 위하여 대학, 학과, 전형 검색을 통하여 다양한 입시정보를 찾을 수 있도록 도와드립니다.</div>
       <div class="color-cards">
-        <div class="color-card yellow">
+        <div class="color-card yellow" onclick="openPage('univOverlay')">
           <div class="card-title">대학정보</div>
           <div class="card-desc">재외국민 전형 실시 대학의 교육여건, 설치학과 등의 기본 정보 및 모집요강, 입시 소식 등의 정보</div>
           <div class="card-icon"><i class="fas fa-university"></i></div>
         </div>
-        <div class="color-card green">
+        <div class="color-card green" onclick="openPage('deptOverlay')">
           <div class="card-title">학과정보</div>
           <div class="card-desc">교육목표, 교육과정, 진로취업분야, 등록금, 취업률 등 학생들이 궁금해 하는 학과의 주요정보</div>
           <div class="card-icon"><i class="fas fa-graduation-cap"></i></div>
         </div>
-        <div class="color-card orange">
+        <div class="color-card orange" onclick="openPage('admOverlay')">
           <div class="card-title">전형정보</div>
           <div class="card-desc">전형일정이나 방법, 그리고 어떤 기준으로 학생을 선발하는지, 자격요건 등 전형에 대한 정보</div>
           <div class="card-icon"><i class="fas fa-clipboard-check"></i></div>
@@ -1563,6 +1571,24 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           ※일요일,공휴일 미운영
         </div>
       </div>
+    </div>
+  </div>
+
+  <!-- 재외교육 정보 (재외교육기관포털 연계) -->
+  <div style="margin-bottom:25px;">
+    <div class="search-section-title">재외교육 정보</div>
+    <div class="search-section-desc">교육부 재외교육기관포털(OKEP)의 공개 정보를 바탕으로 특례자격, 재외교육기관, 귀국학생 편입학 정보를 한곳에 모았습니다.</div>
+    <div class="ok-stats" style="margin-bottom:14px;">
+      <div class="ok-stat"><div class="ok-stat-label">한국학교</div><div class="ok-stat-num">34<small>개교</small></div><div class="ok-stat-desc">16개국 · 2026. 4. 1. 기준</div></div>
+      <div class="ok-stat"><div class="ok-stat-label">한국교육원</div><div class="ok-stat-num">47<small>개원</small></div><div class="ok-stat-desc">22개국 · 2026. 4. 1. 기준</div></div>
+      <div class="ok-stat"><div class="ok-stat-label">한국학교 재학생</div><div class="ok-stat-num">12,949<small>명</small></div><div class="ok-stat-desc">2026년 4월 기준</div></div>
+      <div class="ok-stat"><div class="ok-stat-label">해외 학교 한국어반 학생</div><div class="ok-stat-num">191,896<small>명</small></div><div class="ok-stat-desc">5년 전 대비 약 50% 증가</div></div>
+    </div>
+    <div class="ok-links">
+      <div class="ok-link" onclick="openPage('systemOverlay')"><i class="fas fa-passport"></i><div>재외국민 제도안내<span>3년·12년 특례 자격 비교</span></div></div>
+      <div class="ok-link" onclick="openPage('instOverlay')"><i class="fas fa-school"></i><div>재외교육기관<span>한국학교·한국교육원 현황</span></div></div>
+      <div class="ok-link" onclick="openPage('returnOverlay')"><i class="fas fa-plane-arrival"></i><div>귀국학생 편입학<span>학력인정·편입학 절차</span></div></div>
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-globe"></i><div>재외교육기관포털<span>교육부 OKEP 바로가기</span></div><i class="fas fa-external-link-alt"></i></div>
     </div>
   </div>
 
@@ -2685,16 +2711,17 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   <div class="info-topbar">
     <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
     <span class="bc-sep">›</span><a href="#">대입정보센터</a>
-    <span class="bc-sep">›</span><span class="bc-cur">대입정보자료실</span>
+    <span class="bc-sep">›</span><span class="bc-cur">재외국민 대입정보자료실</span>
     <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
   </div>
-  <div class="info-hero"><h1>대입정보자료실</h1></div>
+  <div class="info-hero"><h1>재외국민 대입정보자료실</h1></div>
   <div class="info-body">
     <div class="info-filter">
       <div class="filter-box"><label>모집학년도</label><select style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:'Noto Sans KR',sans-serif;"><option>전체</option><option>2027</option><option>2028</option></select></div>
       <div class="filter-box"><label>제목</label><select style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;font-family:'Noto Sans KR',sans-serif;"><option>제목</option></select></div>
       <div class="filter-input-row"><input type="text" placeholder="검색어를 입력해주세요."><button><i class="fas fa-search"></i></button></div>
-      <div class="filter-apply-row" style="margin-top:12px;">카테고리 <i class="fas fa-chevron-down" style="color:#aaa;font-size:12px;"></i></div>
+      <div class="filter-box" style="margin-top:12px;"><label>카테고리</label><select class="ug-select" style="margin-bottom:0;"><option>전체</option><option>모집요강</option><option>기본사항·시행계획</option><option>자격요건</option><option>제출서류</option><option>설명회 자료</option><option>진로멘토링</option><option>해외학교 성적</option><option>귀국학생</option></select></div>
+      <button class="filter-link-btn" style="margin-top:12px;" onclick="window.open('https://okep.moe.go.kr/board/list.do?board_manager_seq=16&menu_seq=22','_blank')">재외교육기관포털 대학별 모집요강 ›</button>
     </div>
     <div class="info-table-area">
       <div class="table-top-row">
@@ -2702,14 +2729,14 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
         <select class="table-view-select"><option>10개씩 보기</option></select>
       </div>
       <div class="data-grid">
-        <div class="data-card"><div class="data-thumb">2027학년도<br>대입정보<br>119</div><div class="data-info"><div class="data-tags"><span>2027</span> <span>학생부(교과), 학생부(종합)</span></div><div class="data-title">2027학년도 지역인재 특별전형</div><div class="data-file">2027학년도 지역인재 특별전형.pdf <i class="fas fa-download"></i></div><div class="data-meta">대입상담센터 · 2026-05-19</div></div></div>
-        <div class="data-card"><div class="data-thumb green">2027학년도<br>지역의사<br>선발전형</div><div class="data-info"><div class="data-tags"><span>2027</span> <span>특별전형(농어촌,특성화등), 자료집(공통)</span></div><div class="data-title">2027학년도 지역의사선발전형 안내</div><div class="data-file">2027학년도 지역의사선발전형 안내(수정).pdf <i class="fas fa-download"></i></div><div class="data-meta">입학기획팀 · 2026-05-19</div></div></div>
-        <div class="data-card"><div class="data-thumb orange">2028<br>기본사항</div><div class="data-info"><div class="data-tags"><span>2028</span> <span>기본사항, 자료집(공통)</span></div><div class="data-title">2028학년도 대학입학전형시행계획 모음집 (4)</div><div class="data-file">2028학년도 대학입학전형시행계획(이~하).zip <i class="fas fa-download"></i></div><div class="data-meta">정보화지원팀 · 2026-05-15</div></div></div>
-        <div class="data-card"><div class="data-thumb orange">2028<br>기본사항</div><div class="data-info"><div class="data-tags"><span>2028</span> <span>기본사항, 자료집(공통)</span></div><div class="data-title">2028학년도 대학입학전형시행계획 모음집 (3)</div><div class="data-file">2028학년도 대학입학전형시행계획(ㅂ~을).zip <i class="fas fa-download"></i></div><div class="data-meta">정보화지원팀 · 2026-05-15</div></div></div>
-        <div class="data-card"><div class="data-thumb orange">2028<br>기본사항</div><div class="data-info"><div class="data-tags"><span>2028</span> <span>기본사항, 자료집(공통)</span></div><div class="data-title">2028학년도 대학입학전형시행계획 모음집 (2)</div><div class="data-file">2028학년도 대학입학전형시행계획(ㄱ~ㄷ).zip <i class="fas fa-download"></i></div><div class="data-meta">정보화지원팀 · 2026-05-15</div></div></div>
-        <div class="data-card"><div class="data-thumb orange">2028<br>기본사항</div><div class="data-info"><div class="data-tags"><span>2028</span> <span>기본사항, 자료집(공통)</span></div><div class="data-title">2028학년도 대학입학전형시행계획 모음집 (1)</div><div class="data-file">2028학년도 대학입학전형시행계획(가~깐).zip <i class="fas fa-download"></i></div><div class="data-meta">정보화지원팀 · 2026-05-15</div></div></div>
-        <div class="data-card"><div class="data-thumb">자료집<br>(공통)</div><div class="data-info"><div class="data-tags"><span>2028</span> <span>자료집(공통)</span></div><div class="data-title">2028학년도 대학입학전형시행계획 주요사항…</div><div class="data-file">2028학년도 대학입학전형시행계획 주요사항 안내(4… <i class="fas fa-download"></i></div><div class="data-meta">입학기획팀 · 2026-04-30</div></div></div>
-        <div class="data-card"><div class="data-thumb green">2027학년도<br>대입정보<br>119</div><div class="data-info"><div class="data-tags"><span>2027</span> <span>학생부(교과), 학생부(종합)</span></div><div class="data-title">2027학년도 장애인 등 대상자 특별전형</div><div class="data-file">2027학년도 장애인 등 대상자 특별전형.pdf <i class="fas fa-download"></i></div><div class="data-meta">대입상담센터 · 2026-04-30</div></div></div>
+        <div class="data-card"><div class="data-thumb">2027학년도<br>재외국민<br>모집요강</div><div class="data-info"><div class="data-tags"><span>2027</span> <span>모집요강</span></div><div class="data-title">2027학년도 대학별 재외국민 특별전형 모집요강 모음</div><div class="data-file">2027학년도 재외국민 특별전형 모집요강(가~하).zip <i class="fas fa-download"></i></div><div class="data-meta">재외교육기관포털 연계 · 2026-05-28</div></div></div>
+        <div class="data-card"><div class="data-thumb green">3년·12년<br>특례<br>비교</div><div class="data-info"><div class="data-tags"><span>공통</span> <span>자격요건</span></div><div class="data-title">재외국민 3년 특례·12년 특례 지원자격 비교표</div><div class="data-file">재외국민 특례자격 비교표.pdf <i class="fas fa-download"></i></div><div class="data-meta">대입상담센터 · 2026-05-19</div></div></div>
+        <div class="data-card"><div class="data-thumb orange">2028<br>기본사항</div><div class="data-info"><div class="data-tags"><span>2028</span> <span>기본사항·시행계획</span></div><div class="data-title">2028학년도 대학입학전형시행계획 주요사항 (재외국민과 외국인 전형)</div><div class="data-file">2028학년도 재외국민과 외국인 전형 주요사항.pdf <i class="fas fa-download"></i></div><div class="data-meta">입학기획팀 · 2026-05-15</div></div></div>
+        <div class="data-card"><div class="data-thumb">서류<br>인증·번역</div><div class="data-info"><div class="data-tags"><span>공통</span> <span>제출서류</span></div><div class="data-title">해외 학교 서류 아포스티유·영사확인 및 번역공증 안내</div><div class="data-file">해외서류 인증·번역 안내.pdf <i class="fas fa-download"></i></div><div class="data-meta">대입상담센터 · 2026-05-10</div></div></div>
+        <div class="data-card"><div class="data-thumb green">입시<br>설명회<br>자료집</div><div class="data-info"><div class="data-tags"><span>2027</span> <span>설명회 자료</span></div><div class="data-title">2027학년도 재외국민 입시설명회 자료집</div><div class="data-file">2027 재외국민 입시설명회 자료집.pdf <i class="fas fa-download"></i></div><div class="data-meta">대입상담센터 · 2026-04-30</div></div></div>
+        <div class="data-card"><div class="data-thumb orange">학과별<br>진로<br>멘토링</div><div class="data-info"><div class="data-tags"><span>공통</span> <span>진로멘토링</span></div><div class="data-title">학과별 진로멘토링 자료집 (재외국민 전형 입학 선배 인터뷰)</div><div class="data-file">학과별 진로멘토링 자료집.pdf <i class="fas fa-download"></i></div><div class="data-meta">재외교육기관포털 연계 · 2026-04-22</div></div></div>
+        <div class="data-card"><div class="data-thumb">해외<br>교육과정<br>환산</div><div class="data-info"><div class="data-tags"><span>공통</span> <span>해외학교 성적</span></div><div class="data-title">해외 교육과정별(GPA·IB·A-Level) 성적 환산 이해하기</div><div class="data-file">해외 교육과정별 성적 환산 안내.pdf <i class="fas fa-download"></i></div><div class="data-meta">대입상담센터 · 2026-04-15</div></div></div>
+        <div class="data-card"><div class="data-thumb green">귀국학생<br>편입학</div><div class="data-info"><div class="data-tags"><span>공통</span> <span>귀국학생</span></div><div class="data-title">귀국학생 초·중·고 편입학 및 학력인정 안내</div><div class="data-file">귀국학생 편입학 안내.pdf <i class="fas fa-download"></i></div><div class="data-meta">대입상담센터 · 2026-04-08</div></div></div>
       </div>
       <div class="pagination"><button class="page-btn">«</button><button class="page-btn">‹</button><button class="page-btn active">1</button><button class="page-btn">2</button><button class="page-btn">3</button><button class="page-btn">4</button><button class="page-btn">5</button><button class="page-btn">6</button><button class="page-btn">7</button><button class="page-btn">8</button><button class="page-btn">9</button><button class="page-btn">10</button><button class="page-btn">›</button><button class="page-btn">»</button></div>
     </div>
@@ -2863,7 +2890,7 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           <option>해외 교육과정</option><option>미국식 (AP·SAT)</option><option>IB 디플로마</option><option>영국식 (A-Level)</option><option>현지 학교</option><option>재외 한국학교</option>
         </select>
         <select class="ug-select">
-          <option>부모 동반요건</option><option>부모 모두 동반</option><option>부 또는 모 동반 인정</option><option>동반요건 없음 (12년 특례)</option>
+          <option>해외 체류요건</option><option>학생 3/4·부모 2/3 이상 (3년 특례)</option><option>부모 요건 없음 (12년 특례)</option>
         </select>
         <select class="ug-select">
           <option>전형요소</option><option>서류 100%</option><option>서류 + 면접</option><option>서류 + 필답고사</option><option>필답고사 + 면접</option>
@@ -2906,9 +2933,9 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
           </ul>
           <div class="score-criteria" style="margin-top:12px;">
             <strong style="color:#1a5c3a;">[재외국민 지원자격]</strong><br>
-            1. 3년 특례 : 고교 1개 학년 이상을 포함하여 중·고교 과정 3년 이상을 해외에서 이수하고, 부모의 해외 체류 요건을 충족한 자 (정원 외 2% 이내)<br>
-            2. 12년 특례 : 초·중·고 전 교육과정(12년)을 해외에서 이수한 자 (정원 외, 인원 제한 없음)<br>
-            ※ 해외 체류기간 산정 기준(부모 동반 범위, 국내 체류 허용 일수 등)은 대학별로 상이
+            1. 3년 특례 : 고교 1개 학년 이상을 포함하여 중·고교 과정 3년 이상을 해외에서 이수하고, 재학기간 중 매 1년마다 학생은 3/4 이상, 부모 모두 2/3 이상 해외에 체류한 자 (정원 외 2% 이내)<br>
+            2. 12년 특례 : 초·중·고 전 교육과정(12년)을 해외에서 이수한 자, 부모 체류 요건 없음 (정원 외, 인원 제한 없음)<br>
+            ※ 해외 체류기간 산정 기준(부모 동반 범위, 국내 체류 허용 일수 등)은 대학별로 상이 · <a href="#" onclick="openPage('systemOverlay');return false;" style="color:#2db4a8;font-weight:600;">특례자격 자세히 보기 ›</a>
           </div>
           <div class="score-criteria" style="margin-top:12px;">
             <strong style="color:#1a5c3a;">[해외학교 성적]</strong><br>
@@ -2952,6 +2979,342 @@ function switchUnivGradeTab(idx) {
 switchUnivGradeTab(0);
 </script>
 
+
+
+<!-- ===== 재외교육 정보 공통 스타일 (제도안내 / 재외교육기관 / 귀국학생) ===== -->
+<style>
+.ok-wrap { max-width: 1140px; margin: 0 auto; padding: 26px 40px 10px; }
+.ok-hero-sub { font-size: 14px; color: #777; margin-top: 8px; }
+.ok-intro { background: #e8f5f4; border: 1px solid #b8e6e2; border-radius: 10px; padding: 18px 22px; font-size: 14px; color: #444; line-height: 1.8; margin-bottom: 26px; }
+.ok-intro strong { color: #1a5c3a; }
+.ok-section-title { display: flex; align-items: center; gap: 8px; font-size: 18px; font-weight: 800; color: #222; margin: 34px 0 14px; }
+.ok-section-title i { color: #2db4a8; }
+.ok-section-title:first-child { margin-top: 0; }
+
+.ok-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 8px; }
+.ok-stat { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 18px 20px; }
+.ok-stat-label { font-size: 13px; color: #777; margin-bottom: 6px; }
+.ok-stat-num { font-size: 28px; font-weight: 800; color: #2db4a8; line-height: 1.2; }
+.ok-stat-num small { font-size: 14px; color: #555; font-weight: 600; margin-left: 4px; }
+.ok-stat-desc { font-size: 12px; color: #999; margin-top: 6px; }
+
+.ok-table { width: 100%; border-collapse: collapse; background: #fff; border-radius: 10px; overflow: hidden; font-size: 14px; }
+.ok-table th, .ok-table td { padding: 14px 16px; border-bottom: 1px solid #eee; text-align: left; vertical-align: top; line-height: 1.6; }
+.ok-table thead th { background: #2db4a8; color: #fff; font-weight: 700; }
+.ok-table tbody th { background: #f6fbfb; color: #1a5c3a; font-weight: 700; width: 150px; white-space: nowrap; }
+.ok-table td strong { color: #e65100; }
+
+.ok-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.ok-card { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 18px 20px; }
+.ok-card-icon { width: 40px; height: 40px; border-radius: 10px; background: #e8f5f4; color: #2db4a8; display: flex; align-items: center; justify-content: center; font-size: 18px; margin-bottom: 12px; }
+.ok-card-title { font-size: 15px; font-weight: 700; color: #222; margin-bottom: 6px; }
+.ok-card-desc { font-size: 13px; color: #666; line-height: 1.7; }
+.ok-card.good { border-left: 4px solid #2db4a8; }
+.ok-card.bad { border-left: 4px solid #e57373; }
+.ok-card.bad .ok-card-icon { background: #fdecea; color: #e53935; }
+
+.ok-steps { display: flex; flex-wrap: wrap; gap: 10px; }
+.ok-step { flex: 1; min-width: 150px; background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 16px; position: relative; }
+.ok-step-num { display: inline-block; font-size: 11px; font-weight: 800; color: #fff; background: #2db4a8; border-radius: 12px; padding: 2px 10px; margin-bottom: 8px; }
+.ok-step-title { font-size: 14px; font-weight: 700; color: #222; margin-bottom: 4px; }
+.ok-step-desc { font-size: 12px; color: #777; line-height: 1.6; }
+
+.ok-list { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 18px 22px 18px 40px; font-size: 14px; color: #444; line-height: 1.8; }
+.ok-list li { list-style: disc; margin-bottom: 4px; }
+.ok-list strong { color: #1a5c3a; }
+
+.ok-faq-item { background: #fff; border: 1px solid #e6eeee; border-radius: 10px; margin-bottom: 8px; overflow: hidden; }
+.ok-faq-q { display: flex; align-items: center; gap: 10px; padding: 15px 18px; font-size: 14px; font-weight: 700; color: #333; cursor: pointer; }
+.ok-faq-q::before { content: 'Q'; color: #2db4a8; font-weight: 800; }
+.ok-faq-q i { margin-left: auto; color: #aaa; transition: transform 0.2s; }
+.ok-faq-a { display: none; padding: 0 18px 16px 42px; font-size: 13px; color: #555; line-height: 1.8; }
+.ok-faq-item.open .ok-faq-a { display: block; }
+.ok-faq-item.open .ok-faq-q i { transform: rotate(180deg); }
+
+.ok-tabs { display: flex; border-bottom: 2px solid #e0e0e0; margin-bottom: 20px; }
+.ok-tab { padding: 12px 24px; font-size: 15px; font-weight: 700; color: #aaa; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -2px; }
+.ok-tab.active { color: #2db4a8; border-bottom-color: #2db4a8; }
+.ok-tab-panel { display: none; }
+.ok-tab-panel.active { display: block; }
+
+.ok-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.ok-chip { padding: 7px 14px; background: #fff; border: 1px solid #ddd; border-radius: 20px; font-size: 13px; color: #555; }
+.ok-chip b { color: #2db4a8; font-weight: 700; margin-right: 4px; }
+
+.ok-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; }
+.ok-link { display: flex; align-items: center; gap: 12px; background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 14px 16px; font-size: 14px; font-weight: 600; color: #333; cursor: pointer; transition: border-color 0.2s; }
+.ok-link:hover { border-color: #2db4a8; color: #2db4a8; }
+.ok-link i { color: #2db4a8; font-size: 18px; width: 22px; text-align: center; }
+.ok-link span { display: block; font-size: 12px; font-weight: 400; color: #999; margin-top: 2px; }
+.ok-link .fa-external-link-alt { margin-left: auto; font-size: 12px; color: #bbb; width: auto; }
+
+.ok-btn { display: inline-flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 18px; background: #2db4a8; color: #fff; border: none; border-radius: 8px; font-size: 14px; font-weight: 700; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; }
+.ok-btn:hover { background: #26a69a; }
+.ok-btn.line { background: #fff; color: #2db4a8; border: 1px solid #2db4a8; }
+.ok-note { font-size: 12px; color: #888; line-height: 1.7; margin-top: 10px; }
+.ok-source { font-size: 12px; color: #999; margin-top: 30px; padding-top: 14px; border-top: 1px solid #e6e6e6; line-height: 1.7; }
+.ok-source a { color: #2db4a8; }
+</style>
+
+
+<!-- ===== 재외국민 제도안내 페이지 ===== -->
+<div class="info-overlay" id="systemOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#">입시정보센터</a>
+    <span class="bc-sep">›</span><span class="bc-cur">재외국민 제도안내</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero">
+    <h1>재외국민 특별전형 제도안내</h1>
+    <div class="ok-hero-sub">3년 특례 · 12년 특례 지원자격과 전형 절차를 한눈에 확인하세요.</div>
+  </div>
+  <div class="ok-wrap">
+    <div class="ok-intro">
+      <strong>재외국민과 외국인 특별전형</strong>은 해외에서 학교 교육을 받은 학생에게 국내 대학 진학 기회를 주기 위해 <strong>정원 외</strong>로 운영되는 전형입니다.
+      지원자격은 한국대학교육협의회 「대학입학전형기본사항」을 기준으로 각 대학이 모집요강에서 정하므로, 아래 내용은 공통 기준으로 참고하고 최종 판단은 반드시 <strong>지원 대학의 모집요강</strong>으로 확인하시기 바랍니다.
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-balance-scale"></i> 3년 특례 vs 12년 특례 한눈에 비교</div>
+    <table class="ok-table">
+      <thead><tr><th>구분</th><th>3년 특례 (중·고교 과정 해외 이수자)</th><th>12년 특례 (초·중·고 전 교육과정 해외 이수자)</th></tr></thead>
+      <tbody>
+        <tr><th>모집인원</th><td>정원 외 <strong>입학정원의 2% 이내</strong></td><td>정원 외 <strong>인원 제한 없음</strong></td></tr>
+        <tr><th>학력 요건</th><td><strong>고교 1개 학년 이상</strong>을 포함하여 중·고교 과정 중 <strong>3년 이상</strong>을 해외에서 이수</td><td>초·중·고 <strong>12년 전 교육과정</strong>을 해외에서 이수</td></tr>
+        <tr><th>학생 체류 요건</th><td>해외 학교 재학기간 중 <strong>매 1년마다 3/4 이상</strong> 해외 체류</td><td>대학별 기준 (전 교육과정 해외 이수 증빙)</td></tr>
+        <tr><th>부모 요건</th><td><strong>부모 모두</strong> 해외 근무·체류, 학생의 재학기간 중 <strong>매 1년마다 2/3 이상</strong> 체류</td><td>부모 체류 요건 <strong>없음</strong></td></tr>
+        <tr><th>주요 대상</th><td>해외 주재원·외교관·해외 근무자·해외 사업자 자녀 등</td><td>해외 영주·장기 거주 가정 자녀 등</td></tr>
+        <tr><th>핵심 증빙</th><td>부모 재직·해외근무 증명, 본인·부모 출입국사실증명서, 해외 학교 재학·성적증명서</td><td>초·중·고 전 학년 재학·성적·졸업증명서 (아포스티유 또는 영사확인)</td></tr>
+      </tbody>
+    </table>
+    <div class="ok-note">※ 부모의 사망·이혼 등 예외 인정 범위, 국내 체류 허용 일수, 체류기간 산정 기준일은 대학별로 다릅니다.</div>
+
+    <div class="ok-section-title"><i class="fas fa-route"></i> 재외국민 특별전형 진행 절차</div>
+    <div class="ok-steps">
+      <div class="ok-step"><span class="ok-step-num">STEP 1</span><div class="ok-step-title">자격 확인</div><div class="ok-step-desc">학년별 해외 이수 기간과 학생·부모 체류 일수를 계산해 특례 유형을 확인</div></div>
+      <div class="ok-step"><span class="ok-step-num">STEP 2</span><div class="ok-step-title">서류 준비</div><div class="ok-step-desc">해외 학교 서류 발급 → 아포스티유·영사확인 → 한국어 번역공증</div></div>
+      <div class="ok-step"><span class="ok-step-num">STEP 3</span><div class="ok-step-title">원서접수</div><div class="ok-step-desc">대학별 재외국민 전형 일정에 맞춰 온라인 접수 후 서류 제출</div></div>
+      <div class="ok-step"><span class="ok-step-num">STEP 4</span><div class="ok-step-title">자격심사·평가</div><div class="ok-step-desc">지원자격 심사 후 서류평가, 필답고사, 면접 등 대학별 전형 실시</div></div>
+      <div class="ok-step"><span class="ok-step-num">STEP 5</span><div class="ok-step-title">합격·등록</div><div class="ok-step-desc">합격자 발표, 등록 후 원본 서류 확인 (허위 서류는 합격 취소)</div></div>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-tasks"></i> 대학별 전형요소</div>
+    <div class="ok-cards">
+      <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-folder-open"></i></div><div class="ok-card-title">서류평가</div><div class="ok-card-desc">해외 학교 성적(GPA·IB·A-Level 등), 자기소개서, 교내외 활동 증빙을 종합 평가합니다. 다수 대학이 서류 100% 또는 서류 중심으로 선발합니다.</div></div>
+      <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-pen-nib"></i></div><div class="ok-card-title">필답고사</div><div class="ok-card-desc">일부 대학·모집단위는 국어, 영어, 수학 등 필답고사를 실시합니다. 출제 범위와 반영 비율은 모집요강에서 확인하세요.</div></div>
+      <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-user-tie"></i></div><div class="ok-card-title">면접</div><div class="ok-card-desc">전공 적합성, 수학 능력, 한국어 의사소통 능력을 확인합니다. 해외 체류 경험과 지원 동기를 일관되게 준비하는 것이 중요합니다.</div></div>
+      <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-language"></i></div><div class="ok-card-title">어학성적</div><div class="ok-card-desc">대부분 수능최저학력기준은 적용하지 않지만, 일부 대학은 TOPIK·공인영어 성적을 지원자격이나 가점으로 활용합니다.</div></div>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-exclamation-triangle"></i> 꼭 알아두어야 할 유의사항</div>
+    <ul class="ok-list">
+      <li>재외국민 특별전형은 <strong>대한민국 국적</strong>의 재외국민이 대상이며, 학생과 부모 모두 외국 국적인 경우에는 <strong>외국인 전형</strong> 대상입니다.</li>
+      <li>해외 이수 기간과 체류 기간은 대학이 정한 <strong>기준일</strong>(예: 원서접수 마감일, 졸업일)까지를 기준으로 계산하며, 방학 중 국내 체류일 산입 방법은 대학별로 다릅니다.</li>
+      <li>해외 소재 <strong>한국학교</strong> 재학 기간을 해외 이수 기간으로 인정하는지 여부는 대학별 모집요강을 확인하세요.</li>
+      <li>재외국민과 외국인 특별전형은 일반적으로 <strong>수시모집 6회 지원 제한에 포함되지 않지만</strong>, 대학별로 다른 전형과의 중복 지원을 제한할 수 있습니다.</li>
+      <li>제출 서류가 허위이거나 자격 요건이 사실과 다른 것으로 확인되면 <strong>합격 및 입학이 취소</strong>됩니다.</li>
+    </ul>
+
+    <div class="ok-section-title"><i class="fas fa-question-circle"></i> 자주 묻는 질문</div>
+    <div class="ok-faq">
+      <div class="ok-faq-item"><div class="ok-faq-q" onclick="toggleOkFaq(this)">부모 중 한 명만 해외에서 함께 체류했어요. 3년 특례 지원이 가능한가요?<i class="fas fa-chevron-down"></i></div><div class="ok-faq-a">3년 특례는 원칙적으로 <strong>부모 모두</strong> 해외 체류 요건을 충족해야 합니다. 부모 한 명만 동반한 경우는 일반적으로 자격이 인정되지 않으며, 부모의 사망·이혼 등 예외 인정 범위는 대학별로 다르므로 모집요강과 대학 입학처에 확인하세요.</div></div>
+      <div class="ok-faq-item"><div class="ok-faq-q" onclick="toggleOkFaq(this)">중학교는 국내에서, 고등학교 2년만 해외에서 다녔어요.<i class="fas fa-chevron-down"></i></div><div class="ok-faq-a">3년 특례는 고교 1개 학년 이상을 포함해 중·고교 과정 중 <strong>3년 이상</strong>을 해외에서 이수해야 합니다. 해외 이수 기간이 2년이라면 지원 요건을 충족하지 못합니다.</div></div>
+      <div class="ok-faq-item"><div class="ok-faq-q" onclick="toggleOkFaq(this)">12년 특례는 부모 요건이 정말 없나요?<i class="fas fa-chevron-down"></i></div><div class="ok-faq-a">네, 부모 체류 요건은 없습니다. 대신 초·중·고 <strong>전 교육과정</strong>을 해외에서 이수했음을 학년별 재학·성적증명서로 빠짐없이 입증해야 합니다. 중간에 국내 학교 재학 기간이 있으면 12년 특례 대상이 아닙니다.</div></div>
+      <div class="ok-faq-item"><div class="ok-faq-q" onclick="toggleOkFaq(this)">해외 서류는 어떻게 인증받아야 하나요?<i class="fas fa-chevron-down"></i></div><div class="ok-faq-a">아포스티유 협약국은 해당 국가에서 <strong>아포스티유</strong>를, 비협약국은 현지 한국 공관에서 <strong>영사확인</strong>을 받아야 합니다. 한국어 외 언어로 작성된 서류는 번역공증본을 함께 제출합니다. 자세한 내용은 우측 <strong>서류준비 가이드</strong>를 참고하세요.</div></div>
+      <div class="ok-faq-item"><div class="ok-faq-q" onclick="toggleOkFaq(this)">상담은 어디에서 받을 수 있나요?<i class="fas fa-chevron-down"></i></div><div class="ok-faq-a">한국대학교육협의회 대입상담센터 전화상담(<strong>1600-1615</strong>)과 온라인 대입상담, 각 대학 입학처, 재외교육기관포털의 대학별 모집요강 게시판을 이용할 수 있습니다.</div></div>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-link"></i> 관련 바로가기</div>
+    <div class="ok-links">
+      <div class="ok-link" onclick="openGuideModal()"><i class="fas fa-passport"></i><div>자격요건 입력 가이드<span>해외체류기간·학력 입력 방법</span></div></div>
+      <div class="ok-link" onclick="openDocsGuide()"><i class="fas fa-folder-open"></i><div>서류준비 가이드<span>필수서류·아포스티유·번역</span></div></div>
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/board/list.do?board_manager_seq=16&menu_seq=22','_blank')"><i class="fas fa-file-alt"></i><div>대학별 모집요강<span>재외교육기관포털</span></div><i class="fas fa-external-link-alt"></i></div>
+      <div class="ok-link" onclick="window.open('https://www.adiga.kr','_blank')"><i class="fas fa-search"></i><div>대입정보포털 어디가<span>한국대학교육협의회</span></div><i class="fas fa-external-link-alt"></i></div>
+    </div>
+
+    <div class="ok-source">
+      출처: 한국대학교육협의회 「대학입학전형기본사항」, 각 대학 재외국민 특별전형 모집요강, <a href="https://okep.moe.go.kr/root/index.do" target="_blank">재외교육기관포털(OKEP)</a>. 세부 기준은 학년도별로 바뀔 수 있습니다.
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 재외교육기관 페이지 ===== -->
+<div class="info-overlay" id="instOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#">재외교육 정보</a>
+    <span class="bc-sep">›</span><span class="bc-cur">재외교육기관</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero">
+    <h1>재외교육기관 안내</h1>
+    <div class="ok-hero-sub">전 세계 한국학교·한국교육원 현황과 재외교육 자료를 확인하세요.</div>
+  </div>
+  <div class="ok-wrap">
+    <div class="ok-stats">
+      <div class="ok-stat"><div class="ok-stat-label">한국학교</div><div class="ok-stat-num">34<small>개교</small></div><div class="ok-stat-desc">16개국 · 2026. 4. 1. 기준</div></div>
+      <div class="ok-stat"><div class="ok-stat-label">한국교육원</div><div class="ok-stat-num">47<small>개원</small></div><div class="ok-stat-desc">22개국 · 2026. 4. 1. 기준</div></div>
+      <div class="ok-stat"><div class="ok-stat-label">한국학교 재학생</div><div class="ok-stat-num">12,949<small>명</small></div><div class="ok-stat-desc">2026년 4월 기준</div></div>
+      <div class="ok-stat"><div class="ok-stat-label">해외 학교 한국어반 학생</div><div class="ok-stat-num">191,896<small>명</small></div><div class="ok-stat-desc">5년 전 대비 약 50% 증가</div></div>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-school"></i> 기관 유형별 안내</div>
+    <div class="ok-tabs">
+      <span class="ok-tab active" onclick="switchInstTab(0)">한국학교</span>
+      <span class="ok-tab" onclick="switchInstTab(1)">한국교육원</span>
+    </div>
+
+    <div class="ok-tab-panel active">
+      <div class="ok-intro">
+        <strong>한국학교</strong>는 「재외국민의 교육지원 등에 관한 법률」에 따라 해외에 설립된 정규 학교로, 재외국민 자녀에게 국내 초·중·고 교육과정을 기반으로 한 학교교육을 제공합니다.
+        34개교 가운데 <strong>27개교(약 79%)</strong>가 중국·일본·베트남 등 아시아 지역에 있습니다.
+      </div>
+      <div class="ok-cards">
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-book"></i></div><div class="ok-card-title">국내 교육과정 기반</div><div class="ok-card-desc">국내 교육과정을 바탕으로 한국어·한국사 등 정체성 교육과 현지어·영어 교육을 함께 운영합니다.</div></div>
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-university"></i></div><div class="ok-card-title">국내 대학 진학 연계</div><div class="ok-card-desc">국내 연계교육 중심형 학교는 국내 대학 진학을 염두에 둔 교육과정과 진학 지도를 제공합니다.</div></div>
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-exchange-alt"></i></div><div class="ok-card-title">귀국 시 학력 연계</div><div class="ok-card-desc">귀국 후 국내 학교로 편입학할 때 학력이 연계되어 학업 공백을 줄일 수 있습니다.</div></div>
+      </div>
+      <div class="ok-section-title" style="font-size:15px;margin-top:22px;"><i class="fas fa-map-marker-alt"></i> 주요 한국학교 (일부)</div>
+      <div class="ok-chips">
+        <span class="ok-chip"><b>일본</b>동경한국학교</span>
+        <span class="ok-chip"><b>중국</b>북경한국국제학교</span>
+        <span class="ok-chip"><b>중국</b>상해한국학교</span>
+        <span class="ok-chip"><b>대만</b>타이뻬이한국학교</span>
+        <span class="ok-chip"><b>베트남</b>호치민시한국국제학교</span>
+        <span class="ok-chip"><b>태국</b>방콕한국국제학교</span>
+        <span class="ok-chip"><b>캄보디아</b>프놈펜한국국제학교</span>
+        <span class="ok-chip"><b>말레이시아</b>말레이시아한국국제학교</span>
+        <span class="ok-chip"><b>싱가포르</b>싱가포르한국국제학교</span>
+        <span class="ok-chip"><b>인도네시아</b>자카르타한국국제학교</span>
+        <span class="ok-chip"><b>필리핀</b>필리핀한국국제학교</span>
+        <span class="ok-chip"><b>사우디아라비아</b>젯다한국학교</span>
+        <span class="ok-chip"><b>이란</b>테헤란한국학교</span>
+        <span class="ok-chip"><b>이집트</b>카이로한국학교</span>
+        <span class="ok-chip"><b>러시아</b>모스크바한국학교</span>
+        <span class="ok-chip"><b>아르헨티나</b>아르헨티나한국학교</span>
+        <span class="ok-chip"><b>파라과이</b>파라과이한국학교</span>
+      </div>
+      <button class="ok-btn" onclick="window.open('https://okep.moe.go.kr/koschl/orgInfo/orgSearch/search.do','_blank')"><i class="fas fa-search"></i> 한국학교 전체 34개교 찾기 (재외교육기관포털)</button>
+      <div class="ok-note">※ 한국학교 재학 기간을 재외국민 특별전형의 해외 이수 기간으로 인정하는지는 대학별 모집요강을 확인하세요.</div>
+    </div>
+
+    <div class="ok-tab-panel">
+      <div class="ok-intro">
+        <strong>한국교육원</strong>은 재외동포와 현지인을 대상으로 한국어·한국문화 교육과 한국 유학 홍보를 맡는 교육부 소속 재외교육기관입니다.
+        2025년 미국 시애틀과 멕시코에 새로 문을 열어 <strong>22개국 47개원</strong>으로 확대되었습니다.
+      </div>
+      <div class="ok-cards">
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-chalkboard-teacher"></i></div><div class="ok-card-title">한국어 강좌 운영</div><div class="ok-card-desc">한국교육원이 직접 운영한 한국어 강좌는 2025년 약 1,200개, 수강생은 28,751명으로 늘었습니다.</div></div>
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-school"></i></div><div class="ok-card-title">현지 학교 한국어반 지원</div><div class="ok-card-desc">현지 초·중·고교가 한국어를 정규 과목으로 채택하도록 지원하고, 교원 연수와 교재를 제공합니다.</div></div>
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-hands-helping"></i></div><div class="ok-card-title">한글학교 지원</div><div class="ok-card-desc">주말 한글학교와 협력해 재외동포 자녀의 한국어·정체성 교육을 돕습니다. (한글학교 운영 지원은 재외동포청 소관)</div></div>
+        <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-plane-departure"></i></div><div class="ok-card-title">유학·진학 상담</div><div class="ok-card-desc">국내 대학 진학과 한국 유학 설명회, 상담을 운영합니다. 해외 거주 중 입시 상담 창구로 활용할 수 있습니다.</div></div>
+      </div>
+      <button class="ok-btn" onclick="window.open('https://okep.moe.go.kr/koacad/orgInfo/orgSearch/search.do','_blank')"><i class="fas fa-search"></i> 가까운 한국교육원 찾기 (재외교육기관포털)</button>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-book-reader"></i> 재외교육 자료실</div>
+    <div class="ok-links">
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-chalkboard"></i><div>한국학교 교수·학습자료<span>수업·평가 자료</span></div><i class="fas fa-external-link-alt"></i></div>
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-flask"></i><div>한국학교 연수·연구자료<span>교원 연수·연구 결과물</span></div><i class="fas fa-external-link-alt"></i></div>
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-globe-asia"></i><div>해외 한국어 채택 현황<span>국가별 한국어반 운영</span></div><i class="fas fa-external-link-alt"></i></div>
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-language"></i><div>한국어교육 교수·학습자료<span>한국어 교재·학습 콘텐츠</span></div><i class="fas fa-external-link-alt"></i></div>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-bullhorn"></i> 재외교육 알림·소식</div>
+    <div class="ok-links">
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-bell"></i><div>공지사항<span>재외교육기관포털 공지</span></div><i class="fas fa-external-link-alt"></i></div>
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-id-badge"></i><div>재외채용정보<span>한국학교·교육원 교원 채용</span></div><i class="fas fa-external-link-alt"></i></div>
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-newspaper"></i><div>온라인 소식지<span>재외교육기관 웹진</span></div><i class="fas fa-external-link-alt"></i></div>
+      <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-coffee"></i><div>재외교육카페<span>교원 소통 커뮤니티</span></div><i class="fas fa-external-link-alt"></i></div>
+    </div>
+
+    <div class="ok-source">
+      출처: <a href="https://okep.moe.go.kr/root/index.do" target="_blank">재외교육기관포털(OKEP, 교육부)</a> 공개 정보 및 교육부 발표 자료. 재외교육기관포털은 2019년 5월 재외교육기관 통계(OKEIS)·교사 지원(EFKA)·학습자 지원(KOSNET) 사이트를 통합해 출범한 재외동포 교육 종합 포털입니다.
+    </div>
+  </div>
+</div>
+
+
+<!-- ===== 귀국학생 편입학 안내 페이지 ===== -->
+<div class="info-overlay" id="returnOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home" style="cursor:pointer;" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#">재외교육 정보</a>
+    <span class="bc-sep">›</span><span class="bc-cur">귀국학생 편입학 안내</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero">
+    <h1>귀국학생 편입학·학력인정 안내</h1>
+    <div class="ok-hero-sub">해외에서 학교를 다니다 귀국한 학생의 국내 초·중·고 편입학 절차를 안내합니다.</div>
+  </div>
+  <div class="ok-wrap">
+    <div class="ok-intro">
+      귀국학생은 외국에서 이수한 학력을 인정받아 국내 초·중·고교에 <strong>편입학(재취학)</strong>할 수 있습니다.
+      세부 기준과 일정은 <strong>시·도교육청별 귀국자 편입학 시행계획</strong>을 따르므로, 주소지 관할 교육청 안내를 함께 확인하세요.
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-check-double"></i> 학력인정 기준</div>
+    <div class="ok-cards">
+      <div class="ok-card good"><div class="ok-card-icon"><i class="fas fa-check"></i></div><div class="ok-card-title">학력으로 인정</div><div class="ok-card-desc">외국 <strong>정규학교</strong> 재학 기간. 정규학교의 ESL반이라도 정규 교육과정과 같은 과목을 이수하고 성적이 산출되었다면 인정됩니다.</div></div>
+      <div class="ok-card bad"><div class="ok-card-icon"><i class="fas fa-times"></i></div><div class="ok-card-title">학력으로 불인정</div><div class="ok-card-desc">유치원 수료, 어학연수(ESL) 과정, 가정교사 등 개인학습은 학력으로 인정되지 않습니다.</div></div>
+      <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-gavel"></i></div><div class="ok-card-title">증명이 어려운 경우</div><div class="ok-card-desc">시·도교육청 <strong>학력심의위원회</strong> 또는 학력심의가 가능한 학교를 통해 학력인정과 학년 결정을 받을 수 있습니다.</div></div>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-layer-group"></i> 학년 결정 방법</div>
+    <ul class="ok-list">
+      <li>외국 학제가 국내 학제와 다를 경우, <strong>국내 학교급별 교육 연한</strong>을 기준으로 외국에서 이수한 교육과정과 학년을 인정합니다.</li>
+      <li>예) 미국에서 8학년(Grade 8)을 마치고 귀국 → 국내 기준 8년(초 6년 + 중 2년) 이수로 보아 <strong>중학교 3학년</strong> 편입학 대상</li>
+      <li>학기 중 귀국한 경우 이수한 학기와 국내 학사일정을 함께 고려해 학년이 결정됩니다.</li>
+    </ul>
+
+    <div class="ok-section-title"><i class="fas fa-route"></i> 편입학 절차</div>
+    <div class="ok-steps">
+      <div class="ok-step"><span class="ok-step-num">STEP 1</span><div class="ok-step-title">서류 준비</div><div class="ok-step-desc">외국 학교 재학·성적증명서 발급 후 아포스티유 또는 영사확인</div></div>
+      <div class="ok-step"><span class="ok-step-num">STEP 2</span><div class="ok-step-title">편입학 신청</div><div class="ok-step-desc">주민등록 주소지 학교(고교는 지역별 교육청 배정 절차)에 신청</div></div>
+      <div class="ok-step"><span class="ok-step-num">STEP 3</span><div class="ok-step-title">학력인정·학년 결정</div><div class="ok-step-desc">제출 서류로 학력과 학년을 결정, 필요 시 학력심의 진행</div></div>
+      <div class="ok-step"><span class="ok-step-num">STEP 4</span><div class="ok-step-title">학교장 허가</div><div class="ok-step-desc">학칙에 따라 학교장이 편입학(재취학)을 허가</div></div>
+      <div class="ok-step"><span class="ok-step-num">STEP 5</span><div class="ok-step-title">등록</div><div class="ok-step-desc">학적 생성 후 수업 시작, 학교 적응 프로그램 안내</div></div>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-clipboard-list"></i> 구비서류</div>
+    <table class="ok-table">
+      <thead><tr><th>서류</th><th>확인 사항</th></tr></thead>
+      <tbody>
+        <tr><th>외국학교 재학증명서</th><td>입·퇴학 연월일과 재학 학년 명시, 학교장 서명 또는 날인, <strong>아포스티유 또는 영사확인</strong></td></tr>
+        <tr><th>성적증명서</th><td>이수한 <strong>전 과정</strong>이 표시된 성적증명서 (학교장 서명 또는 날인)</td></tr>
+        <tr><th>출입국사실증명서</th><td>해외 체류 기간 확인용 (정부24 발급)</td></tr>
+        <tr><th>주민등록등본 등</th><td>주소지 확인 및 가족관계 확인 (교육청별 상이)</td></tr>
+        <tr><th>번역본</th><td>외국어 서류의 한국어 번역본 (교육청·학교 안내에 따름)</td></tr>
+      </tbody>
+    </table>
+    <div class="ok-note">※ 교육부가 공시한 <strong>외국 소재 학력인정학교</strong>에서 공부한 경우 제출 서류가 간소화될 수 있습니다.</div>
+
+    <div class="ok-section-title"><i class="fas fa-lightbulb"></i> 대학 입시를 준비 중이라면</div>
+    <div class="ok-intro" style="margin-bottom:0;">
+      귀국 시점에 따라 <strong>재외국민 특별전형 지원자격</strong>(해외 이수 기간·체류 기간)이 달라질 수 있습니다.
+      국내 편입학 전에 자격 요건을 먼저 계산해 보고, 필요한 해외 학교 서류는 귀국 전에 미리 발급받아 두세요.
+      <div>
+        <button class="ok-btn" onclick="openPage('systemOverlay')"><i class="fas fa-passport"></i> 특례자격 확인하기</button>
+        <button class="ok-btn line" onclick="openDocsGuide()"><i class="fas fa-folder-open"></i> 서류준비 가이드</button>
+      </div>
+    </div>
+
+    <div class="ok-source">
+      출처: 시·도교육청 귀국자 편입학 안내 및 시행계획, 교육부 외국 소재 학력인정학교 공시. 세부 기준은 교육청별로 다를 수 있습니다.
+    </div>
+  </div>
+</div>
+
+<script>
+function toggleOkFaq(el) {
+  el.parentElement.classList.toggle('open');
+}
+function switchInstTab(idx) {
+  document.querySelectorAll('#instOverlay .ok-tab').forEach((t,i) => t.classList.toggle('active', i === idx));
+  document.querySelectorAll('#instOverlay .ok-tab-panel').forEach((p,i) => p.classList.toggle('active', i === idx));
+}
+</script>
 
 
 <!-- ===== 로그인 페이지 ===== -->
@@ -4100,7 +4463,7 @@ function closeDocsGuide() {
     <a href="#">저작권정책</a>
     <a href="#">제안 및 건의하기</a>
     <div class="footer-selects">
-      <select><option>관련기관</option></select>
+      <select onchange="if(this.value){window.open(this.value,'_blank');this.selectedIndex=0;}"><option value="">관련기관</option><option value="https://www.moe.go.kr">교육부</option><option value="https://okep.moe.go.kr/root/index.do">재외교육기관포털(OKEP)</option><option value="https://www.oka.go.kr/">재외동포청</option><option value="https://www.niied.go.kr/">국립국제교육원</option><option value="https://www.kcue.or.kr">한국대학교육협의회</option><option value="https://www.adiga.kr">대입정보포털 어디가</option></select>
       <select><option>Family Site</option></select>
     </div>
   </div>
@@ -4148,9 +4511,9 @@ function closeDocsGuide() {
           <span class="menu-cat-title">대학/학과/전형</span>
         </div>
         <div class="menu-links">
-          <a href="#">대학정보</a>
-          <a href="#">학과정보</a>
-          <a href="#">전형정보</a>
+          <a href="#" onclick="menuGo('univOverlay');return false;">대학정보</a>
+          <a href="#" onclick="menuGo('deptOverlay');return false;">학과정보</a>
+          <a href="#" onclick="menuGo('admOverlay');return false;">전형정보</a>
           <a href="#">지역별검색</a>
           <a href="#">경쟁률현황</a>
           <a href="#">합격자현황</a>
@@ -4164,11 +4527,11 @@ function closeDocsGuide() {
           <span class="menu-cat-title">자격요건 분석</span>
         </div>
         <div class="menu-links">
-          <a href="#">재외국민 자격확인</a>
-          <a href="#">해외체류기간 계산</a>
-          <a href="#">학력인정 기준</a>
-          <a href="#">특례유형 안내</a>
-          <a href="#" class="full-width">자격요건 상세안내</a>
+          <a href="#" onclick="closeMenu();openGuideModal();return false;">재외국민 자격확인</a>
+          <a href="#" onclick="menuGo('systemOverlay');return false;">해외체류기간 계산</a>
+          <a href="#" onclick="menuGo('returnOverlay');return false;">학력인정 기준</a>
+          <a href="#" onclick="menuGo('systemOverlay');return false;">특례유형 안내</a>
+          <a href="#" onclick="menuGo('systemOverlay');return false;" class="full-width">자격요건 상세안내</a>
         </div>
       </div>
 
@@ -4179,10 +4542,10 @@ function closeDocsGuide() {
           <span class="menu-cat-title">입시상담</span>
         </div>
         <div class="menu-links">
-          <a href="#">온라인입시상담</a>
+          <a href="#" onclick="menuGo('consultOverlay');return false;">온라인입시상담</a>
           <a href="#">상담FAQ</a>
           <a href="#">전화상담 안내</a>
-          <a href="#">1:1 맞춤상담</a>
+          <a href="#" onclick="menuGo('compOverlay');return false;">1:1 맞춤상담</a>
           <a href="#" class="full-width">재외국민 종합상담</a>
         </div>
       </div>
@@ -4194,7 +4557,7 @@ function closeDocsGuide() {
           <span class="menu-cat-title">진로정보</span>
         </div>
         <div class="menu-links">
-          <a href="#">직업정보</a>
+          <a href="#" onclick="menuGo('jobOverlay');return false;">직업정보</a>
           <a href="#">직업심리검사</a>
           <a href="#">학과별 진로안내</a>
           <a href="#">해외 취업정보</a>
@@ -4208,11 +4571,11 @@ function closeDocsGuide() {
           <span class="menu-cat-title">입시정보센터</span>
         </div>
         <div class="menu-links">
-          <a href="#">재외국민제도안내</a>
+          <a href="#" onclick="menuGo('systemOverlay');return false;">재외국민제도안내</a>
           <a href="#">전형일정</a>
           <a href="#">입시소식</a>
           <a href="#">설명회/박람회</a>
-          <a href="#">입시자료실</a>
+          <a href="#" onclick="menuGo('dataOverlay');return false;">입시자료실</a>
           <a href="#">대학별 입시정보</a>
         </div>
       </div>
@@ -4238,7 +4601,7 @@ function closeDocsGuide() {
           <span class="menu-cat-title">회원서비스</span>
         </div>
         <div class="menu-links">
-          <a href="#">로그인</a>
+          <a href="#" onclick="menuGo('loginOverlay');return false;">로그인</a>
           <a href="#">회원가입</a>
           <a href="#">아이디찾기</a>
           <a href="#">비밀번호찾기</a>
@@ -4263,6 +4626,18 @@ function closeDocsGuide() {
         </div>
       </div>
 
+    </div>
+
+    <!-- 재외교육 정보 -->
+    <div class="menu-ok-strip">
+      <div class="menu-ok-title"><i class="fas fa-globe-asia"></i> 재외교육 정보</div>
+      <div class="menu-ok-links">
+        <a href="#" onclick="menuGo('systemOverlay');return false;">재외국민 제도안내</a>
+        <a href="#" onclick="menuGo('instOverlay');return false;">재외교육기관 (한국학교·한국교육원)</a>
+        <a href="#" onclick="menuGo('returnOverlay');return false;">귀국학생 편입학</a>
+        <a href="https://okep.moe.go.kr/root/index.do" target="_blank">재외교육기관포털(OKEP) <i class="fas fa-external-link-alt"></i></a>
+        <a href="https://www.oka.go.kr/" target="_blank">재외동포청 <i class="fas fa-external-link-alt"></i></a>
+      </div>
     </div>
 
     <!-- 하단 연락처 -->
@@ -4301,6 +4676,10 @@ function toggleMenu() {
 function closeMenu() {
   document.getElementById('menuOverlay').classList.remove('open');
   document.getElementById('menuBtn').classList.remove('active');
+}
+function menuGo(id) {
+  closeMenu();
+  openPage(id);
 }
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') { closeMenu(); }
@@ -4459,7 +4838,7 @@ function renderPagination(containerId, current, total, callback) {
 }
 
 /* ====== 페이지 전환 헬퍼 ====== */
-const ALL_PAGES = ['univOverlay','deptOverlay','jobOverlay','admOverlay','gradeOverlay','dataOverlay','compOverlay','consultOverlay','univGradeOverlay','loginOverlay'];
+const ALL_PAGES = ['univOverlay','deptOverlay','jobOverlay','admOverlay','gradeOverlay','dataOverlay','compOverlay','consultOverlay','univGradeOverlay','loginOverlay','systemOverlay','instOverlay','returnOverlay'];
 
 function showPage(id) {
   document.getElementById('mainWrap').style.display = 'none';

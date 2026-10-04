@@ -35,6 +35,7 @@ import { setAdmType, renderAdmTable, resetAdmFilters } from './js/teukrye-adm.js
 import { loginUser, signupUser, requestPasswordReset, saveNewPassword, logoutUser } from './js/auth.js';
 import { setConsultScope, openConsultForm, closeConsultForm, submitConsult } from './js/consult.js';
 import './js/stay-calc.js';
+import './js/library.js';
 import './js/search.js';
 import { switchNewsTab, newsMore } from './js/home.js';
 

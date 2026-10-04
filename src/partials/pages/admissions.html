@@ -13,38 +13,35 @@
         <button class="tab-btn active" onclick="setAdmType('3년')">3년 특례</button>
         <button class="tab-btn" onclick="setAdmType('12년')">12년 특례</button>
       </div>
-      <div class="filter-select-box"><select><option>2027학년도(현재 고3·G12)</option><option>2028학년도(현재 고2·G11)</option></select></div>
-      <div class="filter-input-row"><input type="text" id="admKeyword" placeholder="대학명 또는 모집단위" oninput="renderAdmTable()"><button onclick="renderAdmTable()" aria-label="검색"><i class="fas fa-search"></i></button></div>
+      <div class="filter-box"><label>학년도</label><div class="adm-year">2027학년도 <small>(2026년 7월 접수)</small></div></div>
+      <div class="filter-input-row"><input type="text" id="admKeyword" placeholder="대학명 검색" oninput="renderAdmTable()"><button onclick="renderAdmTable()" aria-label="검색"><i class="fas fa-search"></i></button></div>
       <div class="filter-box mt-4"><label>전형방법</label>
         <select class="ug-select" id="admMethod" onchange="renderAdmTable()">
-          <option value="">전체</option><option value="서류">서류 중심</option><option value="필답">필답고사 포함</option><option value="면접">면접 포함</option>
+          <option value="">전체</option><option value="서류">서류 반영</option><option value="필답">필답고사 포함</option><option value="면접">면접 포함</option>
         </select>
       </div>
-      <div class="filter-box"><label>지역</label>
-        <select class="ug-select" id="admRegion" onchange="renderAdmTable()">
-          <option value="">전체</option><option>서울</option><option>경기</option><option>인천</option><option>그 외 지역</option>
-        </select>
-      </div>
-      <div class="filter-action-row"><button class="btn-reset" onclick="resetAdmFilters()">검색조건 초기화</button><button class="btn-save" onclick="openPage('univGradeOverlay')">성적분석</button></div>
+      <div class="filter-action-row"><button class="btn-reset" onclick="resetAdmFilters()">검색조건 초기화</button><button class="btn-save" onclick="openPage('stayOverlay')">자격 계산</button></div>
       <button class="filter-link-btn" onclick="openProgram(1)">전형요소별 준비 가이드 ›</button>
     </div>
     <div class="info-table-area">
-      <div class="og-notice warn">
-        <i class="fas fa-exclamation-circle text-orange"></i>
-        아래 목록은 <strong>화면 구성용 예시 데이터</strong>입니다. 실제 모집단위·전형방법·경쟁률은 각 대학 재외국민 특별전형 모집요강과 입시결과로 확인하세요.
+      <div class="og-notice">
+        <i class="fas fa-calendar-check"></i>
+        <strong id="admApply"></strong> <span id="admApplySource" class="fs-12 text-gray"></span><br>
+        <span id="admNote" class="fs-12"></span>
       </div>
       <div class="table-top-row">
-        <div class="table-summary">총 <strong id="admTotal">0건</strong></div>
+        <div class="table-summary">총 <strong id="admTotal">0건</strong> <span class="fs-12 text-gray" id="admUpdated"></span></div>
       </div>
       <div class="og-table-wrap">
         <table class="info-table adm-table">
           <thead><tr>
-            <th>대학명</th><th>모집단위</th><th>지역</th><th>전형유형</th><th>전형방법</th><th>전년도<br>경쟁률</th><th>전형결과</th>
+            <th>대학</th><th>전형</th><th>모집인원</th><th>전형방법</th><th>주요 일정</th><th>출처</th>
           </tr></thead>
           <tbody id="admTableBody"></tbody>
         </table>
       </div>
-      <div class="empty-state is-hidden" id="admEmpty"><i class="fas fa-exclamation-circle"></i>조건에 맞는 전형이 없어요.</div>
+      <div class="empty-state is-hidden" id="admEmpty"><i class="fas fa-exclamation-circle"></i>조건에 맞는 전형이 없어요. 표에 없는 대학은 재외교육기관포털 모집요강 게시판에서 확인하세요.</div>
+      <div class="note-text">※ 표에 없는 대학, 빈 칸(모집인원·일정)은 아직 확인하지 못한 정보입니다. 반드시 <a href="https://okep.moe.go.kr/board/list.do?board_manager_seq=16&menu_seq=22" target="_blank" class="text-brand">대학별 모집요강</a>으로 확인하세요.</div>
     </div>
   </div>
 </div>

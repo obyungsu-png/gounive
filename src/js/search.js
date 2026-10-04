@@ -1,10 +1,9 @@
 import univData from '../data/universities.json';
-import teukryeAdmData from '../data/teukrye-admissions.json';
 import { openPage } from './router.js';
 import { openProgram } from './program.js';
 import { openDocsGuide, openGuideModal } from './modals.js';
 import { filterUnivTable } from './tables.js';
-import { renderAdmTable } from './teukrye-adm.js';
+import { renderAdmTable, admRows } from './teukrye-adm.js';
 
 /* ===== 사이트 통합검색 (페이지 · 대학 · 특례전형 · 용어) ===== */
 const SEARCH_PAGES = [
@@ -34,10 +33,10 @@ function buildSearchResults(q) {
     if (p.title.includes(q) || p.keys.toLowerCase().includes(q.toLowerCase())) results.push({ type: '메뉴', title: p.title, desc: p.desc, run: p.run });
   });
   const seen = new Set();
-  teukryeAdmData.forEach(d => {
-    if ((d.univ.includes(q) || d.dept.includes(q)) && !seen.has(d.univ + d.type)) {
+  admRows.forEach(d => {
+    if ((d.univ.includes(q) || d.name.includes(q)) && !seen.has(d.univ + d.type)) {
       seen.add(d.univ + d.type);
-      results.push({ type: '특례전형', title: d.univ, desc: `${d.type} 특례 · ${d.dept}`, run: () => { openPage('admOverlay', d.type === '12년' ? 1 : 0); document.getElementById('admKeyword').value = q; renderAdmTable(); } });
+      results.push({ type: '특례전형', title: d.univ, desc: `${d.type} 특례 · ${d.method.split(' (')[0]}`, run: () => { openPage('admOverlay', d.type === '12년' ? 1 : 0); document.getElementById('admKeyword').value = d.univ.replace(/\(.*\)/, ''); renderAdmTable(); } });
     }
   });
   univData.filter(u => u.name.includes(q)).slice(0, 5).forEach(u => {

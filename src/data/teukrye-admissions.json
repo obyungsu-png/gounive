@@ -1,22 +1,20 @@
-[
-  {"univ":"연세대학교[본교]","dept":"경영학과","region":"서울","type":"3년","method":"서류+면접","comp":"8.4"},
-  {"univ":"연세대학교[본교]","dept":"경제학부","region":"서울","type":"12년","method":"서류","comp":"5.1"},
-  {"univ":"고려대학교[본교]","dept":"정치외교학과","region":"서울","type":"3년","method":"서류+면접","comp":"7.2"},
-  {"univ":"고려대학교[본교]","dept":"컴퓨터학과","region":"서울","type":"12년","method":"서류","comp":"4.6"},
-  {"univ":"서울대학교[본교]","dept":"경영대학","region":"서울","type":"12년","method":"서류","comp":"3.9"},
-  {"univ":"서울대학교[본교]","dept":"공과대학","region":"서울","type":"12년","method":"서류+면접","comp":"4.2"},
-  {"univ":"성균관대학교[본교]","dept":"글로벌경영학과","region":"서울","type":"3년","method":"필답+면접","comp":"9.8"},
-  {"univ":"성균관대학교[제2캠퍼스]","dept":"소프트웨어학과","region":"경기","type":"3년","method":"필답+면접","comp":"7.5"},
-  {"univ":"한양대학교[본교]","dept":"경영학부","region":"서울","type":"3년","method":"필답","comp":"11.3"},
-  {"univ":"한양대학교[본교]","dept":"기계공학부","region":"서울","type":"3년","method":"필답","comp":"6.7"},
-  {"univ":"서강대학교[본교]","dept":"경제학과","region":"서울","type":"3년","method":"서류+면접","comp":"6.1"},
-  {"univ":"중앙대학교[본교]","dept":"국제물류학과","region":"서울","type":"3년","method":"필답+면접","comp":"8.9"},
-  {"univ":"경희대학교[본교]","dept":"국제학과","region":"서울","type":"3년","method":"서류+면접","comp":"7.8"},
-  {"univ":"경희대학교[국제캠퍼스]","dept":"전자공학과","region":"경기","type":"12년","method":"서류","comp":"3.4"},
-  {"univ":"이화여자대학교[본교]","dept":"국제학부","region":"서울","type":"12년","method":"서류+면접","comp":"4.8"},
-  {"univ":"한국외국어대학교[본교]","dept":"영어통번역학부","region":"서울","type":"3년","method":"서류+면접","comp":"6.4"},
-  {"univ":"인하대학교[본교]","dept":"아태물류학부","region":"인천","type":"3년","method":"서류","comp":"5.2"},
-  {"univ":"건국대학교[본교]","dept":"경영학과","region":"서울","type":"3년","method":"서류","comp":"5.9"},
-  {"univ":"부산대학교[본교]","dept":"무역학부","region":"그 외 지역","type":"3년","method":"서류+면접","comp":"3.1"},
-  {"univ":"경북대학교[본교]","dept":"전자공학부","region":"그 외 지역","type":"12년","method":"서류","comp":"2.6"}
-]
+{
+  "year": 2027,
+  "updated": "2026-10-04",
+  "note": "2027학년도 대학별 모집요강·시행계획을 요약한 공개 자료 기준. 확인되지 않은 항목은 비워 두었으며, 세부 사항은 반드시 각 대학 모집요강으로 확인.",
+  "common": { "apply": "2026. 7. 6.(월) ~ 7. 10.(금)", "applySource": "한국대학교육협의회 「2027학년도 대학입학전형기본사항」 공통 접수 기간" },
+  "rows": [
+    { "univ": "서울대학교", "type": "12년", "name": "글로벌인재특별전형 II", "quota": "", "method": "서류평가 원칙 (모집단위에 따라 면접)", "tags": ["서류"], "schedule": "원서 7.6~7.9", "url": "https://admission.snu.ac.kr/webdata/admission/files/2027Spring_under.pdf", "source": "서울대 2027 전기 모집안내" },
+    { "univ": "연세대학교(서울)", "type": "3년", "name": "중·고교과정 해외이수자 (정원 외 2%)", "quota": "", "method": "1단계 서류 100% (3배수) → 2단계 1단계 70% + 면접 30%", "tags": ["서류", "면접"], "schedule": "원서 7.6~7.8 · 면접 8.29 · 발표 9.7", "url": "https://www2.yonsei.ac.kr/entrance/plan/2027_plan.pdf", "source": "연세대 2027 입학전형 시행계획" },
+    { "univ": "연세대학교(서울)", "type": "12년", "name": "초·중·고 전 교육과정 해외이수자", "quota": "", "method": "서류 100% 일괄합산", "tags": ["서류"], "schedule": "원서 7.6~7.8 · 발표 9.7", "url": "https://www2.yonsei.ac.kr/entrance/plan/2027_plan.pdf", "source": "연세대 2027 입학전형 시행계획" },
+    { "univ": "고려대학교(서울)", "type": "3년", "name": "재외국민 (정원 외 2%)", "quota": "", "method": "1단계 서류 100% (3배수) → 2단계 1단계 70% + 면접 30%", "tags": ["서류", "면접"], "schedule": "원서 7.6~7.8 · 면접 8.14 · 발표 9.4", "url": "https://oku.korea.ac.kr/oku/cms/FR_BBS_CON/BoardView.do?MENU_ID=750&CONTENTS_NO=&SITE_NO=2&BOARD_SEQ=5&BBS_SEQ=1794", "source": "고려대 2027 특별전형(전기) 모집요강" },
+    { "univ": "성균관대학교", "type": "3년", "name": "재외국민 특별전형 (3년)", "quota": "70명", "method": "대부분 서류 100% (의예·스포츠과학은 2단계 면접)", "tags": ["서류", "면접"], "schedule": "면접 8.21 · 발표 9.11", "url": "https://admission.skku.edu/upload/guide/20260601095135E2GZME.pdf", "source": "성균관대 2027 전기 재외국민 모집요강" },
+    { "univ": "한양대학교(서울)", "type": "3년", "name": "재외국민 특별전형 (3년)", "quota": "95명", "method": "필답고사 100% (인문·예체능 국어, 자연 수학)", "tags": ["필답"], "schedule": "", "url": "https://go.hanyang.ac.kr/web/mojib/mojib.do?m_type=JEOEGUK", "source": "한양대 재외국민 모집요강" },
+    { "univ": "서강대학교", "type": "3년", "name": "재외중고교과정", "quota": "31명", "method": "서류 100% 일괄합산", "tags": ["서류"], "schedule": "발표 9.4", "url": "https://admission.sogang.ac.kr/upload/GUIDES/20260529145037QWCEXC.pdf", "source": "서강대 2027 재외국민전형 모집요강" },
+    { "univ": "서강대학교", "type": "12년", "name": "재외전교육과정", "quota": "", "method": "서류 100% (면접 없음)", "tags": ["서류"], "schedule": "발표 9.4", "url": "https://admission.sogang.ac.kr/upload/GUIDES/20260529145037QWCEXC.pdf", "source": "서강대 2027 재외국민전형 모집요강" },
+    { "univ": "중앙대학교", "type": "3년", "name": "재외국민 특별전형 (3년)", "quota": "87명", "method": "대부분 서류 100% (의학부·약학부는 1단계 서류 → 2단계 면접)", "tags": ["서류", "면접"], "schedule": "", "url": "https://admission.cau.ac.kr/main.do", "source": "중앙대 입학처" },
+    { "univ": "경희대학교", "type": "3년", "name": "재외국민 특별전형 (3년)", "quota": "", "method": "1단계 서류 100% (3배수) → 2단계 면접 포함 (반영 비율 모집요강 확인)", "tags": ["서류", "면접"], "schedule": "면접 8.8 · 발표 9.4", "url": "https://iphak.khu.ac.kr/submenu.do?menuurl=B4xLxlvMKTq0z1qBllurfg%3D%3D", "source": "경희대 입학처 재외국민" },
+    { "univ": "한국외국어대학교", "type": "3년", "name": "재외국민 특별전형 (3년)", "quota": "통합 65명 + 의예 2 · 약학 3", "method": "1단계 서류 → 2단계 서류 + 면접, 의예·약학 제외 전 모집단위 통합 선발", "tags": ["서류", "면접"], "schedule": "", "url": "https://adms.hufs.ac.kr/index.do", "source": "한국외대 입학처" },
+    { "univ": "이화여자대학교", "type": "3년", "name": "재외국민 특별전형", "quota": "", "method": "서류 + 면접 (면접고사 대상자 별도 발표, 세부 비율 모집요강 확인)", "tags": ["서류", "면접"], "schedule": "", "url": "https://admission.ewha.ac.kr/admission/html/abroad/guide.asp", "source": "이화여대 입학처 재외국민" }
+  ]
+}

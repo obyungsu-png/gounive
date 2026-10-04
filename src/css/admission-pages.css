@@ -89,3 +89,13 @@
 .adm-type-badge { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 12px; font-weight: 700; background: #e8f5f4; color: #2db4a8; white-space: nowrap; }
 .adm-type-badge.blue { background: #e3f2fd; color: #1e88e5; }
 .adm-method { display: inline-block; margin: 2px; padding: 2px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px; color: #555; background: #fff; white-space: nowrap; }
+.adm-name { font-size: 11px; color: #888; margin-top: 4px; line-height: 1.4; }
+.adm-method-cell { text-align: left !important; font-size: 12px; line-height: 1.6; min-width: 220px; }
+.adm-method-cell div { margin-top: 4px; color: #444; }
+a.adm-result-btn { display: inline-block; white-space: nowrap; text-decoration: none; }
+a.adm-result-btn i { font-size: 10px; margin-left: 2px; }
+.adm-year { font-size: 14px; font-weight: 700; color: #333; padding: 6px 0; }
+.adm-year small { font-size: 11px; font-weight: 400; color: #999; }
+a.data-card { color: inherit; text-decoration: none; }
+.data-thumb small { font-size: 11px; font-weight: 500; opacity: 0.8; }
+.data-info .data-desc { font-size: 12px; color: #777; margin-bottom: 6px; line-height: 1.5; }

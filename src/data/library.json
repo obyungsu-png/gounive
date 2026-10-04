@@ -1,0 +1,14 @@
+[
+  { "cat": "기본사항·시행계획", "year": "2027", "title": "「2027학년도 대학입학전형기본사항」 발표", "desc": "재외국민과 외국인 전형 지원자격·접수 기간 등 공통 기준", "org": "한국대학교육협의회", "url": "https://www.kcue.or.kr/news/sub02/sub01.php?at=view&idx=2764313", "kind": "web" },
+  { "cat": "모집요강", "year": "공통", "title": "대학별 재외국민 특별전형 모집요강 게시판", "desc": "각 대학이 올린 모집요강을 한곳에서 확인", "org": "재외교육기관포털(교육부)", "url": "https://okep.moe.go.kr/board/list.do?board_manager_seq=16&menu_seq=22", "kind": "web" },
+  { "cat": "모집요강", "year": "2027", "title": "서울대 2027학년도 전기 글로벌인재특별전형 모집안내", "desc": "글로벌인재특별전형 II (초·중·고 전 교육과정 해외 이수)", "org": "서울대학교", "url": "https://admission.snu.ac.kr/webdata/admission/files/2027Spring_under.pdf", "kind": "pdf" },
+  { "cat": "기본사항·시행계획", "year": "2027", "title": "연세대 2027학년도 입학전형 시행계획 (재외국민과 외국인 특별전형 포함)", "desc": "3년·12년 특례 전형방법과 모집단위", "org": "연세대학교", "url": "https://www2.yonsei.ac.kr/entrance/plan/2027_plan.pdf", "kind": "pdf" },
+  { "cat": "모집요강", "year": "2027", "title": "고려대 2027학년도 특별전형(전기) 모집요강", "desc": "재외국민(정원 외 2%) 등 특별전형", "org": "고려대학교", "url": "https://oku.korea.ac.kr/oku/cms/FR_BBS_CON/BoardView.do?MENU_ID=750&CONTENTS_NO=&SITE_NO=2&BOARD_SEQ=5&BBS_SEQ=1794", "kind": "web" },
+  { "cat": "모집요강", "year": "2027", "title": "성균관대 2027학년도 전기(3월 입학) 재외국민 특별전형 모집요강", "desc": "3년 특례 모집인원·전형방법", "org": "성균관대학교", "url": "https://admission.skku.edu/upload/guide/20260601095135E2GZME.pdf", "kind": "pdf" },
+  { "cat": "모집요강", "year": "2027", "title": "서강대 2027학년도 3월 입학 재외국민전형 모집요강", "desc": "재외중고교과정 · 재외전교육과정 · 재외북한이탈주민", "org": "서강대학교", "url": "https://admission.sogang.ac.kr/upload/GUIDES/20260529145037QWCEXC.pdf", "kind": "pdf" },
+  { "cat": "모집요강", "year": "2027", "title": "서울시립대 2027학년도 재외국민 특별전형 모집요강 (3월 입학)", "desc": "지원자격 · 제출서류 · 전형일정", "org": "서울시립대학교", "url": "https://file.uos.ac.kr/upload/admission/2027%ED%95%99%EB%85%84%EB%8F%84%20%EC%9E%AC%EC%99%B8%EA%B5%AD%EB%AF%BC%20%ED%8A%B9%EB%B3%84%EC%A0%84%ED%98%95%20%EC%8B%A0%EC%9E%85%EC%83%9D%20%EB%AA%A8%EC%A7%91%EC%9A%94%EA%B0%95%20(3%EC%9B%94%EC%9E%85%ED%95%99).pdf", "kind": "pdf" },
+  { "cat": "모집요강", "year": "2027", "title": "한양대 ERICA 2027학년도 재외국민 특별전형 모집요강", "desc": "ERICA 캠퍼스 재외국민 전형", "org": "한양대학교 ERICA", "url": "https://goerica.hanyang.ac.kr/upload/BBS0061/202607221418252SJL2S.PDF", "kind": "pdf" },
+  { "cat": "모집요강", "year": "2027", "title": "한양대 재외국민 특별전형 모집요강", "desc": "서울캠퍼스 재외국민 모집요강 페이지", "org": "한양대학교", "url": "https://go.hanyang.ac.kr/web/mojib/mojib.do?m_type=JEOEGUK", "kind": "web" },
+  { "cat": "자격·서류", "year": "공통", "title": "재외국민 등록 · 아포스티유 안내", "desc": "해외 서류 인증과 재외국민 등록 민원", "org": "재외동포청", "url": "https://www.oka.go.kr/", "kind": "web" },
+  { "cat": "귀국학생", "year": "공통", "title": "한국학교 · 한국교육원 기관 검색", "desc": "국가별 재외교육기관 정보", "org": "재외교육기관포털(교육부)", "url": "https://okep.moe.go.kr/koschl/orgInfo/orgSearch/search.do", "kind": "web" }
+]

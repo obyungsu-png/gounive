@@ -20,3 +20,4 @@
 .score-criteria { margin-top: 12px; font-size: 12px; color: #666; line-height: 1.6; }
 .score-criteria strong { color: #333; font-weight: 600; }
 .ug-select { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; margin-bottom: 8px; }
+button.univ-grade-tag { font-family: inherit; }

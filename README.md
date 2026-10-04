@@ -20,6 +20,7 @@ css/
 js/
   data.js               예시 데이터 (대학 · 학과 · 특례전형)
   ui.js                 토스트, 미구현 요소 '준비 중' 안내
+  router.js             화면 주소 연결 (#/경로/하위탭)
   app.js                페이지 전환, 대학/학과 목록, 배너 슬라이더
   menu.js               전체메뉴
   modals.js             자격요건 · 초보자 · 서류준비 가이드 모달
@@ -41,9 +42,26 @@ assets/fontawesome/     Font Awesome Free 6.4.0 (로컬 호스팅, LICENSE 포�
 
 `js/data.js`의 대학 · 특례전형 목록과 경쟁률은 **화면 구성용 예시 데이터**입니다.
 
+## 화면 주소
+
+각 화면은 고유 주소를 가져 새로고침·뒤로가기·링크 공유가 됩니다.
+
+| 주소 | 화면 |
+|---|---|
+| `#/eligibility` | 재외국민 제도안내 |
+| `#/admissions/3year`, `#/admissions/12year` | 특례전형정보 |
+| `#/results/3year`, `#/results/12year` | 대학별 성적분석 |
+| `#/prepare/roadmap` · `factors` · `schedule` · `checklist` · `glossary` | 특례 준비 가이드 |
+| `#/grades` | 해외학교 성적 입력 |
+| `#/library` · `#/consult` · `#/login` | 자료실 · 상담 · 로그인 |
+| `#/institutions/schools`, `#/institutions/centers` | 재외교육기관 |
+| `#/return` | 귀국학생 편입학 |
+| `#/universities` · `#/departments` | 대학정보 · 학과정보 |
+
 ## 새 페이지 추가 방법
 
 1. `index.html`에 `<div class="info-overlay" id="xxxOverlay">…</div>` 추가
 2. `js/app.js`의 `ALL_PAGES` 배열에 `'xxxOverlay'` 추가
-3. 버튼이나 링크에서 `openPage('xxxOverlay')` 호출
-4. 검색에 노출하려면 `js/search.js`의 `SEARCH_PAGES`에 항목 추가
+3. `js/router.js`의 `ROUTES`에 `{ path: 'xxx', page: 'xxxOverlay', title: '화면 이름' }` 추가
+4. 버튼이나 링크에서 `openPage('xxxOverlay')` 호출
+5. 검색에 노출하려면 `js/search.js`의 `SEARCH_PAGES`에 항목 추가

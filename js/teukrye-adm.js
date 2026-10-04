@@ -6,6 +6,7 @@ function setAdmType(type) {
   document.querySelectorAll('#admTypeTabs .tab-btn').forEach(b => b.classList.toggle('active', b.textContent.startsWith(type)));
   document.getElementById('admBcCur').textContent = type + ' 특례';
   renderAdmTable();
+  syncRoute('admOverlay', type === '12년' ? 1 : 0);
 }
 
 function renderAdmTable() {

@@ -3,14 +3,14 @@ const PROGRAM_TABS = ['준비 로드맵', '전형요소별 준비', '특례 일�
 const CHECKLIST_KEY = 'teukrye-checklist';
 
 function openProgram(idx) {
-  openPage('programOverlay');
-  switchProgramTab(idx);
+  openPage('programOverlay', idx);
 }
 
 function switchProgramTab(idx) {
   document.querySelectorAll('#programOverlay .ok-tab').forEach((t,i) => t.classList.toggle('active', i === idx));
   document.querySelectorAll('#programOverlay .ok-tab-panel').forEach((p,i) => p.classList.toggle('active', i === idx));
   document.getElementById('programBcCur').textContent = PROGRAM_TABS[idx];
+  syncRoute('programOverlay', idx);
 }
 
 function readChecklist() {

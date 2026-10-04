@@ -21,7 +21,9 @@ function loginUser() {
   } catch (e) {}
   document.getElementById('loginPw').value = '';
   renderAuthState();
-  showHome();
+  const back = sessionStorage.getItem('afterLogin');
+  sessionStorage.removeItem('afterLogin');
+  navigate(back || '#/');
   showToast(`${id}님, 로그인되었습니다. (데모)`);
 }
 

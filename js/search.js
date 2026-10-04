@@ -28,7 +28,7 @@ function buildSearchResults(q) {
   teukryeAdmData.forEach(d => {
     if ((d.univ.includes(q) || d.dept.includes(q)) && !seen.has(d.univ + d.type)) {
       seen.add(d.univ + d.type);
-      results.push({ type: '특례전형', title: d.univ, desc: `${d.type} 특례 · ${d.dept}`, run: () => { openPage('admOverlay'); setAdmType(d.type); document.getElementById('admKeyword').value = q; renderAdmTable(); } });
+      results.push({ type: '특례전형', title: d.univ, desc: `${d.type} 특례 · ${d.dept}`, run: () => { openPage('admOverlay', d.type === '12년' ? 1 : 0); document.getElementById('admKeyword').value = q; renderAdmTable(); } });
     }
   });
   univData.filter(u => u.name.includes(q)).slice(0, 5).forEach(u => {

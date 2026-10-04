@@ -26,6 +26,7 @@ function renderConsults() {
 function openConsultForm() {
   if (!getCurrentUser()) {
     showToast('상담 신청은 로그인 후 이용할 수 있어요.');
+    sessionStorage.setItem('afterLogin', '#/consult');
     openPage('loginOverlay');
     return;
   }

@@ -73,44 +73,32 @@ function renderPagination(containerId, current, total, callback) {
   c.innerHTML = html;
 }
 
-/* ====== 페이지 전환 헬퍼 ====== */
+/* ====== 페이지 표시 (주소 변경은 router.js가 담당) ====== */
 const ALL_PAGES = ['univOverlay','deptOverlay','jobOverlay','admOverlay','gradeOverlay','dataOverlay','compOverlay','consultOverlay','univGradeOverlay','loginOverlay','systemOverlay','instOverlay','returnOverlay','programOverlay'];
 
-function showPage(id) {
+function displayPage(id) {
+  const wasOpen = document.getElementById(id).classList.contains('open');
   document.getElementById('mainWrap').style.display = 'none';
-  ALL_PAGES.forEach(p => document.getElementById(p).classList.remove('open'));
-  document.getElementById(id).classList.add('open');
-  // 푸터는 항상 표시
-  document.querySelector('footer.footer').style.display = '';
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  ALL_PAGES.forEach(p => document.getElementById(p).classList.toggle('open', p === id));
+  if (!wasOpen) window.scrollTo(0, 0);
 }
 
-function showHome() {
+function displayHome() {
   ALL_PAGES.forEach(p => document.getElementById(p).classList.remove('open'));
   document.getElementById('mainWrap').style.display = '';
-  document.querySelector('footer.footer').style.display = '';
-  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-/* ====== 대학정보 / 학과정보 / 직업정보 ====== */
-function openPage(id) {
-  showPage(id);
-  if(id==='univOverlay') filterUnivTable('');
-  if(id==='deptOverlay') renderDeptTable(1);
-}
+/* 화면 이동: 주소(#/경로)를 바꾸면 router.js가 해당 화면을 표시 */
+function openPage(id, sub) { navigate(routePath(id, sub)); }
+function showHome() { navigate('#/'); }
 
-function openUnivModal() { openPage('univOverlay'); }
-function closeUnivModal() { showHome(); }
-
-function openDeptModal() { openPage('deptOverlay'); }
-function closeDeptModal() { showHome(); }
-
-function openJobModal() { showPage('jobOverlay'); }
-function closeJobModal() { showHome(); }
-
-/* ESC → 홈으로 */
+/* ESC → 열린 메뉴·모달 닫기 */
 document.addEventListener('keydown', function(e){
-  if(e.key==='Escape'){ showHome(); closeMenu(); }
+  if (e.key !== 'Escape') return;
+  closeMenu();
+  document.querySelectorAll('.guide-modal-overlay.open, .novice-modal-overlay.open, .docs-modal-overlay.open, .ui-modal-overlay.open')
+    .forEach(m => m.classList.remove('open'));
+  document.body.style.overflow = '';
 });
 
 /* ====== 배너 슬라이더 ====== */

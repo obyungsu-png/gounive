@@ -15,5 +15,6 @@ function switchUnivGradeTab(idx) {
   document.getElementById('ugBcCur').textContent = tab.label;
   document.getElementById('ugTotal').textContent = tab.univs.reduce((sum,u) => sum + u[1], 0) + '건';
   document.getElementById('ugTags').innerHTML = tab.univs.map(u => `<span class="univ-grade-tag">${u[0]} <strong>${u[1]}건</strong></span>`).join('');
+  syncRoute('univGradeOverlay', idx);
 }
 switchUnivGradeTab(0);

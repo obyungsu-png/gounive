@@ -1,0 +1,63 @@
+<div class="info-overlay" id="gradeOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home clickable" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#">마이페이지</a>
+    <span class="bc-sep">›</span><a href="#">성적관리</a>
+    <span class="bc-sep">›</span><span class="bc-cur">해외학교 성적</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero"><h1>해외학교 성적 입력</h1></div>
+  <div class="info-body">
+    <div class="info-filter">
+      <div class="og-box">
+        <div class="og-box-title">성적 체계</div>
+        <div class="og-scale-btns" id="ogScaleBtns">
+          <button class="grade-input-btn primary" data-js data-scale="gpa4">4.0 GPA (비가중)</button>
+          <button class="grade-input-btn" data-js data-scale="gpa5">5.0 GPA (가중)</button>
+          <button class="grade-input-btn" data-js data-scale="pct">100점 백분율</button>
+          <button class="grade-input-btn" data-js data-scale="ib">IB 7점</button>
+        </div>
+      </div>
+      <div class="og-box">
+        <div class="og-box-title">공인시험 기록</div>
+        <label class="og-field">SAT <span>400~1600</span><input type="number" min="400" max="1600" step="10" data-test="sat"></label>
+        <label class="og-field">ACT <span>1~36</span><input type="number" min="1" max="36" data-test="act"></label>
+        <label class="og-field">AP 4·5점 과목 수<input type="number" min="0" max="30" data-test="ap"></label>
+        <label class="og-field">IB 예상 총점 <span>/45</span><input type="number" min="0" max="45" data-test="ibTotal"></label>
+        <label class="og-field">TOEFL iBT <span>/120</span><input type="number" min="0" max="120" data-test="toefl"></label>
+        <label class="og-field">TOPIK 급수 <span>1~6</span><input type="number" min="1" max="6" data-test="topik"></label>
+      </div>
+      <button class="bookmark-btn" onclick="resetOverseasGrades()">입력 초기화</button>
+    </div>
+    <div class="info-table-area">
+      <div class="og-notice">
+        <i class="fas fa-info-circle"></i>
+        해외학교 성적은 국가·학교마다 체계가 달라 <strong>대학별 환산 방식이 다릅니다.</strong>
+        이 계산기는 입력한 성적의 평균과 <strong>단순 비율(100점) 환산</strong>을 보여주는 참고용입니다. 입력값은 이 브라우저에 자동 저장됩니다.
+      </div>
+
+      <div class="og-summary">
+        <div class="og-sum-card"><div class="og-sum-label">전체 평균</div><div class="og-sum-value" id="ogAvg">-</div><div class="og-sum-desc" id="ogScaleLabel">4.0 GPA 기준</div></div>
+        <div class="og-sum-card"><div class="og-sum-label">100점 환산 (단순 비율)</div><div class="og-sum-value" id="ogPct">-</div><div class="og-sum-desc">평균 ÷ 만점 × 100</div></div>
+        <div class="og-sum-card"><div class="og-sum-label">입력한 학기</div><div class="og-sum-value" id="ogTerms">0</div><div class="og-sum-desc">최대 8개 학기</div></div>
+        <div class="og-sum-card"><div class="og-sum-label">최근 학기 추이</div><div class="og-sum-value" id="ogTrend">-</div><div class="og-sum-desc">직전 학기 대비</div></div>
+      </div>
+
+      <div class="og-table-wrap">
+        <table class="grade-table og-table">
+          <thead><tr><th>학년 · 학기</th><th>영어<br><small>Language Arts</small></th><th>수학</th><th>과학</th><th>사회</th><th>기타<br><small>제2외국어 등</small></th><th>학기 평균</th></tr></thead>
+          <tbody id="ogTableBody"></tbody>
+          <tfoot><tr><td class="row-label">과목 평균</td><td id="ogColAvg0">-</td><td id="ogColAvg1">-</td><td id="ogColAvg2">-</td><td id="ogColAvg3">-</td><td id="ogColAvg4">-</td><td id="ogColAvgAll">-</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="note-text">
+        ※ 재학생은 최종 학년 1학기까지, 졸업(예정)자는 최종 학년 2학기까지 입력하세요. 학기제가 아닌 학교(쿼터·트라이메스터 등)는 대학이 인정하는 학기 단위로 묶어 입력합니다.<br>
+        ※ 대학은 GPA를 자체 기준으로 재환산하거나 교과별 가중치를 두는 경우가 많으므로, 실제 평가는 대학별 모집요강을 확인하세요.
+      </div>
+      <div class="ok-links mt-20">
+        <div class="ok-link" onclick="openPage('univGradeOverlay')"><i class="fas fa-chart-pie"></i><div>대학별 성적분석<span>전년도 입시결과와 비교</span></div></div>
+        <div class="ok-link" onclick="openProgram(1)"><i class="fas fa-route"></i><div>전형요소별 준비<span>3년·12년 특례 평가요소</span></div></div>
+      </div>
+    </div>
+  </div>
+</div>

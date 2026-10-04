@@ -1,0 +1,67 @@
+<div class="info-overlay" id="loginOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home clickable" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><span class="bc-cur">로그인</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="login-page">
+    <div class="login-box">
+      <div class="login-demo-note" id="demoNote"><i class="fas fa-info-circle"></i> 현재는 <strong>데모 모드</strong>입니다. 서버(Supabase) 연결 전까지 회원·상담·성적 정보는 이 브라우저에만 저장됩니다.</div>
+
+      <!-- 로그인 -->
+      <div class="auth-panel" data-panel="signin">
+        <h1>로그인</h1>
+        <input type="email" id="loginEmail" class="login-field" placeholder="이메일" autocomplete="email">
+        <div class="login-field-wrap">
+          <input type="password" id="loginPw" class="login-field mb-0" placeholder="비밀번호" autocomplete="current-password">
+          <span class="field-icon"><i class="fas fa-shield-alt"></i></span>
+        </div>
+        <div class="login-error" id="loginError" role="alert"></div>
+        <button class="login-submit" id="loginSubmit" onclick="loginUser()">로그인하기</button>
+        <div class="login-options">
+          <label><input type="checkbox" id="loginSaveId" checked> 이메일 저장</label>
+          <a href="#/login/reset">비밀번호 찾기</a>
+          <span class="sep">|</span>
+          <a href="#/login/signup">회원가입</a>
+        </div>
+      </div>
+
+      <!-- 회원가입 -->
+      <div class="auth-panel" data-panel="signup">
+        <h1>회원가입</h1>
+        <div class="login-role">
+          <label><input type="radio" name="signupRole" value="학생" checked> 학생</label>
+          <label><input type="radio" name="signupRole" value="학부모"> 학부모</label>
+        </div>
+        <input type="text" id="signupName" class="login-field" placeholder="이름" autocomplete="name" maxlength="30">
+        <input type="email" id="signupEmail" class="login-field" placeholder="이메일" autocomplete="email">
+        <input type="password" id="signupPw" class="login-field" placeholder="비밀번호 (6자 이상)" autocomplete="new-password">
+        <input type="password" id="signupPw2" class="login-field" placeholder="비밀번호 확인" autocomplete="new-password">
+        <label class="auth-agree"><input type="checkbox" id="signupAgree"> 상담·성적 관리를 위한 개인정보(이름·이메일) 수집·이용에 동의합니다.</label>
+        <div class="login-error" id="signupError" role="alert"></div>
+        <button class="login-submit" id="signupSubmit" onclick="signupUser()">가입하기</button>
+        <div class="login-options"><a href="#/login/signin">이미 계정이 있어요 · 로그인</a></div>
+      </div>
+
+      <!-- 비밀번호 찾기 -->
+      <div class="auth-panel" data-panel="reset">
+        <h1>비밀번호 찾기</h1>
+        <p class="auth-desc">가입한 이메일로 비밀번호 재설정 링크를 보내드립니다.</p>
+        <input type="email" id="resetEmail" class="login-field" placeholder="이메일" autocomplete="email">
+        <div class="login-error" id="resetError" role="alert"></div>
+        <button class="login-submit" id="resetSubmit" onclick="requestPasswordReset()">재설정 메일 보내기</button>
+        <div class="login-options"><a href="#/login/signin">로그인으로 돌아가기</a></div>
+      </div>
+
+      <!-- 새 비밀번호 설정 (재설정 메일 링크로 들어온 경우) -->
+      <div class="auth-panel" data-panel="update">
+        <h1>새 비밀번호 설정</h1>
+        <input type="password" id="newPw" class="login-field" placeholder="새 비밀번호 (6자 이상)" autocomplete="new-password">
+        <input type="password" id="newPw2" class="login-field" placeholder="새 비밀번호 확인" autocomplete="new-password">
+        <div class="login-error" id="updateError" role="alert"></div>
+        <button class="login-submit" id="updateSubmit" onclick="saveNewPassword()">비밀번호 변경</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>

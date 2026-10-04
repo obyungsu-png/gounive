@@ -1,0 +1,50 @@
+<div class="info-overlay" id="admOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home clickable" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#" onclick="showHome();return false;">대학/학과/전형</a>
+    <span class="bc-sep">›</span><a href="#">특례전형정보</a>
+    <span class="bc-sep">›</span><span class="bc-cur" id="admBcCur">3년 특례</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero"><h1>특례전형정보</h1></div>
+  <div class="info-body">
+    <div class="info-filter">
+      <div class="tab-row" id="admTypeTabs">
+        <button class="tab-btn active" onclick="setAdmType('3년')">3년 특례</button>
+        <button class="tab-btn" onclick="setAdmType('12년')">12년 특례</button>
+      </div>
+      <div class="filter-select-box"><select><option>2027학년도(현재 고3·G12)</option><option>2028학년도(현재 고2·G11)</option></select></div>
+      <div class="filter-input-row"><input type="text" id="admKeyword" placeholder="대학명 또는 모집단위" oninput="renderAdmTable()"><button onclick="renderAdmTable()" aria-label="검색"><i class="fas fa-search"></i></button></div>
+      <div class="filter-box mt-4"><label>전형방법</label>
+        <select class="ug-select" id="admMethod" onchange="renderAdmTable()">
+          <option value="">전체</option><option value="서류">서류 중심</option><option value="필답">필답고사 포함</option><option value="면접">면접 포함</option>
+        </select>
+      </div>
+      <div class="filter-box"><label>지역</label>
+        <select class="ug-select" id="admRegion" onchange="renderAdmTable()">
+          <option value="">전체</option><option>서울</option><option>경기</option><option>인천</option><option>그 외 지역</option>
+        </select>
+      </div>
+      <div class="filter-action-row"><button class="btn-reset" onclick="resetAdmFilters()">검색조건 초기화</button><button class="btn-save" onclick="openPage('univGradeOverlay')">성적분석</button></div>
+      <button class="filter-link-btn" onclick="openProgram(1)">전형요소별 준비 가이드 ›</button>
+    </div>
+    <div class="info-table-area">
+      <div class="og-notice warn">
+        <i class="fas fa-exclamation-circle text-orange"></i>
+        아래 목록은 <strong>화면 구성용 예시 데이터</strong>입니다. 실제 모집단위·전형방법·경쟁률은 각 대학 재외국민 특별전형 모집요강과 입시결과로 확인하세요.
+      </div>
+      <div class="table-top-row">
+        <div class="table-summary">총 <strong id="admTotal">0건</strong></div>
+      </div>
+      <div class="og-table-wrap">
+        <table class="info-table adm-table">
+          <thead><tr>
+            <th>대학명</th><th>모집단위</th><th>지역</th><th>전형유형</th><th>전형방법</th><th>전년도<br>경쟁률</th><th>전형결과</th>
+          </tr></thead>
+          <tbody id="admTableBody"></tbody>
+        </table>
+      </div>
+      <div class="empty-state is-hidden" id="admEmpty"><i class="fas fa-exclamation-circle"></i>조건에 맞는 전형이 없어요.</div>
+    </div>
+  </div>
+</div>

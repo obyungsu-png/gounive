@@ -1,0 +1,57 @@
+/* ===== 공통 유틸리티 (인라인 스타일 대체) ===== */
+.clickable { cursor: pointer; }
+.is-hidden { display: none; }
+.w-full { width: 100%; }
+.d-flex { display: flex; }
+.gap-6 { gap: 6px; }
+
+.mt-4 { margin-top: 4px; }   .mt-8 { margin-top: 8px; }   .mt-12 { margin-top: 12px; }
+.mt-20 { margin-top: 20px; } .mt-22 { margin-top: 22px; }
+.mb-0 { margin-bottom: 0 !important; } .mb-8 { margin-bottom: 8px; } .mb-10 { margin-bottom: 10px; }
+.mb-14 { margin-bottom: 14px; } .mb-16 { margin-bottom: 16px; } .mb-18 { margin-bottom: 18px; } .mb-25 { margin-bottom: 25px; }
+.my-12 { margin: 12px 0; }
+.ml-4 { margin-left: 4px; } .ml-8 { margin-left: 8px; } .ml-40 { margin-left: 40px; }
+
+.fs-11 { font-size: 11px; } .fs-12 { font-size: 12px; } .fs-13 { font-size: 13px; }
+.fw-600 { font-weight: 600; }
+.text-brand { color: #2db4a8; }
+.text-green { color: #1a5c3a; }
+.text-orange { color: #e65100; }
+.text-red { color: #e53935; }
+.text-strong { color: #333; }
+.text-muted { color: #aaa; }
+.text-gray { color: #999; }
+
+/* 폼 · 버튼 */
+.field-input { width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; }
+.mini-input { flex: 1; padding: 6px; font-size: 11px; border: 1px solid #ddd; border-radius: 4px; }
+.mini-btn { padding: 4px 10px; border: 1px solid #ccc; border-radius: 4px; background: #fff; font-size: 11px; color: #555; cursor: pointer; }
+.mini-btn.brand { border-color: #2db4a8; color: #2db4a8; }
+.filter-btn-block { text-align: left; width: 100%; }
+.filter-btn-brand { border: 1px solid #2db4a8; color: #2db4a8; }
+.filter-heading { font-size: 13px; font-weight: 600; color: #444; margin-bottom: 8px; }
+.result-count { font-size: 15px; font-weight: 700; margin-bottom: 20px; }
+.note-text { font-size: 12px; color: #888; margin-top: 10px; line-height: 1.7; }
+.notice-warn { background: #fff8e1; padding: 10px 14px; border-radius: 6px; margin: 16px 0; font-size: 12px; color: #e65100; }
+.og-notice.warn { background: #fff8e1; }
+.divider { border: none; border-top: 1px solid #eee; margin: 30px 0; }
+.ok-section-title.sm { font-size: 15px; }
+
+/* 배너 버튼 색상 */
+.btn-fill-brand { background: #2db4a8; color: #fff; }
+.btn-line-brand { background: #fff; color: #2db4a8; border: 1px solid #2db4a8 !important; }
+.btn-fill-blue { background: #2196f3; color: #fff; }
+.btn-fill-orange { background: #ff7043; color: #fff; }
+.btn-fill-purple { background: #7e57c2; color: #fff; }
+.btn-fill-red { background: #ff0000; color: #fff; }
+.pill-yellow { background: #fbc02d !important; }
+.banner-kicker { display: block; font-size: 18px; font-weight: 500; color: #888; }
+
+/* 로그인 전 사이드바, 가이드 화살표 위치 */
+.login-before { width: 100%; display: flex; flex-direction: column; align-items: center; }
+.guide-arrow-pos { left: 10px; top: 30px; }
+
+/* 학과 목록 셀 */
+.dept-name-cell { text-align: left !important; font-weight: 600; }
+.univ-name-cell.center { justify-content: center; }
+.univ-logo.sm { width: 28px; height: 28px; font-size: 11px; }

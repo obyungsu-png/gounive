@@ -1,0 +1,51 @@
+<div class="info-overlay" id="consultOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home clickable" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#">대입상담</a>
+    <span class="bc-sep">›</span><span class="bc-cur">특례 입시상담</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero"><h1>특례 입시 온라인상담</h1></div>
+  <div class="info-body">
+    <div class="info-filter">
+      <select class="consult-filter-select"><option>제목</option></select>
+      <div class="filter-input-row"><input type="text" placeholder="검색어를 입력해주세요."><button><i class="fas fa-search"></i></button></div>
+      <div class="seg-toggle" id="consultScope">
+        <button onclick="setConsultScope('all')">공개 상담</button>
+        <button class="active" onclick="setConsultScope('mine')">내가 쓴 글</button>
+      </div>
+      <select class="consult-filter-select"><option>상담분야</option><option>자격요건·체류기간</option><option>서류·인증·번역</option><option>필답고사</option><option>면접</option><option>대학·학과 선택</option><option>귀국·편입학</option></select>
+      <select class="consult-filter-select"><option>특례유형</option><option>3년 특례</option><option>12년 특례</option><option>미정</option></select>
+      <select class="consult-filter-select"><option>처리상태</option></select>
+      <select class="consult-filter-select"><option>공개여부</option></select>
+      <button class="bookmark-btn" onclick="openConsultForm()">상담신청</button>
+    </div>
+    <div class="info-table-area">
+      <div class="consult-stats">
+        <div class="consult-stat"><div class="stat-label">상담 분야</div><div class="stat-value">6개</div></div>
+        <div class="consult-stat"><div class="stat-label">상담 대상</div><div class="stat-value black">3특·12특</div></div>
+        <div class="consult-stat"><div class="stat-label">전화상담(대교협)</div><div class="stat-value">1600-1615</div></div>
+        <div class="consult-stat"><div class="stat-label">상담비용</div><div class="stat-value black">무료</div></div>
+      </div>
+      <div class="consult-banner"><span>특례 자격·서류·필답·면접, 궁금한 점을 남겨주세요!</span><a href="#" onclick="openConsultForm();return false;">특례 상담 신청하기 ›</a></div>
+      <div class="ok-section-title sm mt-4"><i class="fas fa-lightbulb"></i> 상담 전에 먼저 확인해 보세요</div>
+      <div class="ok-chips mb-18">
+        <span class="ok-chip clickable" onclick="openPage('systemOverlay')"><b>FAQ</b>부모 한 명만 동반했어요</span>
+        <span class="ok-chip clickable" onclick="openPage('systemOverlay')"><b>FAQ</b>12년 특례 부모 요건</span>
+        <span class="ok-chip clickable" onclick="openDocsGuide()"><b>가이드</b>아포스티유·번역공증</span>
+        <span class="ok-chip clickable" onclick="openProgram(1)"><b>가이드</b>필답고사·면접 준비</span>
+        <span class="ok-chip clickable" onclick="openPage('returnOverlay')"><b>안내</b>귀국 후 편입학</span>
+      </div>
+      <div class="warning-text">
+        ※ 원서접수 시기에는 상담이 많아 답변이 늦어질 수 있습니다. 답변은 <strong>한국시간</strong> 기준으로 등록됩니다.<br>
+        상담 신청 시 해외 재학 국가·학년별 재학 기간·부모 체류 기간을 함께 적어주시면 더 정확한 답변을 받을 수 있습니다.
+      </div>
+      <div class="result-count"><span id="consultScopeLabel">내 상담</span> <span id="consultCount">0</span>건</div>
+      <div id="consultList"></div>
+      <hr class="divider">
+      <div class="usage-accordion">
+        <div class="usage-acc-header">이용안내 <i class="fas fa-chevron-down"></i></div>
+      </div>
+    </div>
+  </div>
+</div>

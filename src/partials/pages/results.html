@@ -1,0 +1,95 @@
+<div class="info-overlay" id="univGradeOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home clickable" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#" onclick="showHome()">성적분석</a>
+    <span class="bc-sep">›</span><a href="#">재외국민 대학별성적분석</a>
+    <span class="bc-sep">›</span><span class="bc-cur" id="ugBcCur">3년 특례</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero"><h1>재외국민 대학별성적분석</h1></div>
+  <div class="info-body">
+    <div class="info-filter">
+      <div class="filter-box"><label>학과</label><input class="field-input" type="text" placeholder="학과관련 키워드"></div>
+      <button class="bookmark-btn">관심정보보기</button>
+      <button class="filter-apply-row filter-btn-block filter-btn-brand">해외학교 성적입력</button>
+      <div class="my-12">
+        <div class="filter-heading">나의 검색조건</div>
+        <select class="ug-select">
+          <option>지역</option><option>서울</option><option>경기·인천</option><option>강원</option><option>충청권</option><option>호남권</option><option>영남권</option><option>제주</option>
+        </select>
+        <select class="ug-select">
+          <option>지원자격</option><option>3년 특례 (중·고교 3년 이상 해외 이수)</option><option>12년 특례 (초·중·고 전 교육과정 해외 이수)</option>
+        </select>
+        <select class="ug-select">
+          <option>해외 재학국가</option><option>미국</option><option>캐나다</option><option>중국</option><option>일본</option><option>베트남</option><option>싱가포르</option><option>기타</option>
+        </select>
+        <select class="ug-select">
+          <option>해외 교육과정</option><option>미국식 (AP·SAT)</option><option>IB 디플로마</option><option>영국식 (A-Level)</option><option>현지 학교</option><option>재외 한국학교</option>
+        </select>
+        <select class="ug-select">
+          <option>해외 체류요건</option><option>학생 3/4·부모 2/3 이상 (3년 특례)</option><option>부모 요건 없음 (12년 특례)</option>
+        </select>
+        <select class="ug-select">
+          <option>전형요소</option><option>서류 100%</option><option>서류 + 면접</option><option>서류 + 필답고사</option><option>필답고사 + 면접</option>
+        </select>
+        <select class="ug-select">
+          <option>어학성적 기준</option><option>TOPIK</option><option>TOEFL·IELTS</option><option>기준 없음</option>
+        </select>
+      </div>
+      <button class="filter-apply-row filter-btn-block mt-8">적용필터</button>
+      <button class="filter-link-btn mt-8">검색조건설정 바로가기</button>
+    </div>
+    <div class="info-table-area">
+      <div class="table-top-row">
+        <div class="table-summary">총 <strong id="ugTotal"></strong></div>
+      </div>
+      <div class="grade-tabs-univ">
+        <span class="grade-tab-univ active" onclick="switchUnivGradeTab(0)">3년 특례 (정원 외 2%)</span>
+        <span class="grade-tab-univ" onclick="switchUnivGradeTab(1)">12년 특례 (전 교육과정)</span>
+      </div>
+      <div class="univ-grade-tags" id="ugTags"></div>
+      <div class="know-box">
+        <div class="know-title"><i class="fas fa-info-circle"></i> 알아두세요!</div>
+        <div class="know-text">
+          <ul>
+            <li>해외 고교 재학생은 최종 학년 1학기까지, 졸업(예정)자는 최종 학년 2학기까지의 해외학교 성적을 기준으로 제공됩니다.<br>
+              (국가·학교별로 학년제와 학기제가 다르므로, 대학이 인정하는 학년 기준에 맞추어 입력해 주세요.)</li>
+            <li>재외국민 특별전형은 대학별로 지원자격(해외 체류기간·부모 동반 요건)과 제출서류 기준이 다릅니다. 더 자세한 사항은 지원 시 대학별 재외국민 모집요강을 반드시 확인하시기 바랍니다.</li>
+          </ul>
+          <div class="score-criteria">
+            ① 전년도 입시결과 : 대학에서 제공한 재외국민 특별전형 결과이며, 진학설계에 참고자료로 활용하시기 바랍니다.<br>
+            ② 2026학년도 기준 설정 : 2026학년도 대학별 재외국민 전형 반영방법(서류·면접·필답고사 비율)으로 산출된 점수이며, GPA·IB·A-Level 등
+            해외 교육과정별 환산 방식에 따라 실제 대학 산출 점수와 다를 수 있으므로 반드시 한국대학교육협의회 대입상담센터(전화상담 💬 1600-1615, 대입정보포털 온라인 대입상담)를 이용하시기 바랍니다.<br>
+            ③ 2027학년도 기준 설정 : 2027학년도 대학별 재외국민 특별전형 모집요강에 근거하여 산출된 점수입니다.
+          </div>
+          <ul class="mt-12">
+            <li>해외학교 성적 환산은 최종 학년 1학기(국내 고3 1학기에 해당)까지 입력해야 정상적으로 도출됩니다.<br>
+              (해당 학기 성적이 없을 시 직전 학기 성적을 임시로 입력하여 사용하시길 권장합니다.)</li>
+            <li>재외국민 특별전형은 대부분 수능최저학력기준을 적용하지 않으며, 일부 대학은 TOPIK·공인영어 등 어학성적을 지원자격 또는 평가요소로 활용합니다.</li>
+            <li>전년도 입시결과 항목 안내</li>
+          </ul>
+          <div class="score-criteria mt-12">
+            <strong class="text-green">[재외국민 지원자격]</strong><br>
+            1. 3년 특례 : 고교 1개 학년 이상을 포함하여 중·고교 과정 3년 이상을 해외에서 이수하고, 재학기간 중 매 1년마다 학생은 3/4 이상, 부모 모두 2/3 이상 해외에 체류한 자 (정원 외 2% 이내)<br>
+            2. 12년 특례 : 초·중·고 전 교육과정(12년)을 해외에서 이수한 자, 부모 체류 요건 없음 (정원 외, 인원 제한 없음)<br>
+            ※ 해외 체류기간 산정 기준(부모 동반 범위, 국내 체류 허용 일수 등)은 대학별로 상이 · <a class="text-brand fw-600" href="#" onclick="openPage('systemOverlay');return false;">특례자격 자세히 보기 ›</a>
+          </div>
+          <div class="score-criteria mt-12">
+            <strong class="text-green">[해외학교 성적]</strong><br>
+            1. 충원합격순위 : 최초 합격자를 제외한 마지막 충원 합격자의 순위 (지원자격별 구분)<br>
+            2. 환산점수 : 각 모집단위별 서류평가에 반영된 해외학교 교과 성적을 대학별 반영방법에 따라 환산한 점수<br>
+            3. 환산 GPA : 각 모집단위별 평가에 반영된 해외학교 교과목의 평균 성적 (4.0 만점 기준 환산)<br>
+            4. 환산점수, 환산 GPA 50%, 70% cut<br>
+            &nbsp;&nbsp;- 50% cut : 재외국민 최종등록자 중 해외학교 성적 순으로 상위 50%에 해당하는 점수<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;(최종등록자 10명 중 5번째 점수)<br>
+            &nbsp;&nbsp;- 70% cut : 재외국민 최종등록자 중 해외학교 성적 순으로 상위 70%에 해당하는 점수<br>
+            &nbsp;&nbsp;&nbsp;&nbsp;(최종등록자 10명 중 7번째 점수)<br>
+            ※ 서류·면접 종합평가 결과로, 지원자 전체의 상위 50%, 70% 성적을 의미하는 것이 아님<br>
+            ※ 50%, 70% cut은 대학별 필수공개, 80%, 90%, 100% cut은 대학별 선택공개<br>
+            ※ 재외국민 특별전형은 모집단위별 등록 인원이 적어, 개인정보 보호를 위해 일부 결과가 비공개될 수 있음
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

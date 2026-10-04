@@ -1,0 +1,177 @@
+<div class="menu-overlay" id="menuOverlay" onclick="closeMenu()">
+  <div class="menu-modal" onclick="event.stopPropagation()">
+    <div class="menu-modal-header">
+      <span class="menu-title">전체메뉴보기</span>
+      <span class="menu-login-link" id="menuLoginLink" onclick="closeMenu();openMyArea()">로그인해주세요 &rsaquo;</span>
+      <button class="menu-close" onclick="closeMenu()" aria-label="메뉴 닫기"><i class="fas fa-times"></i></button>
+    </div>
+
+    <div class="menu-grid">
+
+      <!-- 대학/학과/전형 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-edit"></i>
+          <span class="menu-cat-title">대학/학과/전형</span>
+        </div>
+        <div class="menu-links">
+          <a href="#" onclick="menuGo('univOverlay');return false;">대학정보</a>
+          <a href="#" onclick="menuGo('deptOverlay');return false;">학과정보</a>
+          <a href="#" onclick="menuGo('admOverlay');return false;">전형정보</a>
+          <a href="#">지역별검색</a>
+          <a href="#">경쟁률현황</a>
+          <a href="#">합격자현황</a>
+        </div>
+      </div>
+
+      <!-- 자격요건 분석 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-passport"></i>
+          <span class="menu-cat-title">자격요건 분석</span>
+        </div>
+        <div class="menu-links">
+          <a href="#" onclick="closeMenu();openGuideModal();return false;">재외국민 자격확인</a>
+          <a href="#" onclick="menuGo('systemOverlay');return false;">해외체류기간 계산</a>
+          <a href="#" onclick="menuGo('returnOverlay');return false;">학력인정 기준</a>
+          <a href="#" onclick="menuGo('systemOverlay');return false;">특례유형 안내</a>
+          <a href="#" onclick="menuGo('systemOverlay');return false;" class="full-width">자격요건 상세안내</a>
+        </div>
+      </div>
+
+      <!-- 입시상담 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-comments"></i>
+          <span class="menu-cat-title">입시상담</span>
+        </div>
+        <div class="menu-links">
+          <a href="#" onclick="menuGo('consultOverlay');return false;">온라인입시상담</a>
+          <a href="#">상담FAQ</a>
+          <a href="#">전화상담 안내</a>
+          <a href="#" onclick="menuGo('consultOverlay');return false;">1:1 맞춤상담</a>
+          <a href="#" class="full-width">재외국민 종합상담</a>
+        </div>
+      </div>
+
+      <!-- 진로정보 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-route"></i>
+          <span class="menu-cat-title">진로정보</span>
+        </div>
+        <div class="menu-links">
+          <a href="#" onclick="menuGo('jobOverlay');return false;">직업정보</a>
+          <a href="#">직업심리검사</a>
+          <a href="#">학과별 진로안내</a>
+          <a href="#">해외 취업정보</a>
+        </div>
+      </div>
+
+      <!-- 입시정보센터 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-database"></i>
+          <span class="menu-cat-title">입시정보센터</span>
+        </div>
+        <div class="menu-links">
+          <a href="#" onclick="menuGo('systemOverlay');return false;">재외국민제도안내</a>
+          <a href="#" onclick="closeMenu();openProgram(2);return false;">전형일정</a>
+          <a href="#">입시소식</a>
+          <a href="#">설명회/박람회</a>
+          <a href="#" onclick="menuGo('dataOverlay');return false;">입시자료실</a>
+          <a href="#">대학별 입시정보</a>
+        </div>
+      </div>
+
+      <!-- 고객센터 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-headset"></i>
+          <span class="menu-cat-title">고객센터</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">공지사항</a>
+          <a href="#">서비스이용문의</a>
+          <a href="#">사이트맵</a>
+          <a href="#">이용안내</a>
+        </div>
+      </div>
+
+      <!-- 회원서비스 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-users"></i>
+          <span class="menu-cat-title">회원서비스</span>
+        </div>
+        <div class="menu-links">
+          <a href="#" onclick="closeMenu();openMyArea();return false;">로그인</a>
+          <a href="#">회원가입</a>
+          <a href="#">아이디찾기</a>
+          <a href="#">비밀번호찾기</a>
+          <a href="#">개인정보처리방침</a>
+          <a href="#">이메일수집거부</a>
+        </div>
+      </div>
+
+      <!-- 마이페이지 -->
+      <div class="menu-category">
+        <div class="menu-cat-header">
+          <i class="fas fa-user-circle"></i>
+          <span class="menu-cat-title">마이페이지</span>
+        </div>
+        <div class="menu-links">
+          <a href="#">관심대학/전형</a>
+          <a href="#">어디가 알림</a>
+          <a href="#">일정관리</a>
+          <a href="#">신청/접수</a>
+          <a href="#">재외국민 지원정보</a>
+          <a href="#">입학도우미</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- 특례 입시 바로가기 -->
+    <div class="menu-ok-strip">
+      <div class="menu-ok-title"><i class="fas fa-route"></i> 특례 입시</div>
+      <div class="menu-ok-links">
+        <a href="#" onclick="closeMenu();openProgram(0);return false;">준비 로드맵</a>
+        <a href="#" onclick="closeMenu();openProgram(1);return false;">전형요소별 준비</a>
+        <a href="#" onclick="closeMenu();openProgram(2);return false;">특례 일정</a>
+        <a href="#" onclick="closeMenu();openProgram(3);return false;">체크리스트</a>
+        <a href="#" onclick="closeMenu();openProgram(4);return false;">용어사전</a>
+        <a href="#" onclick="menuGo('admOverlay');return false;">특례전형정보</a>
+        <a href="#" onclick="menuGo('gradeOverlay');return false;">해외성적 입력</a>
+      </div>
+    </div>
+    <div class="menu-ok-strip">
+      <div class="menu-ok-title"><i class="fas fa-globe-asia"></i> 재외교육 정보</div>
+      <div class="menu-ok-links">
+        <a href="#" onclick="menuGo('systemOverlay');return false;">재외국민 제도안내</a>
+        <a href="#" onclick="menuGo('instOverlay');return false;">재외교육기관 (한국학교·한국교육원)</a>
+        <a href="#" onclick="menuGo('returnOverlay');return false;">귀국학생 편입학</a>
+        <a href="https://okep.moe.go.kr/root/index.do" target="_blank">재외교육기관포털(OKEP) <i class="fas fa-external-link-alt"></i></a>
+        <a href="https://www.oka.go.kr/" target="_blank">재외동포청 <i class="fas fa-external-link-alt"></i></a>
+      </div>
+    </div>
+
+    <!-- 하단 연락처 -->
+    <div class="menu-bottom">
+      <div class="menu-contact">
+        <i class="fas fa-phone-alt"></i>
+        <div>
+          <div class="contact-label">입시상담전화</div>
+          <div class="contact-number">1600-1615</div>
+        </div>
+      </div>
+      <div class="menu-contact">
+        <i class="fas fa-phone"></i>
+        <div>
+          <div class="contact-label">기타문의</div>
+          <div class="contact-number">02-6919-3960</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+[
+  {"dept":"(국제)관광경영학과","univ":"서울신학대학교 [본교]","region":"경기","su":"0","jeong":"0","capacity":0},
+  {"dept":"(국제)글로벌경영학과","univ":"서울신학대학교 [본교]","region":"경기","su":"0","jeong":"0","capacity":0},
+  {"dept":"(국제)글로벌한국어학과","univ":"서울신학대학교 [본교]","region":"경기","su":"0","jeong":"0","capacity":0},
+  {"dept":"(국제)컴퓨터공학과","univ":"서울신학대학교 [본교]","region":"경기","su":"0","jeong":"0","capacity":0},
+  {"dept":"AI 모빌리티학과","univ":"남서울대학교 [본교]","region":"충남","su":"0","jeong":"0","capacity":30},
+  {"dept":"AI 융합미디어학과","univ":"남서울대학교 [본교]","region":"충남","su":"4.51","jeong":"6.4","capacity":75},
+  {"dept":"AI·SW계열","univ":"한신대학교 [본교]","region":"경기","su":"4.39","jeong":"6.54","capacity":215},
+  {"dept":"AI·빅데이터학과","univ":"우송대학교 [본교]","region":"대전","su":"4.37","jeong":"0","capacity":16},
+  {"dept":"국제학부","univ":"서울대학교 [본교]","region":"서울","su":"0","jeong":"3.5","capacity":36},
+  {"dept":"글로벌인재학부","univ":"서울대학교 [본교]","region":"서울","su":"0","jeong":"0","capacity":0},
+  {"dept":"재외국민특별전형학과","univ":"연세대학교 [본교]","region":"서울","su":"12.5","jeong":"8.3","capacity":45},
+  {"dept":"국제통상학과","univ":"고려대학교 [본교]","region":"서울","su":"15.2","jeong":"9.1","capacity":60},
+  {"dept":"글로벌비즈니스학과","univ":"성균관대학교 [본교]","region":"서울","su":"11.4","jeong":"7.6","capacity":40},
+  {"dept":"한국어문학부","univ":"이화여자대학교 [본교]","region":"서울","su":"8.9","jeong":"5.2","capacity":55},
+  {"dept":"경영학과","univ":"한양대학교 [본교]","region":"서울","su":"18.7","jeong":"10.3","capacity":120}
+]

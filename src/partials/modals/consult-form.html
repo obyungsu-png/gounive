@@ -1,0 +1,19 @@
+<div class="ui-modal-overlay" id="consultModal" onclick="if(event.target===this)closeConsultForm()">
+  <div class="ui-modal" role="dialog" aria-labelledby="consultModalTitle">
+    <div class="ui-modal-header"><span id="consultModalTitle">특례 상담 신청</span><button class="ui-modal-close" onclick="closeConsultForm()" aria-label="닫기"><i class="fas fa-times"></i></button></div>
+    <div class="ui-modal-body">
+      <div class="ui-form-row">
+        <label>상담분야<select id="consultField"><option>자격요건·체류기간</option><option>서류·인증·번역</option><option>필답고사</option><option>면접</option><option>대학·학과 선택</option><option>귀국·편입학</option></select></label>
+        <label>특례유형<select id="consultType"><option>3년 특례</option><option>12년 특례</option><option>미정</option></select></label>
+      </div>
+      <label class="ui-form-full">제목<input type="text" id="consultTitle" maxlength="80" placeholder="예) 부모님 체류기간이 2/3에 조금 못 미쳐요"></label>
+      <label class="ui-form-full">상담 내용<textarea id="consultBody" rows="6" placeholder="해외 재학 국가, 학년별 재학 기간, 부모 체류 기간을 함께 적어주시면 더 정확한 답변을 받을 수 있어요."></textarea></label>
+      <label class="ui-check"><input type="checkbox" id="consultOpen"> 다른 이용자에게 공개 (개인정보는 적지 마세요)</label>
+      <div class="login-error" id="consultError" role="alert"></div>
+    </div>
+    <div class="ui-modal-footer">
+      <button class="ok-btn line" onclick="closeConsultForm()">취소</button>
+      <button class="ok-btn" id="consultSubmit" onclick="submitConsult()">상담 등록</button>
+    </div>
+  </div>
+</div>

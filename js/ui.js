@@ -14,6 +14,10 @@ function showToast(msg) {
   showToast.timer = setTimeout(() => box.classList.remove('show'), 2400);
 }
 
+function escapeHtml(str) {
+  return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
 /* href="#" 링크와 onclick 없는 버튼은 '준비 중' 안내 (빈 화면 이동 방지) */
 document.addEventListener('click', function(e) {
   const el = e.target.closest('a[href="#"], button');
@@ -35,5 +39,5 @@ function openNotices() {
 
 function openMyArea() {
   if (getCurrentUser()) openPage('gradeOverlay');
-  else openPage('loginOverlay');
+  else navigate('#/login/signin');
 }

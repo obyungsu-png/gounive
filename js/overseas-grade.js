@@ -1,5 +1,4 @@
 /* ===== 해외학교 성적 입력 (평균·단순 비율 환산) ===== */
-const OG_KEY = 'teukrye-overseas-grades';
 const OG_SCALES = {
   gpa4: { label: '4.0 GPA 기준', max: 4, step: 0.01 },
   gpa5: { label: '5.0 GPA(가중) 기준', max: 5, step: 0.01 },
@@ -9,16 +8,26 @@ const OG_SCALES = {
 const OG_TERMS = ['G9 1학기','G9 2학기','G10 1학기','G10 2학기','G11 1학기','G11 2학기','G12 1학기','G12 2학기'];
 const OG_SUBJECTS = 5;
 
-let ogState = { scale: 'gpa4', grades: OG_TERMS.map(() => Array(OG_SUBJECTS).fill('')), tests: {} };
+function ogEmptyState() {
+  return { scale: 'gpa4', grades: OG_TERMS.map(() => Array(OG_SUBJECTS).fill('')), tests: {} };
+}
+let ogState = ogEmptyState();
 
-function ogLoad() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(OG_KEY));
-    if (saved && saved.grades) ogState = Object.assign(ogState, saved);
-  } catch (e) {}
+function ogApply(saved) {
+  ogState = Object.assign(ogEmptyState(), saved && saved.grades ? saved : {});
 }
 function ogSave() {
-  try { localStorage.setItem(OG_KEY, JSON.stringify(ogState)); } catch (e) {}
+  Store.save('grades', ogState);
+}
+function ogHasData(state) {
+  return !!state && state.grades.flat().some(v => v !== '');
+}
+
+/* 화면 전체를 현재 ogState로 다시 그림 */
+function ogRenderAll() {
+  document.querySelectorAll('#ogScaleBtns button').forEach(b => b.classList.toggle('primary', b.dataset.scale === ogState.scale));
+  document.querySelectorAll('#gradeOverlay [data-test]').forEach(inp => { inp.value = ogState.tests[inp.dataset.test] || ''; });
+  renderOverseasTable();
 }
 
 function ogAverage(values) {
@@ -101,14 +110,18 @@ function resetOverseasGrades() {
 }
 
 (function initOverseasGrades() {
-  ogLoad();
-  document.querySelectorAll('#ogScaleBtns button').forEach(b => {
-    b.classList.toggle('primary', b.dataset.scale === ogState.scale);
-    b.addEventListener('click', () => setOverseasScale(b.dataset.scale));
-  });
+  ogApply(Store.loadLocal('grades', null));
+  document.querySelectorAll('#ogScaleBtns button').forEach(b => b.addEventListener('click', () => setOverseasScale(b.dataset.scale)));
   document.querySelectorAll('#gradeOverlay [data-test]').forEach(inp => {
-    inp.value = ogState.tests[inp.dataset.test] || '';
     inp.addEventListener('input', () => { ogState.tests[inp.dataset.test] = inp.value; ogSave(); });
   });
-  renderOverseasTable();
+  ogRenderAll();
+  // 서버 모드에서 로그인하면: 서버에 저장된 성적을 불러오고, 없으면 이 기기의 입력값을 서버로 올림
+  Store.onChange(async user => {
+    if (!Store.isServer) return;
+    if (!user) { ogApply(null); ogRenderAll(); return; }
+    const remote = await Store.loadRemote('grades');
+    if (ogHasData(remote)) { ogApply(remote); Store.save('grades', ogState); ogRenderAll(); }
+    else if (ogHasData(ogState)) ogSave();
+  });
 })();

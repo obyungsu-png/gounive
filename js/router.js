@@ -17,7 +17,7 @@ const ROUTES = [
   { path: 'return',       page: 'returnOverlay',    title: '귀국학생 편입학 안내' },
   { path: 'jobs',         page: 'jobOverlay',       title: '직업정보' },
   { path: 'comp-consult', page: 'compOverlay',      title: '학생부종합전형 상담' },
-  { path: 'login',        page: 'loginOverlay',     title: '로그인' }
+  { path: 'login',        page: 'loginOverlay',     title: '로그인 · 회원가입', subs: ['signin', 'signup', 'reset', 'update'], enter: i => showAuthPanel(i) }
 ];
 
 let renderedHash = null;

@@ -24,7 +24,9 @@ js/
   app.js                페이지 전환, 대학/학과 목록, 배너 슬라이더
   menu.js               전체메뉴
   modals.js             자격요건 · 초보자 · 서류준비 가이드 모달
-  auth.js               데모 로그인
+  config.js             Supabase 연결 값 (비어 있으면 데모 모드)
+  store.js              데이터 저장소 (Supabase 또는 localStorage)
+  auth.js               로그인 · 회원가입 · 비밀번호 찾기
   search.js             사이트 통합검색
   home.js               메인 주요자료 탭
   program.js            특례 준비 가이드 (탭 · 체크리스트)
@@ -33,12 +35,37 @@ js/
   consult.js            특례 상담 신청
   ok-pages.js, univ-grade.js
 assets/fontawesome/     Font Awesome Free 6.4.0 (로컬 호스팅, LICENSE 포함)
+assets/vendor/          supabase-js 2.x UMD 빌드 (MIT)
+supabase/schema.sql     DB 테이블 · 보안 정책 (SQL Editor에서 실행)
 ```
 
-## 데모 기능 안내
+## 서버 연동 (Supabase)
 
-서버가 없으므로 로그인, 상담 신청, 해외학교 성적, 체크리스트는 **브라우저 localStorage**에만 저장됩니다.
-다른 기기나 브라우저와 공유되지 않으며, 실제 서비스 전에는 서버(회원 · 상담 DB) 연동이 필요합니다.
+회원·상담·해외학교 성적·체크리스트는 `js/store.js`가 저장합니다.
+`js/config.js`에 Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **있으면 서버 모드**로 자동 전환됩니다.
+
+### 설정 순서 (약 10분)
+
+1. [supabase.com](https://supabase.com)에서 프로젝트 생성 (Region: Northeast Asia (Seoul) 권장)
+2. 대시보드 **SQL Editor** → `supabase/schema.sql` 내용을 붙여넣고 **Run**
+   - 테이블: `profiles`(회원), `consults`(상담), `grade_records`(성적), `checklists`(체크리스트)
+   - 모든 테이블에 RLS가 켜져 있어 사용자는 자기 데이터만 읽고 쓸 수 있습니다
+3. **Authentication → URL Configuration**
+   - Site URL: 실제 배포 주소 (예: `https://아이디.github.io/gounive/`)
+   - Redirect URLs: 같은 주소 (로컬 테스트 시 `http://localhost:5500/` 등도 추가)
+4. **Authentication → Sign In / Providers → Email**: 가입 시 이메일 인증을 받을지 선택 (Confirm email)
+5. **Project Settings → API**에서 `Project URL`과 `anon public` 키를 `js/config.js`에 입력
+   - anon 키는 공개용이라 브라우저에 넣어도 됩니다. **service_role 키는 절대 넣지 마세요.**
+
+### 상담 답변 달기
+
+대시보드 **Table Editor → consults**에서 해당 행의 `answer`에 답변을 쓰고 `status`를 `답변완료`로 바꾸면,
+사용자의 상담 화면에 바로 표시됩니다.
+
+### 데모 모드에서 알아둘 점
+
+- 데이터는 브라우저 localStorage에만 있어 다른 기기와 공유되지 않습니다.
+- 비밀번호 찾기·변경은 서버 모드에서만 동작합니다.
 
 `js/data.js`의 대학 · 특례전형 목록과 경쟁률은 **화면 구성용 예시 데이터**입니다.
 
@@ -53,7 +80,8 @@ assets/fontawesome/     Font Awesome Free 6.4.0 (로컬 호스팅, LICENSE 포�
 | `#/results/3year`, `#/results/12year` | 대학별 성적분석 |
 | `#/prepare/roadmap` · `factors` · `schedule` · `checklist` · `glossary` | 특례 준비 가이드 |
 | `#/grades` | 해외학교 성적 입력 |
-| `#/library` · `#/consult` · `#/login` | 자료실 · 상담 · 로그인 |
+| `#/library` · `#/consult` | 자료실 · 상담 |
+| `#/login/signin` · `signup` · `reset` | 로그인 · 회원가입 · 비밀번호 찾기 |
 | `#/institutions/schools`, `#/institutions/centers` | 재외교육기관 |
 | `#/return` | 귀국학생 편입학 |
 | `#/universities` · `#/departments` | 대학정보 · 학과정보 |

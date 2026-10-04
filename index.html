@@ -249,9 +249,8 @@
         <div class="login-avatar"><i class="fas fa-user"></i></div>
         <button class="login-btn" onclick="openPage('loginOverlay')">로그인</button>
         <div class="login-links">
-          <a href="#">아이디찾기</a>
-          <a href="#">비밀번호 찾기</a>
-          <a href="#">회원가입</a>
+          <a href="#/login/reset">비밀번호 찾기</a>
+          <a href="#/login/signup">회원가입</a>
         </div>
       </div>
 
@@ -1012,9 +1011,9 @@
     <div class="info-filter">
       <select class="consult-filter-select"><option>제목</option></select>
       <div class="filter-input-row"><input type="text" placeholder="검색어를 입력해주세요."><button><i class="fas fa-search"></i></button></div>
-      <div style="display:flex;border:1px solid #e0e0e0;border-radius:6px;overflow:hidden;margin-bottom:12px;">
-        <button style="flex:1;padding:10px;border:none;background:#fff;font-size:13px;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">전체</button>
-        <button style="flex:1;padding:10px;border:none;background:#2db4a8;color:#fff;font-size:13px;font-weight:600;font-family:'Noto Sans KR',sans-serif;cursor:pointer;">내가 쓴 글</button>
+      <div class="seg-toggle" id="consultScope">
+        <button onclick="setConsultScope('all')">공개 상담</button>
+        <button class="active" onclick="setConsultScope('mine')">내가 쓴 글</button>
       </div>
       <select class="consult-filter-select"><option>상담분야</option><option>자격요건·체류기간</option><option>서류·인증·번역</option><option>필답고사</option><option>면접</option><option>대학·학과 선택</option><option>귀국·편입학</option></select>
       <select class="consult-filter-select"><option>특례유형</option><option>3년 특례</option><option>12년 특례</option><option>미정</option></select>
@@ -1042,7 +1041,7 @@
         ※ 원서접수 시기에는 상담이 많아 답변이 늦어질 수 있습니다. 답변은 <strong>한국시간</strong> 기준으로 등록됩니다.<br>
         상담 신청 시 해외 재학 국가·학년별 재학 기간·부모 체류 기간을 함께 적어주시면 더 정확한 답변을 받을 수 있습니다.
       </div>
-      <div style="font-size:15px;font-weight:700;margin-bottom:20px;">내 상담 <span id="consultCount">0</span>건</div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:20px;"><span id="consultScopeLabel">내 상담</span> <span id="consultCount">0</span>건</div>
       <div id="consultList"></div>
       <hr style="border:none;border-top:1px solid #eee;margin:30px 0;">
       <div class="usage-accordion">
@@ -1613,34 +1612,64 @@
   </div>
   <div class="login-page">
     <div class="login-box">
-      <h1>로그인</h1>
-      <div class="login-demo-note"><i class="fas fa-info-circle"></i> 현재는 <strong>데모 로그인</strong>입니다. 서버 연동 전까지 로그인 정보는 이 브라우저에만 저장됩니다.</div>
-      <div class="login-role">
-        <label><input type="radio" name="loginRole" value="학생" checked> 학생</label>
-        <label><input type="radio" name="loginRole" value="학부모"> 학부모</label>
+      <div class="login-demo-note" id="demoNote"><i class="fas fa-info-circle"></i> 현재는 <strong>데모 모드</strong>입니다. 서버(Supabase) 연결 전까지 회원·상담·성적 정보는 이 브라우저에만 저장됩니다.</div>
+
+      <!-- 로그인 -->
+      <div class="auth-panel" data-panel="signin">
+        <h1>로그인</h1>
+        <input type="email" id="loginEmail" class="login-field" placeholder="이메일" autocomplete="email">
+        <div class="login-field-wrap">
+          <input type="password" id="loginPw" class="login-field" placeholder="비밀번호" style="margin-bottom:0;" autocomplete="current-password">
+          <span class="field-icon"><i class="fas fa-shield-alt"></i></span>
+        </div>
+        <div class="login-error" id="loginError" role="alert"></div>
+        <button class="login-submit" id="loginSubmit" onclick="loginUser()">로그인하기</button>
+        <div class="login-options">
+          <label><input type="checkbox" id="loginSaveId" checked> 이메일 저장</label>
+          <a href="#/login/reset">비밀번호 찾기</a>
+          <span class="sep">|</span>
+          <a href="#/login/signup">회원가입</a>
+        </div>
       </div>
-      <input type="text" id="loginId" class="login-field" placeholder="아이디 입력 (4자 이상)" autocomplete="username">
-      <div class="login-field-wrap">
-        <input type="password" id="loginPw" class="login-field" placeholder="비밀번호 (4자 이상)" style="margin-bottom:0;" autocomplete="current-password">
-        <span class="field-icon"><i class="fas fa-shield-alt"></i></span>
+
+      <!-- 회원가입 -->
+      <div class="auth-panel" data-panel="signup">
+        <h1>회원가입</h1>
+        <div class="login-role">
+          <label><input type="radio" name="signupRole" value="학생" checked> 학생</label>
+          <label><input type="radio" name="signupRole" value="학부모"> 학부모</label>
+        </div>
+        <input type="text" id="signupName" class="login-field" placeholder="이름" autocomplete="name" maxlength="30">
+        <input type="email" id="signupEmail" class="login-field" placeholder="이메일" autocomplete="email">
+        <input type="password" id="signupPw" class="login-field" placeholder="비밀번호 (6자 이상)" autocomplete="new-password">
+        <input type="password" id="signupPw2" class="login-field" placeholder="비밀번호 확인" autocomplete="new-password">
+        <label class="auth-agree"><input type="checkbox" id="signupAgree"> 상담·성적 관리를 위한 개인정보(이름·이메일) 수집·이용에 동의합니다.</label>
+        <div class="login-error" id="signupError" role="alert"></div>
+        <button class="login-submit" id="signupSubmit" onclick="signupUser()">가입하기</button>
+        <div class="login-options"><a href="#/login/signin">이미 계정이 있어요 · 로그인</a></div>
       </div>
-      <div class="login-error" id="loginError" role="alert"></div>
-      <button class="login-submit" onclick="loginUser()">로그인하기</button>
-      <div class="login-options">
-        <label><input type="checkbox" id="loginSaveId" checked> 아이디 저장</label>
-        <a href="#">아이디 찾기</a>
-        <span class="sep">|</span>
-        <a href="#">비밀번호 찾기</a>
-        <span class="sep">|</span>
-        <a href="#">회원가입</a>
+
+      <!-- 비밀번호 찾기 -->
+      <div class="auth-panel" data-panel="reset">
+        <h1>비밀번호 찾기</h1>
+        <p class="auth-desc">가입한 이메일로 비밀번호 재설정 링크를 보내드립니다.</p>
+        <input type="email" id="resetEmail" class="login-field" placeholder="이메일" autocomplete="email">
+        <div class="login-error" id="resetError" role="alert"></div>
+        <button class="login-submit" id="resetSubmit" onclick="requestPasswordReset()">재설정 메일 보내기</button>
+        <div class="login-options"><a href="#/login/signin">로그인으로 돌아가기</a></div>
       </div>
-      <div class="sns-section">
-        <div class="sns-title">SNS 계정으로 간편하게 로그인 하세요!</div>
-        <button class="sns-btn"><span class="naver-icon">N</span> 네이버 간편로그인</button>
-        <button class="sns-btn"><span class="kakao-icon"><i class="fas fa-comment"></i></span> 카카오 간편로그인</button>
+
+      <!-- 새 비밀번호 설정 (재설정 메일 링크로 들어온 경우) -->
+      <div class="auth-panel" data-panel="update">
+        <h1>새 비밀번호 설정</h1>
+        <input type="password" id="newPw" class="login-field" placeholder="새 비밀번호 (6자 이상)" autocomplete="new-password">
+        <input type="password" id="newPw2" class="login-field" placeholder="새 비밀번호 확인" autocomplete="new-password">
+        <div class="login-error" id="updateError" role="alert"></div>
+        <button class="login-submit" id="updateSubmit" onclick="saveNewPassword()">비밀번호 변경</button>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 
@@ -2045,7 +2074,7 @@
     </div>
     <div class="ui-modal-footer">
       <button class="ok-btn line" onclick="closeConsultForm()">취소</button>
-      <button class="ok-btn" onclick="submitConsult()">상담 등록</button>
+      <button class="ok-btn" id="consultSubmit" onclick="submitConsult()">상담 등록</button>
     </div>
   </div>
 </div>
@@ -2271,8 +2300,11 @@
 </div>
 
 
+<script src="js/config.js"></script>
+<script src="assets/vendor/supabase.js"></script>
 <script src="js/data.js"></script>
 <script src="js/ui.js"></script>
+<script src="js/store.js"></script>
 <script src="js/router.js"></script>
 <script src="js/app.js"></script>
 <script src="js/menu.js"></script>

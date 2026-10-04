@@ -1,6 +1,5 @@
 /* ===== 특례 준비 가이드 (탭 · 체크리스트) ===== */
 const PROGRAM_TABS = ['준비 로드맵', '전형요소별 준비', '특례 일정', '체크리스트', '용어사전'];
-const CHECKLIST_KEY = 'teukrye-checklist';
 
 function openProgram(idx) {
   openPage('programOverlay', idx);
@@ -13,9 +12,6 @@ function switchProgramTab(idx) {
   syncRoute('programOverlay', idx);
 }
 
-function readChecklist() {
-  try { return JSON.parse(localStorage.getItem(CHECKLIST_KEY)) || []; } catch (e) { return []; }
-}
 
 function renderChecklist() {
   const boxes = document.querySelectorAll('#checklist input');
@@ -28,7 +24,7 @@ function renderChecklist() {
 
 function saveChecklist() {
   const state = Array.from(document.querySelectorAll('#checklist input')).map(b => b.checked);
-  try { localStorage.setItem(CHECKLIST_KEY, JSON.stringify(state)); } catch (e) {}
+  Store.save('checklist', state);
   renderChecklist();
 }
 
@@ -37,11 +33,20 @@ function resetChecklist() {
   saveChecklist();
 }
 
-(function initChecklist() {
-  const saved = readChecklist();
-  document.querySelectorAll('#checklist input').forEach((b,i) => {
-    b.checked = !!saved[i];
-    b.addEventListener('change', saveChecklist);
-  });
+function applyChecklist(saved) {
+  document.querySelectorAll('#checklist input').forEach((b,i) => { b.checked = !!(saved && saved[i]); });
   renderChecklist();
+}
+
+(function initChecklist() {
+  document.querySelectorAll('#checklist input').forEach(b => b.addEventListener('change', saveChecklist));
+  applyChecklist(Store.loadLocal('checklist', []));
+  // 서버 모드 로그인 시 서버 기록 우선, 없으면 이 기기의 체크 상태를 서버로 올림
+  Store.onChange(async user => {
+    if (!Store.isServer) return;
+    if (!user) { applyChecklist([]); return; }
+    const remote = await Store.loadRemote('checklist');
+    if (Array.isArray(remote)) { applyChecklist(remote); Store.save('checklist', remote); }
+    else if (Store.loadLocal('checklist', []).some(Boolean)) saveChecklist();
+  });
 })();

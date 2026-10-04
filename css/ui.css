@@ -45,3 +45,18 @@
 
 /* 키보드 포커스 표시 */
 a:focus-visible, button:focus-visible, [role="button"]:focus-visible, .icon-nav-item:focus-visible { outline: 2px solid #2db4a8; outline-offset: 2px; }
+
+/* 로그인 · 회원가입 패널 */
+.auth-panel { display: none; }
+.auth-panel.active { display: block; }
+.auth-desc { font-size: 14px; color: #666; text-align: center; margin: -20px 0 20px; }
+.auth-agree { display: flex; align-items: flex-start; gap: 8px; font-size: 13px; color: #555; line-height: 1.5; margin: 4px 0 4px; cursor: pointer; }
+.auth-agree input { margin-top: 3px; accent-color: #2db4a8; flex-shrink: 0; }
+.login-submit:disabled { opacity: 0.6; cursor: wait; }
+
+/* 상담: 공개/내 글 전환 */
+.seg-toggle { display: flex; border: 1px solid #e0e0e0; border-radius: 6px; overflow: hidden; margin-bottom: 12px; }
+.seg-toggle button { flex: 1; padding: 10px; border: none; background: #fff; font-size: 13px; color: #555; font-family: 'Noto Sans KR', sans-serif; cursor: pointer; }
+.seg-toggle button.active { background: #2db4a8; color: #fff; font-weight: 600; }
+.consult-answer { margin-top: 10px; padding: 12px 14px; background: #f0faf9; border-left: 3px solid #2db4a8; border-radius: 6px; font-size: 13px; color: #333; line-height: 1.7; white-space: pre-wrap; }
+.consult-status.done { color: #2e7d32; }

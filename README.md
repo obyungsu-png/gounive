@@ -29,7 +29,7 @@ src/
     home.html               메인 화면
     pages/                  화면별 HTML (주소 #/경로 와 1:1)
       eligibility · admissions · results · grades · prepare · library · consult
-      institutions · return · universities · departments · login · jobs · comp-consult
+      institutions · return · universities · departments · login · stay · en · jobs · comp-consult
     modals/                 자격요건 · 초보자 · 서류준비 가이드, 상담 신청 폼
   data/                     JSON 데이터 (universities · departments · teukrye-admissions · univ-grade-tabs)
   css/                      화면별 스타일 + utilities.css(공통 유틸) + responsive.css(마지막에 로드)
@@ -47,12 +47,14 @@ src/
     univ-grade.js           대학별 성적분석
     tables.js               대학·학과 목록
     search.js · home.js · menu.js · modals.js · banner.js · jobs.js · ok-pages.js · ui.js
+public/                     favicon · 공유 미리보기 이미지(og-image.png) · robots.txt (빌드 시 그대로 복사)
 supabase/schema.sql         DB 테이블 · 보안 정책 (Supabase SQL Editor에서 실행)
 tests/                      node:test 단위 테스트
 .github/workflows/deploy.yml  GitHub Pages 자동 배포
 ```
 
-아이콘(Font Awesome)과 supabase-js는 npm 패키지로 설치되어 빌드 결과에 포함됩니다.
+아이콘(Font Awesome), 한글 폰트(Noto Sans KR, @fontsource), supabase-js는 npm 패키지로 설치되어 빌드 결과에 포함됩니다.
+외부 CDN을 쓰지 않으며, 폰트는 woff2만 포함하고 글자 범위별로 나뉘어 있어 화면에 필요한 조각만 내려받습니다.
 supabase-js는 서버 모드일 때만 따로 불러오므로 데모 모드의 첫 화면 용량에는 포함되지 않습니다.
 
 ## 서버 연동 (Supabase)
@@ -112,6 +114,7 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 | `#/institutions/schools`, `#/institutions/centers` | 재외교육기관 |
 | `#/return` | 귀국학생 편입학 |
 | `#/universities` · `#/departments` | 대학정보 · 학과정보 |
+| `#/en` | English Guide (영어 안내) |
 
 ## 새 화면 추가 방법
 
@@ -122,3 +125,14 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 5. 화면에 들어올 때 할 일이 있으면 해당 모듈에서 `onRouteEnter('xxxOverlay', () => …)` 등록
 6. HTML의 `onclick`에서 부를 함수는 `src/main.js`의 `Object.assign(window, …)`에 추가
 7. 검색에 노출하려면 `src/js/search.js`의 `SEARCH_PAGES`에 항목 추가
+
+## 공유 미리보기 · 검색 노출
+
+`index.html`의 `<head>`에 설명(description)과 Open Graph·트위터 카드 태그가 있습니다.
+기본 주소는 `https://obyungsu-png.github.io/gounive/`(GitHub Pages)로 적혀 있으니, 다른 도메인에 올리면 `canonical`, `og:url`, `og:image` 세 곳을 함께 바꾸세요.
+
+## 접근성
+
+- 상단 메뉴·전체메뉴 버튼·알림/마이 아이콘은 실제 `<button>`이라 Tab·Enter로 사용할 수 있습니다.
+- 그 밖에 클릭으로 동작하는 카드(`onclick`이 달린 div 등)는 `ui.js`가 자동으로 포커스 가능하게 만들고 Enter/Space로 실행되게 합니다.
+- 아이콘만 있는 버튼에는 `aria-label`을 붙였습니다. 새 버튼을 만들 때도 글자나 `aria-label`을 꼭 넣어 주세요.

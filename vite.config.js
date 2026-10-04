@@ -23,8 +23,24 @@ function htmlIncludes() {
   };
 }
 
+/* 웹폰트(한글 @fontsource, 아이콘 Font Awesome)에서 구형 woff/ttf 대체 파일을 빼고 woff2만 사용 */
+function woff2Only() {
+  return {
+    name: 'woff2-only',
+    enforce: 'pre',
+    transform(code, id) {
+      if (id.includes('@fontsource') && id.endsWith('.css')) {
+        return code.replace(/,\s*url\([^)]+\.woff\)\s*format\('woff'\)/g, '');
+      }
+      if (id.includes('@fortawesome') && id.endsWith('.css')) {
+        return code.replace(/,\s*url\([^)]+\.ttf\)\s*format\("truetype"\)/g, '');
+      }
+    }
+  };
+}
+
 export default defineConfig({
   base: './',            // GitHub Pages 하위 경로 등 어디에 올려도 동작하도록 상대 경로
-  plugins: [htmlIncludes()],
+  plugins: [htmlIncludes(), woff2Only()],
   build: { outDir: 'dist' }
 });

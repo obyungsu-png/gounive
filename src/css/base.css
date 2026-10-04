@@ -1142,3 +1142,19 @@ a { text-decoration: none; color: inherit; cursor: pointer; }
   border-color: #2db4a8;
 }
 .nav-hamburger.active i { color: #2db4a8; }
+
+/* 버튼으로 바꾼 내비 요소 기본 스타일 초기화 */
+button.nav-hamburger, button.icon-nav-item, .nav-util button.icon-circle, .search-box button.search-icon {
+  font-family: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: inherit;
+  cursor: pointer;
+}
+button.nav-hamburger { border: 1px solid #e0e0e0; background: #fff; color: #666; margin-right: 8px; }
+button.icon-nav-item { padding: 5px 10px; }
+.nav-util button.icon-circle { color: #999; }
+.search-box button.search-icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; color: #2db4a8; font-size: 20px; }
+a.logo { display: inline-block; }

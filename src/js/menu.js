@@ -6,12 +6,16 @@ export function toggleMenu() {
   const overlay = document.getElementById('menuOverlay');
   const open = !overlay.classList.contains('open');
   overlay.classList.toggle('open', open);
-  document.getElementById('menuBtn').classList.toggle('active', open);
+  const btn = document.getElementById('menuBtn');
+  btn.classList.toggle('active', open);
+  btn.setAttribute('aria-expanded', String(open));
 }
 
 export function closeMenu() {
   document.getElementById('menuOverlay').classList.remove('open');
-  document.getElementById('menuBtn').classList.remove('active');
+  const btn = document.getElementById('menuBtn');
+  btn.classList.remove('active');
+  btn.setAttribute('aria-expanded', 'false');
 }
 
 export function menuGo(id) {

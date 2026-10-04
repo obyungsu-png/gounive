@@ -3,6 +3,11 @@
    2) 화면 모듈 로드 (각 모듈이 스스로 초기화하고 라우트를 등록)
    3) HTML의 onclick="…"에서 부르는 함수만 window에 노출
    4) 현재 주소의 화면 표시 */
+import '@fontsource/noto-sans-kr/400.css';
+import '@fontsource/noto-sans-kr/500.css';
+import '@fontsource/noto-sans-kr/600.css';
+import '@fontsource/noto-sans-kr/700.css';
+import '@fontsource/noto-sans-kr/800.css';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import './css/base.css';
 import './css/job.css';

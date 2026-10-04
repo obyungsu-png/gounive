@@ -23,6 +23,7 @@ const SEARCH_PAGES = [
   { title: '귀국학생 편입학', desc: '학력인정·편입학 절차', keys: '귀국 편입 편입학 학력인정 학년 결정 재취학', run: () => openPage('returnOverlay') },
   { title: '서류준비 가이드', desc: '필수서류·인증·번역', keys: '서류 아포스티유 번역 출입국 재직증명 가족관계', run: () => openDocsGuide() },
   { title: '자격요건 입력 가이드', desc: '해외체류기간 입력 방법', keys: '자격요건 입력 체류기간 가이드', run: () => openGuideModal() },
+  { title: 'English Guide', desc: '영어 안내 페이지', keys: 'english en 영어 guide overseas special admission', run: () => openPage('enOverlay') },
   { title: '대학정보', desc: '전국 대학 목록', keys: '대학 대학정보 대학교', run: () => openPage('univOverlay') },
   { title: '학과정보', desc: '학과별 정보', keys: '학과 학과정보 전공', run: () => openPage('deptOverlay') }
 ];

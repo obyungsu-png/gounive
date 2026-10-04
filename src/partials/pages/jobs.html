@@ -19,7 +19,7 @@
       <div class="job-filter-panel">
         <div class="filter-search">
           <input type="text" id="jobSearchInput" placeholder="직종명을 입력해주세요." onkeydown="if(event.key==='Enter')searchJobs()">
-          <button onclick="searchJobs()"><i class="fas fa-search"></i></button>
+          <button onclick="searchJobs()" aria-label="직업 검색"><i class="fas fa-search" aria-hidden="true"></i></button>
         </div>
         <div class="filter-box">
           <label>평균연봉</label>

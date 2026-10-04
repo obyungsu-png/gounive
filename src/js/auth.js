@@ -106,9 +106,9 @@ function renderAuthState(user) {
   if (user) {
     document.getElementById('profileName').textContent = user.name;
     document.getElementById('profileRole').textContent = user.role;
-    links.innerHTML = `<a href="#/grades"><b>${escapeHtml(user.name)}</b>님</a><span>|</span><a href="#" onclick="logoutUser();return false;">로그아웃</a><span>|</span><a href="#" onclick="toggleMenu();return false;">사이트맵</a>`;
+    links.innerHTML = `<a href="#/grades"><b>${escapeHtml(user.name)}</b>님</a><span>|</span><a href="#" onclick="logoutUser();return false;">로그아웃</a><span>|</span><a href="#" onclick="toggleMenu();return false;">사이트맵</a><span>|</span><a href="#/en" lang="en">EN</a>`;
   } else {
-    links.innerHTML = `<a href="#/login/signin">로그인</a><span>|</span><a href="#/login/signup">회원가입</a><span>|</span><a href="#" onclick="toggleMenu();return false;">사이트맵</a>`;
+    links.innerHTML = `<a href="#/login/signin">로그인</a><span>|</span><a href="#/login/signup">회원가입</a><span>|</span><a href="#" onclick="toggleMenu();return false;">사이트맵</a><span>|</span><a href="#/en" lang="en">EN</a>`;
   }
 }
 

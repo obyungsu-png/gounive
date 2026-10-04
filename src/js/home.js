@@ -28,7 +28,7 @@ export function switchNewsTab(idx) {
   newsTab = idx;
   document.querySelectorAll('.news-tabs .news-tab').forEach((t, i) => t.classList.toggle('active', i === idx));
   document.getElementById('newsList').innerHTML = NEWS_TABS[idx].items.map((it, i) => `
-    <div class="news-item" data-i="${i}">
+    <div class="news-item" data-i="${i}" role="button" tabindex="0">
       <div class="news-thumb"><i class="fas ${it.icon}"></i></div>
       <div class="news-text"><div class="title">${it.title}</div><div class="meta">${it.meta}</div></div>
     </div>`).join('');

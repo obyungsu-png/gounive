@@ -18,6 +18,20 @@ export function escapeHtml(str) {
   return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 }
 
+/* onclick이 달린 div·span 등(버튼·링크가 아닌 요소)을 키보드로도 쓸 수 있게: 포커스 가능 + Enter/Space로 실행 */
+const NATIVE = 'A,BUTTON,INPUT,SELECT,TEXTAREA,LABEL,OPTION,I,SVG';
+document.querySelectorAll('[onclick]').forEach(el => {
+  if (NATIVE.split(',').includes(el.tagName) || /overlay/.test(el.className) || /stopPropagation/.test(el.getAttribute('onclick'))) return;
+  if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '0');
+  if (!el.hasAttribute('role')) el.setAttribute('role', 'button');
+});
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.getAttribute && e.target.getAttribute('role') === 'button' && !NATIVE.split(',').includes(e.target.tagName)) {
+    e.preventDefault();
+    e.target.click();
+  }
+});
+
 /* href="#" 링크와 onclick 없는 버튼은 '준비 중' 안내 (빈 화면 이동 방지) */
 document.addEventListener('click', function(e) {
   const el = e.target.closest('a[href="#"], button');

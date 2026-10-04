@@ -21,6 +21,7 @@ const ROUTES = [
   { path: 'return',       page: 'returnOverlay',    title: '귀국학생 편입학 안내' },
   { path: 'jobs',         page: 'jobOverlay',       title: '직업정보' },
   { path: 'comp-consult', page: 'compOverlay',      title: '학생부종합전형 상담' },
+  { path: 'en',           page: 'enOverlay',        title: 'English Guide', lang: 'en' },
   { path: 'login',        page: 'loginOverlay',     title: '로그인 · 회원가입', subs: ['signin', 'signup', 'reset', 'update'] }
 ];
 
@@ -63,6 +64,7 @@ function renderRoute() {
   renderedHash = hash;
   const [path, sub] = hash.replace(/^#\/?/, '').split('/');
   const route = ROUTES.find(r => r.path === path);
+  document.documentElement.lang = (route && route.lang) || 'ko';
   if (!route) {
     displayHome();
     document.title = BASE_TITLE;

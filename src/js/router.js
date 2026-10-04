@@ -8,6 +8,7 @@ import { displayPage, displayHome } from './pages.js';
 const BASE_TITLE = '재외국민 One Stop 서비스';
 const ROUTES = [
   { path: 'eligibility',  page: 'systemOverlay',    title: '재외국민 제도안내' },
+  { path: 'stay',         page: 'stayOverlay',      title: '해외체류기간 계산기' },
   { path: 'universities', page: 'univOverlay',      title: '대학정보' },
   { path: 'departments',  page: 'deptOverlay',      title: '학과정보' },
   { path: 'admissions',   page: 'admOverlay',       title: '특례전형정보', subs: ['3year', '12year'] },

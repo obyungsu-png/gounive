@@ -1,5 +1,5 @@
 /* ===== 화면(오버레이) 표시 ===== */
-export const ALL_PAGES = ['univOverlay','deptOverlay','jobOverlay','admOverlay','gradeOverlay','dataOverlay','compOverlay','consultOverlay','univGradeOverlay','loginOverlay','systemOverlay','instOverlay','returnOverlay','programOverlay'];
+export const ALL_PAGES = ['univOverlay','deptOverlay','jobOverlay','admOverlay','gradeOverlay','dataOverlay','compOverlay','consultOverlay','univGradeOverlay','loginOverlay','systemOverlay','instOverlay','returnOverlay','programOverlay','stayOverlay'];
 
 export function displayPage(id) {
   const wasOpen = document.getElementById(id).classList.contains('open');

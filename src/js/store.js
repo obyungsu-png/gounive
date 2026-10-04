@@ -10,7 +10,9 @@ export const Store = (() => {
   let client = null;
   let initPromise = null;
 
-  const KEYS = { user: 'teukrye-demo-user', consults: 'teukrye-consults', grades: 'teukrye-overseas-grades', checklist: 'teukrye-checklist' };
+  const KEYS = { user: 'teukrye-demo-user', consults: 'teukrye-consults', grades: 'teukrye-overseas-grades', checklist: 'teukrye-checklist', stay: 'teukrye-stay' };
+  // 로그인 사용자별 1행으로 저장하는 데이터: kind → [테이블, JSON 칸]
+  const TABLES = { grades: ['grade_records', 'data'], checklist: ['checklists', 'items'], stay: ['stay_records', 'data'] };
   const local = {
     get(key, fallback) { try { const v = JSON.parse(localStorage.getItem(key)); return v === null ? fallback : v; } catch (e) { return fallback; } },
     set(key, value) { try { localStorage.setItem(key, JSON.stringify(value)); } catch (e) {} },
@@ -126,9 +128,8 @@ export const Store = (() => {
       if (isServer) await initPromise;
       if (isServer) {
         await client.auth.signOut();
-        // 공용 PC 대비: 서버 모드에서는 로그아웃 시 이 기기의 성적·체크리스트 사본도 삭제
-        local.remove(KEYS.grades);
-        local.remove(KEYS.checklist);
+        // 공용 PC 대비: 서버 모드에서는 로그아웃 시 이 기기의 사본도 삭제
+        Object.keys(TABLES).forEach(kind => local.remove(KEYS[kind]));
       }
       local.remove(KEYS.user);
       user = null;
@@ -173,13 +174,12 @@ export const Store = (() => {
       if (error) fail(error);
     },
 
-    /* ----- 해외학교 성적 / 체크리스트 (로컬 캐시 + 로그인 시 서버 동기화) ----- */
+    /* ----- 해외학교 성적 / 체크리스트 / 체류기록 (로컬 캐시 + 로그인 시 서버 동기화) ----- */
     loadLocal(kind, fallback) { return local.get(KEYS[kind], fallback); },
     async loadRemote(kind) {
       if (isServer) await initPromise;
       if (!isServer || !user) return null;
-      const table = kind === 'grades' ? 'grade_records' : 'checklists';
-      const col = kind === 'grades' ? 'data' : 'items';
+      const [table, col] = TABLES[kind];
       const { data, error } = await client.from(table).select(col).eq('user_id', user.id).maybeSingle();
       if (error) { console.warn(friendly(error)); return null; }
       return data ? data[col] : null;
@@ -187,8 +187,7 @@ export const Store = (() => {
     save(kind, value) {
       local.set(KEYS[kind], value);
       if (!isServer || !user) return;
-      const table = kind === 'grades' ? 'grade_records' : 'checklists';
-      const col = kind === 'grades' ? 'data' : 'items';
+      const [table, col] = TABLES[kind];
       later(kind, async () => {
         await initPromise;
         if (!client) return;

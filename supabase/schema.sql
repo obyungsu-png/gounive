@@ -104,3 +104,16 @@ alter table public.checklists enable row level security;
 drop policy if exists "본인 체크리스트" on public.checklists;
 create policy "본인 체크리스트" on public.checklists
   for all using (auth.uid() = user_id) with check (auth.uid() = user_id);
+
+-- 5) 해외체류기간 계산기 입력값 (사용자당 1행)
+create table if not exists public.stay_records (
+  user_id    uuid primary key default auth.uid() references auth.users (id) on delete cascade,
+  data       jsonb not null,
+  updated_at timestamptz not null default now()
+);
+
+alter table public.stay_records enable row level security;
+
+drop policy if exists "본인 체류기록" on public.stay_records;
+create policy "본인 체류기록" on public.stay_records
+  for all using (auth.uid() = user_id) with check (auth.uid() = user_id);

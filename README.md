@@ -9,6 +9,7 @@ npm install        # 처음 한 번
 npm run dev        # 개발 서버 (http://localhost:5173) - 저장하면 자동 새로고침
 npm run build      # 배포용 빌드 → dist/
 npm run preview    # 빌드 결과 미리보기
+npm test           # 해외체류기간 계산 규칙 테스트
 ```
 
 `main` 브랜치에 push하면 `.github/workflows/deploy.yml`이 자동으로 빌드해 GitHub Pages에 배포합니다.
@@ -40,11 +41,14 @@ src/
     consult.js              특례 상담
     program.js              특례 준비 가이드 (탭 · 체크리스트)
     overseas-grade.js       해외학교 성적 계산
+    stay-rules.js           3년 특례 체류 요건 계산 규칙 (순수 함수, tests/에서 검증)
+    stay-calc.js            해외체류기간 계산기 화면
     teukrye-adm.js          특례전형정보
     univ-grade.js           대학별 성적분석
     tables.js               대학·학과 목록
     search.js · home.js · menu.js · modals.js · banner.js · jobs.js · ok-pages.js · ui.js
 supabase/schema.sql         DB 테이블 · 보안 정책 (Supabase SQL Editor에서 실행)
+tests/                      node:test 단위 테스트
 .github/workflows/deploy.yml  GitHub Pages 자동 배포
 ```
 
@@ -53,14 +57,14 @@ supabase-js는 서버 모드일 때만 따로 불러오므로 데모 모드의 �
 
 ## 서버 연동 (Supabase)
 
-회원·상담·해외학교 성적·체크리스트는 `src/js/store.js`가 저장합니다.
+회원·상담·해외학교 성적·체크리스트·체류 계산 입력값은 `src/js/store.js`가 저장합니다.
 Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **있으면 서버 모드**로 자동 전환됩니다.
 
 ### 설정 순서 (약 10분)
 
 1. [supabase.com](https://supabase.com)에서 프로젝트 생성 (Region: Northeast Asia (Seoul) 권장)
 2. 대시보드 **SQL Editor** → `supabase/schema.sql` 내용을 붙여넣고 **Run**
-   - 테이블: `profiles`(회원), `consults`(상담), `grade_records`(성적), `checklists`(체크리스트)
+   - 테이블: `profiles`(회원), `consults`(상담), `grade_records`(성적), `checklists`(체크리스트), `stay_records`(체류 계산 입력값)
    - 모든 테이블에 RLS가 켜져 있어 사용자는 자기 데이터만 읽고 쓸 수 있습니다
 3. **Authentication → URL Configuration**
    - Site URL: 실제 배포 주소 (예: `https://아이디.github.io/gounive/`)
@@ -90,6 +94,7 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 | 주소 | 화면 |
 |---|---|
 | `#/eligibility` | 재외국민 제도안내 |
+| `#/stay` | 해외체류기간 계산기 |
 | `#/admissions/3year`, `#/admissions/12year` | 특례전형정보 |
 | `#/results/3year`, `#/results/12year` | 대학별 성적분석 |
 | `#/prepare/roadmap` · `factors` · `schedule` · `checklist` · `glossary` | 특례 준비 가이드 |

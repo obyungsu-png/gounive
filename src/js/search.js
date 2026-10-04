@@ -9,6 +9,7 @@ import { renderAdmTable } from './teukrye-adm.js';
 /* ===== 사이트 통합검색 (페이지 · 대학 · 특례전형 · 용어) ===== */
 const SEARCH_PAGES = [
   { title: '재외국민 제도안내', desc: '3년·12년 특례 지원자격 비교', keys: '특례 자격 3년 12년 3특 12특 체류 부모 정원외 제도 지원자격 FAQ', run: () => openPage('systemOverlay') },
+  { title: '해외체류기간 계산기', desc: '학생 3/4·부모 2/3 자동 판정', keys: '체류 체류기간 체류일수 계산 계산기 3/4 2/3 출입국 부모 해외체류', run: () => openPage('stayOverlay') },
   { title: '특례전형정보', desc: '대학별 특례 전형방법 비교', keys: '전형 전형정보 필답 면접 서류 경쟁률 모집단위', run: () => openPage('admOverlay') },
   { title: '특례 준비 로드맵', desc: '학년별 준비 단계', keys: '준비 로드맵 학년 G9 G10 G11 G12 귀국 전략 프로그램', run: () => openProgram(0) },
   { title: '전형요소별 준비', desc: '필답고사·면접·서류', keys: '필답고사 필답 면접 서류 자기소개서 SAT IB AP TOPIK 한국어', run: () => openProgram(1) },

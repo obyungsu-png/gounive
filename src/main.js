@@ -17,6 +17,7 @@ import './css/guide-modal.css';
 import './css/novice-modal.css';
 import './css/docs-modal.css';
 import './css/ui.css';
+import './css/stay-calc.css';
 import './css/utilities.css';
 import './css/responsive.css';
 
@@ -33,6 +34,7 @@ import { resetOverseasGrades } from './js/overseas-grade.js';
 import { setAdmType, renderAdmTable, resetAdmFilters } from './js/teukrye-adm.js';
 import { loginUser, signupUser, requestPasswordReset, saveNewPassword, logoutUser } from './js/auth.js';
 import { setConsultScope, openConsultForm, closeConsultForm, submitConsult } from './js/consult.js';
+import './js/stay-calc.js';
 import './js/search.js';
 import { switchNewsTab, newsMore } from './js/home.js';
 

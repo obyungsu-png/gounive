@@ -1,0 +1,50 @@
+/* ===== 해외체류기간 계산기 ===== */
+.stay-table-wrap { overflow-x: auto; margin-bottom: 10px; }
+.stay-table { width: 100%; min-width: 620px; border-collapse: collapse; background: #fff; border: 1px solid #e6eeee; border-radius: 10px; overflow: hidden; font-size: 13px; }
+.stay-table th { background: #f6fbfb; color: #1a5c3a; font-weight: 700; padding: 10px; text-align: center; border-bottom: 1px solid #e6eeee; }
+.stay-table td { padding: 8px 10px; border-bottom: 1px solid #f0f0f0; text-align: center; vertical-align: middle; }
+.stay-table th small, .stay-table td small { font-weight: 400; color: #999; font-size: 11px; }
+.stay-table input, .stay-table select, .stay-visit input, .stay-options select {
+  width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; font-family: 'Noto Sans KR', sans-serif; background: #fff;
+}
+.stay-table input:focus, .stay-table select:focus, .stay-visit input:focus, .stay-options select:focus { outline: none; border-color: #2db4a8; }
+.stay-del { border: none; background: none; color: #bbb; font-size: 15px; cursor: pointer; padding: 6px; }
+.stay-del:hover { color: #e53935; }
+
+.stay-people { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 12px; }
+.stay-person { background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 14px 16px; }
+.stay-person-head { font-size: 15px; font-weight: 800; color: #222; margin-bottom: 10px; }
+.stay-person-head span { font-size: 12px; font-weight: 600; color: #2db4a8; margin-left: 6px; }
+.stay-visit { display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; align-items: end; margin-bottom: 8px; }
+.stay-visit label { font-size: 11px; color: #888; }
+.stay-visit input { margin-top: 3px; }
+.stay-empty { font-size: 12px; color: #aaa; padding: 8px 0 10px; }
+.stay-add { width: 100%; padding: 8px; border: 1px dashed #b8e6e2; border-radius: 8px; background: #f8fdfc; color: #2db4a8; font-size: 13px; font-weight: 600; cursor: pointer; font-family: 'Noto Sans KR', sans-serif; }
+.stay-add:hover { background: #e8f5f4; }
+
+.stay-options { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 14px 16px; }
+.stay-options > label { font-size: 13px; font-weight: 600; color: #444; display: flex; flex-direction: column; gap: 6px; min-width: 240px; }
+.stay-options > label.ui-check { flex-direction: row; align-items: center; min-width: 0; font-weight: 500; }
+.stay-options > label.is-hidden { display: none; }
+
+.stay-summary { display: flex; gap: 12px; align-items: flex-start; padding: 16px 18px; border-radius: 12px; background: #f5f5f5; color: #555; font-size: 14px; margin-bottom: 12px; border: 1px solid #e6e6e6; }
+.stay-summary > i { font-size: 22px; margin-top: 1px; }
+.stay-summary.ok { background: #e8f5e9; border-color: #a5d6a7; color: #1b5e20; }
+.stay-summary.bad { background: #fdecea; border-color: #f5b5ae; color: #b71c1c; }
+.stay-summary-sub { font-size: 12px; margin-top: 4px; opacity: 0.85; }
+.stay-reasons { margin-bottom: 12px; font-size: 13px; }
+.stay-cell { font-weight: 700; }
+.stay-cell.ok { color: #2e7d32; }
+.stay-cell.bad { color: #e53935; background: #fff5f4; }
+.stay-cell.muted { color: #aaa; font-weight: 500; }
+
+.stay-grades { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+.stay-grade { display: flex; flex-direction: column; align-items: center; gap: 4px; padding: 12px 6px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; font-size: 14px; font-weight: 700; color: #555; cursor: pointer; }
+.stay-grade input { accent-color: #2db4a8; width: 16px; height: 16px; }
+.stay-grade small { font-size: 11px; font-weight: 400; color: #999; }
+.stay-grade.on { border-color: #2db4a8; background: #f0faf9; color: #1a5c3a; }
+
+@media (max-width: 600px) {
+  .stay-grades { grid-template-columns: repeat(3, 1fr); }
+  .stay-options > label { min-width: 100%; }
+}

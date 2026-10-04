@@ -1,0 +1,69 @@
+<div class="info-overlay" id="stayOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home clickable" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><a href="#/eligibility">자격요건 분석</a>
+    <span class="bc-sep">›</span><span class="bc-cur">해외체류기간 계산기</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero">
+    <h1>해외체류기간 계산기</h1>
+    <div class="ok-hero-sub">해외 재학 학년과 한국 방문 기록을 넣으면 3년 특례 체류 요건(학생 3/4 · 부모 2/3)을 학년별로 판정합니다.</div>
+  </div>
+  <div class="ok-wrap">
+    <div class="ok-tabs" id="stayTypeTabs">
+      <span class="ok-tab active" data-type="3년">3년 특례</span>
+      <span class="ok-tab" data-type="12년">12년 특례</span>
+    </div>
+
+    <!-- ===== 3년 특례 ===== -->
+    <div class="stay-panel" data-panel="3년">
+      <div class="ok-intro">
+        <strong>입력 방법</strong> ① 해외 학교에 다닌 학년과 학년 시작일(학기 개시일)을 넣고 ② 학생·아버지·어머니가 <strong>한국에 머문 기간</strong>(방학 귀국 등)을 넣으세요.
+        목록에 없는 기간은 해외에 체류한 것으로 계산합니다. 출입국사실증명서를 옆에 두고 입력하면 정확합니다.
+        <div class="mt-8"><button class="ok-btn line" data-js id="staySample"><i class="fas fa-magic"></i> 예시로 채워보기</button> <button class="ok-btn line" data-js id="stayReset"><i class="fas fa-undo"></i> 초기화</button></div>
+      </div>
+
+      <div class="ok-section-title"><i class="fas fa-school"></i> ① 해외 학교 재학 학년</div>
+      <div class="stay-table-wrap">
+        <table class="stay-table">
+          <thead><tr><th>학년</th><th>재학 국가</th><th>학년 시작일 (학기 개시일)</th><th>학년 종료일</th><th></th></tr></thead>
+          <tbody id="stayYears"></tbody>
+        </table>
+      </div>
+      <button class="ok-btn line" data-js id="stayAddYear"><i class="fas fa-plus"></i> 학년 추가</button>
+      <div class="ok-note">※ 학년 종료일은 '다음 학년도 같은 학기 개시일의 전날'로 자동 입력됩니다. 재학 중인 학년은 대학이 정한 기준일(예: 원서접수 마감일)로 바꿔 주세요.</div>
+
+      <div class="ok-section-title"><i class="fas fa-plane-arrival"></i> ② 한국 체류(방문) 기간</div>
+      <div class="stay-people" id="stayPeople"></div>
+
+      <div class="ok-section-title"><i class="fas fa-sliders-h"></i> 판정 기준</div>
+      <div class="stay-options">
+        <label>부모 요건 적용
+          <select id="stayParentRule">
+            <option value="both">부모 모두 2/3 이상 (일반 기준)</option>
+            <option value="worker">해외 근무 부모 1인만 2/3 이상 (일부 대학)</option>
+          </select>
+        </label>
+        <label id="stayWorkerWrap">해외 근무 부모
+          <select id="stayWorker"><option value="father">아버지</option><option value="mother">어머니</option></select>
+        </label>
+        <label class="ui-check"><input type="checkbox" id="stayEndpoints" checked> 출국일·입국일을 해외 체류일로 계산 (일반 기준)</label>
+      </div>
+
+      <div class="ok-section-title"><i class="fas fa-clipboard-check"></i> 판정 결과</div>
+      <div id="stayResult"></div>
+    </div>
+
+    <!-- ===== 12년 특례 ===== -->
+    <div class="stay-panel is-hidden" data-panel="12년">
+      <div class="ok-intro">12년 특례는 <strong>부모 체류 요건이 없고</strong>, 초·중·고 12개 학년 전 과정을 해외 학교에서 이수해야 합니다. 해외 학교에서 이수한 학년을 모두 체크하세요.</div>
+      <div class="stay-grades" id="stayGrades12"></div>
+      <div class="mt-20" id="stayResult12"></div>
+    </div>
+
+    <div class="ok-source">
+      계산 기준: 학년 단위(학기 개시일 ~ 다음 학년도 같은 학기 개시일 전일)마다 학생 3/4 이상, 부모 2/3 이상 해외 체류, 필요 일수의 소수점 이하는 절사.
+      이 계산기는 참고용이며, 체류일 산정 방식과 예외(부모 사망·이혼, 국내 체류 인정 사유 등)는 대학마다 다르므로 <strong>최종 자격은 지원 대학의 모집요강과 자격심사</strong>로 확인하세요.
+    </div>
+  </div>
+</div>

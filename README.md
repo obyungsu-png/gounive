@@ -12,8 +12,8 @@ npm run preview    # 빌드 결과 미리보기
 npm test           # 해외체류기간 계산 규칙 테스트
 ```
 
-`main` 브랜치에 push하면 `.github/workflows/deploy.yml`이 자동으로 빌드해 GitHub Pages에 배포합니다.
-(최초 1회: 저장소 **Settings → Pages → Source**를 **GitHub Actions**로 선택)
+배포는 **Vercel**(https://sat-tzyr.vercel.app)이 담당합니다. `main`에 push하면 Vercel이 `vercel.json` 설정대로
+`npm run build` 후 `dist/`를 배포합니다. GitHub Actions(`.github/workflows/ci.yml`)는 push·PR마다 테스트와 빌드만 확인합니다.
 
 > 빌드 도구를 쓰므로 `index.html`을 더블클릭해서 열면 화면이 나오지 않습니다. `npm run dev` 또는 배포 주소로 확인하세요.
 
@@ -31,7 +31,7 @@ src/
       eligibility · admissions · results · grades · prepare · library · consult
       institutions · return · universities · departments · login · stay · en · jobs · comp-consult
     modals/                 자격요건 · 초보자 · 서류준비 가이드, 상담 신청 폼
-  data/                     JSON 데이터 (universities · departments · teukrye-admissions · univ-grade-tabs)
+  data/                     JSON 데이터 (teukrye-admissions · library · universities · departments)
   css/                      화면별 스타일 + utilities.css(공통 유틸) + responsive.css(마지막에 로드)
   js/
     router.js               화면 주소 연결 (#/경로/하위탭), onRouteEnter 등록
@@ -50,7 +50,8 @@ src/
 public/                     favicon · 공유 미리보기 이미지(og-image.png) · robots.txt (빌드 시 그대로 복사)
 supabase/schema.sql         DB 테이블 · 보안 정책 (Supabase SQL Editor에서 실행)
 tests/                      node:test 단위 테스트
-.github/workflows/deploy.yml  GitHub Pages 자동 배포
+.github/workflows/ci.yml    push·PR마다 테스트 + 빌드 확인
+vercel.json                 Vercel 빌드 설정 (Vite, 출력 폴더 dist)
 ```
 
 아이콘(Font Awesome), 한글 폰트(Noto Sans KR, @fontsource), supabase-js는 npm 패키지로 설치되어 빌드 결과에 포함됩니다.
@@ -69,12 +70,12 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
    - 테이블: `profiles`(회원), `consults`(상담), `grade_records`(성적), `checklists`(체크리스트), `stay_records`(체류 계산 입력값)
    - 모든 테이블에 RLS가 켜져 있어 사용자는 자기 데이터만 읽고 쓸 수 있습니다
 3. **Authentication → URL Configuration**
-   - Site URL: 실제 배포 주소 (예: `https://아이디.github.io/gounive/`)
+   - Site URL: 실제 배포 주소 `https://sat-tzyr.vercel.app/`
    - Redirect URLs: 같은 주소와 `http://localhost:5173/`
 4. **Authentication → Sign In / Providers → Email**: 가입 시 이메일 인증을 받을지 선택 (Confirm email)
 5. **Project Settings → API**의 `Project URL`과 `anon public` 키를 입력
    - 로컬: `.env.example`을 `.env`로 복사해 `VITE_SUPABASE_URL`, `VITE_SUPABASE_ANON_KEY` 입력
-   - 배포: 저장소 **Settings → Secrets and variables → Actions → Variables**에 같은 이름으로 등록
+   - 배포: **Vercel → 프로젝트 → Settings → Environment Variables**에 같은 이름으로 등록한 뒤 Redeploy
    - anon 키는 공개용이라 브라우저에 들어가도 됩니다. **service_role 키는 절대 넣지 마세요.**
 
 ### 상담 답변 달기
@@ -129,7 +130,7 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 ## 공유 미리보기 · 검색 노출
 
 `index.html`의 `<head>`에 설명(description)과 Open Graph·트위터 카드 태그가 있습니다.
-기본 주소는 `https://obyungsu-png.github.io/gounive/`(GitHub Pages)로 적혀 있으니, 다른 도메인에 올리면 `canonical`, `og:url`, `og:image` 세 곳을 함께 바꾸세요.
+기본 주소는 `https://sat-tzyr.vercel.app/`로 적혀 있으니, 도메인을 바꾸면 `canonical`, `og:url`, `og:image` 세 곳을 함께 바꾸세요.
 
 ## 접근성
 

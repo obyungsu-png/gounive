@@ -135,6 +135,21 @@ export const Store = (() => {
       user = null;
       emit();
     },
+    /* 회원 탈퇴: 서버에서는 delete_my_account()가 계정과 연결된 모든 행을 지움 (schema.sql) */
+    async deleteAccount() {
+      if (isServer) await initPromise;
+      if (isServer) {
+        const { error } = await client.rpc('delete_my_account');
+        if (error) fail(error);
+        await client.auth.signOut({ scope: 'local' });
+      } else {
+        local.remove(KEYS.consults);
+      }
+      Object.keys(TABLES).forEach(kind => local.remove(KEYS[kind]));
+      local.remove(KEYS.user);
+      user = null;
+      emit();
+    },
     async resetPassword(email) {
       if (isServer) await initPromise;
       if (!isServer) throw new Error('데모 모드에서는 비밀번호 찾기를 사용할 수 없습니다.');

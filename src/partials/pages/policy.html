@@ -1,0 +1,152 @@
+<div class="info-overlay" id="policyOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home clickable" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><span class="bc-cur" id="policyBcCur">개인정보처리방침</span>
+    <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
+  </div>
+  <div class="info-hero">
+    <h1>운영 정책</h1>
+    <div class="ok-hero-sub">개인정보처리방침 · 이용약관 · 이메일주소 무단수집 거부</div>
+  </div>
+  <div class="ok-wrap policy-doc">
+    <div class="ok-tabs" id="policyTabs">
+      <span class="ok-tab active" onclick="switchPolicyTab(0)">개인정보처리방침</span>
+      <span class="ok-tab" onclick="switchPolicyTab(1)">이용약관</span>
+      <span class="ok-tab" onclick="switchPolicyTab(2)">이메일무단수집거부</span>
+    </div>
+
+    <!-- 0. 개인정보처리방침 -->
+    <div class="ok-tab-panel active">
+      <div class="ok-intro">
+        <strong data-site="name"></strong>(이하 '서비스')는 「개인정보 보호법」에 따라 이용자의 개인정보를 보호하고 관련 고충을 신속하게 처리하기 위해 다음과 같이 개인정보처리방침을 둡니다.
+        <div class="mt-8">시행일: <span data-site="policyDate"></span></div>
+      </div>
+
+      <div class="ok-section-title sm">1. 처리하는 개인정보와 목적·보유 기간</div>
+      <div class="stay-table-wrap">
+        <table class="ok-table">
+          <thead><tr><th>구분</th><th>항목</th><th>목적</th><th>보유 기간</th></tr></thead>
+          <tbody>
+            <tr><th>회원가입·로그인<br><small>(필수)</small></th><td>이메일, 비밀번호(암호화 저장), 이름, 구분(학생·학부모)</td><td>회원 식별, 로그인, 비밀번호 재설정 메일 발송</td><td>회원 탈퇴 시까지</td></tr>
+            <tr><th>특례 상담</th><td>상담 분야, 특례 유형, 제목, 내용, 공개 여부, 답변</td><td>상담 답변 제공, 공개를 선택한 글은 다른 이용자에게 사례로 공유</td><td>회원 탈퇴 시까지</td></tr>
+            <tr><th>기록 저장<br><small>(선택)</small></th><td>해외학교 성적 입력값, 특례 준비 체크리스트, 체류기간 계산 입력값(학년·재학 국가·학년 기간, 학생·부모의 한국 방문 기간)</td><td>입력한 기록을 저장하고 다른 기기에서 불러오기</td><td>회원 탈퇴 시까지</td></tr>
+            <tr><th>자동 수집</th><td>접속 IP, 접속 일시, 브라우저 정보 등 접속 기록</td><td>웹사이트 제공과 보안 (호스팅 서버 기록)</td><td>호스팅 업체의 보관 정책에 따름</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <ul class="ok-list">
+        <li>로그인하지 않고 쓰는 계산기·성적 입력값과, 서버가 연결되지 않은 <strong>데모 모드</strong>의 모든 입력값은 이용자 브라우저에만 저장되며 운영자에게 전송되지 않습니다.</li>
+        <li>체류기간 계산기에 부모의 한국 방문 기간을 입력할 때는 부모의 동의를 받은 뒤 입력해 주세요.</li>
+        <li>서비스는 만 14세 미만 아동의 회원가입을 받지 않습니다.</li>
+      </ul>
+
+      <div class="ok-section-title sm">2. 제3자 제공</div>
+      <p class="policy-p">서비스는 이용자의 개인정보를 제3자에게 제공하지 않습니다. 다만 법령에 특별한 규정이 있는 경우는 예외로 합니다.</p>
+
+      <div class="ok-section-title sm">3. 처리 위탁과 국외 이전</div>
+      <p class="policy-p">서비스는 웹사이트 운영을 위해 아래 업체에 개인정보 처리를 맡기고 있습니다.</p>
+      <div class="stay-table-wrap">
+        <table class="ok-table">
+          <thead><tr><th>받는 자</th><th>맡기는 업무</th><th>이전 국가·저장 위치</th><th>항목</th><th>시기·방법</th><th>보유 기간</th></tr></thead>
+          <tbody>
+            <tr><th>Vercel Inc.</th><td>웹사이트 호스팅</td><td>미국 법인, 세계 각지 서버</td><td>접속 기록</td><td>사이트에 접속할 때 네트워크로 전송</td><td>업체 보관 정책에 따름</td></tr>
+            <tr><th>Supabase Inc.</th><td>회원 인증, 데이터 저장, 인증 메일 발송</td><td>미국 법인, 데이터 저장 위치 <span data-site="dataRegion"></span></td><td>1번의 회원·상담·기록 저장 정보</td><td>가입·저장할 때 네트워크로 전송</td><td>회원 탈퇴 시까지</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="policy-p">국외 이전을 원하지 않으면 회원가입을 하지 않고 브라우저에만 저장되는 기능을 이용할 수 있습니다. 이 경우 상담 신청과 기록 동기화는 이용할 수 없습니다.</p>
+
+      <div class="ok-section-title sm">4. 파기 절차와 방법</div>
+      <p class="policy-p">회원 탈퇴 시 계정과 연결된 모든 정보(프로필, 상담 글, 성적·체크리스트·체류 기록)를 즉시 삭제하며, 전자 파일은 복구할 수 없는 방법으로 지웁니다. 업체 백업에 남은 정보는 백업 보관 주기가 지나면 자동으로 삭제됩니다.</p>
+
+      <div class="ok-section-title sm">5. 이용자의 권리와 행사 방법</div>
+      <ul class="ok-list">
+        <li>이용자는 언제든지 자신의 개인정보 열람·정정·삭제·처리정지를 요구할 수 있습니다.</li>
+        <li><strong>회원 탈퇴</strong>는 <a class="text-brand fw-600" href="#/login/withdraw">회원 탈퇴 화면</a>에서 직접 할 수 있으며, 탈퇴하면 모든 정보가 즉시 삭제됩니다.</li>
+        <li>비밀번호는 <a class="text-brand fw-600" href="#/login/reset">비밀번호 찾기</a>로 바꿀 수 있고, 그 밖의 정정·삭제 요청은 아래 연락처로 접수하면 지체 없이 처리합니다.</li>
+        <li>공용 기기에서는 사용 후 로그아웃하세요. 서버 모드에서는 로그아웃할 때 그 기기에 남은 기록 사본도 삭제됩니다.</li>
+      </ul>
+
+      <div class="ok-section-title sm">6. 쿠키 등 자동 수집 장치</div>
+      <p class="policy-p">서비스는 쿠키와 광고·이용 분석 도구를 사용하지 않습니다. 로그인 상태와 입력값을 유지하기 위해 브라우저 저장소(localStorage)를 사용하며, 브라우저 설정에서 사이트 데이터를 삭제하면 지워집니다.</p>
+
+      <div class="ok-section-title sm">7. 안전성 확보 조치</div>
+      <ul class="ok-list">
+        <li>모든 통신은 HTTPS로 암호화하여 전송합니다.</li>
+        <li>비밀번호는 복호화할 수 없는 방식으로 암호화하여 저장합니다.</li>
+        <li>데이터베이스의 행 수준 보안(RLS)으로 이용자는 자신의 정보만 조회·수정할 수 있습니다.</li>
+      </ul>
+
+      <div class="ok-section-title sm">8. 개인정보 보호책임자</div>
+      <table class="ok-table">
+        <tbody>
+          <tr><th>보호책임자</th><td data-site="operatorLabel"></td></tr>
+          <tr><th>연락처</th><td data-site="contactHtml"></td></tr>
+        </tbody>
+      </table>
+
+      <div class="ok-section-title sm">9. 권익침해 구제 방법</div>
+      <p class="policy-p">개인정보 침해에 대한 신고나 상담이 필요하면 아래 기관에 문의할 수 있습니다.</p>
+      <ul class="ok-list">
+        <li>개인정보분쟁조정위원회: 1833-6972 (<a href="https://www.kopico.go.kr" target="_blank" rel="noopener">www.kopico.go.kr</a>)</li>
+        <li>개인정보침해신고센터: 국번 없이 118 (<a href="https://privacy.kisa.or.kr" target="_blank" rel="noopener">privacy.kisa.or.kr</a>)</li>
+        <li>대검찰청: 국번 없이 1301 (<a href="https://www.spo.go.kr" target="_blank" rel="noopener">www.spo.go.kr</a>)</li>
+        <li>경찰청: 국번 없이 182 (<a href="https://ecrm.police.go.kr" target="_blank" rel="noopener">ecrm.police.go.kr</a>)</li>
+      </ul>
+
+      <div class="ok-section-title sm">10. 방침의 변경</div>
+      <p class="policy-p">이 방침을 바꾸는 경우 시행 7일 전부터 이 화면에 알립니다.</p>
+    </div>
+
+    <!-- 1. 이용약관 -->
+    <div class="ok-tab-panel">
+      <div class="ok-intro">시행일: <span data-site="policyDate"></span></div>
+      <div class="ok-section-title sm">제1조 (목적)</div>
+      <p class="policy-p">이 약관은 <span data-site="name"></span>(이하 '서비스')의 이용 조건과 절차, 이용자와 운영자의 권리·의무를 정합니다.</p>
+
+      <div class="ok-section-title sm">제2조 (서비스의 성격)</div>
+      <ul class="ok-list">
+        <li>서비스는 재외국민 특별전형 준비를 돕는 <strong>비공식 정보 서비스</strong>이며, 교육부·한국대학교육협의회·각 대학과 관계가 없습니다.</li>
+        <li>전형 정보는 공개된 모집요강과 공공기관 자료를 요약한 것으로, 오류가 있거나 바뀔 수 있습니다. <strong>최종 지원자격과 전형 내용은 반드시 지원 대학의 모집요강</strong>으로 확인해야 합니다.</li>
+        <li>체류기간 계산기·성적 입력 결과와 상담 답변은 참고용이며, 대학의 지원자격 심사 결과를 대신하지 않습니다.</li>
+      </ul>
+
+      <div class="ok-section-title sm">제3조 (회원)</div>
+      <ul class="ok-list">
+        <li>회원가입은 만 14세 이상이 본인의 정보로 할 수 있습니다.</li>
+        <li>회원은 자신의 계정과 비밀번호를 관리할 책임이 있으며, 언제든지 탈퇴할 수 있습니다.</li>
+      </ul>
+
+      <div class="ok-section-title sm">제4조 (게시물)</div>
+      <ul class="ok-list">
+        <li>상담 글을 '공개'로 등록하면 다른 이용자도 볼 수 있습니다. 글에 본인이나 타인의 연락처·주소 등 개인정보를 쓰지 마세요.</li>
+        <li>타인을 비방하거나 광고·불법 정보를 담은 게시물은 알림 없이 삭제할 수 있습니다.</li>
+        <li>게시물에 대한 책임은 작성자에게 있습니다.</li>
+      </ul>
+
+      <div class="ok-section-title sm">제5조 (서비스의 변경·중단)</div>
+      <p class="policy-p">서비스는 무료로 제공되며, 운영상 필요한 경우 미리 알린 뒤 내용을 바꾸거나 중단할 수 있습니다.</p>
+
+      <div class="ok-section-title sm">제6조 (책임의 한계)</div>
+      <p class="policy-p">운영자는 서비스 정보를 정확하게 유지하려고 노력하지만, 고의 또는 중대한 과실이 없는 한 서비스 정보를 이용한 결과(지원 결과 등)에 대해 책임을 지지 않습니다.</p>
+
+      <div class="ok-section-title sm">제7조 (저작권)</div>
+      <ul class="ok-list">
+        <li>서비스가 직접 작성한 글·화면·계산 기능의 저작권은 운영자에게 있습니다. 개인 학습이나 출처를 밝힌 비영리 인용 외의 무단 복제·배포를 금지합니다.</li>
+        <li>요약·인용한 모집요강과 공공기관 자료의 저작권은 각 대학과 기관에 있으며, 서비스는 해당 자료의 출처와 원문 링크를 표시합니다.</li>
+      </ul>
+
+      <div class="ok-section-title sm">부칙</div>
+      <p class="policy-p">이 약관은 <span data-site="policyDate"></span>부터 시행합니다.</p>
+    </div>
+
+    <!-- 2. 이메일무단수집거부 -->
+    <div class="ok-tab-panel">
+      <div class="ok-intro">
+        본 웹사이트에 게시된 이메일 주소가 전자우편 수집 프로그램이나 그 밖의 기술적 장치를 이용하여 무단으로 수집되는 것을 거부하며,
+        이를 위반하면 「정보통신망 이용촉진 및 정보보호 등에 관한 법률」 제50조의2에 따라 처벌받을 수 있습니다.
+      </div>
+      <div class="ok-note">게시일: <span data-site="policyDate"></span></div>
+    </div>
+  </div>
+</div>

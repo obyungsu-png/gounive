@@ -81,3 +81,47 @@
 .inst-items a:hover { border-color: #2db4a8; color: #1d8a80; }
 .inst-tag { display: inline-block; font-size: 10px; font-weight: 700; color: #b8860b; background: #fff6dd; border-radius: 8px; padding: 1px 6px; vertical-align: 1px; }
 .inst-legend { font-size: 12px; color: #888; margin-bottom: 14px; }
+
+/* 운영 정책 */
+.policy-doc .ok-section-title.sm { margin-top: 22px; }
+.policy-p { font-size: 14px; line-height: 1.8; color: #444; margin: 0 0 10px; }
+.policy-doc .ok-table th { white-space: nowrap; }
+@media (max-width: 768px) {
+  .policy-doc .ok-table th { white-space: normal; }
+  .policy-doc .stay-table-wrap .ok-table { min-width: 600px; }
+}
+
+/* 대학별 특례 정보 카드 */
+.uc-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; margin-bottom: 16px; }
+.uc-search { position: relative; flex: 1 1 240px; max-width: 360px; }
+.uc-search input { width: 100%; padding: 10px 36px 10px 14px; border: 1px solid #ddd; border-radius: 22px; font-size: 14px; font-family: inherit; }
+.uc-search input:focus { outline: none; border-color: #2db4a8; }
+.uc-search i { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: #2db4a8; }
+.uc-filter { display: flex; flex-wrap: wrap; gap: 6px; }
+.uc-filter button { border: 1px solid #ddd; background: #fff; border-radius: 18px; padding: 7px 14px; font-size: 13px; font-family: inherit; color: #555; cursor: pointer; }
+.uc-filter button.active { background: #2db4a8; border-color: #2db4a8; color: #fff; font-weight: 700; }
+.uc-total { font-size: 13px; color: #888; margin-left: auto; }
+.uc-list { display: grid; gap: 14px; }
+.uc-card { background: #fff; border: 1px solid #e6eeee; border-radius: 14px; padding: 16px 18px; min-width: 0; }
+.uc-head { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.uc-name { font-size: 17px; font-weight: 800; color: #222; margin: 0; flex: 1; min-width: 0; }
+.uc-home, .uc-doc { font-size: 12px; font-weight: 600; color: #1d8a80; text-decoration: none; white-space: nowrap; }
+.uc-home { border: 1px solid #cfe9e6; border-radius: 16px; padding: 5px 11px; }
+.uc-tracks { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.uc-track { background: #f8fbfb; border: 1px solid #e3efee; border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.uc-track.none { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; color: #999; font-size: 13px; }
+.uc-track.none p { margin: 0; }
+.uc-track-head { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin-bottom: 8px; }
+.uc-track-name { font-size: 13px; font-weight: 700; color: #333; }
+.uc-track dl { display: grid; grid-template-columns: 64px 1fr; gap: 6px 8px; margin: 0 0 8px; font-size: 13px; line-height: 1.6; }
+.uc-track dt { color: #888; font-weight: 600; }
+.uc-track dd { margin: 0; color: #333; overflow-wrap: anywhere; }
+.uc-track .adm-method { margin-right: 4px; }
+.uc-foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px; margin-top: 12px; padding-top: 12px; border-top: 1px dashed #e3efee; font-size: 13px; color: #555; }
+.uc-foot i { color: #2db4a8; margin-right: 4px; }
+.uc-foot .ok-btn { margin: 0; }
+@media (max-width: 768px) {
+  .uc-tracks { grid-template-columns: 1fr; }
+  .uc-total { margin-left: 0; width: 100%; }
+}
+.ok-empty { padding: 40px 16px; text-align: center; color: #999; font-size: 14px; background: #fff; border: 1px dashed #ddd; border-radius: 12px; }

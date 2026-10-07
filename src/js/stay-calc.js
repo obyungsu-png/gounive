@@ -101,6 +101,14 @@ function renderResult() {
 
 function update() { save(); renderResult(); }
 
+/* 대학별 특례 정보 화면 등에서 출·입국일 산정 방식을 지정해 열 때 */
+export function useEndpointRule(key) {
+  state.endpointRule = endpointRule(key).key;
+  setType('3년');
+  renderInputs();
+  update();
+}
+
 function setType(type) {
   state.type = type;
   document.querySelectorAll('#stayTypeTabs .ok-tab').forEach(t => t.classList.toggle('active', t.dataset.type === type));

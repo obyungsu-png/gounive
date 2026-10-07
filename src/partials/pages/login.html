@@ -37,7 +37,8 @@
         <input type="email" id="signupEmail" class="login-field" placeholder="이메일" autocomplete="email">
         <input type="password" id="signupPw" class="login-field" placeholder="비밀번호 (6자 이상)" autocomplete="new-password">
         <input type="password" id="signupPw2" class="login-field" placeholder="비밀번호 확인" autocomplete="new-password">
-        <label class="auth-agree"><input type="checkbox" id="signupAgree"> 상담·성적 관리를 위한 개인정보(이름·이메일) 수집·이용에 동의합니다.</label>
+        <label class="auth-agree"><input type="checkbox" id="signupAgree"> 상담·기록 저장을 위한 개인정보(이름·이메일 등) 수집·이용에 동의합니다. <a href="#/policy/privacy" target="_blank">개인정보처리방침 보기</a></label>
+        <label class="auth-agree"><input type="checkbox" id="signupAge"> 만 14세 이상입니다.</label>
         <div class="login-error" id="signupError" role="alert"></div>
         <button class="login-submit" id="signupSubmit" onclick="signupUser()">가입하기</button>
         <div class="login-options"><a href="#/login/signin">이미 계정이 있어요 · 로그인</a></div>
@@ -60,6 +61,17 @@
         <input type="password" id="newPw2" class="login-field" placeholder="새 비밀번호 확인" autocomplete="new-password">
         <div class="login-error" id="updateError" role="alert"></div>
         <button class="login-submit" id="updateSubmit" onclick="saveNewPassword()">비밀번호 변경</button>
+      </div>
+
+      <!-- 회원 탈퇴 -->
+      <div class="auth-panel" data-panel="withdraw">
+        <h1>회원 탈퇴</h1>
+        <p class="auth-desc">탈퇴하면 계정과 함께 상담 글, 해외학교 성적, 체크리스트, 체류 계산 기록이 <strong>모두 즉시 삭제</strong>되며 되돌릴 수 없습니다.</p>
+        <p class="auth-desc" id="withdrawWho"></p>
+        <label class="auth-agree"><input type="checkbox" id="withdrawAgree"> 위 내용을 확인했으며 탈퇴합니다.</label>
+        <div class="login-error" id="withdrawError" role="alert"></div>
+        <button class="login-submit" id="withdrawSubmit" onclick="withdrawUser()">탈퇴하기</button>
+        <div class="login-options"><a href="#/">취소하고 홈으로</a></div>
       </div>
     </div>
   </div>

@@ -2,7 +2,7 @@
 
 @media (max-width: 1200px) {
   .main-wrap { padding: 20px 80px 40px 24px; }
-  .info-body, .job-modal-body { padding: 24px 80px 24px 24px; }
+  .info-body { padding: 24px 80px 24px 24px; }
   .steps-grid { grid-template-columns: repeat(2, 1fr); }
   .banner-illustration { right: 16px; width: 180px; }
   .banner-illustration i.main-icon { font-size: 100px; }
@@ -37,11 +37,11 @@
   .eval-illustration { display: none; }
 
   /* 내부 페이지 */
-  .info-topbar, .job-modal-topbar { padding: 10px 16px; flex-wrap: wrap; font-size: 12px; }
+  .info-topbar { padding: 10px 16px; flex-wrap: wrap; font-size: 12px; }
   .info-hero { padding: 22px 16px 18px; }
   .info-hero h1 { font-size: 21px; }
-  .info-body, .job-modal-body { flex-direction: column; padding: 16px; gap: 16px; }
-  .info-filter, .job-filter-panel { width: auto; }
+  .info-body { flex-direction: column; padding: 16px; gap: 16px; }
+  .info-filter { width: auto; }
   .info-table-area { min-width: 0; overflow-x: auto; }
   .info-table { min-width: 640px; }
   .ok-wrap { padding: 20px 16px 10px; }

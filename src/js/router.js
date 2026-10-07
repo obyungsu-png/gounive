@@ -9,8 +9,7 @@ const BASE_TITLE = '재외국민 One Stop 서비스';
 const ROUTES = [
   { path: 'eligibility',  page: 'systemOverlay',    title: '재외국민 제도안내' },
   { path: 'stay',         page: 'stayOverlay',      title: '해외체류기간 계산기' },
-  { path: 'universities', page: 'univOverlay',      title: '대학정보' },
-  { path: 'departments',  page: 'deptOverlay',      title: '학과정보' },
+  { path: 'universities', page: 'univOverlay',      title: '대학별 특례 정보' },
   { path: 'admissions',   page: 'admOverlay',       title: '특례전형정보', subs: ['3year', '12year'] },
   { path: 'results',      page: 'univGradeOverlay', title: '재외국민 대학별성적분석', subs: ['3year', '12year'] },
   { path: 'grades',       page: 'gradeOverlay',     title: '해외학교 성적 입력' },
@@ -19,10 +18,9 @@ const ROUTES = [
   { path: 'consult',      page: 'consultOverlay',   title: '특례 입시상담' },
   { path: 'institutions', page: 'instOverlay',      title: '재외교육기관', subs: ['schools', 'centers'] },
   { path: 'return',       page: 'returnOverlay',    title: '귀국학생 편입학 안내' },
-  { path: 'jobs',         page: 'jobOverlay',       title: '직업정보' },
-  { path: 'comp-consult', page: 'compOverlay',      title: '학생부종합전형 상담' },
   { path: 'en',           page: 'enOverlay',        title: 'English Guide', lang: 'en' },
-  { path: 'login',        page: 'loginOverlay',     title: '로그인 · 회원가입', subs: ['signin', 'signup', 'reset', 'update'] }
+  { path: 'login',        page: 'loginOverlay',     title: '로그인 · 회원가입', subs: ['signin', 'signup', 'reset', 'update', 'withdraw'] },
+  { path: 'policy',       page: 'policyOverlay',    title: '운영 정책', subs: ['privacy', 'terms', 'email'] }
 ];
 
 const enterHandlers = {};

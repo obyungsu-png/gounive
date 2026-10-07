@@ -8,23 +8,19 @@
 
     <div class="menu-grid">
 
-      <!-- 대학/학과/전형 -->
       <div class="menu-category">
         <div class="menu-cat-header">
           <i class="fas fa-edit"></i>
-          <span class="menu-cat-title">대학/학과/전형</span>
+          <span class="menu-cat-title">대학/전형</span>
         </div>
         <div class="menu-links">
-          <a href="#" onclick="menuGo('univOverlay');return false;">대학정보</a>
-          <a href="#" onclick="menuGo('deptOverlay');return false;">학과정보</a>
-          <a href="#" onclick="menuGo('admOverlay');return false;">전형정보</a>
-          <a href="#">지역별검색</a>
-          <a href="#">경쟁률현황</a>
-          <a href="#">합격자현황</a>
+          <a href="#/universities" onclick="closeMenu()">대학별 특례 정보</a>
+          <a href="#/admissions/3year" onclick="closeMenu()">3년 특례 전형</a>
+          <a href="#/admissions/12year" onclick="closeMenu()">12년 특례 전형</a>
+          <a href="#/results/3year" onclick="closeMenu()">대학별 성적분석</a>
+          <a href="#/library" onclick="closeMenu()">모집요강 자료실</a>
         </div>
       </div>
-
-      <!-- 자격요건 분석 -->
       <div class="menu-category">
         <div class="menu-cat-header">
           <i class="fas fa-passport"></i>
@@ -32,101 +28,87 @@
         </div>
         <div class="menu-links">
           <a href="#" onclick="closeMenu();openGuideModal();return false;">재외국민 자격확인</a>
-          <a href="#" onclick="menuGo('stayOverlay');return false;">해외체류기간 계산</a>
-          <a href="#" onclick="menuGo('returnOverlay');return false;">학력인정 기준</a>
-          <a href="#" onclick="menuGo('systemOverlay');return false;">특례유형 안내</a>
-          <a href="#" onclick="menuGo('systemOverlay');return false;" class="full-width">자격요건 상세안내</a>
+          <a href="#/stay" onclick="closeMenu()">해외체류기간 계산</a>
+          <a href="#/return" onclick="closeMenu()">학력인정 기준</a>
+          <a href="#/eligibility" onclick="closeMenu()">특례유형 안내</a>
+          <a href="#/eligibility" onclick="closeMenu()" class="full-width">자격요건 상세안내</a>
         </div>
       </div>
-
-      <!-- 입시상담 -->
       <div class="menu-category">
         <div class="menu-cat-header">
           <i class="fas fa-comments"></i>
           <span class="menu-cat-title">입시상담</span>
         </div>
         <div class="menu-links">
-          <a href="#" onclick="menuGo('consultOverlay');return false;">온라인입시상담</a>
-          <a href="#">상담FAQ</a>
-          <a href="#">전화상담 안내</a>
-          <a href="#" onclick="menuGo('consultOverlay');return false;">1:1 맞춤상담</a>
-          <a href="#" class="full-width">재외국민 종합상담</a>
+          <a href="#/consult" onclick="closeMenu()">온라인 입시상담</a>
+          <a href="#" onclick="closeMenu();openConsultForm();return false;">상담 신청하기</a>
+          <a href="#/eligibility" onclick="closeMenu()">자주 묻는 질문</a>
+          <a href="https://www.adiga.kr" target="_blank" rel="noopener">대교협 대입상담 <i class="fas fa-external-link-alt"></i></a>
+          <a href="tel:16001615" class="full-width">전화상담 1600-1615 (대교협)</a>
         </div>
       </div>
-
-      <!-- 진로정보 -->
       <div class="menu-category">
         <div class="menu-cat-header">
-          <i class="fas fa-route"></i>
-          <span class="menu-cat-title">진로정보</span>
+          <i class="fas fa-globe-asia"></i>
+          <span class="menu-cat-title">재외교육·귀국</span>
         </div>
         <div class="menu-links">
-          <a href="#" onclick="menuGo('jobOverlay');return false;">직업정보</a>
-          <a href="#">직업심리검사</a>
-          <a href="#">학과별 진로안내</a>
-          <a href="#">해외 취업정보</a>
+          <a href="#/institutions/schools" onclick="closeMenu()">한국학교</a>
+          <a href="#/institutions/centers" onclick="closeMenu()">한국교육원</a>
+          <a href="#/return" onclick="closeMenu()">귀국학생 편입학</a>
+          <a href="#/en" onclick="closeMenu()" lang="en">English Guide</a>
         </div>
       </div>
-
-      <!-- 입시정보센터 -->
       <div class="menu-category">
         <div class="menu-cat-header">
           <i class="fas fa-database"></i>
           <span class="menu-cat-title">입시정보센터</span>
         </div>
         <div class="menu-links">
-          <a href="#" onclick="menuGo('systemOverlay');return false;">재외국민제도안내</a>
-          <a href="#" onclick="closeMenu();openProgram(2);return false;">전형일정</a>
-          <a href="#">입시소식</a>
-          <a href="#">설명회/박람회</a>
-          <a href="#" onclick="menuGo('dataOverlay');return false;">입시자료실</a>
-          <a href="#">대학별 입시정보</a>
+          <a href="#/eligibility" onclick="closeMenu()">재외국민 제도안내</a>
+          <a href="#/prepare/schedule" onclick="closeMenu()">전형일정</a>
+          <a href="#/prepare/roadmap" onclick="closeMenu()">준비 로드맵</a>
+          <a href="#/prepare/factors" onclick="closeMenu()">전형요소별 준비</a>
+          <a href="#/prepare/glossary" onclick="closeMenu()">용어사전</a>
+          <a href="#/library" onclick="closeMenu()">입시자료실</a>
         </div>
       </div>
-
-      <!-- 고객센터 -->
       <div class="menu-category">
         <div class="menu-cat-header">
           <i class="fas fa-headset"></i>
           <span class="menu-cat-title">고객센터</span>
         </div>
         <div class="menu-links">
-          <a href="#">공지사항</a>
-          <a href="#">서비스이용문의</a>
-          <a href="#">사이트맵</a>
-          <a href="#">이용안내</a>
+          <a href="#" onclick="closeMenu();openNotices();return false;">공지사항</a>
+          <a href="#" onclick="closeMenu();openNoviceGuide();return false;">이용안내</a>
+          <a href="#/consult" onclick="closeMenu()">제안 및 건의</a>
+          <a href="#/policy/terms" onclick="closeMenu()">이용약관</a>
         </div>
       </div>
-
-      <!-- 회원서비스 -->
       <div class="menu-category">
         <div class="menu-cat-header">
           <i class="fas fa-users"></i>
           <span class="menu-cat-title">회원서비스</span>
         </div>
         <div class="menu-links">
-          <a href="#" onclick="closeMenu();openMyArea();return false;">로그인</a>
-          <a href="#">회원가입</a>
-          <a href="#">아이디찾기</a>
-          <a href="#">비밀번호찾기</a>
-          <a href="#">개인정보처리방침</a>
-          <a href="#">이메일수집거부</a>
+          <a href="#/login/signin" onclick="closeMenu()">로그인</a>
+          <a href="#/login/signup" onclick="closeMenu()">회원가입</a>
+          <a href="#/login/reset" onclick="closeMenu()">비밀번호 찾기</a>
+          <a href="#/login/withdraw" onclick="closeMenu()">회원 탈퇴</a>
+          <a href="#/policy/privacy" onclick="closeMenu()">개인정보처리방침</a>
+          <a href="#/policy/email" onclick="closeMenu()">이메일수집거부</a>
         </div>
       </div>
-
-      <!-- 마이페이지 -->
       <div class="menu-category">
         <div class="menu-cat-header">
           <i class="fas fa-user-circle"></i>
           <span class="menu-cat-title">마이페이지</span>
         </div>
         <div class="menu-links">
-          <a href="#">관심대학/전형</a>
-          <a href="#">어디가 알림</a>
-          <a href="#">일정관리</a>
-          <a href="#">신청/접수</a>
-          <a href="#">재외국민 지원정보</a>
-          <a href="#">입학도우미</a>
+          <a href="#/grades" onclick="closeMenu()">내 해외학교 성적</a>
+          <a href="#/prepare/checklist" onclick="closeMenu()">내 체크리스트</a>
+          <a href="#/stay" onclick="closeMenu()">내 체류 계산</a>
+          <a href="#/consult" onclick="closeMenu()">내 상담 내역</a>
         </div>
       </div>
 

@@ -340,3 +340,31 @@
 .dept-keyword-input button {
   padding: 0 11px; background: #333; border: none; color: #fff; cursor: pointer;
 }
+
+
+/* 왼쪽 필터 상자 (자료실 · 특례전형 · 성적분석) */
+.filter-box {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+.filter-box label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 10px;
+}
+.filter-box select {
+  width: 100%;
+  padding: 9px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  font-family: 'Noto Sans KR', sans-serif;
+  color: #555;
+  appearance: auto;
+  background: #fafafa;
+}

@@ -5,13 +5,21 @@ import { showToast, escapeHtml } from './ui.js';
 import { navigate, onRouteEnter } from './router.js';
 
 const SAVED_EMAIL_KEY = 'teukrye-saved-email';
-const AUTH_PANELS = ['signin', 'signup', 'reset', 'update'];
+const AUTH_PANELS = ['signin', 'signup', 'reset', 'update', 'withdraw'];
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 export function getCurrentUser() { return Store.getUser(); }
 
 export function showAuthPanel(idx) {
   document.querySelectorAll('#loginOverlay .auth-panel').forEach(p => p.classList.toggle('active', p.dataset.panel === AUTH_PANELS[idx]));
+  if (AUTH_PANELS[idx] === 'withdraw') renderWithdraw(Store.getUser());
+}
+
+function renderWithdraw(user) {
+  document.getElementById('withdrawWho').innerHTML = user
+    ? `탈퇴할 계정: <b>${escapeHtml(user.email || user.name)}</b>`
+    : '로그인한 뒤 탈퇴할 수 있습니다. <a href="#/login/signin">로그인하기</a>';
+  document.getElementById('withdrawSubmit').disabled = !user;
 }
 
 /* 버튼을 잠그고 비동기 작업 실행, 오류는 해당 칸에 표시 */
@@ -59,6 +67,7 @@ export function signupUser() {
     if (pw.length < 6) { err.textContent = '비밀번호는 6자 이상이어야 합니다.'; return; }
     if (pw !== document.getElementById('signupPw2').value) { err.textContent = '비밀번호 확인이 일치하지 않습니다.'; return; }
     if (!document.getElementById('signupAgree').checked) { err.textContent = '개인정보 수집·이용에 동의해주세요.'; return; }
+    if (!document.getElementById('signupAge').checked) { err.textContent = '만 14세 이상만 가입할 수 있습니다.'; return; }
     const { needsConfirm } = await Store.signUp({ email, password: pw, name, role });
     ['signupPw', 'signupPw2'].forEach(id => { document.getElementById(id).value = ''; });
     if (needsConfirm) {
@@ -93,6 +102,17 @@ export function saveNewPassword() {
   });
 }
 
+export function withdrawUser() {
+  runAuthAction('withdrawSubmit', 'withdrawError', async (err) => {
+    if (!Store.getUser()) { err.textContent = '로그인한 뒤 탈퇴할 수 있습니다.'; return; }
+    if (!document.getElementById('withdrawAgree').checked) { err.textContent = '안내 내용을 확인하고 체크해주세요.'; return; }
+    await Store.deleteAccount();
+    document.getElementById('withdrawAgree').checked = false;
+    navigate('#/');
+    showToast('탈퇴가 완료되었습니다. 그동안 이용해 주셔서 감사합니다.');
+  });
+}
+
 export async function logoutUser() {
   await Store.signOut();
   showToast('로그아웃되었습니다.');
@@ -124,6 +144,7 @@ function renderAuthState(user) {
   enter(['resetEmail'], requestPasswordReset);
   enter(['newPw2'], saveNewPassword);
   Store.onChange(renderAuthState);
+  Store.onChange(user => { if (document.querySelector('#loginOverlay .auth-panel.active[data-panel="withdraw"]')) renderWithdraw(user); });
   Store.onRecovery(() => navigate('#/login/update'));
   onRouteEnter('loginOverlay', i => showAuthPanel(i));
 })();

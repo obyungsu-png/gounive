@@ -29,9 +29,9 @@ src/
     home.html               메인 화면
     pages/                  화면별 HTML (주소 #/경로 와 1:1)
       eligibility · admissions · results · grades · prepare · library · consult
-      institutions · return · universities · departments · login · stay · en · jobs · comp-consult
+      institutions · return · universities · login · stay · en · policy
     modals/                 자격요건 · 초보자 · 서류준비 가이드, 상담 신청 폼
-  data/                     JSON 데이터 (teukrye-admissions · library · institutions · universities · departments)
+  data/                     JSON 데이터 (teukrye-admissions · library · institutions · site)
   css/                      화면별 스타일 + utilities.css(공통 유틸) + responsive.css(마지막에 로드)
   js/
     router.js               화면 주소 연결 (#/경로/하위탭), onRouteEnter 등록
@@ -45,8 +45,9 @@ src/
     stay-calc.js            해외체류기간 계산기 화면
     teukrye-adm.js          특례전형정보
     univ-grade.js           대학별 성적분석
-    tables.js               대학·학과 목록
-    search.js · home.js · menu.js · modals.js · banner.js · jobs.js · ok-pages.js · ui.js
+    univ-info.js            대학별 특례 정보 (대학마다 3년·12년 카드)
+    policy.js               운영 정책 화면 + 푸터 운영자 정보 (src/data/site.json)
+    search.js · home.js · menu.js · modals.js · banner.js · ok-pages.js · ui.js
 public/                     favicon · 공유 미리보기 이미지(og-image.png) · robots.txt (빌드 시 그대로 복사)
 supabase/schema.sql         DB 테이블 · 보안 정책 (Supabase SQL Editor에서 실행)
 tests/                      node:test 단위 테스트
@@ -65,10 +66,11 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 
 ### 설정 순서 (약 10분)
 
-1. [supabase.com](https://supabase.com)에서 프로젝트 생성 (Region: Northeast Asia (Seoul) 권장)
+1. [supabase.com](https://supabase.com)에서 프로젝트 생성 (Region: **Northeast Asia (Seoul)** — 개인정보처리방침에 저장 위치를 서울로 적어 두었으므로 다른 지역을 고르면 `src/data/site.json`의 `dataRegion`도 바꿔야 함)
 2. 대시보드 **SQL Editor** → `supabase/schema.sql` 내용을 붙여넣고 **Run**
    - 테이블: `profiles`(회원), `consults`(상담), `grade_records`(성적), `checklists`(체크리스트), `stay_records`(체류 계산 입력값)
    - 모든 테이블에 RLS가 켜져 있어 사용자는 자기 데이터만 읽고 쓸 수 있습니다
+   - 회원 탈퇴용 함수 `delete_my_account()`도 함께 만들어집니다 (탈퇴 시 위 테이블의 본인 행까지 모두 삭제)
 3. **Authentication → URL Configuration**
    - Site URL: 실제 배포 주소 `https://gounive.vercel.app/`
    - Redirect URLs: 같은 주소와 `http://localhost:5173/`
@@ -88,6 +90,11 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 - 데이터는 브라우저 localStorage에만 있어 다른 기기와 공유되지 않습니다.
 - 비밀번호 찾기·변경은 서버 모드에서만 동작합니다.
 
+## 운영자 정보 (src/data/site.json)
+
+푸터와 개인정보처리방침의 운영자 이름(`operator`)과 연락 이메일(`contactEmail`)은 이 파일에서 바꿉니다.
+비어 있으면 '입시상담 게시판(비공개 글)'로 문의를 받도록 표시됩니다.
+
 ## 데이터 (src/data)
 
 | 파일 | 내용 | 출처 |
@@ -95,7 +102,7 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 | `teukrye-admissions.json` | 2027학년도 대학별 3년·12년 특례 전형방법·모집인원·일정 | 대학별 2027 모집요강 원문 PDF 요약 (행마다 출처 링크) |
 | `library.json` | 자료실 (공식 문서·페이지 링크) | 대교협, 교육부 OKEP, 각 대학 입학처 |
 | `institutions.json` | 한국학교 34개교 · 한국교육원 47개원 (나라·홈페이지) | 재외교육기관포털(OKEP) 현황, 2026. 4. 기준 |
-| `universities.json`, `departments.json` | 대학정보·학과정보 목록 | 일반전형 참고 자료 (출처·기준연도 미확인, 화면에 표시) |
+| `site.json` | 사이트 이름 · 운영자 · 연락 이메일 · 정책 시행일 · 데이터 저장 지역 | 운영자가 직접 입력 (비어 있으면 입시상담 게시판으로 안내) |
 
 확인되지 않은 칸은 비워 두고 화면에 "모집요강 확인"으로 표시합니다. 새 학년도 자료가 나오면 JSON만 고치면 됩니다.
 
@@ -115,7 +122,9 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 | `#/login/signin` · `signup` · `reset` | 로그인 · 회원가입 · 비밀번호 찾기 |
 | `#/institutions/schools`, `#/institutions/centers` | 재외교육기관 |
 | `#/return` | 귀국학생 편입학 |
-| `#/universities` · `#/departments` | 대학정보 · 학과정보 |
+| `#/universities` | 대학별 특례 정보 |
+| `#/policy/privacy` · `terms` · `email` | 개인정보처리방침 · 이용약관 · 이메일무단수집거부 |
+| `#/login/withdraw` | 회원 탈퇴 |
 | `#/en` | English Guide (영어 안내) |
 
 ## 새 화면 추가 방법

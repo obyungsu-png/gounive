@@ -1,8 +1,8 @@
-import univData from '../data/universities.json';
 import { openPage } from './router.js';
 import { openProgram } from './program.js';
 import { openDocsGuide, openGuideModal } from './modals.js';
-import { filterUnivTable } from './tables.js';
+import { showUniversity } from './univ-info.js';
+import admissions from '../data/teukrye-admissions.json';
 import { renderAdmTable, admRows } from './teukrye-adm.js';
 
 /* ===== 사이트 통합검색 (페이지 · 대학 · 특례전형 · 용어) ===== */
@@ -16,7 +16,7 @@ const SEARCH_PAGES = [
   { title: '준비 체크리스트', desc: '10개 항목 점검', keys: '체크리스트 점검 준비물', run: () => openProgram(3) },
   { title: '특례 용어사전', desc: '아포스티유·영사확인 등', keys: '용어 용어사전 아포스티유 영사확인 번역공증 정원외 자격심사 외국인전형', run: () => openProgram(4) },
   { title: '해외학교 성적 입력', desc: 'GPA·IB·백분율 평균 계산', keys: '성적 GPA 학점 IB 백분율 계산 환산 해외성적 SAT TOEFL', run: () => openPage('gradeOverlay') },
-  { title: '재외국민 대학별성적분석', desc: '전년도 입시결과', keys: '성적분석 입시결과 cut 환산점수 대학별', run: () => openPage('univGradeOverlay') },
+  { title: '재외국민 대학별성적분석', desc: '특례 운영 대학과 모집인원', keys: '성적분석 대학별 모집인원 운영 대학', run: () => openPage('univGradeOverlay') },
   { title: '재외국민 대입정보자료실', desc: '모집요강·자료집', keys: '자료실 자료 모집요강 시행계획 설명회 다운로드', run: () => openPage('dataOverlay') },
   { title: '특례 입시상담', desc: '온라인 상담 신청', keys: '상담 질문 문의 1600-1615 전화', run: () => openPage('consultOverlay') },
   { title: '재외교육기관', desc: '한국학교·한국교육원', keys: '한국학교 한국교육원 재외교육기관 OKEP 교육원 국가', run: () => openPage('instOverlay') },
@@ -24,8 +24,9 @@ const SEARCH_PAGES = [
   { title: '서류준비 가이드', desc: '필수서류·인증·번역', keys: '서류 아포스티유 번역 출입국 재직증명 가족관계', run: () => openDocsGuide() },
   { title: '자격요건 입력 가이드', desc: '해외체류기간 입력 방법', keys: '자격요건 입력 체류기간 가이드', run: () => openGuideModal() },
   { title: 'English Guide', desc: '영어 안내 페이지', keys: 'english en 영어 guide overseas special admission', run: () => openPage('enOverlay') },
-  { title: '대학정보', desc: '전국 대학 목록', keys: '대학 대학정보 대학교', run: () => openPage('univOverlay') },
-  { title: '학과정보', desc: '학과별 정보', keys: '학과 학과정보 전공', run: () => openPage('deptOverlay') }
+  { title: '대학별 특례 정보', desc: '대학마다 3년·12년 특례 비교', keys: '대학 대학정보 대학교 입학처 대학별', run: () => openPage('univOverlay') },
+  { title: '개인정보처리방침', desc: '운영 정책', keys: '개인정보 처리방침 약관 이용약관 탈퇴 회원탈퇴 이메일 무단수집', run: () => openPage('policyOverlay', 0) },
+  { title: '회원 탈퇴', desc: '계정과 기록 삭제', keys: '탈퇴 회원탈퇴 계정 삭제', run: () => openPage('loginOverlay', 'withdraw') }
 ];
 
 function buildSearchResults(q) {
@@ -40,8 +41,8 @@ function buildSearchResults(q) {
       results.push({ type: '특례전형', title: d.univ, desc: `${d.type} 특례 · ${d.method.split(' (')[0]}`, run: () => { openPage('admOverlay', d.type === '12년' ? 1 : 0); document.getElementById('admKeyword').value = d.univ.replace(/\(.*\)/, ''); renderAdmTable(); } });
     }
   });
-  univData.filter(u => u.name.includes(q)).slice(0, 5).forEach(u => {
-    results.push({ type: '대학', title: u.name, desc: u.region, run: () => { openPage('univOverlay'); filterUnivTable(q); } });
+  admissions.univs.filter(u => u.univ.includes(q)).slice(0, 5).forEach(u => {
+    results.push({ type: '대학', title: u.univ, desc: '3년·12년 특례 한눈에', run: () => showUniversity(u.univ.replace(/\(.*\)/, '')) });
   });
   return results.slice(0, 10);
 }

@@ -1,65 +1,32 @@
 <div class="info-overlay" id="univOverlay">
   <div class="info-topbar">
     <i class="fas fa-home clickable" onclick="showHome()"></i>
-    <span class="bc-sep">›</span><a href="#" onclick="showHome()">대학/학과/전형</a>
-    <span class="bc-sep">›</span><a href="#">대학정보</a>
-    <span class="bc-sep">›</span><span class="bc-cur">일반대학</span>
+    <span class="bc-sep">›</span><a href="#/admissions/3year">대학/전형</a>
+    <span class="bc-sep">›</span><span class="bc-cur">대학별 특례 정보</span>
     <button class="info-close-btn" onclick="showHome()"><i class="fas fa-home"></i> 홈으로</button>
   </div>
-  <div class="info-hero"><h1>대학정보</h1></div>
-
-  <div class="info-body">
-    <!-- 필터 -->
-    <div class="info-filter">
-      <div class="tab-row">
-        <button class="tab-btn active">일반대학</button>
-        <button class="tab-btn">전문대학</button>
+  <div class="info-hero">
+    <h1>대학별 특례 정보</h1>
+    <div class="ok-hero-sub">대학마다 3년 특례와 12년 특례를 나란히 비교하세요. 2027학년도 모집요강 원문으로 확인한 대학만 싣습니다.</div>
+  </div>
+  <div class="ok-wrap">
+    <div class="uc-toolbar">
+      <div class="uc-search">
+        <input type="text" id="univSearchInput" placeholder="대학명 검색 (예: 연세, 한양)" aria-label="대학명 검색">
+        <i class="fas fa-search" aria-hidden="true"></i>
       </div>
-      <div class="filter-select-box">
-        <select>
-          <option>2027학년도(현재 고3)</option>
-          <option>2026학년도(현재 고2)</option>
-        </select>
+      <div class="uc-filter" id="univTypeFilter" role="group" aria-label="특례 유형">
+        <button type="button" data-js data-type="" class="active">전체</button>
+        <button type="button" data-js data-type="3년">3년 특례 운영</button>
+        <button type="button" data-js data-type="12년">12년 특례 운영</button>
       </div>
-      <div class="filter-input-row">
-        <input type="text" id="univSearchInput" placeholder="대학명을 입력해주세요." oninput="filterUnivTable(this.value)">
-        <button onclick="filterUnivTable(document.getElementById('univSearchInput').value)" aria-label="검색"><i class="fas fa-search"></i></button>
-      </div>
-      <div class="filter-apply-row">
-        적용필터 <i class="fas fa-sync-alt text-brand fs-13"></i>
-        <i class="fas fa-chevron-right text-muted fs-12"></i>
-      </div>
-      <button class="bookmark-btn">관심대학보기</button>
-      <div class="filter-action-row">
-        <button class="btn-reset">검색조건 초기화</button>
-        <button class="btn-save">검색조건 저장</button>
-      </div>
-      <button class="filter-link-btn">검색조건설정 바로가기</button>
+      <span class="uc-total" id="univTotal"></span>
     </div>
-
-    <!-- 테이블 -->
-    <div class="info-table-area">
-      <div class="og-notice warn"><i class="fas fa-exclamation-circle text-orange"></i> 이 목록은 <strong>일반전형 기준 참고 자료</strong>로, 특례 전형과 직접 관련이 없고 출처·기준연도를 아직 확인하지 못했습니다. 특례 정보는 <a href="#/admissions/3year" class="text-brand fw-600">특례전형정보</a>를 이용하세요.</div>
-      <div class="table-top-row">
-        <div class="table-summary">총 <strong id="univTotal">220건</strong></div>
-        <select class="table-view-select"><option>대학목록 ∨</option></select>
-      </div>
-      <table class="info-table">
-        <thead>
-          <tr>
-            <th>대학명 <span class="sort-icon">▾</span></th>
-            <th>지역 <span class="sort-icon">▾</span></th>
-            <th>2026<br>경쟁률</th>
-            <th>입학정원 <span class="sort-icon">▾</span></th>
-            <th>설치학과 <span class="sort-icon">▾</span></th>
-            <th>전형정보 <span class="sort-icon">▾</span></th>
-            <th>비교</th>
-            <th>★</th>
-          </tr>
-        </thead>
-        <tbody id="univTableBody"></tbody>
-      </table>
-      <div class="pagination" id="univPagination"></div>
+    <div class="uc-list" id="univCards"></div>
+    <div class="ok-empty is-hidden" id="univEmpty">검색 결과가 없습니다.</div>
+    <div class="ok-source">
+      출처: 각 대학 2027학년도 재외국민 특별전형 모집요강 (카드의 '모집요강' 링크). 출·입국일 산정 방식은 모집요강에 적힌 대학만 표시했습니다.
+      표에 없는 대학도 특례를 운영할 수 있으니 <a href="https://okep.moe.go.kr/board/list.do?board_manager_seq=16&menu_seq=22" target="_blank" rel="noopener">재외교육기관포털 모집요강 게시판</a>에서 확인하세요.
     </div>
   </div>
 </div>

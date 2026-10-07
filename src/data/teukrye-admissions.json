@@ -3,6 +3,19 @@
   "updated": "2026-10-07",
   "note": "2027학년도 대학별 재외국민 특별전형 모집요강(원문 PDF) 기준 요약. 서강대는 원문 서버 접속이 되지 않아 이전 확인 자료 기준. 세부 사항은 반드시 각 대학 모집요강으로 확인.",
   "common": { "apply": "2026. 7. 6.(월) ~ 7. 10.(금)", "applySource": "한국대학교육협의회 「2027학년도 대학입학전형기본사항」 공통 접수 기간" },
+  "univs": [
+    {"univ": "서울대학교", "home": "https://admission.snu.ac.kr", "note": "12년 특례(글로벌인재특별전형 II)만 운영"},
+    {"univ": "연세대학교(서울)", "home": "https://admission.yonsei.ac.kr"},
+    {"univ": "고려대학교(서울)", "home": "https://oku.korea.ac.kr", "dayRule": "exitAbroad"},
+    {"univ": "성균관대학교", "home": "https://admission.skku.edu", "dayRule": "exitAbroad"},
+    {"univ": "한양대학교(서울)", "home": "https://go.hanyang.ac.kr", "dayRule": "entryAbroad"},
+    {"univ": "한양대학교 ERICA", "home": "https://goerica.hanyang.ac.kr", "dayRule": "entryAbroad"},
+    {"univ": "서강대학교", "home": "https://admission.sogang.ac.kr"},
+    {"univ": "중앙대학교", "home": "https://admission.cau.ac.kr"},
+    {"univ": "경희대학교", "home": "https://iphak.khu.ac.kr", "dayRule": "exitAbroad"},
+    {"univ": "한국외국어대학교", "home": "https://adms.hufs.ac.kr"},
+    {"univ": "이화여자대학교", "home": "https://admission.ewha.ac.kr"}
+  ],
   "rows": [
     { "univ": "서울대학교", "type": "12년", "name": "글로벌인재특별전형 II", "quota": "정원 외 (별도 인원 없음)", "method": "서류평가, 필요한 경우에만 서류 기반 화상면접", "tags": ["서류", "면접"], "schedule": "원서 7.6~7.9 · 화상면접 9.18 · 예비합격 10.16 · 합격 11.20", "url": "https://admission.snu.ac.kr/webdata/admission/files/2027Spring_under.pdf", "source": "서울대 2027 전기 외국인·재외국민 모집안내" },
     { "univ": "연세대학교(서울)", "type": "3년", "name": "재외국민전형 (2% 이내)", "quota": "71명", "method": "1단계 서류 100% (3배수) → 2단계 1단계 70% + 인성면접 30%", "tags": ["서류", "면접"], "schedule": "원서 7.6~7.8 · 면접 8.29 · 발표 9.7", "url": "https://admission.yonsei.ac.kr/seoul/upload/guide/20260529223906M8G4UJ.PDF", "source": "연세대 2027 3월 신입학 재외국민전형 모집요강" },

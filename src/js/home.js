@@ -16,7 +16,8 @@ const NEWS_TABS = [
   ]},
   { more: () => openProgram(2), items: [
     { icon: 'fa-calendar-check', title: '2027학년도 원서접수 2026. 7. 6.~7. 10. (대교협 공통)', meta: '2027 일정', run: () => openProgram(2) },
-    { icon: 'fa-user-tie', title: '면접·필답 8. 8.~8. 29. · 최초 합격 발표 9. 4.~9. 11.', meta: '2027 일정', run: () => openProgram(2) },
+    { icon: 'fa-user-tie', title: '면접·필답 7월 중순~8. 29. · 최초 합격 발표 9. 1.~9. 11.', meta: '2027 일정', run: () => openProgram(2) },
+    { icon: 'fa-bullhorn', title: '2028학년도 원서접수(안) 2027. 7. 5.~7. 9. 중 3일 이상', meta: '2028 예정', run: () => openProgram(2) },
     { icon: 'fa-tasks', title: '나의 특례 준비 체크리스트 점검하기', meta: '체크리스트', run: () => openProgram(3) }
   ]}
 ];

@@ -28,16 +28,29 @@ export function defaultYearEnd(startStr) {
   return fromDay(Math.round(Date.UTC(d.getUTCFullYear() + 1, d.getUTCMonth(), d.getUTCDate()) / DAY) - 1);
 }
 
-/* 한국 방문 목록 → 한국에 있었던 날 구간(병합). 출·입국일을 해외로 보면 양 끝 하루씩 제외 */
-export function koreaRanges(visits, endpointsAbroad, openEnd) {
+/* 출·입국일을 어느 쪽 체류일로 볼지 (대학마다 다름, 2027학년도 모집요강 기준)
+   entry: 한국 입국일을 해외 체류일로 계산 / exit: 한국 출국일을 해외 체류일로 계산 */
+export const ENDPOINT_RULES = [
+  { key: 'exitAbroad', label: '출국일은 해외, 입국일은 국내 (고려대·성균관대·경희대 등)', entry: false, exit: true },
+  { key: 'entryAbroad', label: '입국일은 해외, 출국일은 국내 (한양대·한양대 ERICA)', entry: true, exit: false },
+  { key: 'bothAbroad', label: '출국일·입국일 모두 해외 (가장 유리하게)', entry: true, exit: true },
+  { key: 'bothKorea', label: '출국일·입국일 모두 국내 (가장 보수적으로)', entry: false, exit: false }
+];
+export const DEFAULT_ENDPOINT_RULE = 'exitAbroad';
+export function endpointRule(key) { return ENDPOINT_RULES.find(r => r.key === key) || ENDPOINT_RULES[0]; }
+
+/* 한국 방문 목록(입국일 from ~ 출국일 to) → 한국에 있었던 날 구간(병합).
+   출국일을 비우면 openEnd(마지막 학년 종료일)까지 한국에 있는 것으로 봄 */
+export function koreaRanges(visits, ruleKey, openEnd) {
+  const rule = endpointRule(ruleKey);
   const ranges = [];
   visits.forEach(v => {
     const a = toDay(v.from);
     if (a === null) return;
-    const b = v.to ? toDay(v.to) : openEnd + (endpointsAbroad ? 1 : 0);
+    const b = v.to ? toDay(v.to) : openEnd + (rule.exit ? 1 : 0);
     if (b === null || b < a) return;
-    const from = endpointsAbroad ? a + 1 : a;
-    const to = endpointsAbroad ? b - 1 : b;
+    const from = rule.entry ? a + 1 : a;
+    const to = rule.exit ? b - 1 : b;
     if (to >= from) ranges.push([from, to]);
   });
   ranges.sort((x, y) => x[0] - y[0]);
@@ -80,7 +93,7 @@ export function evaluateStay(state) {
     const cells = {};
     PEOPLE.forEach(p => {
       const need = Math.floor(total * p.ratio[0] / p.ratio[1]);
-      const days = abroadDays(y.start, y.end, koreaRanges(state.visits[p.key] || [], state.endpointsAbroad, lastEnd));
+      const days = abroadDays(y.start, y.end, koreaRanges(state.visits[p.key] || [], state.endpointRule, lastEnd));
       cells[p.key] = { days, need, ok: days >= need, required: required.includes(p.key) };
     });
     return { grade: y.grade, country: y.country, start: fromDay(y.start), end: fromDay(y.end), total, cells };

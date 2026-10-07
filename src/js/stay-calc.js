@@ -2,7 +2,7 @@
    계산 규칙은 stay-rules.js, 저장은 Store('stay') */
 import { Store } from './store.js';
 import { escapeHtml } from './ui.js';
-import { GRADES, PEOPLE, toDay, fromDay, defaultYearEnd, evaluateStay } from './stay-rules.js';
+import { GRADES, PEOPLE, ENDPOINT_RULES, DEFAULT_ENDPOINT_RULE, endpointRule, toDay, fromDay, defaultYearEnd, evaluateStay } from './stay-rules.js';
 
 /* ---------- 상태 · 저장 ---------- */
 function emptyState() {
@@ -10,7 +10,7 @@ function emptyState() {
     type: '3년',
     years: [{ grade: '', country: '', start: '', end: '' }],
     visits: { student: [], father: [], mother: [] },
-    parentRule: 'both', worker: 'father', endpointsAbroad: true,
+    parentRule: 'both', worker: 'father', endpointRule: DEFAULT_ENDPOINT_RULE,
     grades12: Array(12).fill(false)
   };
 }
@@ -56,7 +56,7 @@ function renderInputs() {
   document.getElementById('stayParentRule').value = state.parentRule;
   document.getElementById('stayWorker').value = state.worker;
   document.getElementById('stayWorkerWrap').classList.toggle('is-hidden', state.parentRule !== 'worker');
-  document.getElementById('stayEndpoints').checked = state.endpointsAbroad;
+  document.getElementById('stayEndpointRule').value = state.endpointRule;
   document.getElementById('stayGrades12').innerHTML = state.grades12.map((on, i) => {
     const label = i < 6 ? `초${i + 1}` : i < 9 ? `중${i - 5}` : `고${i - 8}`;
     return `<label class="stay-grade${on ? ' on' : ''}"><input type="checkbox" data-grade12="${i}"${on ? ' checked' : ''}> ${label}<small>G${i + 1}</small></label>`;
@@ -78,7 +78,7 @@ function renderResult() {
       <div class="stay-summary ${r.ok ? 'ok' : 'bad'}">
         <i class="fas ${r.ok ? 'fa-check-circle' : 'fa-exclamation-triangle'}"></i>
         <div><b>${r.ok ? '입력한 기록 기준으로 3년 특례 요건을 충족합니다.' : '입력한 기록 기준으로 3년 특례 요건을 충족하지 못합니다.'}</b>
-        <div class="stay-summary-sub">학력 요건 ${r.gradeOk ? '충족' : '미충족'} (해외 이수 ${r.gradeCount}개 학년) · 체류 요건 ${r.stayOk ? '충족' : '미충족'}</div></div>
+        <div class="stay-summary-sub">학력 요건 ${r.gradeOk ? '충족' : '미충족'} (해외 이수 ${r.gradeCount}개 학년) · 체류 요건 ${r.stayOk ? '충족' : '미충족'} · 산정 방식: ${escapeHtml(endpointRule(state.endpointRule).label)}</div></div>
       </div>
       ${r.reasons.length ? `<ul class="ok-list stay-reasons">${r.reasons.map(t => `<li>${escapeHtml(t)}</li>`).join('')}</ul>` : ''}
       <div class="stay-table-wrap">
@@ -109,6 +109,10 @@ function setType(type) {
 
 function applyState(saved) {
   state = Object.assign(emptyState(), saved || {});
+  // 예전 저장값(endpointsAbroad: 출·입국일 모두 해외 체크 해제)을 새 산정 방식으로 옮김
+  if (saved && !saved.endpointRule && saved.endpointsAbroad === false) state.endpointRule = 'bothKorea';
+  delete state.endpointsAbroad;
+  state.endpointRule = endpointRule(state.endpointRule).key;
   state.visits = Object.assign({ student: [], father: [], mother: [] }, state.visits);
   renderInputs();
   setType(state.type);
@@ -117,6 +121,7 @@ function applyState(saved) {
 
 (function initStay() {
   const root = document.getElementById('stayOverlay');
+  document.getElementById('stayEndpointRule').innerHTML = ENDPOINT_RULES.map(r => `<option value="${r.key}">${r.label}</option>`).join('');
   root.addEventListener('input', e => {
     const t = e.target, d = t.dataset;
     if (d.kind === 'year') {
@@ -139,10 +144,10 @@ function applyState(saved) {
       state.grades12[t.dataset.grade12] = t.checked;
       t.parentElement.classList.toggle('on', t.checked);
       update();
-    } else if (t.id === 'stayParentRule' || t.id === 'stayWorker' || t.id === 'stayEndpoints') {
+    } else if (t.id === 'stayParentRule' || t.id === 'stayWorker' || t.id === 'stayEndpointRule') {
       state.parentRule = document.getElementById('stayParentRule').value;
       state.worker = document.getElementById('stayWorker').value;
-      state.endpointsAbroad = document.getElementById('stayEndpoints').checked;
+      state.endpointRule = document.getElementById('stayEndpointRule').value;
       document.getElementById('stayWorkerWrap').classList.toggle('is-hidden', state.parentRule !== 'worker');
       update();
     } else if (t.dataset.kind === 'year' && t.tagName === 'SELECT') {

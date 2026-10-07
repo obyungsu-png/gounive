@@ -31,7 +31,8 @@
         </table>
       </div>
       <button class="ok-btn line" data-js id="stayAddYear"><i class="fas fa-plus"></i> 학년 추가</button>
-      <div class="ok-note">※ 학년 종료일은 '다음 학년도 같은 학기 개시일의 전날'로 자동 입력됩니다. 재학 중인 학년은 대학이 정한 기준일(예: 원서접수 마감일)로 바꿔 주세요.</div>
+      <div class="ok-note">※ 학년 종료일은 '다음 학년도 같은 학기 개시일의 전날'로 자동 입력됩니다. 재학 중인 학년은 대학이 정한 기준일(예: 원서접수 마감일)로 바꿔 주세요.<br>
+        ※ 학기 중간에 편입한 학년은 <strong>편입일</strong>을 시작일로 넣으세요(편입일부터 1년을 1개 학년으로 계산). 부모의 근무지 국가에 있는 학교에서 재학한 학년만 인정됩니다.</div>
 
       <div class="ok-section-title"><i class="fas fa-plane-arrival"></i> ② 한국 체류(방문) 기간</div>
       <div class="stay-people" id="stayPeople"></div>
@@ -47,8 +48,12 @@
         <label id="stayWorkerWrap">해외 근무 부모
           <select id="stayWorker"><option value="father">아버지</option><option value="mother">어머니</option></select>
         </label>
-        <label class="ui-check"><input type="checkbox" id="stayEndpoints" checked> 출국일·입국일을 해외 체류일로 계산 (일반 기준)</label>
+        <label>출국일·입국일 산정
+          <select id="stayEndpointRule"></select>
+        </label>
       </div>
+
+      <div class="ok-note">※ 한국 입국일·출국일을 해외 체류일로 볼지는 대학마다 다릅니다. 2027학년도 모집요강 기준으로 고려대·성균관대·경희대는 출국일만, 한양대·한양대 ERICA는 입국일만 해외 체류일로 계산합니다. 지원할 대학의 모집요강 기준을 골라 각각 확인하세요.</div>
 
       <div class="ok-section-title"><i class="fas fa-clipboard-check"></i> 판정 결과</div>
       <div id="stayResult"></div>
@@ -62,7 +67,8 @@
     </div>
 
     <div class="ok-source">
-      계산 기준: 학년 단위(학기 개시일 ~ 다음 학년도 같은 학기 개시일 전일)마다 학생 3/4 이상, 부모 2/3 이상 해외 체류, 필요 일수의 소수점 이하는 절사.
+      계산 기준: 학년 단위(학기 개시일 ~ 다음 학년도 같은 학기 개시일 전일)마다 학생 3/4 이상, 해외근무자와 배우자 2/3 이상을 근무지 국가에서 체류, 필요 일수의 소수점 이하는 절사.
+      이와 별도로 해외근무자는 역년으로 통산 3년(1,095일) 이상 국외 근무·사업·영업 기간이 있어야 하며(유학·연수·출장 목적 체류는 제외), 근무 기간과 학생의 재학 기간이 겹치는 기간만 인정됩니다.
       이 계산기는 참고용이며, 체류일 산정 방식과 예외(부모 사망·이혼, 국내 체류 인정 사유 등)는 대학마다 다르므로 <strong>최종 자격은 지원 대학의 모집요강과 자격심사</strong>로 확인하세요.
     </div>
   </div>

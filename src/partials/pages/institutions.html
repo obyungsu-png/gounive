@@ -13,7 +13,7 @@
     <div class="ok-stats">
       <div class="ok-stat"><div class="ok-stat-label">한국학교</div><div class="ok-stat-num">34<small>개교</small></div><div class="ok-stat-desc">16개국 · 2026. 4. 1. 기준</div></div>
       <div class="ok-stat"><div class="ok-stat-label">한국교육원</div><div class="ok-stat-num">47<small>개원</small></div><div class="ok-stat-desc">22개국 · 2026. 4. 1. 기준</div></div>
-      <div class="ok-stat"><div class="ok-stat-label">한국학교 재학생</div><div class="ok-stat-num">12,949<small>명</small></div><div class="ok-stat-desc">2026년 4월 기준</div></div>
+      <div class="ok-stat"><div class="ok-stat-label">한국학교 재학생</div><div class="ok-stat-num">12,949<small>명</small></div><div class="ok-stat-desc">재외국민 자녀 93.7% · 2026년 4월</div></div>
       <div class="ok-stat"><div class="ok-stat-label">해외 학교 한국어반 학생</div><div class="ok-stat-num">191,896<small>명</small></div><div class="ok-stat-desc">5년 전 대비 약 50% 증가</div></div>
     </div>
 
@@ -33,28 +33,18 @@
         <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-university"></i></div><div class="ok-card-title">국내 대학 진학 연계</div><div class="ok-card-desc">국내 연계교육 중심형 학교는 국내 대학 진학을 염두에 둔 교육과정과 진학 지도를 제공합니다.</div></div>
         <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-exchange-alt"></i></div><div class="ok-card-title">귀국 시 학력 연계</div><div class="ok-card-desc">귀국 후 국내 학교로 편입학할 때 학력이 연계되어 학업 공백을 줄일 수 있습니다.</div></div>
       </div>
-      <div class="ok-section-title sm mt-22"><i class="fas fa-map-marker-alt"></i> 주요 한국학교 (일부)</div>
-      <div class="ok-chips">
-        <span class="ok-chip"><b>일본</b>동경한국학교</span>
-        <span class="ok-chip"><b>중국</b>북경한국국제학교</span>
-        <span class="ok-chip"><b>중국</b>상해한국학교</span>
-        <span class="ok-chip"><b>대만</b>타이뻬이한국학교</span>
-        <span class="ok-chip"><b>베트남</b>호치민시한국국제학교</span>
-        <span class="ok-chip"><b>태국</b>방콕한국국제학교</span>
-        <span class="ok-chip"><b>캄보디아</b>프놈펜한국국제학교</span>
-        <span class="ok-chip"><b>말레이시아</b>말레이시아한국국제학교</span>
-        <span class="ok-chip"><b>싱가포르</b>싱가포르한국국제학교</span>
-        <span class="ok-chip"><b>인도네시아</b>자카르타한국국제학교</span>
-        <span class="ok-chip"><b>필리핀</b>필리핀한국국제학교</span>
-        <span class="ok-chip"><b>사우디아라비아</b>젯다한국학교</span>
-        <span class="ok-chip"><b>이란</b>테헤란한국학교</span>
-        <span class="ok-chip"><b>이집트</b>카이로한국학교</span>
-        <span class="ok-chip"><b>러시아</b>모스크바한국학교</span>
-        <span class="ok-chip"><b>아르헨티나</b>아르헨티나한국학교</span>
-        <span class="ok-chip"><b>파라과이</b>파라과이한국학교</span>
-      </div>
-      <button class="ok-btn" onclick="window.open('https://okep.moe.go.kr/koschl/orgInfo/orgSearch/search.do','_blank')"><i class="fas fa-search"></i> 한국학교 전체 34개교 찾기 (재외교육기관포털)</button>
-      <div class="ok-note">※ 한국학교 재학 기간을 재외국민 특별전형의 해외 이수 기간으로 인정하는지는 대학별 모집요강을 확인하세요.</div>
+      <div class="ok-section-title sm mt-22"><i class="fas fa-layer-group"></i> 한국학교의 두 가지 유형</div>
+      <table class="ok-table">
+        <thead><tr><th>국내 연계교육 중심형</th><th>모국이해교육 중심형</th></tr></thead>
+        <tbody><tr>
+          <td>잠시 해외에 머무는 가정의 자녀가 대상. 국내 교육과정과 진학을 이어 주는 데 중점<br><small>예) 동경, 중국 지역, 베트남, 자카르타, 싱가포르, 말레이시아, 필리핀, 방콕 등</small></td>
+          <td>현지에 정착한 동포 자녀가 대상. 한국어·한국 문화 등 모국 이해 교육에 중점<br><small>예) 건국·오사카금강·교토(일본), 파라과이, 아르헨티나, 까오숑(대만) 등</small></td>
+        </tr></tbody>
+      </table>
+      <div class="ok-section-title sm mt-22"><i class="fas fa-map-marker-alt"></i> 한국학교 전체 목록 <span class="inst-count" id="instSchoolCount"></span></div>
+      <div class="inst-list" id="instSchools"></div>
+      <div class="inst-legend"><span class="inst-tag">모국이해</span> 모국이해교육 중심형 · 학교 이름을 누르면 학교 홈페이지가 새 창으로 열립니다.</div>
+      <div class="ok-note">※ 교육부 인가 재외 한국학교도 부모 근무지 국가에 있으면 3년 특례의 해외 이수 학교로 인정되며, 일부 대학은 재학·성적증명서 대신 학교생활기록부를 받고 아포스티유 대신 학교장 직인을 인정합니다. 세부 기준은 대학별 모집요강을 확인하세요.</div>
     </div>
 
     <div class="ok-tab-panel">
@@ -68,7 +58,9 @@
         <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-hands-helping"></i></div><div class="ok-card-title">한글학교 지원</div><div class="ok-card-desc">주말 한글학교와 협력해 재외동포 자녀의 한국어·정체성 교육을 돕습니다. (한글학교 운영 지원은 재외동포청 소관)</div></div>
         <div class="ok-card"><div class="ok-card-icon"><i class="fas fa-plane-departure"></i></div><div class="ok-card-title">유학·진학 상담</div><div class="ok-card-desc">국내 대학 진학과 한국 유학 설명회, 상담을 운영합니다. 해외 거주 중 입시 상담 창구로 활용할 수 있습니다.</div></div>
       </div>
-      <button class="ok-btn" onclick="window.open('https://okep.moe.go.kr/koacad/orgInfo/orgSearch/search.do','_blank')"><i class="fas fa-search"></i> 가까운 한국교육원 찾기 (재외교육기관포털)</button>
+      <div class="ok-section-title sm mt-22"><i class="fas fa-map-marker-alt"></i> 한국교육원 전체 목록 <span class="inst-count" id="instCenterCount"></span></div>
+      <div class="inst-list" id="instCenters"></div>
+      <button class="ok-btn" onclick="window.open('https://okep.moe.go.kr/koacad/orgInfo/orgSearch/search.do','_blank')"><i class="fas fa-search"></i> 한국교육원 상세 정보 (재외교육기관포털)</button>
     </div>
 
     <div class="ok-section-title"><i class="fas fa-book-reader"></i> 재외교육 자료실</div>
@@ -85,6 +77,18 @@
       <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-id-badge"></i><div>재외채용정보<span>한국학교·교육원 교원 채용</span></div><i class="fas fa-external-link-alt"></i></div>
       <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-newspaper"></i><div>온라인 소식지<span>재외교육기관 웹진</span></div><i class="fas fa-external-link-alt"></i></div>
       <div class="ok-link" onclick="window.open('https://okep.moe.go.kr/root/index.do','_blank')"><i class="fas fa-coffee"></i><div>재외교육카페<span>교원 소통 커뮤니티</span></div><i class="fas fa-external-link-alt"></i></div>
+    </div>
+
+    <div class="ok-section-title"><i class="fas fa-link"></i> 재외동포 교육 관련 기관</div>
+    <div class="ok-links">
+      <a class="ok-link" href="https://overseaskoreanedu.snu.ac.kr/" target="_blank" rel="noopener"><i class="fas fa-school"></i><div>교육부 재외교육지원센터<span>한국학교·교육원 운영 지원</span></div><i class="fas fa-external-link-alt"></i></a>
+      <a class="ok-link" href="https://www.niied.go.kr" target="_blank" rel="noopener"><i class="fas fa-landmark"></i><div>국립국제교육원<span>재외동포 교육·초청 연수</span></div><i class="fas fa-external-link-alt"></i></a>
+      <a class="ok-link" href="https://oka.go.kr/" target="_blank" rel="noopener"><i class="fas fa-passport"></i><div>재외동포청<span>재외국민 등록·한글학교 지원</span></div><i class="fas fa-external-link-alt"></i></a>
+      <a class="ok-link" href="https://okocc.or.kr/" target="_blank" rel="noopener"><i class="fas fa-hands-helping"></i><div>재외동포협력센터<span>동포 교류·모국 연수</span></div><i class="fas fa-external-link-alt"></i></a>
+      <a class="ok-link" href="https://www.ksif.or.kr/" target="_blank" rel="noopener"><i class="fas fa-book-open"></i><div>세종학당재단<span>해외 한국어 교육</span></div><i class="fas fa-external-link-alt"></i></a>
+      <a class="ok-link" href="http://study.korean.net" target="_blank" rel="noopener"><i class="fas fa-laptop"></i><div>스터디코리안<span>온라인 한국어 학습</span></div><i class="fas fa-external-link-alt"></i></a>
+      <a class="ok-link" href="https://www.topik.go.kr" target="_blank" rel="noopener"><i class="fas fa-certificate"></i><div>한국어능력시험 TOPIK<span>일부 대학 지원자격·가점</span></div><i class="fas fa-external-link-alt"></i></a>
+      <a class="ok-link" href="https://www.studyinkorea.go.kr" target="_blank" rel="noopener"><i class="fas fa-graduation-cap"></i><div>한국유학정보 (Study in Korea)<span>국내 대학·유학 안내</span></div><i class="fas fa-external-link-alt"></i></a>
     </div>
 
     <div class="ok-source">

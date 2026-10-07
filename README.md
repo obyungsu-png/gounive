@@ -31,7 +31,7 @@ src/
       eligibility · admissions · results · grades · prepare · library · consult
       institutions · return · universities · departments · login · stay · en · jobs · comp-consult
     modals/                 자격요건 · 초보자 · 서류준비 가이드, 상담 신청 폼
-  data/                     JSON 데이터 (teukrye-admissions · library · universities · departments)
+  data/                     JSON 데이터 (teukrye-admissions · library · institutions · universities · departments)
   css/                      화면별 스타일 + utilities.css(공통 유틸) + responsive.css(마지막에 로드)
   js/
     router.js               화면 주소 연결 (#/경로/하위탭), onRouteEnter 등록
@@ -41,7 +41,7 @@ src/
     consult.js              특례 상담
     program.js              특례 준비 가이드 (탭 · 체크리스트)
     overseas-grade.js       해외학교 성적 계산
-    stay-rules.js           3년 특례 체류 요건 계산 규칙 (순수 함수, tests/에서 검증)
+    stay-rules.js           3년 특례 체류 요건 계산 규칙 (출·입국일 산정 방식 4가지 포함, 순수 함수, tests/에서 검증)
     stay-calc.js            해외체류기간 계산기 화면
     teukrye-adm.js          특례전형정보
     univ-grade.js           대학별 성적분석
@@ -92,8 +92,9 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 
 | 파일 | 내용 | 출처 |
 |---|---|---|
-| `teukrye-admissions.json` | 2027학년도 대학별 특례 전형방법·모집인원·일정 | 대학별 모집요강·시행계획 요약 (행마다 출처 링크) |
+| `teukrye-admissions.json` | 2027학년도 대학별 3년·12년 특례 전형방법·모집인원·일정 | 대학별 2027 모집요강 원문 PDF 요약 (행마다 출처 링크) |
 | `library.json` | 자료실 (공식 문서·페이지 링크) | 대교협, 교육부 OKEP, 각 대학 입학처 |
+| `institutions.json` | 한국학교 34개교 · 한국교육원 47개원 (나라·홈페이지) | 재외교육기관포털(OKEP) 현황, 2026. 4. 기준 |
 | `universities.json`, `departments.json` | 대학정보·학과정보 목록 | 일반전형 참고 자료 (출처·기준연도 미확인, 화면에 표시) |
 
 확인되지 않은 칸은 비워 두고 화면에 "모집요강 확인"으로 표시합니다. 새 학년도 자료가 나오면 JSON만 고치면 됩니다.

@@ -69,3 +69,15 @@
 .ok-note { font-size: 12px; color: #888; line-height: 1.7; margin-top: 10px; }
 .ok-source { font-size: 12px; color: #999; margin-top: 30px; padding-top: 14px; border-top: 1px solid #e6e6e6; line-height: 1.7; }
 .ok-source a { color: #2db4a8; }
+
+/* 재외교육기관 나라별 목록 */
+.inst-count { font-size: 12px; font-weight: 500; color: #888; margin-left: 6px; }
+.inst-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(280px, 100%), 1fr)); gap: 10px; margin-bottom: 10px; }
+.inst-group { background: #fff; border: 1px solid #e6eeee; border-radius: 10px; padding: 12px 14px; min-width: 0; }
+.inst-country { font-size: 14px; font-weight: 800; color: #222; margin-bottom: 8px; }
+.inst-country small { font-size: 12px; font-weight: 600; color: #2db4a8; margin-left: 4px; }
+.inst-items { display: flex; flex-wrap: wrap; gap: 6px; }
+.inst-items a { font-size: 13px; color: #444; background: #f5fafa; border: 1px solid #dceeee; border-radius: 16px; padding: 5px 11px; text-decoration: none; overflow-wrap: anywhere; }
+.inst-items a:hover { border-color: #2db4a8; color: #1d8a80; }
+.inst-tag { display: inline-block; font-size: 10px; font-weight: 700; color: #b8860b; background: #fff6dd; border-radius: 8px; padding: 1px 6px; vertical-align: 1px; }
+.inst-legend { font-size: 12px; color: #888; margin-bottom: 14px; }

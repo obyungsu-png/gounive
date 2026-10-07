@@ -23,7 +23,7 @@
 .stay-add:hover { background: #e8f5f4; }
 
 .stay-options { display: flex; flex-wrap: wrap; gap: 12px 20px; align-items: flex-end; background: #fff; border: 1px solid #e6eeee; border-radius: 12px; padding: 14px 16px; }
-.stay-options > label { font-size: 13px; font-weight: 600; color: #444; display: flex; flex-direction: column; gap: 6px; min-width: 240px; }
+.stay-options > label { font-size: 13px; font-weight: 600; color: #444; display: flex; flex-direction: column; gap: 6px; min-width: 240px; max-width: 100%; }
 .stay-options > label.ui-check { flex-direction: row; align-items: center; min-width: 0; font-weight: 500; }
 .stay-options > label.is-hidden { display: none; }
 

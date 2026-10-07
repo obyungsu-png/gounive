@@ -12,7 +12,7 @@ npm run preview    # 빌드 결과 미리보기
 npm test           # 해외체류기간 계산 규칙 테스트
 ```
 
-배포는 **Vercel**(https://sat-tzyr.vercel.app)이 담당합니다. `main`에 push하면 Vercel이 `vercel.json` 설정대로
+배포는 **Vercel**(https://gounive.vercel.app)이 담당합니다. `main`에 push하면 Vercel이 `vercel.json` 설정대로
 `npm run build` 후 `dist/`를 배포합니다. GitHub Actions(`.github/workflows/ci.yml`)는 push·PR마다 테스트와 빌드만 확인합니다.
 
 > 빌드 도구를 쓰므로 `index.html`을 더블클릭해서 열면 화면이 나오지 않습니다. `npm run dev` 또는 배포 주소로 확인하세요.
@@ -70,7 +70,7 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
    - 테이블: `profiles`(회원), `consults`(상담), `grade_records`(성적), `checklists`(체크리스트), `stay_records`(체류 계산 입력값)
    - 모든 테이블에 RLS가 켜져 있어 사용자는 자기 데이터만 읽고 쓸 수 있습니다
 3. **Authentication → URL Configuration**
-   - Site URL: 실제 배포 주소 `https://sat-tzyr.vercel.app/`
+   - Site URL: 실제 배포 주소 `https://gounive.vercel.app/`
    - Redirect URLs: 같은 주소와 `http://localhost:5173/`
 4. **Authentication → Sign In / Providers → Email**: 가입 시 이메일 인증을 받을지 선택 (Confirm email)
 5. **Project Settings → API**의 `Project URL`과 `anon public` 키를 입력
@@ -131,7 +131,7 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 ## 공유 미리보기 · 검색 노출
 
 `index.html`의 `<head>`에 설명(description)과 Open Graph·트위터 카드 태그가 있습니다.
-기본 주소는 `https://sat-tzyr.vercel.app/`로 적혀 있으니, 도메인을 바꾸면 `canonical`, `og:url`, `og:image` 세 곳을 함께 바꾸세요.
+기본 주소는 `https://gounive.vercel.app/`로 적혀 있으니, 도메인을 바꾸면 `canonical`, `og:url`, `og:image` 세 곳을 함께 바꾸세요.
 
 ## 접근성
 

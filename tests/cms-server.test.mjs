@@ -24,13 +24,16 @@ function setup(pages = {}) {
   });
   const web = { ...pages };
   const webFetch = createFakeWeb(web);
-  const anthropic = { requests: [], reply: null };
+  // anthropic.handler(body)가 있으면 그 결과({status, body})로 응답 (중계 서버 흉내)
+  const anthropic = { requests: [], reply: null, handler: null };
   const fetchImpl = async (url, opts) => {
     const host = new URL(url).hostname;
     if (host === 'api.github.com') return gh.fetchImpl(url, opts);
-    if (host === 'api.anthropic.com') {
-      anthropic.requests.push({ url, headers: new Headers(opts.headers), body: JSON.parse(opts.body) });
-      return new Response(JSON.stringify(anthropic.reply), { status: 200, headers: { 'content-type': 'application/json' } });
+    if (host === 'api.anthropic.com' || host === 'relay.example') {
+      const body = JSON.parse(opts.body);
+      anthropic.requests.push({ url, headers: new Headers(opts.headers), body });
+      const out = anthropic.handler ? anthropic.handler(body) : { status: 200, body: anthropic.reply };
+      return new Response(JSON.stringify(out.body), { status: out.status, headers: { 'content-type': 'application/json' } });
     }
     return webFetch(url, opts);
   };
@@ -198,4 +201,47 @@ test('CMS 저장 형식: 모든 데이터 파일이 내용 그대로 다시 읽�
     assert.deepEqual(JSON.parse(out), data, f);
     if (Array.isArray(data) || Object.values(data).some(Array.isArray)) assert.ok(out.split('\n').length > 3, f + ' 목록은 줄 단위');
   }
+});
+
+test('AI 중계 서버(ANTHROPIC_BASE_URL): 주소·인증 헤더, 최신 옵션 거부 시 기본 요청으로 재시도, 오류 안내', async () => {
+  const page = body => ({ type: 'text/html', body: `<p>${body}</p>` });
+  const { call, web, anthropic } = setup({ 'https://okep.example/board': page('a'), 'https://univ.example/guide': page('모집인원 71명'), 'https://univ.example/file.pdf': { type: 'application/pdf', body: '%PDF-1' } });
+  const env = { ...ENV, ANTHROPIC_API_KEY: 'relay-key', ANTHROPIC_BASE_URL: 'https://relay.example/v1/' };
+  const token = await login(call, env);
+  assert.equal((await call({ action: 'status' }, env)).body.features.aiVia, 'relay.example');
+
+  // 연결 확인
+  const msg = text => ({ id: 'm', type: 'message', role: 'assistant', model: 'claude-opus-5-5', content: [{ type: 'text', text }], stop_reason: 'end_turn', usage: { input_tokens: 1, output_tokens: 1 } });
+  anthropic.handler = () => ({ status: 200, body: msg('연결됨') });
+  const t = await call({ action: 'aiTest', token }, env);
+  assert.equal(t.status, 200, JSON.stringify(t.body));
+  assert.equal(t.body.via, 'relay.example');
+  assert.equal(t.body.reply, '연결됨');
+  const req = anthropic.requests.at(-1);
+  assert.equal(req.url, 'https://relay.example/v1/messages');
+  assert.equal(req.headers.get('x-api-key'), 'relay-key');
+  assert.equal(req.headers.get('authorization'), 'Bearer relay-key');
+
+  // 최신 옵션(fallbacks 등)을 모르는 중계 서버 → 400 → 기본 요청 + 프롬프트 JSON으로 재시도
+  await call({ action: 'check', offset: 0, limit: 10, token }, env);
+  web['https://univ.example/guide'] = page('모집인원 72명');
+  await call({ action: 'check', offset: 0, limit: 10, token }, env);
+  const id = (await call({ action: 'updates', token }, env)).body.updates[0].id;
+  const sug = { summary: '모집인원이 바뀌었습니다.', importance: 'high', recommendation: 'apply', reason: '정원', suggestions: [] };
+  anthropic.handler = body => body.fallbacks || body.output_config
+    ? { status: 400, body: { type: 'error', error: { type: 'invalid_request_error', message: 'fallbacks: Extra inputs are not permitted' } } }
+    : { status: 200, body: msg('```json\n' + JSON.stringify(sug) + '\n```') };
+  const before = anthropic.requests.length;
+  const r = await call({ action: 'ai', id, token }, env);
+  assert.equal(r.status, 200, JSON.stringify(r.body));
+  assert.equal(r.body.mode, 'compat');
+  assert.deepEqual(r.body.suggestion, sug);
+  assert.equal(anthropic.requests.length - before, 2);
+  assert.match(anthropic.requests.at(-1).body.system, /JSON/);
+
+  // 키 거부 → 무엇을 확인할지 알려 줌
+  anthropic.handler = () => ({ status: 401, body: { type: 'error', error: { type: 'authentication_error', message: 'invalid x-api-key' } } });
+  const bad = await call({ action: 'aiTest', token }, env);
+  assert.equal(bad.status, 502);
+  assert.match(bad.body.error, /ANTHROPIC_API_KEY/);
 });

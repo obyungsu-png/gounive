@@ -53,31 +53,102 @@ async function relatedData(update, gh) {
   return { admissions: rows, library: items };
 }
 
-export async function aiSuggest(update, { gh, env, fetchImpl = fetch }) {
+/* 클라이언트 만들기. ANTHROPIC_BASE_URL을 넣으면 그 주소(중계 서버 등)로 보냄.
+   중계 서버는 인증 방식이 제각각이라 x-api-key와 Authorization: Bearer를 함께 보낸다. */
+async function makeClient(env, fetchImpl) {
   const { default: Anthropic } = await import('@anthropic-ai/sdk');
-  const client = new Anthropic({ apiKey: env.ANTHROPIC_API_KEY, fetch: fetchImpl });
+  const base = String(env.ANTHROPIC_BASE_URL || '').trim().replace(/\/+$/, '').replace(/\/v1$/, '');
+  const relay = !!base && !/^https:\/\/api\.anthropic\.com$/i.test(base);
+  const client = new Anthropic({
+    apiKey: env.ANTHROPIC_API_KEY,
+    ...(base ? { baseURL: base } : {}),
+    ...(relay ? { authToken: env.ANTHROPIC_API_KEY } : {}),
+    fetch: fetchImpl,
+    maxRetries: 0,
+    timeout: 50 * 1000            // Vercel 함수 제한(60초) 안에서 끝나도록
+  });
+  let via = 'api.anthropic.com';
+  if (relay) { try { via = new URL(base).host; } catch (e) { via = base; } }
+  return { Anthropic, client, relay, via };
+}
+
+/* SDK 오류 → 운영자가 할 일을 알려 주는 한국어 메시지 */
+function friendly(Anthropic, e, via) {
+  if (e instanceof Anthropic.AuthenticationError) return Object.assign(new Error(`AI 키가 거부되었습니다 (${via}). Vercel의 ANTHROPIC_API_KEY를 확인해 주세요.`), { status: 502 });
+  if (e instanceof Anthropic.PermissionDeniedError) return Object.assign(new Error(`AI 키에 이 기능을 쓸 권한이 없습니다 (${via}).`), { status: 502 });
+  if (e instanceof Anthropic.NotFoundError) return Object.assign(new Error(`AI 모델이나 주소를 찾을 수 없습니다 (${via}). ANTHROPIC_MODEL·ANTHROPIC_BASE_URL을 확인해 주세요.`), { status: 502 });
+  if (e instanceof Anthropic.RateLimitError) return Object.assign(new Error('AI 사용량 한도에 걸렸습니다. 잠시 뒤 다시 시도해 주세요.'), { status: 429 });
+  if (e instanceof Anthropic.APIConnectionTimeoutError) return Object.assign(new Error(`AI 응답 시간이 초과되었습니다 (${via}). 다시 시도해 주세요.`), { status: 504 });
+  if (e instanceof Anthropic.APIConnectionError) return Object.assign(new Error(`AI 서버(${via})에 연결하지 못했습니다. ANTHROPIC_BASE_URL을 확인해 주세요.`), { status: 502 });
+  if (e instanceof Anthropic.APIError) return Object.assign(new Error(`AI 서버 오류 (${via}, ${e.status || '-'}): ${String(e.message || '').slice(0, 200)}`), { status: 502 });
+  return e;
+}
+
+/* 응답 글에서 JSON만 꺼내기 (호환 모드는 ```json … ``` 으로 감싸 오기도 함) */
+function parseJsonText(text) {
+  const t = String(text).trim().replace(/^```(?:json)?\s*/i, '').replace(/\s*```$/, '');
+  const a = t.indexOf('{'), b = t.lastIndexOf('}');
+  return JSON.parse(a >= 0 && b > a ? t.slice(a, b + 1) : t);
+}
+
+function checkStop(response) {
+  if (response.stop_reason === 'refusal') throw Object.assign(new Error('AI가 이 내용의 분석을 거절했습니다. 원문을 직접 확인해 주세요.'), { status: 422 });
+  if (response.stop_reason === 'max_tokens') throw new Error('AI 응답이 너무 길어 중간에 끊겼습니다. 다시 시도해 주세요.');
+}
+const textOf = response => response.content.filter(b => b.type === 'text').map(b => b.text).join('');
+
+export async function aiSuggest(update, { gh, env, fetchImpl = fetch }) {
+  const { Anthropic, client, via } = await makeClient(env, fetchImpl);
+  const model = env.ANTHROPIC_MODEL || MODEL;
   const related = await relatedData(update, gh);
   const changeText = update.kind === 'html'
     ? `새로 생긴 줄 ${update.addedCount}개 (최대 60개 표시), 없어진 줄 ${update.removedCount}개:\n${(update.added || []).map(l => '+ ' + l).join('\n')}`
     : `HTML이 아닌 파일(PDF 등)이 바뀌었습니다. 크기 ${update.sizeFrom} → ${update.sizeTo} 바이트. 본문은 확인하지 못했습니다.`;
+  const messages = [{
+    role: 'user',
+    content: `참조 사이트: ${update.title}\n주소: ${update.url}\n감지 시각: ${update.detectedAt}\n\n${changeText}\n\n사이트의 현재 관련 데이터(JSON):\n${JSON.stringify(related, null, 1)}`
+  }];
 
-  const response = await client.beta.messages.create({
-    model: env.ANTHROPIC_MODEL || MODEL,
-    max_tokens: 16000,
-    betas: ['server-side-fallback-2026-07-01'],
-    fallbacks: 'default',                       // 안전 분류기가 거절하면 서버가 다른 모델로 다시 시도
-    system: SYSTEM,
-    output_config: { effort: 'medium', format: { type: 'json_schema', schema: SCHEMA } },
-    messages: [{
-      role: 'user',
-      content: `참조 사이트: ${update.title}\n주소: ${update.url}\n감지 시각: ${update.detectedAt}\n\n${changeText}\n\n사이트의 현재 관련 데이터(JSON):\n${JSON.stringify(related, null, 1)}`
-    }]
-  });
-
-  if (response.stop_reason === 'refusal') throw Object.assign(new Error('AI가 이 내용의 분석을 거절했습니다. 원문을 직접 확인해 주세요.'), { status: 422 });
-  if (response.stop_reason === 'max_tokens') throw new Error('AI 응답이 너무 길어 중간에 끊겼습니다. 다시 시도해 주세요.');
-  const text = response.content.filter(b => b.type === 'text').map(b => b.text).join('');
+  let response, mode = 'full';
+  try {
+    response = await client.beta.messages.create({
+      model, max_tokens: 16000,
+      betas: ['server-side-fallback-2026-07-01'],
+      fallbacks: 'default',                       // 안전 분류기가 거절하면 서버가 다른 모델로 다시 시도
+      system: SYSTEM,
+      output_config: { effort: 'medium', format: { type: 'json_schema', schema: SCHEMA } },
+      messages
+    });
+  } catch (e) {
+    // 중계 서버 등이 최신 옵션(fallbacks·구조화 출력)을 모르면 400 → 기본 요청으로 한 번 더
+    if (!(e instanceof Anthropic.BadRequestError)) throw friendly(Anthropic, e, via);
+    mode = 'compat';
+    try {
+      response = await client.messages.create({
+        model, max_tokens: 16000,
+        system: `${SYSTEM}\n\n반드시 아래 JSON 스키마에 맞는 JSON 객체 하나만 출력하고, 다른 설명은 쓰지 마세요.\n${JSON.stringify(SCHEMA)}`,
+        messages
+      });
+    } catch (e2) { throw friendly(Anthropic, e2, via); }
+  }
+  checkStop(response);
   let result;
-  try { result = JSON.parse(text); } catch (e) { throw new Error('AI 응답을 해석하지 못했습니다. 다시 시도해 주세요.'); }
-  return { suggestion: result, model: response.model };
+  try { result = mode === 'full' ? JSON.parse(textOf(response)) : parseJsonText(textOf(response)); }
+  catch (e) { throw new Error('AI 응답을 해석하지 못했습니다. 다시 시도해 주세요.'); }
+  if (!result || typeof result.summary !== 'string') throw new Error('AI 응답 형식이 예상과 다릅니다. 다시 시도해 주세요.');
+  result.suggestions = Array.isArray(result.suggestions) ? result.suggestions : [];
+  return { suggestion: result, model: response.model, mode, via };
+}
+
+/* CMS의 'AI 연결 확인' 버튼: 아주 짧은 요청으로 키·주소·모델이 맞는지 확인 */
+export async function aiTest({ env, fetchImpl = fetch }) {
+  const { Anthropic, client, via } = await makeClient(env, fetchImpl);
+  const model = env.ANTHROPIC_MODEL || MODEL;
+  try {
+    const response = await client.messages.create({
+      model, max_tokens: 1024,
+      messages: [{ role: 'user', content: '연결 확인입니다. "연결됨" 한 단어로만 답하세요.' }]
+    });
+    return { via, model: response.model || model, reply: textOf(response).trim().slice(0, 100), stop: response.stop_reason };
+  } catch (e) { throw friendly(Anthropic, e, via); }
 }

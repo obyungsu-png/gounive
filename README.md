@@ -109,6 +109,7 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 | 참조 사이트 업데이트 | 버튼을 누르면 OKEP·대교협·nikangs·대학 모집요강 등을 확인 → 바뀐 곳을 검토 대기에 표시 → 운영자가 **반영함 / 참고만 / 무시** 결정(메모 가능). 자동 반영 없음 |
 
 - **게시**하면 해당 JSON/HTML 파일이 GitHub에 커밋되고 Vercel이 약 1분 뒤 사이트에 반영합니다. 같은 파일을 다른 곳에서 먼저 고쳤으면 덮어쓰지 않고 알려 줍니다.
+- 참조 사이트 업데이트 탭의 **AI 연결 확인** 버튼으로 키·주소·모델이 맞는지 바로 확인할 수 있습니다.
 - 각 파일의 **변경 이력**에서 이전 버전 내용을 보고 그 버전으로 되돌릴 수 있습니다.
 - CMS는 `src/data/*.json`, `src/partials/**.html`, `cms/sources.json`만 고칠 수 있습니다(코드·설정 파일은 불가).
 - 참조 사이트 확인 상태는 `cms-state` 브랜치에 저장되며, 이 브랜치는 배포하지 않습니다(`vercel.json`). 처음 확인할 때는 기준만 저장하고 그다음부터 바뀐 점을 알려 줍니다.
@@ -121,7 +122,8 @@ Supabase 값이 **없으면 데모 모드**(이 브라우저에만 저장), **�
 | `GITHUB_TOKEN` | 필수 | GitHub 세분화 토큰(Fine-grained). Repository access: 이 저장소만, Permissions → Contents: **Read and write** |
 | `CMS_PASSWORD` | 선택 | 비밀번호를 바꿀 때만. 넣으면 기본 비밀번호 대신 이 값을 씀 |
 | `ANTHROPIC_API_KEY` | 선택 | 넣으면 업데이트마다 **AI 요약·제안** 버튼이 생김(한국어 요약, 반영 여부 의견, 항목별 수정 제안). 제안은 '편집기에 넣기'를 눌러야 편집 내용에 들어가고, 게시는 직접 함 |
-| `ANTHROPIC_MODEL` | 선택 | AI 모델 변경 시 (기본 `claude-opus-5-5`) |
+| `ANTHROPIC_BASE_URL` | 선택 | 공식 API 대신 중계 서버를 쓸 때 그 주소 (예: `https://apiclaude.cc`). 넣으면 그 서버로 보내며, 최신 옵션을 지원하지 않는 서버면 기본 요청으로 자동 재시도 |
+| `ANTHROPIC_MODEL` | 선택 | AI 모델 변경 시 (기본 `claude-opus-5-5`). 중계 서버가 다른 모델 이름을 쓰면 여기에 입력 |
 | `GITHUB_REPO`, `GITHUB_BRANCH` | 선택 | 기본 `obyungsu-png/gounive`, `main` |
 
 서버 함수는 서울 리전(`icn1`)에서 실행되며 한 번에 최대 60초입니다. 참조 사이트 확인은 화면에서 6곳씩 나눠 요청합니다.

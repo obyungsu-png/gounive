@@ -313,7 +313,9 @@ async function renderUpdates(reload = true) {
       <div class="cms-intro">
         <b>참조 사이트 업데이트 확인</b> — <b>지금 확인하기</b>를 누를 때만 교육부 OKEP·대교협·nikangs·대학 모집요강 등 참조 사이트를 확인합니다.
         바뀐 내용은 <b>검토 대기</b>에 쌓이고, 사이트에 <b>반영할지 · 참고만 할지 · 무시할지</b>는 직접 고릅니다. 사이트 내용은 자동으로 바뀌지 않습니다.
-        ${st.features && st.features.ai ? ' <span class="cms-badge ai"><i class="fas fa-magic"></i> AI 요약·제안 사용 가능</span>' : ' <span class="cms-badge">AI 요약·제안: Vercel에 ANTHROPIC_API_KEY를 등록하면 사용 가능</span>'}
+        ${st.features && st.features.ai
+          ? ` <span class="cms-badge ai"><i class="fas fa-magic"></i> AI 요약·제안 사용 가능 · ${esc(st.features.aiVia || '')}</span> <button class="ok-btn line sm" data-act="ai-test">AI 연결 확인</button> <span class="cms-ai-test" id="cmsAiTest"></span>`
+          : ' <span class="cms-badge">AI 요약·제안: Vercel에 ANTHROPIC_API_KEY를 등록하면 사용 가능</span>'}
       </div>
       <div class="cms-upd-actions">
         <button class="ok-btn" data-act="check" ${u.checking ? 'disabled' : ''}><i class="fas fa-sync-alt${u.checking ? ' fa-spin' : ''}"></i> ${u.checking ? '확인 중…' : '지금 확인하기'}</button>
@@ -569,6 +571,20 @@ async function onClick(e) {
     try { st.upd.ai[id] = await cms('ai', { id }); }
     catch (err) { st.upd.ai[id] = { error: err.message }; if (err.status === 401) fail(err); }
     renderUpdates(false); return;
+  }
+  if (act === 'ai-test') {
+    const out = $('cmsAiTest');
+    el.disabled = true;
+    out.innerHTML = '<i class="fas fa-spinner fa-spin"></i> 확인 중…';
+    try {
+      const r = await cms('aiTest');
+      out.innerHTML = `<span class="ok-text"><i class="fas fa-check-circle"></i> 연결됨 · ${esc(r.via)} · ${esc(r.model)}${r.reply ? ` · 답: ${esc(r.reply)}` : ''}</span>`;
+    } catch (err) {
+      out.innerHTML = `<span class="err-text"><i class="fas fa-times-circle"></i> ${esc(err.message)}</span>`;
+      if (err.status === 401) fail(err);
+    }
+    el.disabled = false;
+    return;
   }
   if (act === 'ai-apply') { const s = st.upd.ai[el.dataset.id].suggestion.suggestions[Number(el.dataset.k)]; applySuggestion(s); }
 }

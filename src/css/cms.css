@@ -153,3 +153,7 @@
   .cms-code { min-height: 420px; }
   .cms-card-link { margin-left: 0; }
 }
+.cms-ai-test { font-size: 12px; }
+.cms-ai-test .ok-text { color: #2e7d32; }
+.cms-ai-test .err-text { color: #b71c1c; }
+.cms-intro .ok-btn.sm { vertical-align: middle; }

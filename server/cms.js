@@ -4,14 +4,15 @@ import { verifyPassword, issueToken, verifyToken } from './auth.js';
 import { createGitHub } from './github.js';
 import { isAllowedPath, validateContent } from './files.js';
 import { runCheck, listUpdates, decideUpdate, getUpdate } from './sources.js';
-import { aiSuggest } from './ai.js';
+import { aiSuggest, aiTest } from './ai.js';
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 export async function handleCms(body, { env = {}, fetchImpl = fetch } = {}) {
   const action = body && body.action;
   const configured = !!env.GITHUB_TOKEN;
-  const features = { configured, ai: !!env.ANTHROPIC_API_KEY, repo: env.GITHUB_REPO || 'obyungsu-png/gounive' };
+  const aiVia = env.ANTHROPIC_BASE_URL ? (() => { try { return new URL(env.ANTHROPIC_BASE_URL).host; } catch (e) { return '주소 오류'; } })() : 'api.anthropic.com';
+  const features = { configured, ai: !!env.ANTHROPIC_API_KEY, aiVia, repo: env.GITHUB_REPO || 'obyungsu-png/gounive' };
 
   if (action === 'status') return ok({ features });
 
@@ -51,10 +52,14 @@ export async function handleCms(body, { env = {}, fetchImpl = fetch } = {}) {
         if (!update) return fail(404, '업데이트 항목을 찾을 수 없습니다.');
         return ok(await aiSuggest(update, { gh, env, fetchImpl }));
       }
+      case 'aiTest': {
+        if (!features.ai) return fail(400, 'AI 기능을 쓰려면 Vercel 환경변수 ANTHROPIC_API_KEY를 등록해 주세요.');
+        return ok(await aiTest({ env, fetchImpl }));
+      }
       default: return fail(400, '알 수 없는 요청입니다.');
     }
   } catch (e) {
-    return fail(e.status && e.status < 500 ? e.status : 500, e.message || '처리 중 오류가 발생했습니다.');
+    return fail(e.status >= 400 && e.status < 600 ? e.status : 500, e.message || '처리 중 오류가 발생했습니다.');
   }
 }
 

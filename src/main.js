@@ -39,6 +39,7 @@ import { switchPolicyTab } from './js/policy.js';
 import { setConsultScope, openConsultForm, closeConsultForm, submitConsult } from './js/consult.js';
 import './js/stay-calc.js';
 import './js/univ-info.js';
+import './js/cms-entry.js';
 import './js/library.js';
 import './js/search.js';
 import { switchNewsTab, newsMore } from './js/home.js';

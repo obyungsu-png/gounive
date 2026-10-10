@@ -20,7 +20,8 @@ const ROUTES = [
   { path: 'return',       page: 'returnOverlay',    title: '귀국학생 편입학 안내' },
   { path: 'en',           page: 'enOverlay',        title: 'English Guide', lang: 'en' },
   { path: 'login',        page: 'loginOverlay',     title: '로그인 · 회원가입', subs: ['signin', 'signup', 'reset', 'update', 'withdraw'] },
-  { path: 'policy',       page: 'policyOverlay',    title: '운영 정책', subs: ['privacy', 'terms', 'email'] }
+  { path: 'policy',       page: 'policyOverlay',    title: '운영 정책', subs: ['privacy', 'terms', 'email'] },
+  { path: 'cms',          page: 'cmsOverlay',       title: 'CMS 관리', subs: ['content', 'pages', 'updates'] }
 ];
 
 const enterHandlers = {};

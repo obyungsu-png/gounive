@@ -1,0 +1,83 @@
+{
+  "banners": [
+    {
+      "theme": 1, "kicker": "", "title": "2028학년도 특례 입시,", "em": "자격진단부터 시작하세요",
+      "desc": "고교 1개 학년 포함 해외 3년 이상 이수, 학생 3/4 · 부모 2/3 체류 요건\n나의 해외 체류기간이 3년 특례·12년 특례 중 어디에 해당하는지 먼저 확인하세요.",
+      "icon": "fa-passport",
+      "buttons": [
+        { "label": "특례자격 확인 ›", "style": "btn-fill-brand", "link": "#/eligibility" },
+        { "label": "준비 로드맵 ›", "style": "btn-line-brand", "link": "#/prepare/roadmap" }
+      ]
+    },
+    {
+      "theme": 2, "kicker": "", "title": "3년 특례 vs 12년 특례", "em": "한눈에 비교!",
+      "desc": "모집인원, 학력·체류 요건, 부모 요건, 핵심 증빙서류까지\n두 특례 전형의 차이를 표 하나로 정리했습니다.",
+      "icon": "fa-balance-scale",
+      "buttons": [ { "label": "비교표 보기 ›", "style": "btn-fill-blue", "link": "#/eligibility" } ]
+    },
+    {
+      "theme": 3, "kicker": "", "title": "학년별로 판정하는", "em": "해외체류기간 계산기",
+      "desc": "학생 3/4 · 부모 2/3 체류 요건을 학년마다 계산하고\n대학별 출국일·입국일 산정 기준까지 골라 확인하세요.",
+      "icon": "fa-calculator",
+      "buttons": [ { "label": "계산해 보기 ›", "style": "btn-fill-orange", "link": "#/stay" } ]
+    },
+    {
+      "theme": 4, "kicker": "", "title": "공식 모집요강을 한곳에", "em": "입시자료실",
+      "desc": "대학별 2027학년도 재외국민 모집요강과 시행계획 원문 링크를 모았습니다.",
+      "icon": "fa-database",
+      "buttons": [ { "label": "자료실 가기 ›", "style": "btn-fill-brand", "link": "#/library" } ]
+    },
+    {
+      "theme": 5, "kicker": "", "title": "알아두면 쓸데있는", "em": "재외국민 용어사전",
+      "desc": "아는만큼 보인다!\n복잡하고 헷갈렸던 재외국민 입시 용어를 한번에 확인하세요",
+      "icon": "fa-star",
+      "buttons": [ { "label": "용어사전 보기 ›", "style": "btn-fill-purple", "link": "#/prepare/glossary" } ]
+    },
+    {
+      "theme": 6, "kicker": "모집요강 원문으로 확인한", "title": "대학별", "em": "3년·12년 특례 한눈에",
+      "desc": "대학마다 모집인원·전형방법·일정과 출·입국일 산정 기준을 한 장으로 비교하세요.",
+      "icon": "fa-university",
+      "buttons": [ { "label": "대학별 특례 정보 ›", "style": "btn-fill-brand", "link": "#/universities" } ]
+    },
+    {
+      "theme": 7, "kicker": "", "title": "필답고사 · 면접 · 서류\n전형요소별 준비 가이드", "em": "",
+      "desc": "3년 특례 필답고사부터 12년 특례 서류평가까지\n학년별 로드맵과 체크리스트로 차근차근 준비하세요.",
+      "icon": "fa-pen-nib",
+      "buttons": [ { "label": "준비 가이드 ›", "style": "btn-fill-orange", "link": "#/prepare/factors" } ]
+    }
+  ],
+  "notices": [
+    { "badge": "신규", "style": "new", "text": "대학별 특례 정보 화면을 열었습니다", "link": "#/universities" },
+    { "badge": "안내", "style": "general", "text": "개인정보처리방침·이용약관을 게시했습니다", "link": "#/policy/privacy" },
+    { "badge": "신규", "style": "new", "text": "해외체류기간 계산기를 열었습니다", "link": "#/stay" },
+    { "badge": "입시", "style": "general", "text": "2027학년도 대학별 특례 전형방법 반영", "link": "#/admissions/3year" },
+    { "badge": "자료", "style": "general", "text": "자료실: 대학별 공식 모집요강 연결", "link": "#/library" }
+  ],
+  "newsTabs": [
+    {
+      "label": "특례소식", "more": "#/eligibility",
+      "items": [
+        { "icon": "fa-balance-scale", "title": "3년 특례 vs 12년 특례, 무엇이 다를까?", "meta": "특례 공통", "link": "#/eligibility" },
+        { "icon": "fa-school", "title": "한국학교 16개국 34개교 · 한국교육원 22개국 47개원 현황", "meta": "재외교육기관", "link": "#/institutions/schools" },
+        { "icon": "fa-calculator", "title": "해외체류기간 계산기로 학생 3/4 · 부모 2/3 확인하기", "meta": "3년 특례", "link": "#/stay" }
+      ]
+    },
+    {
+      "label": "입시자료실", "more": "#/library",
+      "items": [
+        { "icon": "fa-file-alt", "title": "2027학년도 대학별 재외국민 모집요강 (공식 자료 링크)", "meta": "자료실", "link": "#/library" },
+        { "icon": "fa-stamp", "title": "해외 학교 서류 아포스티유·영사확인 안내", "meta": "서류준비", "link": "action:docs" },
+        { "icon": "fa-plane-arrival", "title": "귀국학생 초·중·고 편입학과 학력인정", "meta": "귀국학생", "link": "#/return" }
+      ]
+    },
+    {
+      "label": "주요일정", "more": "#/prepare/schedule",
+      "items": [
+        { "icon": "fa-calendar-check", "title": "2027학년도 원서접수 2026. 7. 6.~7. 10. (대교협 공통)", "meta": "2027 일정", "link": "#/prepare/schedule" },
+        { "icon": "fa-user-tie", "title": "면접·필답 7월 중순~8. 29. · 최초 합격 발표 9. 1.~9. 11.", "meta": "2027 일정", "link": "#/prepare/schedule" },
+        { "icon": "fa-bullhorn", "title": "2028학년도 원서접수(안) 2027. 7. 5.~7. 9. 중 3일 이상", "meta": "2028 예정", "link": "#/prepare/schedule" },
+        { "icon": "fa-tasks", "title": "나의 특례 준비 체크리스트 점검하기", "meta": "체크리스트", "link": "#/prepare/checklist" }
+      ]
+    }
+  ]
+}

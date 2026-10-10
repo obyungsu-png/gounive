@@ -35,7 +35,8 @@ document.addEventListener('keydown', e => {
 /* href="#" 링크와 onclick 없는 버튼은 '준비 중' 안내 (빈 화면 이동 방지) */
 document.addEventListener('click', function(e) {
   const el = e.target.closest('a[href="#"], button');
-  if (!el || el.hasAttribute('onclick') || el.dataset.js !== undefined) return;
+  // 자기 처리기가 다시 그려 화면에서 빠진 요소, data-act/data-link로 처리되는 버튼, CMS 화면은 제외
+  if (!el || !el.isConnected || el.hasAttribute('onclick') || el.dataset.js !== undefined || el.dataset.act !== undefined || el.dataset.link !== undefined || el.closest('#cmsOverlay, .cms-modal')) return;
   if (el.tagName === 'A') e.preventDefault();
   if (el.closest('.info-topbar')) return;
   showToast('준비 중인 기능입니다.');

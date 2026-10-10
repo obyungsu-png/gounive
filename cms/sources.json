@@ -1,0 +1,14 @@
+[
+  { "group": "교육부 OKEP", "title": "재외국민특별전형 대학별 모집요강 게시판", "url": "https://okep.moe.go.kr/board/list.do?board_manager_seq=16&menu_seq=22" },
+  { "group": "교육부 OKEP", "title": "재외교육기관포털 메인 (공지·소식)", "url": "https://okep.moe.go.kr/root/index.do" },
+  { "group": "교육부 OKEP", "title": "한국학교 소개·운영 현황", "url": "https://okep.moe.go.kr/html/page.do?htmlId=17&menu_seq=60" },
+  { "group": "교육부 OKEP", "title": "한국학교 기관 검색", "url": "https://okep.moe.go.kr/koschl/orgInfo/orgSearch/search.do" },
+  { "group": "교육부 OKEP", "title": "한국교육원 기관 검색", "url": "https://okep.moe.go.kr/koacad/orgInfo/orgSearch/search.do" },
+  { "group": "대교협", "title": "대학입학전형기본사항 (재외국민과 외국인 전형 기준)", "url": "https://www.kcue.or.kr/news/sub02/sub01.php?at=view&idx=2764313" },
+  { "group": "nikangs", "title": "특례 프로그램 안내", "url": "https://nikangs.com/program.html" },
+  { "group": "nikangs", "title": "특례 입시 일정 캘린더", "url": "https://nikangs.com/calendar.html" },
+  { "group": "nikangs", "title": "출입국·체류일수 계산기", "url": "https://nikangs.com/calculator.html" },
+  { "group": "nikangs", "title": "자료실", "url": "https://nikangs.com/resources.html" },
+  { "group": "대학 입학처", "title": "연세대 재외국민 모집요강 안내", "url": "https://admission.yonsei.ac.kr/seoul/admission/html/abroad/guide.asp" },
+  { "group": "대학 입학처", "title": "한양대 ERICA 수시·재외국민 모집요강", "url": "https://goerica.hanyang.ac.kr/admission/html/rolling/guide.asp" }
+]

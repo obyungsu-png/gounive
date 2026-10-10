@@ -1158,3 +1158,4 @@ button.icon-nav-item { padding: 5px 10px; }
 .nav-util button.icon-circle { color: #999; }
 .search-box button.search-icon { display: flex; align-items: center; justify-content: center; width: 32px; height: 32px; color: #2db4a8; font-size: 20px; }
 a.logo { display: inline-block; }
+.banner-slider.is-single .banner-arrow, .banner-slider.is-single .banner-dots { display: none; }

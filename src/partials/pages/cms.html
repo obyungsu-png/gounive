@@ -1,0 +1,22 @@
+<div class="info-overlay" id="cmsOverlay">
+  <div class="info-topbar">
+    <i class="fas fa-home clickable" onclick="showHome()"></i>
+    <span class="bc-sep">›</span><span>고객센터</span>
+    <span class="bc-sep">›</span><span class="bc-cur">CMS 관리</span>
+    <button class="info-close-btn is-hidden" id="cmsLogoutBtn" data-js><i class="fas fa-sign-out-alt"></i> CMS 로그아웃</button>
+  </div>
+  <div class="cms-wrap">
+    <!-- 로그인 -->
+    <div class="cms-login" id="cmsLogin">
+      <div class="cms-login-icon"><i class="fas fa-user-shield"></i></div>
+      <h1>CMS 관리</h1>
+      <p>사이트의 배너·공지·특례전형·자료실·화면 내용을 고치고, 참조 사이트의 업데이트를 검토하는 운영자 화면입니다.</p>
+      <input type="password" id="cmsPassword" class="login-field" placeholder="운영자 비밀번호" autocomplete="current-password" aria-label="운영자 비밀번호">
+      <div class="login-error" id="cmsLoginError" role="alert"></div>
+      <button class="login-submit" id="cmsLoginBtn" data-js>로그인</button>
+      <div class="cms-note is-hidden" id="cmsSetupNote"></div>
+    </div>
+    <!-- 로그인 후 (src/js/cms/app.js가 그림) -->
+    <div class="cms-app is-hidden" id="cmsApp"></div>
+  </div>
+</div>

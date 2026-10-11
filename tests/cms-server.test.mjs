@@ -245,3 +245,23 @@ test('AI 중계 서버(ANTHROPIC_BASE_URL): 주소·인증 헤더, 최신 옵션
   assert.equal(bad.status, 502);
   assert.match(bad.body.error, /ANTHROPIC_API_KEY/);
 });
+
+test('AI 키 붙여넣기 실수: 한글 섞인 키는 요청 전에 안내, 앞뒤 공백은 자동 제거', async () => {
+  const { call, anthropic } = setup({});
+  const base = { ...ENV, ANTHROPIC_BASE_URL: 'https://relay.example' };
+  const token = await login(call, base);
+  const before = anthropic.requests.length;
+  const bad = await call({ action: 'aiTest', token }, { ...base, ANTHROPIC_API_KEY: 'sk-연결키abc' });
+  assert.equal(bad.status, 400);
+  assert.match(bad.body.error, /ANTHROPIC_API_KEY.*4번째 글자/);
+  assert.ok(!bad.body.error.includes('연결키abc'), '키 값을 화면에 보여 주지 않음');
+  assert.equal(anthropic.requests.length, before, '잘못된 키로는 요청하지 않음');
+  const badUrl = await call({ action: 'aiTest', token }, { ...base, ANTHROPIC_API_KEY: 'sk-ok', ANTHROPIC_BASE_URL: 'apiclaude 주소' });
+  assert.equal(badUrl.status, 400);
+  assert.match(badUrl.body.error, /ANTHROPIC_BASE_URL/);
+
+  anthropic.handler = () => ({ status: 200, body: { id: 'm', type: 'message', role: 'assistant', model: 'm', content: [{ type: 'text', text: '연결됨' }], stop_reason: 'end_turn', usage: { input_tokens: 1, output_tokens: 1 } } });
+  const ok = await call({ action: 'aiTest', token }, { ...base, ANTHROPIC_API_KEY: '  sk-trimmed\n' });
+  assert.equal(ok.status, 200, JSON.stringify(ok.body));
+  assert.equal(anthropic.requests.at(-1).headers.get('x-api-key'), 'sk-trimmed');
+});

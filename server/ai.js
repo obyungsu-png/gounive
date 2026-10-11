@@ -57,12 +57,21 @@ async function relatedData(update, gh) {
    중계 서버는 인증 방식이 제각각이라 x-api-key와 Authorization: Bearer를 함께 보낸다. */
 async function makeClient(env, fetchImpl) {
   const { default: Anthropic } = await import('@anthropic-ai/sdk');
+  // 복사·붙여넣기 실수 점검: 앞뒤 공백은 지우고, 키에 한글·공백·따옴표가 섞이면 요청 전에 알려 줌 (키 값은 화면에 보이지 않음)
+  const key = String(env.ANTHROPIC_API_KEY || '').trim();
+  const bad = key.search(/[^\x21-\x7e]|["'`]/);
+  if (!key || bad >= 0) {
+    throw Object.assign(new Error(`Vercel의 ANTHROPIC_API_KEY 값에 키가 아닌 글자(한글·공백·따옴표 등)가 들어 있습니다${bad >= 0 ? ` (${bad + 1}번째 글자)` : ''}. 키(영문·숫자로 된 sk-…)만 정확히 붙여넣고 Redeploy 해 주세요.`), { status: 400 });
+  }
   const base = String(env.ANTHROPIC_BASE_URL || '').trim().replace(/\/+$/, '').replace(/\/v1$/, '');
+  if (base && !/^https?:\/\/[\x21-\x7e]+$/.test(base)) {
+    throw Object.assign(new Error('Vercel의 ANTHROPIC_BASE_URL 값이 주소 형식이 아닙니다. https://apiclaude.cc 처럼 https://로 시작하는 주소만 넣고 Redeploy 해 주세요.'), { status: 400 });
+  }
   const relay = !!base && !/^https:\/\/api\.anthropic\.com$/i.test(base);
   const client = new Anthropic({
-    apiKey: env.ANTHROPIC_API_KEY,
+    apiKey: key,
     ...(base ? { baseURL: base } : {}),
-    ...(relay ? { authToken: env.ANTHROPIC_API_KEY } : {}),
+    ...(relay ? { authToken: key } : {}),
     fetch: fetchImpl,
     maxRetries: 0,
     timeout: 50 * 1000            // Vercel 함수 제한(60초) 안에서 끝나도록
